@@ -39,6 +39,10 @@
 	text-align: right;
 }
 
+/* 공통 div class="row" 마진 0*/
+div .row{
+	margin: 0;
+}
 
 /* 로고 */
 .logo1{
@@ -50,4 +54,64 @@
 div#topTitle {
     margin-bottom: 10px;
 }
+
+
+/*boardWright.jsp*/
+/* 파일첨부 버튼 */
+#fileinputlabel {
+    position: absolute;
+    margin-left: -30px;
+}
+
+input#exampleFormControlFile1 {
+    width: 65%;
+}
+input#exampleFormControlFile1\ upfile {
+    margin-left: -115px;
+}
+label#fileinputlabel {
+    margin-left: -137px;
+    margin-top: 3px;
+}
+/* 글등록버튼 */
+div#se2_sample {
+    width: 100px;
+    float: right;
+}
+
+/* boardList.jsp */
+/* 페이징 */
+ul.pagination {
+    float: right;
+}
+.bdListSearchText {
+    width: 187px;
+}
+label.f-right {
+    margin-left: 525px;
+    float: left;
+    margin-top: 3px;
+}
+.bdListSearch label.f-right {
+    margin-left: 525px;
+    float: left;
+    margin-top: 3px;
+}
+
+/* boardDetail.jsp */
+/* 댓글 라벨 */
+.replylabel {
+	margin: 0;
+}
+.detailbt{
+	font-size: 0.7em;
+	margin-left: 2px;
+}
+.bdDetailBtDiv{
+	margin-top: -22px;	
+}
+
+
+
+
 
