@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+/* 폰트 import랑 .font가 세트임!*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+.font{
+	font-family: 'Noto Sans KR';
+	
+}
+
 /* 사이드바 */
 /* 사이드바색상 */
 .bg-gradient-primary {
@@ -8,4 +16,38 @@
     background-size: cover;
 }
 
+/* 공통 플롯-right */
+.f-right {
+    float: right;
+}
+
+/* 공통 플롯-left */
+.f-left {
+    float: left;
+}
+
+/* 공통 text-align */
+.t-center{
+	text-align: center;
+}
+
+.t-left{
+	text-align: left;
+}
+
+.t-right{
+	text-align: right;
+}
+
+
 /* 로고 */
+.logo1{
+	
+}
+
+
+/* 탑 타이틀 */
+div#topTitle {
+    margin-bottom: 10px;
+}
+
