@@ -16,6 +16,12 @@
     background-size: cover;
 }
 
+/* 공통 position-absolute */
+
+.p-absolute {
+    position: absolute;
+}
+
 /* 공통 플롯-right */
 .f-right {
     float: right;
@@ -39,6 +45,11 @@
 	text-align: right;
 }
 
+/* padding-bottom 0 */
+.p-bottom-0{
+	padding-bottom: 0;
+}
+	
 /* 공통 div class="row" 마진 0*/
 div .row{
 	margin: 0;
@@ -49,12 +60,104 @@ div .row{
 	
 }
 
-
+/* 탑 타이틀 - 자원 */
 /* 탑 타이틀 */
 div#topTitle {
     margin-bottom: 10px;
 }
 
+/* 버튼수정 - 자원 */
+.btn-edit{
+	margin-right: 10px;
+}
+
+/* 리스트추가 아이콘 - 자원 */
+/* 스타일링 */
+.listAdd {
+    background: #2ecc71;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0.5em 0.5em;
+    position: relative;
+}
+
+.listAdd:hover {
+  color: #2ecc71;
+  background:#fff;
+  border: 2px solid #2ecc71;
+}
+/* 위치조정 */
+.listAdd {
+    margin-left: 85px;
+    margin-top: -9px;
+    margin-bottom: -9px;
+}
+
+/* 자원추가 아이콘 - 자원 */
+/* 스타일링 */
+.jawonAdd{
+	background: #6868AC;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0.3em 0.5em;
+    position: relative;
+}
+.jawonAdd:hover {
+  color: #6868AC;
+  background:#fff;
+  border: 2px solid #6868AC;
+}
+/* 위치조정 */
+.jawonAdd {
+    float: right;
+    margin-left: -69px;
+    margin-right: 41px;
+    margin-top: -3px;
+    margin-bottom: -9px;
+}
+
+/* 신청취소 아이콘 - 자원 */
+/* 스타일링 */
+.jawonCancel{
+	background: red;
+    border-radius: 30px;
+    color: #fff;
+    display: block;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0.3em 0.5em;
+    position: relative;
+    border-style: none;
+}
+.jawonCancel:hover {
+  color: red;
+  background:#fff;
+}
+
+/* a태그 호버시 색상 */
+#a-hover:hover{
+	text-decoration: none;
+	color: #6868AC;
+}
+
+/* h1 굵기 크기 */
+.h1-style{
+	font-size: 1.6em;
+    font-weight: bold;
+}
+
+/* h5 크기 */
+.h5-style{
+	font-size: 1.2em;
+}
 
 /*boardWright.jsp*/
 /* 파일첨부 버튼 */
