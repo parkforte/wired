@@ -66,6 +66,7 @@ div#topTitle {
     margin-bottom: 10px;
 }
 
+<<<<<<< HEAD
 /* 버튼수정 - 자원 */
 .btn-edit{
 	margin-right: 10px;
@@ -159,6 +160,7 @@ div#topTitle {
 	font-size: 1.2em;
 }
 
+
 /*boardWright.jsp*/
 /* 파일첨부 버튼 */
 #fileinputlabel {
@@ -213,8 +215,5 @@ label.f-right {
 .bdDetailBtDiv{
 	margin-top: -22px;	
 }
-
-
-
 
 
