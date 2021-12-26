@@ -15,4 +15,8 @@ public class HomeController {
 	public String defaultPage() {
 		return "default/defaultPage";
 	}
+	
+	public void test() {
+		
+	}
 }

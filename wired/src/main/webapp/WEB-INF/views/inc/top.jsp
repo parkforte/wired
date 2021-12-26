@@ -25,6 +25,9 @@
 <!-- Custom styles for this template-->
 <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <!-- 부트스트랩 version 4.6.0 -->
+<!-- 부트스트랩 icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
 <!-- 수정용CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/wiredStyle.css" rel="stylesheet">
 
