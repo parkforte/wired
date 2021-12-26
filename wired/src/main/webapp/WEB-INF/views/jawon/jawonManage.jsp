@@ -19,18 +19,17 @@
     <div class="container-fluid font">
 		<div id="topTitle">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800 h1-style">자원예약현황</h1>
-		<h5 class="m-0 font-weight-bold text-primary h5-style">내 예약 현황</h5><!-- 부제 -->
+        <h1 class="h3 mb-2 text-gray-800 h1-style">자원관리</h1>
 		</div>
         <!-- title1 -->
-       <c:forEach var="i" begin="1" end="3">       
+           
          <div class="card shadow mb-4">
             
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-                   <h6 class="m-0 font-weight-bold text-primary">내역이름</h6><!-- 게시판 이름 -->
-             
+                   <h6 class="m-0 font-weight-bold text-primary p-absolute">자원리스트</h6><!-- 게시판 이름 -->
+  						<button class="listAdd" onclick="location.href='#'">리스트 추가</button>
              <!-- 게시판 검색 -->      
              <!-- Topbar Search -->
          <!-- <form
@@ -46,7 +45,7 @@
              </div>
          </form> -->
          
-   
+   		
          <!-- Topbar Navbar -->
            <ul class="navbar-nav ml-auto">
       
@@ -74,35 +73,40 @@
                    </div>
                </li>
                </div>
-               <div class="card-body">
+                <c:forEach var="i" begin="1" end="3">  
+               <div class="card-body p-bottom-0">
                    <div class="table-responsive">
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
-                                   <th>자원명</th>
+                                   <th>자원명
+                                   	<button class="jawonAdd" onclick="location.href='#'">추가</button></th>
                                    <th>자원정보</th>
-                                   <th>기간</th>
-                                   <th></th>
+                                   <th>자원위치</th>
+                                   <th>예약시간</th>
+                                   <th>상태</th>
                                    <th></th>
                                </tr>
                            </thead>
                            <tbody>
                                <tr>
-                                   <td>회의실</td>
-                                   <td>A회의실</td>
+                                   <td>차량</td>
+                                   <td>아반떼</td>
+                                   <td>본관 지하주차장</td>
                                    <td>2021-12-21 17:00 ~ 2021-12-21 18:00</td>
-                                   <td><button class="jawonCancel" onclick="location.href='#'">신청취소</button></td>
-                                   <td>검토중/승인</td>
+                                   <td>사용/미사용</td>
+                                   <td><a href="#" id="a-hover">수정</a>&nbsp;
+                                   		<a href="#" id="a-hover">삭제</a></td>
                                </tr>
                            </tbody>
                        </table>
                    </div>
                </div>
+    			</c:forEach>  
                 </div>
 
     </div>
     <!-- /.container-fluid -->
-    </c:forEach>  
      </div>
             <!-- End of Main Content -->
 
