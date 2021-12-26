@@ -9,7 +9,6 @@
 
 
 </script>
-
                <!-- defaultPage -->
                 <div class="container-fluid">
 
