@@ -14,19 +14,17 @@
 		var calendarEl = document.getElementById('calendar');
 		
 		var calendar = new FullCalendar.Calendar(calendarEl, {
-		  initialView: 'dayGridMonth',	//캘린더형태설정
+		  initialView: 'dayGridMonth',
 		  locale: 'ko'
 		});
 		
 		calendar.render();
 		
 	});
-	
-	
 
 </script>
 
-<!-- 개인스케쥴러 -->
+<!-- 팀스케쥴러 -->
 <div class="container-fluid">
 
 	<!-- Page Heading -->
@@ -40,7 +38,7 @@
 
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">개인스케쥴러</h6>
+			<h6 class="m-0 font-weight-bold text-primary">팀스케쥴러</h6>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
