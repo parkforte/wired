@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 
-<!-- http://localhost:9091/wired/jawon/jawonList -->
+<!-- http://localhost:9091/wired/jawon/jawonManage -->
 
 <!-- css영역 -->
 <style type="text/css">

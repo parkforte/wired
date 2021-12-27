@@ -55,6 +55,11 @@ div .row{
 	margin: 0;
 }
 
+/* 공통 버튼 동그랗게 */
+.b-radius{
+	border-radius: 30px;
+}
+
 /* 로고 */
 .logo1{
 	
@@ -124,23 +129,6 @@ div#topTitle {
     margin-bottom: -9px;
 }
 
-/* 신청취소 아이콘 - 자원 */
-/* 스타일링 */
-.jawonCancel{
-	background: red;
-    border-radius: 30px;
-    color: #fff;
-    display: block;
-    font-size: 0.8em;
-    font-weight: bold;
-    padding: 0.3em 0.5em;
-    position: relative;
-    border-style: none;
-}
-.jawonCancel:hover {
-  color: red;
-  background:#fff;
-}
 
 /* a태그 호버시 색상 */
 #a-hover:hover{
