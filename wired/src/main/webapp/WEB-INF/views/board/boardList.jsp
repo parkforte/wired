@@ -577,29 +577,27 @@
               				</div>
               			
               			</div>
+              			
+              			<!-- 페이징 1,2,3,4,5, -->
               			<div class="col-sm-12 col-md-7">
-              				<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate" >
-              					<ul class="pagination">
-              						<li class="paginate_button page-item previous disabled" id="dataTable_previous">
-              							<a href="#" class="page-link">previous</a>
-              						</li>
-              						<c:forEach var="i" begin="1" end="5">
-              						<li class="paginate_button page-item active" data-dt-idx="${i }">
-              							<a href="#" class="page-link">${i }</a>
-              						</li>
-              						</c:forEach>
-              					
-              					
-              						<li class="paginate_button page-item next" id="dataTable_next">
-              							<a href="#" class="page-link">next</a>
-              						</li>
-              					</ul>
-              				
-              				</div>
+              				<nav aria-label="...">
+							  <ul class="pagination ">
+							    <li class="page-item disabled">
+							      <span class="page-link">Previous</span>
+							    </li>
+							    <li class="page-item"><a class="page-link" href="#">1</a></li>
+							    <li class="page-item active" aria-current="page">
+							      <span class="page-link">2</span>
+							    </li>
+							    <li class="page-item"><a class="page-link" href="#">3</a></li>
+							    <li class="page-item">
+							      <a class="page-link" href="#">Next</a>
+							    </li>
+							  </ul>
+							</nav>
               			</div>
-              		
+              			
               		</div>
-                       
                        </div>
                    </div>
             

@@ -13,6 +13,8 @@
 <script type="text/javascript">
 <!-- head 안에 추가 -->
 
+	
+	
 	function save(){
 		oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);  
 	    		//스마트 에디터 값을 텍스트컨텐츠로 전달
@@ -21,6 +23,9 @@
 	    		// 값을 불러올 땐 document.get으로 받아오기
 		return; 
 	}
+	
+	
+	
 
 </script>
 
@@ -41,7 +46,31 @@
                             <!-- 작성자만 볼수있게 버튼if 처리 세션에서 아이디 가져와 셀렉트-->
                             <div class="f-right bdDetailBtDiv">
 	                            <button type="button" class="btn btn-primary f-left detailbt">글수정</button>
-								<button type="button" class="btn btn-danger f-left detailbt">글삭제</button>
+	                            
+	                            <!-- 삭제버튼 클릭하면 모달창 생성후 삭제하겠습니다 라는 입력받아서 같으면 처리해보기-->
+								<button type="button" class="btn btn-danger f-left detailbt" id="deleteBt" data-toggle="modal" data-target="#exampleModal">글삭제</button>
+								
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								  <div class="modal-dialog">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+								        ...
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								        <button type="button" class="btn btn-primary">Save changes</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+							
                             </div>
                         </div>
                         <div class="card-body">
