@@ -18,7 +18,6 @@
 </style>
 
 <!-- defaultPage -->
-<div class="container-fluid font">
 
 	<!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">전자결재</h1>
@@ -36,10 +35,14 @@
 				<div class="card text-center" style="width: 18rem;">
 					<div class="card-header">문서상태</div>
 					<ul class="list-group list-group-flush nav flex-column">
-						<li class="list-group-item nav-item"><i class="bi bi-clipboard"></i> 결재대기</li>
-						<li class="list-group-item nav-item"><i class="bi bi-clipboard"></i> 결재완료</li>
-						<li class="list-group-item nav-item"><i class="bi bi-clipboard"></i> 결재반려</li>
-						<li class="list-group-item nav-item"><i class="bi bi-clipboard"></i> 임시저장</li>
+						<li class="list-group-item nav-item"><i
+							class="bi bi-clipboard"></i> 결재대기</li>
+						<li class="list-group-item nav-item"><i
+							class="bi bi-clipboard"></i> 결재완료</li>
+						<li class="list-group-item nav-item"><i
+							class="bi bi-clipboard"></i> 결재반려</li>
+						<li class="list-group-item nav-item"><i
+							class="bi bi-clipboard"></i> 임시저장</li>
 					</ul>
 				</div>
 
@@ -66,25 +69,20 @@
 						</tr>
 					</tbody>
 				</table>
-				<nav class="f-right"aria-label="...">
-				  <ul class="pagination">
-				    <li class="page-item disabled">
-				      <a class="page-link">Previous</a>
-				    </li>
-				    <li class="page-item"><a class="page-link" href="#">1</a></li>
-				    <li class="page-item active" aria-current="page">
-				      <a class="page-link" href="#">2</a>
-				    </li>
-				    <li class="page-item"><a class="page-link" href="#">3</a></li>
-				    <li class="page-item">
-				      <a class="page-link" href="#">Next</a>
-				    </li>
-				  </ul>
+				<nav class="f-right" aria-label="...">
+					<ul class="pagination">
+						<li class="page-item disabled"><a class="page-link">Previous</a>
+						</li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item active" aria-current="page"><a
+							class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a>
+						</li>
+					</ul>
 				</nav>
 			</div>
 		</div>
 	</div>
 </div>
-</div>
-<!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>

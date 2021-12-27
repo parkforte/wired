@@ -12,4 +12,9 @@ public class ConfirmController {
 	public String docbox_get() {
 		return "e-approval/docbox";
 	}
+
+	@GetMapping("/approvalTree")
+	public String approvalTree_get() {
+		return "e-approval/approvalTree";
+	}
 }
