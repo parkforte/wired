@@ -13,8 +13,15 @@ public class ConfirmController {
 		return "e-approval/docbox";
 	}
 
-	@GetMapping("/approvalTree")
+	@GetMapping("/paperWrite")
 	public String approvalTree_get() {
-		return "e-approval/approvalTree";
+		return "e-approval/paperWrite";
 	}
+	
+	@GetMapping("/mainpage")
+	public String mainpage_get() {
+		return "e-approval/mainpage";
+	}
+	
+	
 }
