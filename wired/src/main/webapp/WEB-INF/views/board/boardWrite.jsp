@@ -13,8 +13,8 @@
 <script type="text/javascript">
 <!-- head 안에 추가 -->
 	$(function(){
-	$('form[name=frmWrite]').submit(function(){
-		$('.infobox').each(function(idx, item){
+		$('form[name=frmWrite]').submit(function(){
+			$('.infobox').each(function(idx, item){
 			if($(this).val().length<1){
 				alert($(this).prev().html() + "을(를) 입력하세요");
 				$(this).focus();
@@ -22,10 +22,13 @@
 				return false;  //each 탈출
 			}
 		});
+		
 	});
 	
 	$('#btList').click(function(){
 		location.href="<c:url value='/board/boardList'/>";	
+	
+		
 	});
 
 	function save(){
@@ -36,7 +39,8 @@
 	    		// 값을 불러올 땐 document.get으로 받아오기
 		return; 
 	}
-
+	
+	
 </script>
 
                <!-- defaultPage -->
@@ -44,9 +48,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">게시글 작성</h1>
-                    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                        For more information about DataTables, please visit the <a target="_blank"
-                            href="h.ttps://datatablesnet">official DataTables documentation</a>.</p>
+                    <p class="mb-4">Company bulletin board write.</a>.</p>
 
                     <!-- title1 -->
                     <div class="card shadow mb-4">
@@ -87,6 +89,7 @@
 										    }
 										});
 									</script>
+									<!-- 파일첨부 -->
 									<div class="form-group f-right">
 									    <label for="exampleFormControlFile1" id="fileinputlabel">Example file input</label>
 									    <input type="file" multiple="multiple" name="upfile" class="form-control-file f-right" id="exampleFormControlFile1 upfile"/>

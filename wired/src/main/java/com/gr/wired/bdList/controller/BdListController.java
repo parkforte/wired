@@ -11,13 +11,13 @@ public class BdListController {
 	private static final Logger logger
 		=LoggerFactory.getLogger(BdListController.class);
 	
-	@RequestMapping("/bdListList")
-	public String  list() {
+	@RequestMapping("/bdListmanagement")
+	public String  bdList() {
 		logger.info("게시판 목록");
 		
 		
 		
-		return "bdList/bdListList";
+		return "bdList/bdListmanagement";
 	}
 	
 }
