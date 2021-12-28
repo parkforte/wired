@@ -80,12 +80,12 @@ div#topTitle {
 /* 스타일링 */
 .listAdd {
     background: #2ecc71;
-    border: 2px solid #fff;
+    border: 1px solid;
     border-radius: 5px;
     color: #fff;
     display: block;
-    font-size: 0.8em;
-    font-weight: bold;
+    font-size: 0.9em;
+    font-weight: 500;
     padding: 0.5em 0.5em;
     position: relative;
 }
@@ -93,7 +93,7 @@ div#topTitle {
 .listAdd:hover {
   color: #2ecc71;
   background:#fff;
-  border: 2px solid #2ecc71;
+  border: 1px solid #2ecc71;
 }
 /* 위치조정 */
 .listAdd {
@@ -106,24 +106,24 @@ div#topTitle {
 /* 스타일링 */
 .jawonAdd{
 	background: #6868AC;
-    border: 2px solid #fff;
+    border: 1px solid;
     border-radius: 5px;
     color: #fff;
     display: block;
-    font-size: 0.8em;
-    font-weight: bold;
+    font-size: 0.9em;
+    font-weight: 500;
     padding: 0.3em 0.5em;
     position: relative;
 }
 .jawonAdd:hover {
   color: #6868AC;
   background:#fff;
-  border: 2px solid #6868AC;
+  border:1px solid #6868AC;
 }
 /* 위치조정 */
 .jawonAdd {
     float: right;
-    margin-left: -69px;
+    margin-left: -65px;
     margin-right: 41px;
     margin-top: -3px;
     margin-bottom: -9px;

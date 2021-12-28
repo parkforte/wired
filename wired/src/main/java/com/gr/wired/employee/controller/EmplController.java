@@ -11,4 +11,17 @@ public class EmplController {
 	public String emplInsert() {
 		return "employee/emplRegister";
 	}
+	
+	@RequestMapping("/emplList")
+	public String emplAll() {
+		return "employee/emplList";
+	}
+	@RequestMapping("/emplEdit")
+	public String emplEdit() {
+		return "employee/emplEdit";
+	}
+	@RequestMapping("/emplResign")
+	public String emplquit() {
+		return "employee/emplResign";
+	}
 }

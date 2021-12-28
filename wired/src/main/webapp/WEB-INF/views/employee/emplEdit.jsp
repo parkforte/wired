@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 
-<!-- http://localhost:9091/wired/employee/emplRegister -->
+<!-- http://localhost:9091/wired/employee/emplEdit -->
 
 <!-- css영역 -->
 <style type="text/css">
@@ -49,23 +49,13 @@ input#jumin2 {
 	                        <form class="user">
 	                            <div class="table-responsive">
 				                    <div class="outer">
-					                    <h1 class="h3 mb-2 text-gray-800 h1-style">사원등록</h1>
-					                    <p class="mb-4">Employee registration</p>
+					                    <h1 class="h3 mb-2 text-gray-800 h1-style">사원수정</h1>
+					                    <p class="mb-4">Employee Modify</p>
 									</div>
 	                            	<!-- 이름 -->
 	                            	<div class="form-group">
                                     <input type="text" class="form-control form-control-user c-size" id="name"
                                         placeholder="이름">
-                                	</div>
-	                            	<!-- 비밀번호 -->
-	                            	<div class="form-group">
-                                    <input type="text" class="form-control form-control-user c-size" id="password1"
-                                        placeholder="비밀번호 입력">
-                                	</div>
-	                            	<!-- 비밀번호확인 -->
-	                            	<div class="form-group">
-                                    <input type="text" class="form-control form-control-user c-size" id="password2"
-                                        placeholder="비밀번호 재입력">
                                 	</div>
                                 	<!-- 휴대폰 -->
 	                            	<div class="form-group hp-margin">
@@ -83,9 +73,8 @@ input#jumin2 {
                                 	</div>
 	                                <div class="form-group c-size">
 	                                <br>
-	                                    <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary b-radius">등록</button>
-	                                    <button type="button" class="btn btn-danger b-radius">취소</button>
-	                                    <button type="button" class="btn btn-secondary b-radius">목록</button>
+	                                    <button type="button" class="btn btn-success b-radius" data-toggle="modal" data-target="#exampleModal">수정</button>
+										<button type="button" class="btn btn-danger b-radius">취소</button>
                                 	</div>
 	                            </div>
 	                            </form>
@@ -98,13 +87,13 @@ input#jumin2 {
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			      	<h5 class="modal-title" id="exampleModalLabel">사원등록</h5>
+			      	<h5 class="modal-title" id="exampleModalLabel">사원수정</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        등록하시겠습니까?
+			        수정하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary b-radius" data-dismiss="modal" >취소</button>

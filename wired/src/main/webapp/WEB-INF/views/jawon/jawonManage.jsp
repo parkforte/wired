@@ -8,6 +8,9 @@
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
+.btn-waiting{
+	background-color: #cccccc;
+}
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
@@ -20,6 +23,7 @@
 		<div id="topTitle">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800 h1-style">자원관리</h1>
+        <p class="mb-4">Resource Management</p>
 		</div>
         <!-- title1 -->
            
@@ -29,7 +33,7 @@
            <div class="card shadow mb-4">
                <div class="card-header py-3">
                    <h6 class="m-0 font-weight-bold text-primary p-absolute">자원리스트</h6><!-- 게시판 이름 -->
-  						<button class="listAdd" onclick="location.href='#'">리스트 추가</button>
+  						<button class="listAdd" onclick="location.href='#'">리스트추가</button>
              <!-- 게시판 검색 -->      
              <!-- Topbar Search -->
          <!-- <form
@@ -94,7 +98,8 @@
                                    <td>아반떼</td>
                                    <td>본관 지하주차장</td>
                                    <td>2021-12-21 17:00 ~ 2021-12-21 18:00</td>
-                                   <td>사용/미사용</td>
+                                   <td><button type="button" class="btn btn-warning">사용중</button>or
+                                   <button type="button" class="btn btn-waiting">미사용</button></td></td>
                                    <td><a href="#" id="a-hover">수정</a>&nbsp;
                                    		<a href="#" id="a-hover">삭제</a></td>
                                </tr>
@@ -108,30 +113,6 @@
     </div>
     <!-- /.container-fluid -->
      </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-</div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
          

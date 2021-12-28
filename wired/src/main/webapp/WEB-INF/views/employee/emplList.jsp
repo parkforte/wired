@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 
-<!-- http://localhost:9091/wired/jawon/jawonList -->
+<!-- http://localhost:9091/wired/employee/emplList -->
 
 <!-- css영역 -->
 <style type="text/css">
@@ -22,28 +22,17 @@
     <div class="container-fluid font">
 		<div id="topTitle">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800 h1-style">자원예약현황</h1>
-		<h5 class="m-0 font-weight-bold text-primary h5-style">내 예약 현황</h5><!-- 부제 -->
+        <h1 class="h3 mb-2 text-gray-800 h1-style">사원목록</h1>
+        <p class="mb-4">Employee List</p>
 		</div>
         <!-- title1 -->
-       <c:forEach var="i" begin="1" end="3">       
          <div class="card shadow mb-4">
             
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-                   <h6 class="m-0 font-weight-bold text-primary">내역이름</h6><!-- 게시판 이름 -->
-             
-   
-         <!-- Topbar Navbar -->
-           <ul class="navbar-nav ml-auto">
-      
-               <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-               <li class="nav-item dropdown no-arrow d-sm-none">
-                   <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       <i class="fas fa-search fa-fw"></i>
-                   </a>
+             이름 직급 부서로 검색/ 페이징처리
+         
                    <!-- Dropdown - Messages -->
                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                        aria-labelledby="searchDropdown">
@@ -67,23 +56,27 @@
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
-                                   <th>자원명</th>
-                                   <th>자원정보</th>
-                                   <th>기간</th>
-                                   <th></th>
-                                   <th></th>
+                                   <th>사원번호</th>
+                                   <th>이름</th>
+                                   <th>부서</th>
+                                   <th>직급</th>
+                                   <th>연락처</th>
+                                   <th>수정/삭제</th>
                                </tr>
                            </thead>
+               <c:forEach var="i" begin="1" end="10">
                            <tbody>
                                <tr>
-                                   <td>회의실</td>
-                                   <td>A회의실</td>
-                                   <td>2021-12-21 17:00 ~ 2021-12-21 18:00</td>
-                                   <td><button type="button" class="btn btn-danger b-radius" data-toggle="modal" data-target="#exampleModal" onclick="location.href='#'">신청취소</button></td>
-                                   <td><button type="button" class="btn btn-success">검토중</button>
-                                   <button type="button" class="btn btn-waiting">승인</button></td>
+                                   <td>1</td>
+                                   <td>송지효</td>
+                                   <td>총무부</td>
+                                   <td>과장</td>
+                                   <td>010-1234-5678</td>
+                                   <td><button type="button" class="btn btn-success" onclick="location.href='/wired/employee/emplEdit'">수정</button>
+										<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">퇴사</button></td>
                                </tr>
                            </tbody>
+               </c:forEach>
                        </table>
                    </div>
                </div>
@@ -101,17 +94,16 @@
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        취소하시겠습니까?
+			        퇴사 처리 하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary b-radius" data-dismiss="modal" >닫기</button>
-			        <button type="submit" class="btn btn-danger b-radius">신청취소</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >취소</button>
+			        <button type="submit" class="btn btn-primary">확인</button>
 			      </div>
 			    </div>
 			  </div>
 			</div>
     <!-- /.container-fluid -->
-    </c:forEach>  
      </div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
