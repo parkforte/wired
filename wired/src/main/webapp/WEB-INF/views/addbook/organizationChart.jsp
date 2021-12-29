@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<!-- http://localhost:9091/wired/addbook/addbook -->
+<!-- http://localhost:9091/wired/addbook/organizationChart -->
 <!-- 2 load the theme CSS file -->
 <link rel="stylesheet"
 	href="<c:url value='/resources/api/jsTree/dist/themes/proton/style.min.css' />" />

@@ -1,5 +1,5 @@
 package com.gr.wired.addBook.model;
 
-public interface addBookService {
+public interface organizationChartDAO {
 
 }
