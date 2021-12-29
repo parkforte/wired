@@ -2,11 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 
-<!-- http://localhost:9091/wired/default/defaultPage -->
+<!-- http://localhost:9091/wired/board/boardWrite -->
 
 <!-- javaScript영역 -->
 <!-- 네이버 스마트에디터  -->
 <!-- <head> 안에 추가 -->
+
+
+
 <script type="text/javascript" src='<c:url value="/resources/api/smarteditor/js/service/HuskyEZCreator.js"/>' charset="utf-8"></script>
 <script type="text/javascript" src='<c:url value="//code.jquery.com/jquery-1.11.0.min.js"/>'></script>
 
@@ -89,23 +92,46 @@
 										    }
 										});
 									</script>
-									<!-- 파일첨부 -->
-									<div class="form-group f-right">
-									    <label for="exampleFormControlFile1" id="fileinputlabel">Example file input</label>
-									    <input type="file" multiple="multiple" name="upfile" class="form-control-file f-right" id="exampleFormControlFile1 upfile"/>
-									    
 									</div>
+									<!-- 파일첨부 -->
+            				
+            						<!-- partial:index.partial.html -->
+									<!-- The classic file input element we'll enhance to a file pond
+									-->
+									<input type="file" 
+							       class="filepond"
+							       name="filepond"
+							       multiple
+							       data-max-file-size="3MB"
+							       data-max-files="3" />
+							
+									<!-- file upload itself is disabled in this pen -->
+									<!-- partial -->
+									<script src='<c:url value="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"/>'></script>
+									<script src='<c:url value="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"/>'></script>
+									<script src='<c:url value="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"/>'></script>
+									<script src='<c:url value="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"/>'></script>
+									<script src='<c:url value="https://unpkg.com/filepond/dist/filepond.min.js"/>'></script><script  src='<c:url value="/resources/js/script.js"/>'></script>
+            				
+            				
+            				
+               						 <!-- /.container-fluid -->
+<!-- 									<div class="form-group f-right"> -->
+<!-- 									    <label for="exampleFormControlFile1" id="fileinputlabel">Example file input</label> -->
+<!-- 									    <input type="file" multiple="multiple" name="upfile" class="form-control-file f-right" id="exampleFormControlFile1 upfile"/> -->
+									    
+<!-- 									</div> -->
 									<div>
 										<button type="button" class="btn btn-primary f-left" id="btList">글목록</button>
 									</div>		
                             	</form>
+                            	
                             </div>
                         </div>
                     </div>
                     
 
-                </div>
-                <!-- /.container-fluid -->
+               
 
             <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
