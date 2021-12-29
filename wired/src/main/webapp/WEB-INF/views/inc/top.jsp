@@ -53,6 +53,9 @@
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
+
+<!-- chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -69,93 +72,88 @@
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
 				href="${pageContext.request.contextPath}/index">
-				<div class="sidebar-brand-icon rotate-n-15">
-					<!-- <i class="fas fa-laugh-wink"><img src="resources/img/logo/logo2.png" alt="...""></i> -->
+				<div class="sidebar-brand-icon">
+					<img src="${pageContext.request.contextPath}/resources/img/logo/wired_logo2.png" alt="logo">
 				</div>
-				<div class="sidebar-brand-text mx-3">WIRED</div>
 			</a>
-
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active"><a class="nav-link" href="index">
+			<li class="nav-item active"><a class="nav-link" href="${pageContext.request.contextPath}/index">
 					<i class="fas fa-fw fa-tachometer-alt"></i> <span>Home</span>
 			</a></li>
 
-			<!-- Divider -->
-			<hr class="sidebar-divider">
 
-			<!-- Heading -->
-			<div class="sidebar-heading">업무관리</div>
-
-			<!-- Nav Item - Pages Collapse Menu -->
+			<!-- 전자결재 -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseTwo"
 				aria-expanded="true" aria-controls="collapseTwo"> <i
-					class="fas fa-fw fa-cog"></i> <span>Components</span>
+					class="fas fa-fw fa-cog"></i> <span>전자결재</span>
 			</a>
 				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Custom Components:</h6>
-						<a class="collapse-item" href="buttons.html">Buttons</a> <a
-							class="collapse-item" href="cards.html">Cards</a>
+						<h6 class="collapse-header">전자결재:</h6>
+						<a class="collapse-item" href="#">문서작성</a>
+						<a class="collapse-item" href="#">문서함</a>
+						<a class="collapse-item" href="#">문서관리</a>
 					</div>
 				</div></li>
 
-			<!-- Nav Item - Utilities Collapse Menu -->
+			<!-- 사내게시판 -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseUtilities"
 				aria-expanded="true" aria-controls="collapseUtilities"> <i
-					class="fas fa-fw fa-wrench"></i> <span>Utilities</span>
+					class="fas fa-fw fa-wrench"></i> <span>사내게시판</span>
 			</a>
 				<div id="collapseUtilities" class="collapse"
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Custom Utilities:</h6>
-						<a class="collapse-item" href="utilities-color.html">Colors</a> <a
-							class="collapse-item" href="utilities-border.html">Borders</a> <a
-							class="collapse-item" href="utilities-animation.html">Animations</a>
-						<a class="collapse-item" href="utilities-other.html">Other</a>
+						<h6 class="collapse-header">사내게시판:</h6>
+						<a class="collapse-item" href="#">#</a> <a
+							class="collapse-item" href="#">#</a> <a
+							class="collapse-item" href="#">#</a>
+						<a class="collapse-item" href="#">#</a>
 					</div>
 				</div></li>
 
-			<!-- Divider -->
-			<hr class="sidebar-divider">
 
 			<!-- Heading -->
 			<div class="sidebar-heading"></div>
 
-			<!-- Nav Item - Pages Collapse Menu -->
+			<!-- 자원관리 -->
 			<li class="nav-item"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapsePages"
 				aria-expanded="true" aria-controls="collapsePages"> <i
-					class="fas fa-fw fa-folder"></i> <span>Pages</span>
+					class="fas fa-fw fa-folder"></i> <span>자원관리</span>
 			</a>
 				<div id="collapsePages" class="collapse"
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<h6 class="collapse-header">Login Screens:</h6>
-						<a class="collapse-item" href="login.html">Login</a> <a
-							class="collapse-item" href="register.html">Register</a> <a
-							class="collapse-item" href="forgot-password.html">Forgot
-							Password</a>
-						<div class="collapse-divider"></div>
-						<h6 class="collapse-header">Other Pages:</h6>
-						<a class="collapse-item" href="404.html">404 Page</a> <a
-							class="collapse-item" href="blank.html">Blank Page</a>
+						<h6 class="collapse-header">자원관리:</h6>
+							<a class="collapse-item" href="#">#</a>
+							<a class="collapse-item" href="#">#</a>
+							<a class="collapse-item" href="#">#</a>
 					</div>
 				</div></li>
 
-			<!-- Nav Item - Charts -->
-			<li class="nav-item"><a class="nav-link" href="charts.html">
-					<i class="fas fa-fw fa-chart-area"></i> <span>Charts</span>
+			<!-- 웹하드 -->
+			<li class="nav-item"><a class="nav-link" href="#">
+					<i class="fas fa-fw fa-chart-area"></i> <span>웹하드</span>
 			</a></li>
 
-			<!-- Nav Item - Tables -->
-			<li class="nav-item"><a class="nav-link" href="tables.html">
-					<i class="fas fa-fw fa-table"></i> <span>Tables</span>
+			<!-- 주소록 -->
+			<li class="nav-item"><a class="nav-link" href="#">
+					<i class="fas fa-fw fa-table"></i> <span>주소록</span>
+			</a></li>
+			<!-- 스케쥴러 -->
+			<li class="nav-item"><a class="nav-link" href="#">
+					<i class="fas fa-fw fa-table"></i> <span>스케쥴러</span>
+			</a></li>
+			<!-- 사원관리 -->
+			<li class="nav-item"><a class="nav-link" href="#">
+					<i class="fas fa-fw fa-table"></i> <span>사원관리</span>
 			</a></li>
 
 			<!-- Divider -->
@@ -175,8 +173,7 @@
 					components, and more!
 				</p>
 				<a class="btn btn-success btn-sm"
-					href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
-					Pro!</a>
+					href="#">button!</a>
 			</div>
 
 		</ul>
@@ -368,7 +365,7 @@
 									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 마이페이지
 								</a> <a class="dropdown-item" href="#"> <i
 									class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									서명관리
+									근태관리
 								</a> <a class="dropdown-item" href="#"> <i
 									class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
 									출/퇴근등록
