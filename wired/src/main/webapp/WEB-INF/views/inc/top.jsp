@@ -31,6 +31,11 @@
 <!-- 수정용CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/wiredStyle.css" rel="stylesheet">
 
+<!-- 파일 업로드용 css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css">
+<link rel='stylesheet' href="https://unpkg.com/filepond/dist/filepond.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 
 <!-- Bootstrap core JavaScript-->
 <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
