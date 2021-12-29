@@ -57,7 +57,8 @@
 <!-- chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
-
+<!-- sweetAlert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body id="page-top">
 
 	<!-- Page Wrapper -->
