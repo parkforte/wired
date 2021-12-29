@@ -16,4 +16,14 @@ public class JawonController {
 	public String manage() {
 		return "jawon/jawonManage";
 	}
+	
+	@RequestMapping("/jawonInfo")
+	public String Info() {
+		return "jawon/jawonInfo";
+	}
+	
+	@RequestMapping("/jawonAllList")
+	public String all() {
+		return "jawon/jawonAllList";
+	}
 }

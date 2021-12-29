@@ -11,6 +11,11 @@
 .btn-waiting{
 	background-color: #cccccc;
 }
+.listAdd {
+    float: right;
+    margin-right: 78px;
+}
+
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
@@ -83,13 +88,12 @@
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
-                                   <th>자원명
-                                   	<button class="jawonAdd" onclick="location.href='#'">추가</button></th>
+                                   <th>자원명</th>
                                    <th>자원정보</th>
                                    <th>자원위치</th>
                                    <th>예약시간</th>
                                    <th>상태</th>
-                                   <th></th>
+                                   <th><button class="jawonAdd" onclick="location.href='#'">추가</button></th>
                                </tr>
                            </thead>
                            <tbody>
