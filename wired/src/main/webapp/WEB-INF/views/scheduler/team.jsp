@@ -51,6 +51,5 @@
 </div>
 <!-- /.container-fluid -->
 
-</div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp"%>
