@@ -8,6 +8,14 @@
 	href="<c:url value='/resources/api/jsTree/dist/themes/proton/style.min.css' />" />
 
 <style type="text/css">
+.f-right{
+	float: right;
+}
+
+.f-left{
+	float:left;
+}
+
 .setW20 {
 	width: 20%;
 }
@@ -27,7 +35,7 @@
 	margin: 10mm auto;
 	border-radius: 5px;
 	background: #fff;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .tg {
@@ -121,40 +129,7 @@
 </script>
 <!-- 전자결재HOME -->
 <div class="container-fluid">
-	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">전자결재 시스템</h1>
-	<p class="mb-4">e-Approval system</p>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="collapse navbar-collapse" id="navbarScroll">
-			<ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll"
-				style="max-height: 100px;">
-				<li class="nav-item active"><a class="nav-link active" href="#">Home</a>
-				</li>
-				<li class="nav-item active"><a class="nav-link" href="#">문서작성</a>
-				</li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarScrollingDropdown" role="button" data-toggle="dropdown"
-					aria-expanded="false"> 문서함 </a>
-					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-						<li><a class="dropdown-item" href="#">결재대기</a></li>
-						<li><a class="dropdown-item" href="#">결재완료</a></li>
-						<li><a class="dropdown-item" href="#">결재반려</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">임시저장</a></li>
-					</ul></li>
-				<li class="nav-item active"><a class="nav-link" href="#">문서결재</a>
-				<li class="nav-item active"><a class="nav-link" href="#">문서관리</a>
-				</li>
-			</ul>
-			<form class="d-flex">
-				<input class="form-control mr-2" type="search" placeholder="Search"
-					aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
-			</form>
-		</div>
-	</nav>
-
+<%@ include file="include/navbar.jsp"%>
 	<div>
 		<!-- title1 -->
 		<div class="card shadow mb-4 setW20 setMR10 f-left">
@@ -225,20 +200,53 @@
 			</div>
 		</div>
 		<div class="card shadow mb-4">
-			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">문서작성</h6>
+			<div class="card-header py-3 ">
+				<div class="setW20 f-left"><h6 class="m-0 font-weight-bold text-primary">문서작성</h6></div>
+				<div class="f-right">
+                                     <a href="#" class="btn btn-primary btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                                        <span class="text">Export to Excel</span>
+                                    </a>
+                                     <a href="#" class="btn btn-primary btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                                        <span class="text">Print to pdf</span>
+                                    </a>
+                                     <a href="#" class="btn btn-primary btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                                        <span class="text">결재선선택</span>
+                                    </a>
+                                     <a href="#" class="btn btn-primary btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                                        <span class="text">임시저장</span>
+                                    </a>
+				<a href="#" class="btn btn-success btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                        <span class="text">상신하기</span>
+                                    </a>
+                                    </div>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<div>
+				  
+                                    
 						<div class="paper">
 							<div class="content">
 
 								<table class="tg" style="table-layout: fixed; width: 100%;">
 									<thead>
 										<tr>
-											<th class="tg-lboi" colspan="3" rowspan="5"><h3>품의서</h3></th>
-											<th class="tg-lboi" colspan="3" rowspan="5"></th>
+											<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>품의서</h3></th>
+											<th class="tg-lboi" colspan="3" rowspan="5"><img src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
 											<th class="tg-lboi">결재선3</th>
 											<th class="tg-lboi">결재선2</th>
 											<th class="tg-lboi">결재선1</th>
@@ -253,15 +261,9 @@
 										<tr>
 										</tr>
 										<tr>
-											<th class="tg-0lax"></th>
-											<th class="tg-0lax"></th>
-											<th class="tg-0lax"></th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td class="tg-lboi" colspan="9"></td>
-										</tr>
 										<tr>
 											<td class="tg-lboi">기안부서</td>
 											<td class="tg-lboi" colspan="2"></td>
@@ -277,9 +279,6 @@
 											<td class="tg-lboi" colspan="2"></td>
 											<td class="tg-lboi">비밀등급</td>
 											<td class="tg-lboi" colspan="2"></td>
-										</tr>
-										<tr>
-											<td class="tg-0lax" colspan="9"></td>
 										</tr>
 										<tr>
 											<td class="tg-lboi">제목</td>
@@ -323,7 +322,6 @@ nhn.husky.EZCreator.createInIFrame({
 
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 
