@@ -149,6 +149,10 @@
 						title="휴대폰 가운데자리" class="width_80">- <input type="text"
 						name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리" class="width_80">
 				</div>
+				<div class="form-group hp-margin">
+					<input type="text" class="form-control form-control-user c-size"
+						id="hp" placeholder="휴대폰번호">
+				</div>
 				<label for="mem_hp3" class="col-sm-2 col-form-label">연락처3</label>
 				<div class="col-sm-10">
 					<select name="hp1" id="hp1" title="휴대폰 앞자리">
