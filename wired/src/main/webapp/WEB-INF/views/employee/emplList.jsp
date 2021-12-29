@@ -31,7 +31,18 @@
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-             이름 직급 부서로 검색/ 페이징처리
+               <!-- search -->
+             <div class="col-sm-12 col-md-6 f-right" align="right">
+                   			<div id="dataTable_filter" class="dataTables_filter">
+                   				<div class="bdListSearch">
+	                   				<label class="f-right">Search:</label>
+                   				</div>
+                   				<div class="bdListSearchText">
+                   				
+    	               				<input type="search" class="form-control form-control-sm" placeholder aria-controls="dataTable"/>
+                   				</div>
+                   			</div>
+                   		</div>
          
                    <!-- Dropdown - Messages -->
                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
@@ -80,9 +91,40 @@
                        </table>
                    </div>
                </div>
-                </div>
                 
     </div>
+    		<!-- paging -->
+    				<div class="row">
+              			<div class="col-sm-12 col-md-5">
+              				<div class="dataTables_info" id="dataTables_info" role="status">
+              					Showing 1 to 10 of 57 entries
+              				</div>
+              			
+              			</div>
+              			
+              			<!-- 페이징 1,2,3,4,5, -->
+              			<div class="col-sm-12 col-md-7">
+              				<nav aria-label="...">
+							  <ul class="pagination ">
+							    <li class="page-item disabled">
+							      <span class="page-link">Previous</span>
+							    </li>
+							    <li class="page-item"><a class="page-link" href="#">1</a></li>
+							    <li class="page-item active" aria-current="page">
+							      <span class="page-link">2</span>
+							    </li>
+							    <li class="page-item"><a class="page-link" href="#">3</a></li>
+							    <li class="page-item">
+							      <a class="page-link" href="#">Next</a>
+							    </li>
+							  </ul>
+							</nav>
+              			</div>
+              		</div>
+               
+               
+                </div>
+    
     <!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">

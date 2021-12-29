@@ -23,15 +23,21 @@
 .c-size {
     margin-left: 5px;
 }
-input#jumin1 {
-    width: 47.5%;
+.s-half-style{
+	width: 30.8%;
+}
+.half-style{
+	width: 47.5%;
 }
 span {
     padding-top: 11px;
     padding-left: 5px;
 }
-input#jumin2 {
-    width: 47.5%;
+.rank-margin {
+    margin-top: 16px;
+}
+.form-group.row.rank-margin {
+    margin-top: 16px;
 }
 </style>
 
@@ -67,19 +73,38 @@ input#jumin2 {
                                     <input type="text" class="form-control form-control-user c-size" id="password2"
                                         placeholder="비밀번호 재입력">
                                 	</div>
-                                	<!-- 휴대폰 -->
-	                            	<div class="form-group hp-margin">
-                                    <input type="text" class="form-control form-control-user c-size" id="hp"
-                                        placeholder="휴대폰번호">
+                                	<!-- 연락처 -->
+	                            	<div class="form-group row">
+	                                <input type="text" class="form-control form-control-user c-size s-half-style" id="hp1"
+	                                    placeholder="010">
+	                                <span>-</span>
+	                                <input type="text" class="form-control form-control-user c-size s-half-style" id="hp2"
+	                                    placeholder="0000">
+	                                <span>-</span>
+	                                <input type="text" class="form-control form-control-user c-size s-half-style" id="hp3"
+	                                    placeholder="0000">
                                 	</div>
                                 	<hr>
-                                	<!-- 부서,직급 -->
+                                	<!-- 연봉,연차 -->
 	                            	<div class="form-group row">
-	                                <input type="text" class="form-control form-control-user c-size" id="jumin1"
+	                                <input type="text" class="form-control form-control-user c-size half-style" id="salary"
+	                                    placeholder="연봉">
+	                                <span></span>
+	                                <input type="text" class="form-control form-control-user c-size half-style" id="annual"
+	                                    placeholder="연차">
+                                	</div>
+                                	<!-- 부서,직급 -->
+	                            	<div class="form-group row rank-margin">
+	                                <input type="text" class="form-control form-control-user c-size half-style" id="jumin1"
 	                                    placeholder="부서">
 	                                <span></span>
-	                                <input type="text" class="form-control form-control-user c-size" id="jumin2"
+	                                <input type="text" class="form-control form-control-user c-size half-style" id="jumin2"
 	                                    placeholder="직급">
+                                	</div>
+                                	<!-- 권한 -->
+	                            	<div class="form-group">
+                                    <input type="text" class="form-control form-control-user c-size rank-margin" id="rank"
+                                        placeholder="권한">
                                 	</div>
 	                                <div class="form-group c-size">
 	                                <br>

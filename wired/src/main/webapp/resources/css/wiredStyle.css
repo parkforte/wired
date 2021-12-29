@@ -95,12 +95,6 @@ div#topTitle {
   background:#fff;
   border: 1px solid #2ecc71;
 }
-/* 위치조정 */
-.listAdd {
-    margin-left: 85px;
-    margin-top: -9px;
-    margin-bottom: -9px;
-}
 
 /* 자원추가 아이콘 - 자원 */
 /* 스타일링 */
@@ -120,15 +114,6 @@ div#topTitle {
   background:#fff;
   border:1px solid #6868AC;
 }
-/* 위치조정 */
-.jawonAdd {
-    float: right;
-    margin-left: -65px;
-    margin-right: 41px;
-    margin-top: -3px;
-    margin-bottom: -9px;
-}
-
 
 /* a태그 호버시 색상 */
 #a-hover:hover{
