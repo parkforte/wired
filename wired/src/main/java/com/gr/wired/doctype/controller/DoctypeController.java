@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/doctype")
+@RequestMapping("/e-approval/doctype")
 public class DoctypeController {
 
 	@GetMapping("/admin")
 	public String admin_get() {
 		
-		return "doctype/admin";
+		return "e-approval/doctype/admin";
 		
 	}
 }

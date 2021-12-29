@@ -2,14 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<!-- http://localhost:9091/wired/default/defaultPage -->
 <!-- 2 load the theme CSS file -->
 <link rel="stylesheet"
 	href="<c:url value='/resources/api/jsTree/dist/themes/proton/style.min.css' />" />
 
 <style>
-.setW20 {
-	width: 20%;
+.setW15 {
+	width: 15%;
 }
 
 .setW75 {
@@ -19,56 +18,26 @@
 .setMR10 {
 	margin-right: 10px;
 }
+
+.f-center{
+	margin: 0 auto;
+}
 </style>
 <!-- javaScript영역 -->
 
 <!-- 전자결재HOME -->
 <div>
 <div class="container-fluid">
-	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">전자결재 시스템</h1>
-	<p class="mb-4">e-Approval system</p>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="collapse navbar-collapse" id="navbarScroll">
-			<ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll"
-				style="max-height: 100px;">
-				<li class="nav-item active"><a class="nav-link active" href="#">Home</a>
-				</li>
-				<li class="nav-item active"><a class="nav-link" href="#">문서작성</a>
-				</li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarScrollingDropdown" role="button" data-toggle="dropdown"
-					aria-expanded="false"> 문서함 </a>
-					<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-						<li><a class="dropdown-item" href="#">결재대기</a></li>
-						<li><a class="dropdown-item" href="#">결재완료</a></li>
-						<li><a class="dropdown-item" href="#">결재반려</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">임시저장</a></li>
-					</ul></li>
-				<li class="nav-item active"><a class="nav-link" href="#">문서결재</a>
-				<li class="nav-item active"><a class="nav-link" href="#">문서관리</a>
-				</li>
-			</ul>
-			<form class="d-flex">
-				<input class="form-control mr-2" type="search" placeholder="Search"
-					aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
-			</form>
-		</div>
-	</nav>
-
+<%@ include file="include/navbar.jsp"%>
 	<div>
 		<!-- title1 -->
-		<div class="card shadow mb-4 setW20 setMR10 f-left">
+		<div class="card shadow mb-4 setW15 setMR10 f-left">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">문서양식</h6>
+				<h6 class="m-0 font-weight-bold text-primary">문서상태</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-						<div class="card text-center" style="width: 18rem;">
-					<div class="card-header">문서상태</div>
+					<div class="card text-center f-center" style="width: 10rem;">
 					<ul class="list-group list-group-flush nav flex-column">
 						<li class="list-group-item nav-item"><i
 							class="bi bi-clipboard"></i> 결재대기</li>
@@ -79,13 +48,13 @@
 						<li class="list-group-item nav-item"><i
 							class="bi bi-clipboard"></i> 임시저장</li>
 					</ul>
-				</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">title1</h6>
+				<h6 class="m-0 font-weight-bold text-primary">문서함</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
@@ -126,6 +95,7 @@
 			</div>
 		</div>
 
+	</div>
 	</div>
 </div>
 
