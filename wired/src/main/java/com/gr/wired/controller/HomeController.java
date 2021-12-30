@@ -16,7 +16,4 @@ public class HomeController {
 		return "default/defaultPage";
 	}
 	
-	public void test() {
-		
-	}
 }
