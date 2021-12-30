@@ -23,5 +23,10 @@ public class ConfirmController {
 		return "e-approval/mainpage";
 	}
 	
+	@GetMapping("/signature/paint")
+	public String signature_get() {
+		return "e-approval/signature/paint";
+	}
+	
 	
 }
