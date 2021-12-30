@@ -11,6 +11,13 @@
 .btn-waiting{
 	background-color: #cccccc;
 }
+.c-both{
+	clear: both;
+}
+.m-search{
+	margin-bottom: 12px;
+	margin-top: -12px;
+}
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
@@ -23,16 +30,22 @@
 		<div id="topTitle">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800 h1-style">자원예약현황</h1>
-		<h5 class="m-0 font-weight-bold text-primary h5-style">내 예약 현황</h5><!-- 부제 -->
+		<h5 class="m-0 font-weight-bold text-primary h5-style f-left">내 예약 현황</h5><!-- 부제 -->
+		<!-- search -->
+		<form class="d-flex f-right m-search">
+			<input class="form-control mr-2" type="search" placeholder="Search"
+				aria-label="Search">
+			<button class="btn btn-outline-success" type="submit">Search</button>
+		</form>
 		</div>
         <!-- title1 -->
        <c:forEach var="i" begin="1" end="3">       
-         <div class="card shadow mb-4">
-            
+         <div class="card shadow mb-4 c-both">
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
                    <h6 class="m-0 font-weight-bold text-primary">내역이름</h6><!-- 게시판 이름 -->
+                   
              
    
          <!-- Topbar Navbar -->

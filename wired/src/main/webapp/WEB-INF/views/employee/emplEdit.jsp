@@ -86,10 +86,10 @@ span {
                                 	</div>
                                 	<!-- 부서,직급 -->
 	                            	<div class="form-group row">
-	                                <input type="text" class="form-control form-control-user c-size half-style rank-margin" id="jumin1"
+	                                <input type="text" class="form-control form-control-user c-size half-style rank-margin" id="depart"
 	                                    placeholder="부서">
 	                                <span></span>
-	                                <input type="text" class="form-control form-control-user c-size half-style rank-margin" id="jumin2"
+	                                <input type="text" class="form-control form-control-user c-size half-style rank-margin" id="position"
 	                                    placeholder="직급">
                                 	</div>
                                 	<!-- 권한 -->
