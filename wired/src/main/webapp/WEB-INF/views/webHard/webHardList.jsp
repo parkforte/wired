@@ -47,19 +47,35 @@ input#exampleCheck1\ chkbox {
 	  <div class="modal-dialog modal-dialog-centered">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">관리자 글삭제</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">업로드할 파일을 선택하세요.</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
+		  <form name="frmfile" enctype="multipart/form-data" action="" >
 	      <div class="modal-body">
-	        게시글을 정말 삭제하시겠습니까?
+			<!-- 파일첨부 -->
+				<!-- 파일첨부 인풋 -->
+				<input type="file" 
+				       class="filepond"
+				       name="filepond"
+				       multiple
+				       data-max-file-size="3MB"
+				       data-max-files="3" />
+				<!-- 파일첨부 스크립트 -->
+				<script src='<c:url value="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"/>'></script>
+				<script src='<c:url value="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"/>'></script>
+				<script src='<c:url value="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"/>'></script>
+				<script src='<c:url value="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"/>'></script>
+				<script src='<c:url value="https://unpkg.com/filepond/dist/filepond.min.js"/>'></script><script src='${pageContext.request.contextPath}/resources/js/script.js'></script>
+				<!-- 파일첨부 스크립트 -->
 	      </div>
 	      <div class="modal-footer">
 	      	
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary">삭제</button>
+	        <button type="submit" class="btn btn-primary">등록</button>
 	      </div>
+		</form>
 	    </div>
 	  </div>
 	</div>
@@ -71,8 +87,8 @@ input#exampleCheck1\ chkbox {
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">게시판</h1>
-		<p class="mb-4">Company bulletin board list.</p>
+        <h1 class="h3 mb-2 text-gray-800">웹하드</h1>
+		<p class="mb-4">Company web hard.</p>
 		
 		<!-- 게시판 검색 -->  
 		<div id='boardListSc'>
@@ -86,8 +102,13 @@ input#exampleCheck1\ chkbox {
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-                   <h6 class="m-0 font-weight-bold text-primary">게시판이름</h6><!-- 게시판 이름 -->
-             
+                   <h6 class="m-0 font-weight-bold text-primary f-left">웹하드</h6><!-- 게시판 이름 -->
+	             	<div class="bdListBtDiv f-right">
+	                    <button type="button" class="btn btn-primary f-left detailbt" data-toggle="modal" data-target="#exampleModal">업로드</button>
+	                    <button type="button" class="btn btn-primary f-left detailbt">다운로드</button>
+	                    <!-- 관리자만, 본인 페이지만 삭제 -->
+						<button type="button" class="btn btn-danger f-left detailbt">삭제</button>
+	               	</div>
                  
             
 			
@@ -124,13 +145,13 @@ input#exampleCheck1\ chkbox {
                            <thead>
                                <tr>
                                	   <th style="width:50px"><input type="checkbox" class="form-check-input" id="exampleCheck1 chkAll"></th>
-                                   <th style="width: 151px">Name</th>
-                                   <th>title</th>
-                                   <th style="width: 90px">등록일</th>
-                                   <th style="width: 80px">조회수</th>
-                                   <th style="width: 100px">추천</th>
-                                  <!-- 관리자 모드일때만 보이게 if처리 -->
-                                   <th style="width: 151px">관리</th>
+                               	   <th style="width: 120px">업로더</th>
+                                   <th>파일이름</th>
+                                   <th style="width: 150px">파일크기</th>
+                                   <th style="width: 150px">등록일</th>
+                                   <th style="width: 120px">다운로드수</th>
+                                   <!-- 사내 웹하드에서만 보이기 -->
+                                   
                                </tr>
                            </thead>
                            <tbody>
@@ -141,23 +162,18 @@ input#exampleCheck1\ chkbox {
                                    <td>
                                    		<input type="checkbox" class="form-check-input" id="exampleCheck1 chkbox">
                                    </td>
+                                   
                                    <td>Tiger Nixon${i }</td>
                                    <td>
                                    		
                                    		<i class="bi bi-folder"></i><!-- 첨부파일 있는 게시물의 경우if처리 -->
                                    		게시글 제목
                                    </td>
+                                   <td></td>
                                    <td>2021/12/26</td>
-                                   <td>128</td>
                                    <td>
-              							추천수
-                                   </td>
-                                   	<!-- 관리자 모드일때만 보이게 if처리 게시글 번호로 수정 페이지이동, 삭제 메시지이용-->
-                                   <td>
-                                   		<div class="bdListBtDiv">
-				                            <button type="button" class="btn btn-primary f-left detailbt">글수정</button>
-											<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal">글삭제</button>
-			                            </div>
+                                   	
+                                   		
 	                                   	
                                    </td>
                                </tr>
