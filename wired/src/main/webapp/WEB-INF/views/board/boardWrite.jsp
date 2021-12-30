@@ -116,11 +116,11 @@
             				
             				
                						 <!-- /.container-fluid -->
-<!-- 									<div class="form-group f-right"> -->
-<!-- 									    <label for="exampleFormControlFile1" id="fileinputlabel">Example file input</label> -->
-<!-- 									    <input type="file" multiple="multiple" name="upfile" class="form-control-file f-right" id="exampleFormControlFile1 upfile"/> -->
+ 									<div class="form-group f-right">
+ 									    <label for="exampleFormControlFile1" id="fileinputlabel">Example file input</label>
+ 									    <input type="file" multiple="multiple" name="upfile" class="form-control-file f-right" id="exampleFormControlFile1 upfile"/>
 									    
-<!-- 									</div> -->
+ 									</div>
 									<div>
 										<button type="button" class="btn btn-primary f-left" id="btList">글목록</button>
 									</div>		
