@@ -19,6 +19,17 @@
 .setMR10 {
 	margin-right: 10px;
 }
+.s-half-style {
+    width: 31.5%;
+}
+span {
+    padding-top: 11px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+.rank-margin {
+    margin-top: 16px;
+}
 </style>
 <!-- javaScript영역 -->
 <!-- 4 include the jQuery library -->
@@ -68,6 +79,7 @@
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">주소록 추가</h5>
+									</div>
 									<div class="modal-body">
 
 
@@ -82,52 +94,45 @@
 												</div>
 												<!-- 연락처 -->
 												<div class="form-group row">
+				                                <input type="text" class="form-control form-control-user c-size s-half-style" id="hp1"
+				                                    placeholder="010">
+				                                <span>-</span>
+				                                <input type="text" class="form-control form-control-user c-size s-half-style" id="hp2"
+				                                    placeholder="0000">
+				                                <span>-</span>
+				                                <input type="text" class="form-control form-control-user c-size s-half-style" id="hp3"
+				                                    placeholder="0000">
+			                                	</div>
+												<!-- 이메일 -->
+												<div class="form-group rank-margin">
 													<input type="text"
-														class="form-control form-control-user c-size s-half-style"
-														id="hp1" placeholder="010"> <span>-</span> <input
-														type="text"
-														class="form-control form-control-user c-size s-half-style"
-														id="hp2" placeholder="0000"> <span>-</span> <input
-														type="text"
-														class="form-control form-control-user c-size s-half-style"
-														id="hp3" placeholder="0000">
+														class="form-control form-control-user c-size" id="email"
+														placeholder="이메일">
 												</div>
-												<hr>
-												<!-- 연봉,연차 -->
-												<div class="form-group row">
-													<input type="text"
-														class="form-control form-control-user c-size half-style"
-														id="salary" placeholder="연봉"> <span></span> <input
-														type="text"
-														class="form-control form-control-user c-size half-style"
-														id="annual" placeholder="연차">
-												</div>
-												<!-- 부서,직급 -->
-												<div class="form-group row rank-margin">
-													<input type="text"
-														class="form-control form-control-user c-size half-style"
-														id="jumin1" placeholder="부서"> <span></span> <input
-														type="text"
-														class="form-control form-control-user c-size half-style"
-														id="jumin2" placeholder="직급">
-												</div>
-												<!-- 권한 -->
+												<!-- 부서 -->
 												<div class="form-group">
 													<input type="text"
-														class="form-control form-control-user c-size rank-margin"
-														id="rank" placeholder="권한">
+														class="form-control form-control-user c-size" id="depart"
+														placeholder="부서">
 												</div>
+												<!-- 직급 -->
+												<div class="form-group">
+													<input type="text"
+														class="form-control form-control-user c-size" id="position"
+														placeholder="직급">
+												</div>
+												
 											</div>
 										</form>
 
 
 
 
-									</div>
-									<div class="modal-footer"></div>
+									<div class="modal-footer">
 									<button type="button" class="btn btn-secondary b-radius"
 										data-dismiss="modal">취소</button>
 									<button type="submit" class="btn btn-primary b-radius">추가하기</button>
+									</div>
 								</div>
 							</div>
 						</div>

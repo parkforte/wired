@@ -9,7 +9,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 #calendar {
-      max-width: 1100px;
+      max-width: 1500px;
       margin: 40px auto;
 }
 </style>
@@ -33,7 +33,7 @@
 
 </script>
 
-<!-- 팀스케쥴러 -->
+<!-- 자원전체예약현황 -->
 <div class="container-fluid font">
 		<div id="topTitle">
         <!-- Page Heading -->

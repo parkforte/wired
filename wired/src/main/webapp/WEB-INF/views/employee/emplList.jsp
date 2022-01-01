@@ -11,6 +11,24 @@
 .btn-waiting{
 	background-color: #cccccc;
 }
+.c-both{
+	clear: both;
+}
+.m-search{
+	margin-bottom: 12px;
+	margin-top: -12px;
+}
+.check-margin {
+    margin-top: -17px;
+    margin-left: 6px;
+}
+.check-margin2 {
+    margin-top: 13px;
+    margin-left: 6px;
+}
+#t-width {
+    width: 3%;
+}
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
@@ -23,26 +41,20 @@
 		<div id="topTitle">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800 h1-style">사원목록</h1>
-        <p class="mb-4">Employee List</p>
+        <p class="mb-4 f-left">Employee List</p>
+        <!-- search -->
+		<form class="d-flex f-right m-search">
+			<input class="form-control mr-2" type="search" placeholder="Search"
+				aria-label="Search">
+			<button class="btn btn-outline-success" type="submit">Search</button>
+		</form>
 		</div>
         <!-- title1 -->
-         <div class="card shadow mb-4">
+         <div class="card shadow mb-4 c-both">
             
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-               <!-- search -->
-             <div class="col-sm-12 col-md-6 f-right" align="right">
-                   			<div id="dataTable_filter" class="dataTables_filter">
-                   				<div class="bdListSearch">
-	                   				<label class="f-right">Search:</label>
-                   				</div>
-                   				<div class="bdListSearchText">
-                   				
-    	               				<input type="search" class="form-control form-control-sm" placeholder aria-controls="dataTable"/>
-                   				</div>
-                   			</div>
-                   		</div>
          
                    <!-- Dropdown - Messages -->
                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
@@ -67,6 +79,7 @@
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
+                               	   <th id="t-width"><input type="checkbox" class="form-check-input check-margin" id="exampleCheck1"></th>	
                                    <th>사원번호</th>
                                    <th>이름</th>
                                    <th>부서</th>
@@ -78,6 +91,7 @@
                <c:forEach var="i" begin="1" end="10">
                            <tbody>
                                <tr>
+                                   <td><input type="checkbox" class="form-check-input check-margin2" id="exampleCheck1"></td>
                                    <td>1</td>
                                    <td>송지효</td>
                                    <td>총무부</td>

@@ -7,6 +7,38 @@
 <!-- javaScript영역 -->
 <!-- 네이버 스마트에디터  -->
 <!-- <head> 안에 추가 -->
+<style>
+hr{
+	margin: 4px 0;
+}
+
+button.btn.btn-primary.f-right {
+    margin: 3px;
+}
+
+button.btn.btn-outline-primary {
+    font-size: 0.3em;
+    float: right;
+    margin-left: 2px;
+    height: 30px;
+}
+button.btn.btn-outline-secondary {
+    float: right;
+    font-size: 0.4em;
+    margin-top: -2.5px;
+}
+textarea{
+	resize: none;
+}
+
+button.btn.btn-primary.f-right {
+    font-size: 0.6em;
+}
+
+/* .replyWrite{ */
+/* 	display: none; */
+/* } */
+</style>
 <script type="text/javascript" src="/libs/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
@@ -24,6 +56,12 @@
 		return; 
 	}
 	
+	$(function () {
+		$('.replyWrite').hide();
+		$('.btn-outline-secondary').click(function () {
+			$('.replyWrite').show();
+		});
+	});
 	
 	
 
@@ -33,7 +71,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Page Heading</h1>
+                    <h1 class="h3 mb-2 text-gray-800">게시판</h1>
                     <p class="mb-4">Company bulletin board.</p>
 
                     <!-- title1 -->
@@ -94,16 +132,31 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            
-                            	<label class="replylabel">회원아이디wired123</label>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
-                            	<hr style="margin: 3px 0">
-                            	<i class="bi bi-arrow-return-right"></i><label class="replylabel">김방방</label>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
-                            	<hr style="margin: 3px 0">
-                            	<label class="replylabel">박진호</label>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
-                            	<hr style="margin: 3px 0">
-                            	<label class="replylabel">김방방</label>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
-                            	<hr style="margin: 3px 0">
-                            	<label class="replylabel">박진호</label>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
+                            	<!-- 댓글창 -->
+                            	<div style="height:117px">
+                            		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="바르말 고운말 사용"></textarea>
+                            		<button type="button" class="btn btn-primary f-right">등록</button>
+                            	</div>
+                            	
+                            	<hr>
+                            	
+                            	<div class="f-left"><span>회원아이디</span></div>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span><button type="button" class="btn btn-outline-secondary">댓글</button>
+								<hr>
+                            	<!-- 대댓글 -->
+                            	<i class="bi bi-arrow-return-right"></i><label class="replylabel">김방방</label>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span><button type="button" class="btn btn-outline-secondary">댓글</button>
+                            	<hr style="">
+                            	
+								<!-- 대댓글 쓰기창  *자신을 제외한 댓들 등록창은 hide* -->
+								<div class="row replyWrite">
+									<div class="f-left" style="width:7%"><span>회원아이디</span></div>&nbsp;&nbsp;
+									<div class="f-left" style="width:89%"><input type="text" class="form-control form-control-sm form-control-user c-size infobox f-right" id="title" placeholder="바르말 고운말 사용"></div><button type="button" class="btn btn-outline-primary">등록</button>
+									<hr>
+								</div>
+                            	<div class="f-left"><span>회원아이디</span></div>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
+                            	<hr>
+                            	<div class="f-left"><span>회원아이디</span></div>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
+                            	<hr>
+                            	<div class="f-left"><span>회원아이디</span></div>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
                             
                             	<!-- 마지막줄은 hr안함 -->
                             </div>

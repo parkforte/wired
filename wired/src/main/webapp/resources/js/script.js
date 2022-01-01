@@ -18,5 +18,5 @@ FilePond.registerPlugin(
 
 // Select the file input and use create() to turn it into a pond
 FilePond.create(
-	document.querySelector('input')
+	document.querySelector('input[type=file]')
 );
