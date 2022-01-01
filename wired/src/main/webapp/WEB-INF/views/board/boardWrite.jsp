@@ -2,14 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 
-<!-- http://localhost:9091/wired/board/boardWrite -->
-
+<!-- http://localhost:9091/wired/default/defaultPage -->
+<link rel="stylesheet" href='<c:url value="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>'>
+<link rel='stylesheet' href='<c:url value="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"/>'>
+<link rel='stylesheet' href='<c:url value="https://unpkg.com/filepond/dist/filepond.min.css"/>'><link rel="stylesheet" href='<c:url value="/resources/css/style.css"/>'>
+<style>
+label {
+    float: left;
+    margin-top: 6px;
+    margin-right: 6px;
+    margin-left: 4px;
+}
+input#title {
+    float: left;
+}
+</style>
 <!-- javaScript영역 -->
 <!-- 네이버 스마트에디터  -->
 <!-- <head> 안에 추가 -->
-
-
-
 <script type="text/javascript" src='<c:url value="/resources/api/smarteditor/js/service/HuskyEZCreator.js"/>' charset="utf-8"></script>
 <script type="text/javascript" src='<c:url value="//code.jquery.com/jquery-1.11.0.min.js"/>'></script>
 
@@ -58,16 +68,17 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">게시판 이름</h6>
                         </div>
+                    	
                         <div class="card-body">
                             <div class="table-responsive">
                             	<form class="frmWrite" method="post" enctype="multipart/form-data" action='<c:url value="/board/boardWrite"/>'>
                             	
                             		<!-- 누가 작성했는지 알기위해 세션에서 작성자 ID 받아올것 -->
                             		<input type="hidden" value="사원번호orID">
-                            		
+                            		<!-- 제목 -->
 	                            	<label>제목</label>
-	                            	<input type="text" id="title" name="title" class="infobox" style="width: 500px"/>
-	                            	
+				                    <input type="text" class="form-control form-control-user c-size infobox" id="title" placeholder="" style="width: 800px">
+				                    
 	                            	<!-- 데이터 전송버튼 -->
 				                    <div id="se2_sample" style="margin:5px 0;">
 				                    	<button type="submit" class="btn btn-primary f-left f-right">글쓰기</button>
@@ -92,21 +103,15 @@
 										    }
 										});
 									</script>
-									</div>
 									<!-- 파일첨부 -->
-            				
-            						<!-- partial:index.partial.html -->
-									<!-- The classic file input element we'll enhance to a file pond
-									-->
+									<!-- 파일첨부 인풋 -->
 									<input type="file" 
-							       class="filepond"
-							       name="filepond"
-							       multiple
-							       data-max-file-size="3MB"
-							       data-max-files="3" />
-							
-									<!-- file upload itself is disabled in this pen -->
-									<!-- partial -->
+									       class="filepond"
+									       name="filepond"
+									       multiple
+									       data-max-file-size="3MB"
+									       data-max-files="3" />
+									<!-- 파일첨부 스크립트 -->
 									<script src='<c:url value="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"/>'></script>
 									<script src='<c:url value="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"/>'></script>
 									<script src='<c:url value="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"/>'></script>
@@ -119,20 +124,25 @@
  									<div class="form-group f-right">
  									    <label for="exampleFormControlFile1" id="fileinputlabel">Example file input</label>
  									    <input type="file" multiple="multiple" name="upfile" class="form-control-file f-right" id="exampleFormControlFile1 upfile"/>
+									<script src='<c:url value="https://unpkg.com/filepond/dist/filepond.min.js"/>'></script><script src='${pageContext.request.contextPath}/resources/js/script.js'></script>
+									<!-- 파일첨부 스크립트 -->
+									
+									
+									
+<!-- 									<div class="form-group f-right"> -->
+<!-- 									    <label for="exampleFormControlFile1" id="fileinputlabel">Example file input</label> -->
+<!-- 									    <input type="file" multiple="multiple" name="upfile" class="form-control-file f-right" id="exampleFormControlFile1 upfile"/> -->
 									    
  									</div>
 									<div>
 										<button type="button" class="btn btn-primary f-left" id="btList">글목록</button>
 									</div>		
                             	</form>
-                            	
                             </div>
                         </div>
                     </div>
-                    
-
-               
-
-            <!-- End of Main Content -->
+                </div>
+                
+                
 <%@ include file="../inc/bottom.jsp" %>
 			
