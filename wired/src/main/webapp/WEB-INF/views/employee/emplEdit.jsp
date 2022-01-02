@@ -12,10 +12,10 @@
 }
 .r-table {
     width: 36%;
-    margin-left: 32.5%;
+    margin-left: 31.5%;
 }
 #content{
-	background-color: #6868AC;
+	background-color: #F2F2FC;
 }
 .form-control {
 	width: 98%;
