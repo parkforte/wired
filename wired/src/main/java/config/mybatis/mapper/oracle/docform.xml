@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gr.wired.docform.model.DocformDAO">
+
+	<insert id="insertDocform" parameterType="docformVo">
+		<selectKey keyProperty="formNo" resultType="int" order="BEFORE">
+			SELECT docform_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into docform (form_no, form_name, TYPE_NO, ranks_no)
+		values(#{formNo}, #{formName}, 520 ,3)
+	</insert>
+	<select id="selectAll" resultType="docformVo">
+		select * from docform order by type_no desc
+	</select>
+	<delete id="deleteDocform" parameterType="int">
+		delete docform where form_no=#{formNo}
+	</delete>
+</mapper>

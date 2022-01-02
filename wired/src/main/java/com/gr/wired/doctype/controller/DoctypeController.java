@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gr.wired.docform.model.DocformService;
+import com.gr.wired.docform.model.DocformVO;
 import com.gr.wired.doctype.model.DoctypeService;
 import com.gr.wired.doctype.model.DoctypeVO;
 
@@ -24,11 +26,13 @@ public class DoctypeController {
 		= LoggerFactory.getLogger(DoctypeController.class);
 
 	private final DoctypeService doctypeService;
+	private final DocformService docformService;
 
 	@Autowired
-	public DoctypeController(DoctypeService doctypeService) {
+	public DoctypeController(DoctypeService doctypeService, DocformService docformService) {
 		this.doctypeService = doctypeService;
-		logger.info("DoctypeController 생성자주입");
+		this.docformService = docformService;
+		logger.info("DoctypeController, type, form 생성자주입!");
 	}
 
 	@GetMapping("/admin")
@@ -38,7 +42,11 @@ public class DoctypeController {
 		List<DoctypeVO> list=doctypeService.selectAll();
 		logger.info("문서관리doctype list.size={}", list.size());
 
+		List<DocformVO> formList=docformService.selectAll();
+		logger.info("양식관리docform formList.size={}", formList.size());
+
 		model.addAttribute("list", list);
+		model.addAttribute("formList", formList);
 
 		return "e-approval/doctype/admin";
 	}
@@ -76,7 +84,22 @@ public class DoctypeController {
 		return "common/message";
 	}
 
+	@PostMapping("/addform")
+	public String add_form(@ModelAttribute DocformVO vo, Model model) {
+		logger.info("문서양식 추가, 파라미터 vo={}", vo);
 
+		int result=docformService.insertDocform(vo);
+
+		String msg="양식 추가 실패!", url="/e-approval/doctype/admin";
+		if(result>0) {
+			msg="양식 추가 성공!";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
 
 
 }
