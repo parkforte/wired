@@ -1,5 +1,8 @@
 package com.gr.wired.employee.model;
 
-public interface EmplDAO {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public interface EmplDAO {
+	int insertEmployee(EmplVO emplVo);
 }
