@@ -116,6 +116,14 @@ input#title {
 									<script src='<c:url value="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"/>'></script>
 									<script src='<c:url value="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"/>'></script>
 									<script src='<c:url value="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"/>'></script>
+									<script src='<c:url value="https://unpkg.com/filepond/dist/filepond.min.js"/>'></script><script  src='<c:url value="/resources/js/script.js"/>'></script>
+            				
+            				
+            				
+               						 <!-- /.container-fluid -->
+ 									<div class="form-group f-right">
+ 									    <label for="exampleFormControlFile1" id="fileinputlabel">Example file input</label>
+ 									    <input type="file" multiple="multiple" name="upfile" class="form-control-file f-right" id="exampleFormControlFile1 upfile"/>
 									<script src='<c:url value="https://unpkg.com/filepond/dist/filepond.min.js"/>'></script><script src='${pageContext.request.contextPath}/resources/js/script.js'></script>
 									<!-- 파일첨부 스크립트 -->
 									
@@ -125,7 +133,7 @@ input#title {
 <!-- 									    <label for="exampleFormControlFile1" id="fileinputlabel">Example file input</label> -->
 <!-- 									    <input type="file" multiple="multiple" name="upfile" class="form-control-file f-right" id="exampleFormControlFile1 upfile"/> -->
 									    
-<!-- 									</div> -->
+ 									</div>
 									<div>
 										<button type="button" class="btn btn-primary f-left" id="btList">글목록</button>
 									</div>		

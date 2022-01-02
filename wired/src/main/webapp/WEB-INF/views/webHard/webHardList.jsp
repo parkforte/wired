@@ -60,7 +60,7 @@ input#exampleCheck1\ chkbox {
 	      <div class="modal-body">
 			<!-- 파일첨부 -->
 				<!-- 파일첨부 인풋 -->
-				<input type="file" 
+				<input type="file"
 				       class="filepond"
 				       name="filepond"
 				       multiple
@@ -75,7 +75,7 @@ input#exampleCheck1\ chkbox {
 				<!-- 파일첨부 스크립트 -->
 	      </div>
 	      <div class="modal-footer">
-	      	
+
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 	        <button type="submit" class="btn btn-primary">등록</button>
 	      </div>
@@ -83,9 +83,9 @@ input#exampleCheck1\ chkbox {
 	    </div>
 	  </div>
 	</div>
- 
-                        
-     
+
+
+
     <form name="frmList" method="post" action="<c:url value=''/>">
    	<!-- defaultPage -->
     <div class="container-fluid">
@@ -93,16 +93,16 @@ input#exampleCheck1\ chkbox {
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">웹하드</h1>
 		<p class="mb-4">Company web hard.</p>
-		
-		<!-- 게시판 검색 -->  
+
+		<!-- 게시판 검색 -->
 		<div id='boardListSc'>
 			<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
 			<button class="btn btn-outline-success" type="submit">Search</button>
 		</div>
         <!-- title1 -->
         <div class="card shadow mb-4">
-            
-                	
+
+
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
@@ -120,38 +120,38 @@ input#exampleCheck1\ chkbox {
 	                    <!-- 관리자만, 본인 페이지만 삭제 -->
 						<button type="button" class="btn btn-danger f-left detailbt">삭제</button>
 	               	</div>
-                 
-            
-			
-	
-			
+
+
+
+
+
                </div>
                <div class="card-body">
-            	
+
                    <div class="table-responsive">
                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                    <div class="row" style="text-align: right">
-                   
+
                    <!-- 이거안함 -->
                    		<div class="col-sm-12 col-md-6">
-  							         		
+
                    		</div>
                    		<div class="col-sm-12 col-md-6" align="right">
                    			<div id="dataTable_filter" class="dataTables_filter">
-                   				
-                   				
+
+
                    			</div>
                    		</div>
                   	 	</div>
-              
-              
-              
-              
-              
-              
+
+
+
+
+
+
               		<div class="row">
-              		
-              		
+
+
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
@@ -162,35 +162,35 @@ input#exampleCheck1\ chkbox {
                                    <th style="width: 150px">등록일</th>
                                    <th style="width: 120px">다운로드수</th>
                                    <!-- 사내 웹하드에서만 보이기 -->
-                                   
+
                                </tr>
                            </thead>
                            <tbody>
-                           
+
                            <!-- 반복문 시작 -->
                            <c:forEach var="i" begin="0" end="10">
                                <tr>
                                    <td>
                                    		<input type="checkbox" class="form-check-input" id="exampleCheck1 chkbox">
                                    </td>
-                                   
+
                                    <td>Tiger Nixon${i }</td>
                                    <td>
-                                   		
+
                                    		<i class="bi bi-folder"></i><!-- 첨부파일 있는 게시물의 경우if처리 -->
                                    		게시글 제목
                                    </td>
                                    <td></td>
                                    <td>2021/12/26</td>
                                    <td>
-                                   	
-                                   		
-	                                   	
+
+
+
                                    </td>
                                </tr>
                            </c:forEach>
                            <!-- 반복 끝 -->
-                             
+
                            </tbody>
                        </table>
               		</div>
@@ -199,9 +199,9 @@ input#exampleCheck1\ chkbox {
               				<div class="dataTables_info" id="dataTables_info" role="status">
               					Showing 1 to 10 of 57 entries
               				</div>
-              			
+
               			</div>
-              			
+
               			<!-- 페이징 1,2,3,4,5, -->
               			<div class="col-sm-12 col-md-7">
               				<nav aria-label="...">
@@ -220,17 +220,17 @@ input#exampleCheck1\ chkbox {
 							  </ul>
 							</nav>
               			</div>
-              			
+
               		</div>
                        </div>
                    </div>
-            
+
                </div>
             </div>
 	    </div>
 	    <!-- /.container-fluid -->
      </div>
-      </form>        
+      </form>
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -247,6 +247,5 @@ input#exampleCheck1\ chkbox {
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-    
+
 <%@ include file="../inc/bottom.jsp" %>
-			

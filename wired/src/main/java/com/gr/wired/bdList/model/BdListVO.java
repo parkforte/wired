@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class BdListVO {
 
 	private int bdlistNo;
-	private int bdlistName;
+	private String bdlistName;
 	private char bdlistRe;
 	private char bdlistUp;
 	private char bdlistRc;
@@ -18,10 +18,10 @@ public class BdListVO {
 	public void setBdlistNo(int bdlistNo) {
 		this.bdlistNo = bdlistNo;
 	}
-	public int getBdlistName() {
+	public String getBdlistName() {
 		return bdlistName;
 	}
-	public void setBdlistName(int bdlistName) {
+	public void setBdlistName(String bdlistName) {
 		this.bdlistName = bdlistName;
 	}
 	public char getBdlistRe() {
@@ -60,6 +60,7 @@ public class BdListVO {
 				+ ", bdlistUp=" + bdlistUp + ", bdlistRc=" + bdlistRc + ", ranksNo=" + ranksNo + ", bdlistRegdate="
 				+ bdlistRegdate + "]";
 	}
+
 
 
 }
