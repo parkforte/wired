@@ -92,7 +92,7 @@ span {
                                 	</div>
 	                            	<!-- 비밀번호확인 -->
 	                            	<div class="form-group">
-                                    <input type="password" class="form-control form-control-user c-size" name="memPwd" id="memPwd2"
+                                    <input type="password" class="form-control form-control-user c-size" name="memPwd2" id="memPwd2"
                                         placeholder="비밀번호 재입력">
                                 	</div>
                                 	<!-- 연락처 -->
