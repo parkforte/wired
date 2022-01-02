@@ -24,7 +24,10 @@
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
-
+	function boardList(curPage) {
+		$('#currentPage').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
 
 </script>
 
@@ -48,13 +51,20 @@
 					    </div>
 					  </div>
 					</div>
-				
+
                <!-- defaultPage -->
                 <div class="container-fluid" >
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">게시판 관리</h1>
                     <p class="mb-4">Company bulletin board management.</a>.</p>
+
+					<!-- 페이징 처리를 위한 form 시작-->
+					<form name="frmPage" method="post"
+						action="<c:url value='/bdList/bdListmanagement'/>">
+						<input type="text" name="currentPage" id="currentPage">
+					</form>
+					<!-- 페이징 처리를 위한 form 끝-->
 
                     <!-- title1 -->
                     <div class="card shadow mb-4" id="board1">
@@ -63,7 +73,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            
+
 			                    <!-- 테이블 -->
 			                   	<div class="row">
 			                       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -74,98 +84,71 @@
 			                                   <th style="width: 90px">관리</th>
 			                               </tr>
 			                           </thead>
+
 			                           <tbody>
-			                               <tr>
-			                                   <td>영업1팀 게시판</td>
-			                                   <td>팀장 이상</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                               <tr>
-			                                   <td>영업2팀 게시판</td>
-			                                   <td>팀장 이상</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                               <tr>
-			                                   <td>영업3팀 게시판</td>
-			                                   <td>팀장 이상</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                               <tr>
-			                                   <td>영업4팀 게시판</td>
-			                                   <td>관리자</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                               <tr>
-			                                   <td>영업5팀 게시판</td>
-			                                   <td>팀장 이상</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                               <tr>
-			                                   <td>영업6팀 게시판</td>
-			                                   <td>관리자</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                               <tr>
-			                                   <td>영업6팀 게시판</td>
-			                                   <td>관리자</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                               <tr>
-			                                   <td>영업6팀 게시판</td>
-			                                   <td>관리자</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                               <tr>
-			                                   <td>영업7팀 게시판</td>
-			                                   <td>관리자</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                               <tr>
-			                                   <td>영업8팀 게시판</td>
-			                                   <td>관리자</td>
-			                                   <td>
-			                                   		<button type="button" class="btn btn-danger f-left detailbt"><i class="bi bi-trash"></i>삭제</button>
-			                                   </td>
-			                               </tr>
-			                                                     
+				                           <c:if test="${empty bdList }">
+				                           		<tr>
+				                           			<td colspan="3">게시판이 존제하지 않습니다.</td>
+				                           		</tr>
+				                           </c:if>
+				                      		<!-- 반복시작 -->
+				                           <c:forEach var="map" items="${bdList }">
+
+				                               <tr>
+				                                   <td>${map['BDLIST_NAME'] }</td>
+				                                   <td>${map['RANKS_NAME'] }</td>
+				                                   <td>
+				                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
+				                                   </td>
+				                               </tr>
+				                           </c:forEach>
+											<!-- 반복 끝 -->
+
 			                           </tbody>
 			                       </table>
 			                       <nav class="f-right" aria-label="...">
+			                       		<!-- 페이지 번호추가 -->
 										<ul class="pagination">
-											<li class="page-item disabled"><a class="page-link">Previous</a>
-											</li>
-											<li class="page-item"><a class="page-link" href="#">1</a></li>
-											<li class="page-item active" aria-current="page"><a
-												class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item"><a class="page-link" href="#">Next</a>
-											</li>
+											<li class="page-item disabled"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
+
+											<!-- [1][2][3][4][5][6][7][8][9][10] -->
+											<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+
+
+												<li
+													<c:if test="${i==pagingInfo.currentPage }">
+														class="page-item active" aria-current="page"
+													</c:if>
+													<c:if test="${i!=pagingInfo.currentPage }">
+														class="page-item"
+													</c:if>
+												><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li>
+
+
+
+<%-- 												<c:if test="${i==pagingInfo.currentPage }"> --%>
+<!-- 													<li class="page-item active" aria-current="page"> -->
+<%-- 												</c:if> --%>
+
+<%-- 												<c:if test="${i!=pagingInfo.currentPage }"> --%>
+<%-- 													<li class="page-item"><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li> --%>
+<%-- 												</c:if> --%>
+
+												<%-- <a class="page-link" href="#">${i }</a></li> --%>
+											</c:forEach>
+
+											<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
+												<li class="page-item"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+											</c:if>
+											<!-- 페이지 번호끝 -->
 										</ul>
 									</nav>
 			              		</div>
                             </div>
                         </div>
                     </div>
-                    
-					
+
+
                     <!-- title2 여러개필요시사용 -->
                     <div class="card shadow mb-4" id="board2">
                         <div class="card-header py-3">
@@ -173,7 +156,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            
+
                             	 <!-- 테이블 -->
                             	 <form action="">
 				                   	<div class="row">
@@ -201,7 +184,7 @@
 														</div>
 				                                   </td>
 				                               </tr>
-				                              
+
 				                               <tr>
 				                                   <td>추천 유무</td>
 				                                   <td>
@@ -234,13 +217,13 @@
 				                           </tbody>
 				                       </table>
 				              		</div>
-				              		
+
                             	 </form>
-                            
+
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- title3 여러개필요시사용 -->
                     <div class="card shadow mb-4" id="board3">
                         <div class="card-header py-3">
@@ -248,7 +231,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            
+
                             	 <!-- 테이블 -->
                             	 <form action="">
 				                   	<div class="row">
@@ -276,7 +259,7 @@
 														</div>
 				                                   </td>
 				                               </tr>
-				                              
+
 				                               <tr>
 				                                   <td>추천 유무</td>
 				                                   <td>
@@ -306,12 +289,12 @@
 														</div>
 				                                   </td>
 				                               </tr>
-				                              
+
 				                           </tbody>
 				                       </table>
 				              		</div>
                             	 </form>
-                            
+
                             </div>
                         </div>
                     </div>
@@ -319,6 +302,5 @@
                 </div>
                 <!-- /.container-fluid -->
 
-           
+
 <%@ include file="../inc/bottom.jsp" %>
-			
