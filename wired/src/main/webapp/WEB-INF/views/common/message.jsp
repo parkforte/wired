@@ -12,14 +12,13 @@
 	String msg=(String)request.getAttribute("msg");
 	String url=(String)request.getAttribute("url");
 	String ctxPath=request.getContextPath();
-	url=ctxPath+url; //=> /mymvc + /pd/pdEdit.do => /mymvc/pd/pdEdit.do 
+	url=ctxPath+url; //=> /mymvc + /pd/pdEdit.do => /mymvc/pd/pdEdit.do
 %>
 	<script type="text/javascript">
-		Swal.fire('<%=msg%>');	
-		<%-- alert("<%=msg%>"); --%>
+		alert('<%=msg%>');
 		location.href="<%=url%>";
 	</script>
-	
+
 </body>
 </html>
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gr.wired.doctype.model.DoctypeDAO">
+
+	<insert id="insertDoctype" parameterType="doctypeVo">
+		<selectKey keyProperty="typeNo" resultType="int" order="BEFORE">
+			SELECT DOCTYPE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into doctype (TYPE_NO, TYPE_NAME)
+		values(#{typeNo}, #{typeName})
+	</insert>
+	<select id="selectAll" resultType="doctypeVo">
+		select * from doctype
+	</select>
+	<delete id="deleteDoctype" parameterType="int">
+		delete doctype where type_no=#{typeNo}
+	</delete>
+</mapper>
