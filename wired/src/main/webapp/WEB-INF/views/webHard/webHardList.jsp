@@ -36,6 +36,10 @@ input#exampleCheck1\ chkbox {
     margin-left: 7px;
     margin-top: 10px;
 }
+
+.f-left.select {
+    margin-right: 9px;
+}
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
@@ -104,6 +108,13 @@ input#exampleCheck1\ chkbox {
                <div class="card-header py-3">
                    <h6 class="m-0 font-weight-bold text-primary f-left">웹하드</h6><!-- 게시판 이름 -->
 	             	<div class="bdListBtDiv f-right">
+	             		<div class="f-left select">
+					    <select class="form-control form-control-sm" id="inlineFormCustomSelect">
+					        <option selected>선택</option>
+					        <option value="1">개인 웹하드</option>
+					        <option value="2">사내 웹하드</option>
+					    </select>
+	             		</div>
 	                    <button type="button" class="btn btn-primary f-left detailbt" data-toggle="modal" data-target="#exampleModal">업로드</button>
 	                    <button type="button" class="btn btn-primary f-left detailbt">다운로드</button>
 	                    <!-- 관리자만, 본인 페이지만 삭제 -->

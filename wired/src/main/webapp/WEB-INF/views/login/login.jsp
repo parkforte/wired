@@ -40,8 +40,8 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div>
-                            	<img src=../../../resources/img/logo/wired_logo.png">
+                            <div class="col-lg-6 d-none d-lg-block" style="background: white">
+                            	<img src='<c:url value="/resources/img/logo/wired_logo.png"/>'>
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
