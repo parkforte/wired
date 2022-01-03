@@ -9,12 +9,16 @@
 			SELECT docform_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
 		insert into docform (form_no, form_name, TYPE_NO, ranks_no)
-		values(#{formNo}, #{formName}, 520 ,3)
+		values(#{formNo}, #{formName}, #{typeNo} ,3)
 	</insert>
 	<select id="selectAll" resultType="docformVo">
-		select * from docform order by type_no desc
+		select * from docform order by type_no
 	</select>
 	<delete id="deleteDocform" parameterType="int">
 		delete docform where form_no=#{formNo}
 	</delete>
+	<select id="selectByFormNo" resultType="int">
+		select * from docform
+		where formNo=#{formNo}
+	</select>
 </mapper>
