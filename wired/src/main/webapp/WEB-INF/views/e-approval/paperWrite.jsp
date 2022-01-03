@@ -222,21 +222,21 @@
 											<td class="tg-lboi">기안부서</td>
 											<td class="tg-lboi" colspan="2"></td>
 											<td class="tg-lboi">기안일</td>
-											<td class="tg-lboi" colspan="2"></td>
+											<td class="tg-lboi" colspan="2">${cfRegdate }</td>
 											<td class="tg-lboi">문서번호</td>
-											<td class="tg-lboi" colspan="2"></td>
+											<td class="tg-lboi" colspan="2">WIRED-1-1</td>
 										</tr>
 										<tr>
 											<td class="tg-lboi">기안자</td>
 											<td class="tg-lboi" colspan="2"></td>
 											<td class="tg-lboi">보존년한</td>
-											<td class="tg-lboi" colspan="2"></td>
+											<td class="tg-lboi" colspan="2">5년</td>
 											<td class="tg-lboi">비밀등급</td>
-											<td class="tg-lboi" colspan="2"></td>
+											<td class="tg-lboi" colspan="2">대외비</td>
 										</tr>
 										<tr>
 											<td class="tg-lboi">제목</td>
-											<td class="tg-lboi" colspan="8"><input class="form-control" type="text" placeholder="Default input"></td>
+											<td class="tg-lboi" colspan="8"><input class="form-control" type="text" placeholder="제목을 입력하세요"></td>
 										</tr>
 										<tr>
 											<td class="tg-0lax" colspan="9" rowspan="14"><textarea

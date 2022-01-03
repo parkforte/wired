@@ -18,10 +18,8 @@
 				aria-expanded="false"> 문서함 </a>
 				<ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
 					<li><a class="dropdown-item" href="<c:url value='/e-approval/docbox'/>">결재대기</a></li>
-					<li><a class="dropdown-item" href="#">결재완료</a></li>
-					<li><a class="dropdown-item" href="#">결재반려</a></li>
-					<li><hr class="dropdown-divider"></li>
-					<li><a class="dropdown-item" href="#">임시저장</a></li>
+					<li><a class="dropdown-item" href="<c:url value='/e-approval/docbox'/>">결재완료</a></li>
+					<li><a class="dropdown-item" href="<c:url value='/e-approval/docbox'/>">결재반려</a></li>
 				</ul></li>
 			<li class="nav-item active"><a class="nav-link" href="#">문서결재</a>
 			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/doctype/admin'/>">문서관리</a>
