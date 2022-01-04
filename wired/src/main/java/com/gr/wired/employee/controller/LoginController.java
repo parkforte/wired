@@ -20,7 +20,6 @@ import com.gr.wired.employee.model.EmplService;
 import com.gr.wired.employee.model.EmplVO;
 
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 	private static final Logger logger
 		=LoggerFactory.getLogger(LoginController.class);
@@ -42,7 +41,7 @@ public class LoginController {
 			HttpServletRequest request, HttpServletResponse response, Model model) {
 		logger.info("로그인 처리, 파라미터 vo={}, chkSave={}", vo, chkSave);
 
-		String msg="로그인 처리 실패", url="/login/login";
+		String msg="로그인 처리 실패", url="/login";
 		int result=emplService.loginCheck(vo.getMemId(), vo.getMemPwd());
 		if(result==emplService.LOGIN_OK) {
 			EmplVO emplVo=emplService.selectByMemId(vo.getMemId());
