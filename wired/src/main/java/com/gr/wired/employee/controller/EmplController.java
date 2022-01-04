@@ -1,5 +1,7 @@
 package com.gr.wired.employee.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gr.wired.common.ConstUtil;
+import com.gr.wired.common.PaginationInfo;
+import com.gr.wired.common.SearchVO;
 import com.gr.wired.employee.model.EmplService;
 import com.gr.wired.employee.model.EmplVO;
 
@@ -57,9 +62,33 @@ public class EmplController {
 	}
 
 	@RequestMapping("/emplList")
-	public String emplAll() {
+	public String emplAll(@ModelAttribute SearchVO searchVo, Model model) {
+		logger.info("글목록, 파라미터 searchVo={}", searchVo);
+
+		//[1] PaginationInfo 객체 생성 - 계산해줌
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+
+		//[2] searchVo에 값 셋팅
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("값 셋팅 후 searchVo={}", searchVo);
+
+		List<EmplVO> list=emplService.selectAll(searchVo);
+		logger.info("전체조회 결과 list.size={}", list.size());
+
+		//[3] totalRecord 구하기
+		int totalRecord=emplService.selectTotalRecord(searchVo);
+		pagingInfo.setTotalRecord(totalRecord);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
+
 		return "employee/emplList";
 	}
+
 	@RequestMapping("/emplEdit")
 	public String emplEdit() {
 		return "employee/emplEdit";
