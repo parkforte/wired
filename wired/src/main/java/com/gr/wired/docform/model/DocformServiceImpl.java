@@ -32,4 +32,11 @@ public class DocformServiceImpl implements DocformService {
 		return docformDao.insertDocform(vo);
 	}
 
+
+	@Override
+	public int deleteDocform(int formNo) {
+		return docformDao.deleteDocform(formNo);
+	}
+
+
 }

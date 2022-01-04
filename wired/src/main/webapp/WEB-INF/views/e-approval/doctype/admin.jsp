@@ -150,7 +150,7 @@
 								<td>${formVo.formName }</td>
 								<td>
 									<!-- 양식삭제 -->
-									<a href="<c:url value='/e-approval/doctype/deleteForm'/>">
+									<a href="<c:url value='/e-approval/doctype/deleteForm?formNo=${formVo.formNo }'/>">
 									<button type="button" class="btn btn-danger f-left">삭제</button>
 									</a>
 								</td>
@@ -182,13 +182,13 @@
 								<div class="modal-body">
 										<div class="form-group">
 										    <label for="exampleFormControlSelect1">문서종류선택</label>
-										    <select class="form-control" id="exampleFormControlSelect1">
-										      <c:if test="${!empty list }">
-											      <c:forEach var="vo" items="${list }">
-												      <option name="typeNo" value="${vo.typeNo }">${vo.typeName }</option>
-											      </c:forEach>
-										      </c:if>
-										    </select>
+											    <select class="form-control"  name="typeNo" id="exampleFormControlSelect1">
+											      <c:if test="${!empty list }">
+												      <c:forEach var="vo" items="${list }">
+													      <option value="${vo.typeNo}">${vo.typeName }</option>
+												      </c:forEach>
+											      </c:if>
+											    </select>
 										  </div>
 										<div class="form-group">
 											<input type="text" class="form-control" id="formName" name="formName"

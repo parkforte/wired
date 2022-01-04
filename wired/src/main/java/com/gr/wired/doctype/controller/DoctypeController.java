@@ -101,5 +101,22 @@ public class DoctypeController {
 		return "common/message";
 	}
 
+	@GetMapping("/deleteForm")
+	public String delete_form(@RequestParam(defaultValue = "0") int formNo, Model model) {
+		logger.info("문서양식 삭제 파라미터 formNo={}", formNo);
+
+		int result=docformService.deleteDocform(formNo);
+
+		String msg="문서양식 삭제 실패!", url="/e-approval/doctype/admin";
+		if(result>0){
+			msg="문서양식 삭제 성공!";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
+
 
 }
