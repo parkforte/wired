@@ -3,20 +3,52 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.gr.wired.bdList.model.BdListDAO">
-	<insert id="insertBdList">
-		<selectKey keyProperty="boardlistNo" resultType="int" order="BEFORE">
-			select boardlist_seq.nextval from dual
+
+
+	<insert id="insertBdList" parameterType="bdListVo">
+		<selectKey keyProperty="bdlistNo" resultType="int" order="BEFORE">
+			SELECT BOARDLIST_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO BOARDLIST(BDLIST_NO,BDLIST_NAME, BDLIST_RE, BDLIST_UP, BDLIST_RC, RANKS_NO)
-		VALUES(#{bdlistNo}, '#{bdlistName}', '#{bdlistRe#}', '#{bdlistUp}', 'bdlistRc',#{ranksNo});
+		VALUES(#{bdlistNo}, #{bdlistName}, #{bdlistRe}, #{bdlistUp}, #{bdlistRc}, #{ranksNo})
 	</insert>
-	<select id="selectBdList" resultType="map">
-		SELECT BDLIST_NO, BDLIST_NAME, RANKS_NO,
-    		(SELECT RANKS_NAME FROM RANKS R WHERE B.RANKS_NO=R.RANKS_NO) RANKS_NAME
-		FROM BOARDLIST B
+
+	<!-- 게시판 수정용  -->
+	<select id="selectBdListE" resultType="bdListVo">
+		SELECT * FROM BOARDLIST ORDER BY BDlIST_NO
 	</select>
+
+	<select id="selectBdList" parameterType="searchVo" resultType="map">
+		SELECT *
+		FROM
+		(
+			SELECT ROWNUM AS RNUM, A.*
+			FROM
+			(
+				SELECT BDLIST_NO, BDLIST_NAME, RANKS_NO,
+				    (SELECT RANKS_NAME FROM RANKS R WHERE B.RANKS_NO=R.RANKS_NO) RANKS_NAME
+				FROM BOARDLIST B
+				ORDER BY BDLIST_NO DESC
+			)A
+		)
+		<![CDATA[
+		WHERE RNUM>#{firstRecordIndex}
+			AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+
 	<select id="selectTotalRecord" resultType="int">
 		SELECT COUNT(*) FROM BOARDLIST
 	</select>
+
+	<select id="selectRanks" resultType="map">
+		SELECT RANKS_NO, RANKS_NAME FROM RANKS
+	</select>
+	<update id="updatebdList" parameterType="bdListVo">
+		UPDATE BOARDLIST
+			SET BDLIST_RE=#{bdlistRe}, BDLIST_UP=#{bdlistUp}, BDLIST_RC=#{bdlistRc}, RANKS_NO=#{ranksNo}
+		WHERE BDLIST_NO=#{bdlistNo}
+	</update>
+
+
 
 </mapper>
