@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 
+
 <!-- http://localhost:9091/wired/employee/emplList -->
 
 <!-- css영역 -->
@@ -29,13 +30,20 @@
 #t-width {
     width: 3%;
 }
+
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
 
 
 </script>
-                        
+<!-- 페이징 처리를 위한 form -->
+<form id="frmPage" method="post" action="<c:url value='/employee/emplList'/>">
+	<input type="hidden" name="currentPage" >
+	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+</form>
+
       <!-- defaultPage -->
     <div class="container-fluid font">
 		<div id="topTitle">
@@ -51,11 +59,11 @@
 		</div>
         <!-- title1 -->
          <div class="card shadow mb-4 c-both">
-            
+
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-         
+
                    <!-- Dropdown - Messages -->
                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                        aria-labelledby="searchDropdown">
@@ -79,7 +87,7 @@
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
-                               	   <th id="t-width"><input type="checkbox" class="form-check-input check-margin" id="exampleCheck1"></th>	
+                               	   <th id="t-width"><input type="checkbox" class="form-check-input check-margin" id="exampleCheck1"></th>
                                    <th>사원번호</th>
                                    <th>이름</th>
                                    <th>부서</th>
@@ -88,34 +96,55 @@
                                    <th>수정/삭제</th>
                                </tr>
                            </thead>
-               <c:forEach var="i" begin="1" end="10">
                            <tbody>
-                               <tr>
-                                   <td><input type="checkbox" class="form-check-input check-margin2" id="exampleCheck1"></td>
-                                   <td>1</td>
-                                   <td>송지효</td>
-                                   <td>총무부</td>
-                                   <td>과장</td>
-                                   <td>010-1234-5678</td>
-                                   <td><button type="button" class="btn btn-success" onclick="location.href='/wired/employee/emplEdit'">수정</button>
-										<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">퇴사</button></td>
-                               </tr>
+                            <c:if test="${empty list }">
+                            	<tr>
+                            		<td colspan="6">데이터가 없습니다.</td>
+                            	</tr>
+                            </c:if>
+                            <c:if test="${!empty list }">
+                            	<!-- 리스트 반복문 시작 -->
+	               				<c:forEach var="vo" items="${list }">
+	                               <tr>
+	                                   <td><input type="checkbox" class="form-check-input check-margin2" id="exampleCheck1"></td>
+	                                   <td>${vo.memNo }</td>
+	                                   <td>${vo.memName }</td>
+	                                   <td>${vo.deptNo }</td>
+	                                   <td>${vo.posNo }</td>
+	                                   <td>
+		                                   <c:if test="${!empty vo.memHp1 }">
+									           <span id="hp1">${vo.memHp1 }</span>
+									           - <span id="hp2">${vo.memHp2 }</span>
+									           - <span id="hp3">${vo.memHp3 }</span>
+								           </c:if>
+								       </td>
+	                                   <td><button type="button" class="btn btn-success" onclick="location.href='/wired/employee/emplEdit'" >수정</button>
+											<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">퇴사</button></td>
+	                               </tr>
+	               				</c:forEach>
+               				<!-- 반복 끝 -->
+               				</c:if>
                            </tbody>
-               </c:forEach>
                        </table>
                    </div>
                </div>
-                
+
     </div>
     		<!-- paging -->
     				<div class="row">
               			<div class="col-sm-12 col-md-5">
               				<div class="dataTables_info" id="dataTables_info" role="status">
               					Showing 1 to 10 of 57 entries
+              					<span>
+              						<c:if test="${!empty param.searchKeyword }">
+										<p>검색어 : ${param.searchKeyword },
+											${pagingInfo.totalRecord} 건 검색되었습니다. </p>
+									</c:if>
+              					</span>
               				</div>
-              			
+
               			</div>
-              			
+
               			<!-- 페이징 1,2,3,4,5, -->
               			<div class="col-sm-12 col-md-7">
               				<nav aria-label="...">
@@ -135,10 +164,10 @@
 							</nav>
               			</div>
               		</div>
-               
-               
+
+
                 </div>
-    
+
     <!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">
@@ -163,5 +192,4 @@
      </div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
-         
-			
+
