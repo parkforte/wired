@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Login</title>
 
     <!-- Custom fonts for this template-->
     <link href='<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>' rel="stylesheet" type="text/css">
@@ -27,7 +27,7 @@
 
 </head>
 
-<body style="background-color: #6868AC;">
+<body style="background-color: #F2F2FC;">
 
     <div class="container">
 
@@ -48,26 +48,33 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
-                                        </div>
+                                    <form class="user" name="frmLogin" method="post" action="<c:url value='/login/login'/>">
+                                        <!-- 아이디 -->
+		                            	<div class="form-group">
+	                                    <input type="text" class="form-control form-control-user c-size" name="memId" id="memId"
+	                                        placeholder="Id" value="${cookie.ck_userid.value }">
+	                                	</div>
+                                        <!-- 비밀번호 -->
+		                            	<div class="form-group">
+	                                    <input type="password" class="form-control form-control-user c-size" name="memPwd" id="memPwd"
+	                                        placeholder="Password">
+	                                	</div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck"
+                                                	name="chkSave" id="chkSave"
+                                                	<c:if test="${!empty cookie.ck_userid }">
+                                                		checked="checked"
+                                                	</c:if>
+                                                	>
                                                 <label class="custom-control-label" for="customCheck">Remember
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href='<c:url value="index.html"/>' class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" id="ok_button">Login</button>
+                                        <%-- <a href='<c:url value="index.html"/>' class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </a> --%>
                                         <hr>
                                         <a href='<c:url value="index.html"/>' class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
@@ -76,13 +83,6 @@
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a>
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href='<c:url value="forgot-password.html"/>'>Forgot Password?</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href='<c:url value="register.html"/>'>Create an Account!</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

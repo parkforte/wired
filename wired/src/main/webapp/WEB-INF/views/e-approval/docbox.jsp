@@ -45,8 +45,6 @@
 							class="bi bi-clipboard"></i> 결재완료</li>
 						<li class="list-group-item nav-item"><i
 							class="bi bi-clipboard"></i> 결재반려</li>
-						<li class="list-group-item nav-item"><i
-							class="bi bi-clipboard"></i> 임시저장</li>
 					</ul>
 					</div>
 				</div>
