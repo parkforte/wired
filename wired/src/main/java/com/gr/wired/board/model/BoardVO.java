@@ -11,15 +11,15 @@ public class BoardVO {
 	private int boardReadcount;
 	private Timestamp boardRegdate;
 	private Timestamp boardChangedate;
-	
-	//∆ƒ¿œ æ˜∑ŒµÂ
+
+//	ÏûêÎ£åÏã§ ÌïÑÎìú Ï∂îÍ∞Ä
 	private String boardFilename;
 	private String boardOriginalfilename;
+	private long boardFilesize;
 	private int boardDowncount;
 	private char boardDelflag;
 	private int boardRecommend;
-	
-	
+
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -80,6 +80,12 @@ public class BoardVO {
 	public void setBoardOriginalfilename(String boardOriginalfilename) {
 		this.boardOriginalfilename = boardOriginalfilename;
 	}
+	public long getBoardFilesize() {
+		return boardFilesize;
+	}
+	public void setBoardFilesize(long boardFilesize) {
+		this.boardFilesize = boardFilesize;
+	}
 	public int getBoardDowncount() {
 		return boardDowncount;
 	}
@@ -98,15 +104,18 @@ public class BoardVO {
 	public void setBoardRecommend(int boardRecommend) {
 		this.boardRecommend = boardRecommend;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "BoardVO [boardNo=" + boardNo + ", memNo=" + memNo + ", bdlistNo=" + bdlistNo + ", boardTitle="
 				+ boardTitle + ", boardContent=" + boardContent + ", boardReadcount=" + boardReadcount
 				+ ", boardRegdate=" + boardRegdate + ", boardChangedate=" + boardChangedate + ", boardFilename="
-				+ boardFilename + ", boardOriginalfilename=" + boardOriginalfilename + ", boardDowncount="
-				+ boardDowncount + ", boardDelflag=" + boardDelflag + ", boardRecommend=" + boardRecommend + "]";
+				+ boardFilename + ", boardOriginalfilename=" + boardOriginalfilename + ", boardFilesize="
+				+ boardFilesize + ", boardDowncount=" + boardDowncount + ", boardDelflag=" + boardDelflag
+				+ ", boardRecommend=" + boardRecommend + "]";
 	}
-	
-	
+
+
+
+
 }

@@ -27,16 +27,18 @@
 		WHERE MEM_ID=#{memId}
 	</select>
 
-	<select id="selectAll" parameterType="searchVo" resultType="emplVo">
+	<select id="selectAll" parameterType="searchVo" resultType="map">
 		SELECT *
 		FROM
 		(
 		    SELECT ROWNUM AS RNUM, A.*
 		    FROM
 		    (
-		        SELECT MEM_NO, MEM_NAME, DEPT_NO, POS_NO, MEM_HP1, MEM_HP2, MEM_HP3
-		        FROM MEMBER
-		        <include refid="searchWhere"></include>
+		        SELECT *
+		        FROM MEMBER M JOIN DEPARTMENT D
+		        ON M.DEPT_NO=D.DEPT_NO
+		        JOIN POSITION P
+		        ON M.POS_NO=P.POS_NO
 		        ORDER BY MEM_NO DESC
 		    )A
 		)

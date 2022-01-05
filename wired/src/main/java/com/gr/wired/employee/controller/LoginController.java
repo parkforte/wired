@@ -1,5 +1,8 @@
 package com.gr.wired.employee.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +41,7 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String login_post(@ModelAttribute EmplVO vo, @RequestParam(required = false) String chkSave,
-			HttpServletRequest request, HttpServletResponse response, Model model) {
+			HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		logger.info("로그인 처리, 파라미터 vo={}, chkSave={}", vo, chkSave);
 
 		String msg="로그인 처리 실패", url="/login";
@@ -51,6 +54,10 @@ public class LoginController {
 			session.setAttribute("memId", vo.getMemId());
 			session.setAttribute("memName", emplVo.getMemName());
 
+			response.setContentType("text/html; charset=UTF-8");
+
+			PrintWriter out = response.getWriter();
+
 			//[2] 쿠키에 저장 - 아이디 저장하기, 체크된 경우만
 			Cookie ck = new Cookie("ck_memId", vo.getMemId());
 			ck.setPath("/");
@@ -62,8 +69,14 @@ public class LoginController {
 				response.addCookie(ck);
 			}
 
-			msg=emplVo.getMemName() + "님 로그인되었습니다.";
-			url="/index";
+			if(Character.compare(emplVo.getMemFlag(), 'Y')==0) {
+				msg=emplVo.getMemName() + "님 로그인되었습니다.";
+				url="/index";
+			}else {
+				msg=emplVo.getMemName() + "님 로그인되었습니다.";
+				url="/mypage/mypage";
+			}
+
 		}else if(result==emplService.DISAGREE_PWD) {
 			msg="비밀번호가 일치하지 않습니다.";
 		}else if(result==emplService.USERID_NONE) {

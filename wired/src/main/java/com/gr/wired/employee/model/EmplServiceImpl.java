@@ -1,6 +1,7 @@
 package com.gr.wired.employee.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class EmplServiceImpl implements EmplService{
 	}
 
 	@Override
-	public List<EmplVO> selectAll(SearchVO searchVo) {
+	public List<Map<String, Object>> selectAll(SearchVO searchVo) {
 		return emplDao.selectAll(searchVo);
 	}
 
@@ -57,6 +58,8 @@ public class EmplServiceImpl implements EmplService{
 	public int updateSignature(EmplVO emplVo) {
 		return emplDao.updateSignature(emplVo);
 	}
+
+
 
 
 

@@ -25,6 +25,7 @@ public class EmplVO {
 	private int memHoliday;
 	private int memUseholiday;
 	private int posNo;
+	private char memFlag;
 
 	public int getMemNo() {
 		return memNo;
@@ -158,7 +159,13 @@ public class EmplVO {
 	public void setPosNo(int posNo) {
 		this.posNo = posNo;
 	}
-
+	public char getMemFlag() {
+		return memFlag;
+	}
+	public void setMemFlag(char memFlag) {
+		this.memFlag = memFlag;
+	}
+	
 	@Override
 	public String toString() {
 		return "EmplVO [memNo=" + memNo + ", ranksNo=" + ranksNo + ", deptNo=" + deptNo + ", memName=" + memName
@@ -167,8 +174,9 @@ public class EmplVO {
 				+ ", memAddress=" + memAddress + ", memAddressdetail=" + memAddressdetail + ", memFilename="
 				+ memFilename + ", memOriginalfilename=" + memOriginalfilename + ", memJoindate=" + memJoindate
 				+ ", memResigndate=" + memResigndate + ", memPay=" + memPay + ", memHoliday=" + memHoliday
-				+ ", memUseholiday=" + memUseholiday + ", posNo=" + posNo + "]";
+				+ ", memUseholiday=" + memUseholiday + ", posNo=" + posNo + ", memFlag=" + memFlag + "]";
 	}
-
+	
+	
 
 }
