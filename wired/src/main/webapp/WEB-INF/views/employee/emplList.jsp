@@ -104,18 +104,18 @@
                             </c:if>
                             <c:if test="${!empty list }">
                             	<!-- 리스트 반복문 시작 -->
-	               				<c:forEach var="vo" items="${list }">
+	               				<c:forEach var="map" items="${list }">
 	                               <tr>
 	                                   <td><input type="checkbox" class="form-check-input check-margin2" id="exampleCheck1"></td>
-	                                   <td>${vo.memNo }</td>
-	                                   <td>${vo.memName }</td>
-	                                   <td>${vo.deptNo }</td>
-	                                   <td>${vo.posNo }</td>
+	                                   <td>${map['MEM_NO'] }</td>
+	                                   <td>${map['MEM_NAME'] }</td>
+	                                   <td>${map['DEPT_NAME'] }</td>
+	                                   <td>${map['POS_NAME'] }</td>
 	                                   <td>
-		                                   <c:if test="${!empty vo.memHp1 }">
-									           <span id="hp1">${vo.memHp1 }</span>
-									           - <span id="hp2">${vo.memHp2 }</span>
-									           - <span id="hp3">${vo.memHp3 }</span>
+		                                   <c:if test="${!empty map['MEM_HP1'] }">
+									           <span id="hp1">${map['MEM_HP1'] }</span>
+									           - <span id="hp2">${map['MEM_HP2'] }</span>
+									           - <span id="hp3">${map['MEM_HP3'] }</span>
 								           </c:if>
 								       </td>
 	                                   <td><button type="button" class="btn btn-success" onclick="location.href='/wired/employee/emplEdit'" >수정</button>
