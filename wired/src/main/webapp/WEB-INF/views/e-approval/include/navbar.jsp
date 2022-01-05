@@ -21,14 +21,10 @@
 					<li><a class="dropdown-item" href="<c:url value='/e-approval/docbox'/>">결재완료</a></li>
 					<li><a class="dropdown-item" href="<c:url value='/e-approval/docbox'/>">결재반려</a></li>
 				</ul></li>
-			<li class="nav-item active"><a class="nav-link" href="#">문서결재</a>
+			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/signature/uploadPage'/>">문서결재</a>
+			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/signature/uploadPage'/>">서명관리</a>
 			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/doctype/admin'/>">문서관리</a>
 			</li>
 		</ul>
-		<form class="d-flex">
-			<input class="form-control mr-2" type="search" placeholder="Search"
-				aria-label="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
-		</form>
 	</div>
 </nav>

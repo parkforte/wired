@@ -165,23 +165,6 @@
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
 
-			<!-- Sidebar Toggler (Sidebar) -->
-			<div class="text-center d-none d-md-inline">
-				<button class="rounded-circle border-0" id="sidebarToggle"></button>
-			</div>
-
-			<!-- Sidebar Message -->
-			<div class="sidebar-card d-none d-lg-flex">
-				<img class="sidebar-card-illustration mb-2"
-					src="resources/img/undraw_rocket.svg" alt="...">
-				<p class="text-center mb-2">
-					<strong>SB Admin Pro</strong> is packed with premium features,
-					components, and more!
-				</p>
-				<a class="btn btn-success btn-sm"
-					href="#">button!</a>
-			</div>
-
 		</ul>
 		<!-- End of Sidebar -->
 
@@ -362,7 +345,7 @@
 								class="mr-2 d-none d-lg-inline text-gray-600 small">박지노</span>
 								<img class="img-profile rounded-circle"
 								src="${pageContext.request.contextPath}/resources/img/undraw_profile.svg">
-						</a> 
+						</a>
 						<!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

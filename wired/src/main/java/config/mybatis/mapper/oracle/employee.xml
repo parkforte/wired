@@ -49,4 +49,10 @@
 		SELECT COUNT(*) FROM MEMBER
 		<include refid="searchWhere"></include>
 	</select>
+
+	<update id="updateSignature" parameterType="emplVo">
+		update member
+		set mem_originalfilename=#{memOriginalfilename}
+		where mem_id=#{memId}
+	</update>
 </mapper>

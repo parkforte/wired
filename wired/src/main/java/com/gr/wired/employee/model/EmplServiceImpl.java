@@ -53,6 +53,11 @@ public class EmplServiceImpl implements EmplService{
 		return emplDao.selectTotalRecord(searchVo);
 	}
 
+	@Override
+	public int updateSignature(EmplVO emplVo) {
+		return emplDao.updateSignature(emplVo);
+	}
+
 
 
 
