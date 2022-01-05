@@ -52,7 +52,7 @@ public class BdListController {
 		List<Map<String, Object>> list=bdListService.selectBdList(searchVo);
 		logger.info("관리자 게시판 목록 list,={}", list.size());
 
-		//[2] totalPage
+		//[3] totalPage
 		int totalRecord=bdListService.selectTotalRecord();
 		logger.info("totalRecord={}", totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
@@ -104,6 +104,8 @@ public class BdListController {
 		//4 뷰페이지 리턴
 		return "common/message";
 	}
+
+
 
 
 }
