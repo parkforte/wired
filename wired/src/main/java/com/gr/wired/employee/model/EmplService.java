@@ -16,4 +16,6 @@ public interface EmplService {
 	EmplVO selectByMemId(String memId);
 	List<Map<String, Object>> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
+	int updateSignature(EmplVO emplVo);
+
 }
