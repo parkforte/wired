@@ -117,10 +117,11 @@
 					aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">사내게시판:</h6>
-						<a class="collapse-item" href="#">#</a> <a
-							class="collapse-item" href="#">#</a> <a
-							class="collapse-item" href="#">#</a>
-						<a class="collapse-item" href="#">#</a>
+						<c:forEach var="bdListVo" items="${bdlist }">
+							<a class="collapse-item"
+				href='<c:url value="/board/boardList?bdlistNo=${bdListVo.bdlistNo }"/>'>
+								${bdListVo.bdlistName }</a>
+						</c:forEach>
 					</div>
 				</div></li>
 
@@ -362,7 +363,7 @@
 								class="mr-2 d-none d-lg-inline text-gray-600 small">박지노</span>
 								<img class="img-profile rounded-circle"
 								src="${pageContext.request.contextPath}/resources/img/undraw_profile.svg">
-						</a> 
+						</a>
 						<!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

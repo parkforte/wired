@@ -48,7 +48,9 @@
 			SET BDLIST_RE=#{bdlistRe}, BDLIST_UP=#{bdlistUp}, BDLIST_RC=#{bdlistRc}, RANKS_NO=#{ranksNo}
 		WHERE BDLIST_NO=#{bdlistNo}
 	</update>
-
+	<select id="selectMenu" resultType="bdListVo">
+		SELECT BDLIST_NO, BDLIST_NAME FROM BOARDLIST
+	</select>
 
 
 </mapper>

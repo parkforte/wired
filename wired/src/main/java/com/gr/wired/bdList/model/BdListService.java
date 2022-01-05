@@ -12,4 +12,5 @@ public interface BdListService {
 	List<BdListVO> selectBdListE();
 	int insertBdList(BdListVO bdListVo);
 	int updatebdList(BdListVO bsListVo);
+	List<BdListVO> selectMenu();
 }

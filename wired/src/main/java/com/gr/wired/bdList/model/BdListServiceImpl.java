@@ -51,6 +51,12 @@ public class BdListServiceImpl implements BdListService{
 	}
 
 
+	@Override
+	public List<BdListVO> selectMenu() {
+		return bdListDao.selectMenu();
+	}
+
+
 
 
 
