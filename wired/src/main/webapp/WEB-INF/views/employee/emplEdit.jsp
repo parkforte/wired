@@ -129,6 +129,5 @@ span {
 			  </div>
 			</div>
                 <!-- /.container-fluid -->
-				
+
 <%@ include file="../inc/bottom.jsp" %>
-			

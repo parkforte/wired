@@ -1,6 +1,7 @@
 package com.gr.wired.employee.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,7 +77,7 @@ public class EmplController {
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("값 셋팅 후 searchVo={}", searchVo);
 
-		List<EmplVO> list=emplService.selectAll(searchVo);
+		List<Map<String, Object>> list=emplService.selectAll(searchVo);
 		logger.info("전체조회 결과 list.size={}", list.size());
 
 		//[3] totalRecord 구하기

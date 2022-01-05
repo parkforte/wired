@@ -160,8 +160,8 @@ span {
 	                                <div class="form-group c-size">
 	                                <br>
 	                                    <button type="submit" class="btn btn-primary b-radius" id="first_button">등록</button>
-	                                    <button type="button" class="btn btn-danger b-radius">취소</button>
-	                                    <button type="button" class="btn btn-secondary b-radius">목록</button>
+	                                    <button type="button" class="btn btn-danger b-radius" onclick="location.href='<c:url value='../index'/>'">취소</button>
+	                                    <button type="button" class="btn btn-secondary b-radius" onclick="location.href='<c:url value='emplList'/>'">목록</button>
                                 	</div>
 	                            </div>
 	                          </form>

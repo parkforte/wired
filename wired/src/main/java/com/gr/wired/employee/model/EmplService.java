@@ -1,6 +1,7 @@
 package com.gr.wired.employee.model;
 
 import java.util.List;
+import java.util.Map;
 
 import com.gr.wired.common.SearchVO;
 
@@ -13,6 +14,6 @@ public interface EmplService {
 	int insertEmployee(EmplVO emplVo);
 	int loginCheck(String memId, String memPwd);
 	EmplVO selectByMemId(String memId);
-	List<EmplVO> selectAll(SearchVO searchVo);
+	List<Map<String, Object>> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
 }
