@@ -21,8 +21,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectByBNoList(int boardNo) {
-		return boardDao.selectByBNoList(boardNo);
+	public List<Map<String, Object>> selectByBNoList(int bdlistNo) {
+		return boardDao.selectByBNoList(bdlistNo);
 	}
 
 	@Override
@@ -34,6 +34,13 @@ public class BoardServiceImpl implements BoardService{
 	public int selectByMemId(String memId) {
 		return boardDao.selectByMemId(memId);
 	}
+
+	@Override
+	public BoardVO selectByNo(int boardNo) {
+		return boardDao.selectByNo(boardNo);
+	}
+
+
 
 
 

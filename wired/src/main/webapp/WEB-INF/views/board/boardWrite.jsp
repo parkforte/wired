@@ -38,20 +38,25 @@ input#title {
 
 	});
 
-	$('#btList').click(function(){
-		location.href="<c:url value='/board/boardList'/>";
+	$(function () {
+		$('#btList').click(function(){
+			location.href="<c:url value='/board/boardList?bdlistNo=${param.bdListNo}'/>";
+		});
 
 
+		$("#submitbt").click(function(){
+			var inputContent=oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
+			$('#txtContent').val(inputContent);
+			alert(inputContent);
+			$(".frmWrite").submit();
+
+		});
 	});
 
-	function save(){
-		oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
-	    		//스마트 에디터 값을 텍스트컨텐츠로 전달
-		var content = document.getElementById("smartEditor").value;
-		alert(document.getElementById("txtContent").value);
-	    		// 값을 불러올 땐 document.get으로 받아오기
-		return;
-	}
+
+
+
+
 
 
 </script>
@@ -61,7 +66,7 @@ input#title {
 
     <!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">게시글 작성</h1>
-	<p class="mb-4">Company bulletin board write.</a>.</p>
+	<p class="mb-4">Company bulletin board write.</p>
 
 	<!-- title1 -->
 	<div class="card shadow mb-4">
@@ -81,10 +86,12 @@ input#title {
 
 			       	<!-- 데이터 전송버튼 -->
 					<div id="se2_sample" style="margin:5px 0;">
-						<button type="submit" class="btn btn-primary f-left f-right">글쓰기</button>
+						<button type="submit" class="btn btn-primary f-left f-right"  id="submitbt">글쓰기</button>
 					</div>
 
-					<textarea id="txtContent" rows="10" cols="100" style="width: 100%;" class="infobox" name="boardContent"></textarea>
+					<input type="hidden" name="boardContent" >
+					<!-- 스마트에디터 -->
+					<textarea id="txtContent" rows="10" cols="100" style="width: 100%;" class="infobox" ></textarea>
 					<!-- textarea 밑에 script 작성하기 -->
 					<script id="smartEditor" type="text/javascript">
 						var oEditors = [];
@@ -139,6 +146,7 @@ input#title {
 <script src='<c:url value="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"/>'></script>
 <script src='<c:url value="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"/>'></script>
 <script src='<c:url value="https://unpkg.com/filepond/dist/filepond.min.js"/>'></script><script  src='<c:url value="/resources/js/script.js"/>'></script>
+
 
 
 <%@ include file="../inc/bottom.jsp" %>
