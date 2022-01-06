@@ -53,6 +53,7 @@ public class LoginController {
 			HttpSession session=request.getSession();
 			session.setAttribute("memId", vo.getMemId());
 			session.setAttribute("memName", emplVo.getMemName());
+			session.setAttribute("ranksNo", emplVo.getRanksNo());
 
 			response.setContentType("text/html; charset=UTF-8");
 

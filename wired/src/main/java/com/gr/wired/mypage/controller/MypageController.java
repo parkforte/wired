@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gr.wired.employee.model.EmplVO;
 import com.gr.wired.mypage.model.MypageService;
@@ -45,8 +46,8 @@ public class MypageController {
 	}
 
 	@PostMapping("/mypage")
-	public String mypage_post(@ModelAttribute EmplVO vo, HttpSession session,
-			Model model) {
+	public String mypage_post(@ModelAttribute EmplVO vo, @RequestParam String email3,
+			HttpSession session, Model model) {
 		String memId=(String) session.getAttribute("memId");
 		vo.setMemId(memId);
 		logger.info("사원수정 처리, 파라미터 vo={}", vo);
@@ -56,6 +57,20 @@ public class MypageController {
 			vo.setMemHp1("");
 			vo.setMemHp2("");
 			vo.setMemHp3("");
+		}
+
+		if(vo.getMemEmail1()==null || vo.getMemEmail1().isEmpty()) {
+			vo.setMemEmail1("");
+			vo.setMemEmail2("");
+		}else {
+			if(vo.getMemEmail2().equals("etc")) {
+				if(email3!=null && !email3.isEmpty()) {
+					vo.setMemEmail2(email3);
+				}else {
+					vo.setMemEmail1("");
+					vo.setMemEmail2("");
+				}
+			}
 		}
 
 		int cnt=mypageService.updateMember(vo);

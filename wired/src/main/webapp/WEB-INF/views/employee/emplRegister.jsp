@@ -63,8 +63,23 @@ span {
 				$('#memHp2').focus();
 				event.preventDefault();
 			}
-		});
+
+			if($('#memPay').val()==""){
+				$('#memPay').val(0);
+			}
+			if($('#memHoliday').val()==""){
+				$('#memHoliday').val(0);
+			}
+
+		 });
+
 	});
+
+	function validate_phone(tel){
+		var pattern = new RegExp(/^[0-9]*$/g);
+		return pattern.test(tel);
+
+	}
 
 </script>
 
