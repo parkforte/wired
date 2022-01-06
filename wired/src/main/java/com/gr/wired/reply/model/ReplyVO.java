@@ -6,14 +6,16 @@ public class ReplyVO {
 	private int repNo;
 	private String repContent;
 	private Timestamp repRegdate;
+
 	private int repGroup;
 	private int repSortNo;
 	private int repDepth;
+
 	private char repSecret;
 	private int memNo;
 	private int boardNo;
-	
-	
+
+
 	public int getRepNo() {
 		return repNo;
 	}
@@ -74,6 +76,6 @@ public class ReplyVO {
 				+ repGroup + ", repSortNo=" + repSortNo + ", repDepth=" + repDepth + ", repSecret=" + repSecret
 				+ ", memNo=" + memNo + ", boardNo=" + boardNo + "]";
 	}
-	
-	
+
+
 }

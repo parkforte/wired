@@ -24,6 +24,7 @@ import com.gr.wired.common.ConstUtil;
 import com.gr.wired.common.FileUploadUtil;
 import com.gr.wired.common.PaginationInfo;
 import com.gr.wired.common.SearchVO;
+import com.gr.wired.reply.model.ReplyService;
 
 @Controller
 @RequestMapping("/board")
@@ -32,14 +33,14 @@ public class BoardController {
 		=LoggerFactory.getLogger(BoardController.class);
 
 	private final BoardService boardService;
+	private final ReplyService replyService;
 	private final FileUploadUtil fileUploadUtil;
 
-
 	@Autowired
-	public BoardController(BoardService boardService, FileUploadUtil fileUploadUtil) {
+	public BoardController(BoardService boardService, ReplyService replyService, FileUploadUtil fileUploadUtil) {
 		this.boardService = boardService;
+		this.replyService = replyService;
 		this.fileUploadUtil = fileUploadUtil;
-		logger.info("생성자주입!");
 	}
 
 	@GetMapping("/boardWrite")
@@ -95,7 +96,7 @@ public class BoardController {
 		//3
 
 		//4
-		return "redirect:/board/boardList";
+		return "redirect:/board/boardList?bdlistNo="+boardVo.getBdlistNo();
 	}
 
 	@RequestMapping("/boardList")
@@ -133,8 +134,19 @@ public class BoardController {
 
 
 	@RequestMapping("/boardDetail")
-	public String detail() {
+	public String detail(@RequestParam(defaultValue = "0") int boardNo, Model model) {
+		//1
+		logger.info("게시글 디테일 화면, 파라미터 boardNo={}", boardNo);
+		//2
+		BoardVO boardVo = boardService.selectByNo(boardNo);
+		logger.info("boardVo={}", boardVo);
 
+		List<Map<String, Object>> list = replyService.selectAll(boardNo);
+		logger.info("list={}",list.size());
+		//3
+		model.addAttribute("boardVo", boardVo);
+		model.addAttribute("reList", list);
+		//4
 		return "board/boardDetail";
 	}
 }

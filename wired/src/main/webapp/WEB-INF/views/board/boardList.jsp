@@ -46,7 +46,7 @@ input#exampleCheck1\ chkbox {
 
 	$(function () {
 		$('#btWrite').click(function () {
-			location.href="<c:url value='/board/boardWrite?bdlistNo=${bdlistNo}'/>";
+			location.href="<c:url value='/board/boardWrite?bdlistNo=${param.bdlistNo}'/>";
 		});
 	});
 </script>
@@ -145,7 +145,9 @@ input#exampleCheck1\ chkbox {
                                    <th style="width: 80px">조회수</th>
                                    <th style="width: 100px">추천</th>
                                   <!-- 관리자 모드일때만 보이게 if처리 -->
-                                   <th style="width: 151px">관리</th>
+                                   <c:if test="${sessionScope.ranksNo == 3}">
+	                                   <th style="width: 151px">관리</th>
+                                   </c:if>
                                </tr>
                            </thead>
                            <tbody>
@@ -166,9 +168,12 @@ input#exampleCheck1\ chkbox {
 	                                   </td>
 	                                   <td>${map['MEM_NAME'] }</td>
 	                                   <td>
-
-	                                   		<i class="bi bi-folder"></i><!-- 첨부파일 있는 게시물의 경우if처리 -->
-	                                   		${MAP['BOARD_TITLE'] }
+											<c:if test="${!empty map['BOARD_FILENAME'] }">
+	                                   			<i class="bi bi-folder"></i><!-- 첨부파일 있는 게시물의 경우if처리 -->
+											</c:if>
+											<a href='<c:url value="/board/boardDetail?boardNo=${map['BOARD_NO'] }"/>'>
+	                                   			${map['BOARD_TITLE'] }
+											</a>
 	                                   </td>
 	                                   <td>
 	                                   		<fmt:formatDate value="${map['BOARD_REGDATE'] }" pattern="yyyy-MM-dd"/>

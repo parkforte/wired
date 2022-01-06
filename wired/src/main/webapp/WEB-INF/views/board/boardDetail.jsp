@@ -45,25 +45,25 @@ button.btn.btn-primary.f-right {
 <script type="text/javascript">
 <!-- head 안에 추가 -->
 
-	
-	
+
+
 	function save(){
-		oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);  
+		oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
 	    		//스마트 에디터 값을 텍스트컨텐츠로 전달
 		var content = document.getElementById("smartEditor").value;
-		alert(document.getElementById("txtContent").value); 
+		alert(document.getElementById("txtContent").value);
 	    		// 값을 불러올 땐 document.get으로 받아오기
-		return; 
+		return;
 	}
-	
+
 	$(function () {
 		$('.replyWrite').hide();
 		$('.btn-outline-secondary').click(function () {
 			$('.replyWrite').show();
 		});
 	});
-	
-	
+
+
 
 </script>
 
@@ -77,8 +77,8 @@ button.btn.btn-primary.f-right {
                     <!-- title1 -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">게시글 제목</h6>
-                            
+                            <h6 class="m-0 font-weight-bold text-primary">${boardVo.boardTitle }</h6>
+
                             <!-- 작성자만 볼수있게 버튼if 처리 세션에서 아이디 가져와 셀렉트-->
                             <div class="f-right bdDetailBtDiv">
                             	<button type="button" class="btn btn-primary detailbt f-left" style="font-size: 0.7em","margin" >
@@ -88,10 +88,10 @@ button.btn.btn-primary.f-right {
                            			추천
                           		</button>
 	                            <button type="button" class="btn btn-primary f-left detailbt">글수정</button>
-	                            
+
 	                            <!-- 삭제버튼 클릭하면 모달창 생성후 삭제하겠습니다 라는 입력받아서 같으면 처리해보기-->
 								<button type="button" class="btn btn-danger f-left detailbt" id="deleteBt" data-toggle="modal" data-target="#exampleModal">글삭제</button>
-								
+
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								  <div class="modal-dialog modal-dialog-centered">
@@ -106,20 +106,20 @@ button.btn.btn-primary.f-right {
 								        ...
 								      </div>
 								      <div class="modal-footer">
-								      	
+
 								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 								        <button type="button" class="btn btn-primary">Save changes</button>
 								      </div>
 								    </div>
 								  </div>
 								</div>
-							
+
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            	<p>스마트 에디터</p>
-								               
+                            	<p>${boardVo.boardContent }</p>
+
                             </div>
                         </div>
                     </div>
@@ -133,31 +133,36 @@ button.btn.btn-primary.f-right {
                         <div class="card-body">
                             <div class="table-responsive">
                             	<!-- 댓글창 -->
+                            	<form name="frmDetail" method="post" action="/board/boardDetail2">
                             	<div style="height:117px">
-                            		<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="바르말 고운말 사용"></textarea>
+                            		<input type="hidden" name="boardNo" value="${param.boardNo }">
+                            		<textarea class="form-control" name="boardContent" id="exampleFormControlTextarea1" rows="3" placeholder="바르말 고운말 사용"></textarea>
                             		<button type="button" class="btn btn-primary f-right">등록</button>
                             	</div>
-                            	
+                            	</form>
+
                             	<hr>
-                            	
-                            	<div class="f-left"><span>회원아이디</span></div>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span><button type="button" class="btn btn-outline-secondary">댓글</button>
+								<c:forEach var="map" items="${reList }">
+                            		<div class="f-left"><span>${map['MEM_NAME'] }</span></div>&nbsp;&nbsp;<span>${map['REP_CONTENT'] }</span><button type="button" class="btn btn-outline-secondary">댓글</button>
+								</c:forEach>
 								<hr>
                             	<!-- 대댓글 -->
                             	<i class="bi bi-arrow-return-right"></i><label class="replylabel">김방방</label>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span><button type="button" class="btn btn-outline-secondary">댓글</button>
                             	<hr style="">
-                            	
+
 								<!-- 대댓글 쓰기창  *자신을 제외한 댓들 등록창은 hide* -->
 								<div class="row replyWrite">
-									<div class="f-left" style="width:7%"><span>회원아이디</span></div>&nbsp;&nbsp;
+									<div class="f-left" style="width:7%"><span>${map['MEM_NAME'] }</span></div>&nbsp;&nbsp;
 									<div class="f-left" style="width:89%"><input type="text" class="form-control form-control-sm form-control-user c-size infobox f-right" id="title" placeholder="바르말 고운말 사용"></div><button type="button" class="btn btn-outline-primary">등록</button>
 									<hr>
 								</div>
+
                             	<div class="f-left"><span>회원아이디</span></div>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
                             	<hr>
                             	<div class="f-left"><span>회원아이디</span></div>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
                             	<hr>
                             	<div class="f-left"><span>회원아이디</span></div>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span>
-                            
+
                             	<!-- 마지막줄은 hr안함 -->
                             </div>
                         </div>
@@ -168,4 +173,3 @@ button.btn.btn-primary.f-right {
 
             <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
-			
