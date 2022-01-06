@@ -15,4 +15,5 @@ public interface EmplDAO {
 	List<Map<String, Object>> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
 	int updateSignature(EmplVO emplVo);
+	List<Map<String, Object>> selectByMemName(EmplVO emplVo);
 }

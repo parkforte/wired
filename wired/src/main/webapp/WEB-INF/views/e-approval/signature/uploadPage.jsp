@@ -39,7 +39,7 @@
 	$(function(){
 		$('#btnPaint').click(function(){
 			open('paint','paint',
-			 'width=400,height=300,left=50,top=50,location=yes,resizable=yes');
+			 'width=400,height=450,left=50,top=50,location=yes,resizable=yes');
 		});
 
 	});
