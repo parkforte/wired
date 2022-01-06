@@ -80,9 +80,28 @@
 	background-color: silver;
 }
 
-.sigBox{
-	width: 50px;
+.sigTitle{
+	width:50px;
+	height: 20px;
+	background-color: pink;
+}
+.sigImg{
+	margin-top20px;
+	width:50px;
 	height: 50px;
+	background-color: silver;
+}
+
+.sigBox{
+	padding: 0;
+	width: 50px;
+	height: 70px;
+	background-color: silver;
+}
+
+.btnMargin{
+	margin-left: 40px;
+	margin-top: 5px;
 }
 </style>
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
@@ -137,10 +156,11 @@
 		<!-- title1 -->
 		<div class="card shadow mb-4 setW20 setMR10 f-left">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">문서양식</h6>
+				<h6 class="m-0 font-weight-bold text-primary">문서양식 & 결재라인</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
+				 <label for="exampleFormControlSelect1">문서양식선택</label>
 					<div id="jstree">
 						<c:if test="${!empty formList }">
 						<c:forEach var="formVo" items="${formList }">
@@ -151,6 +171,19 @@
 						</c:if>
 					</div>
 				</div>
+				<br><br>
+				<div class="form-group">
+				    <label for="exampleFormControlSelect1">결재라인선택</label>
+					    <select class="form-control"  name="confirmLine" id="confirmLine">
+						      <option value="1">1</option>
+					    </select>
+					     <a href="#" class="btn btn-primary btn-icon-split btn-sm btnMargin">
+                             <span class="icon text-white-50">
+                                 <i class="fas fa-flag"></i>
+                             </span>
+                             <span class="text">결재라인추가</span>
+                         </a>
+				  </div>
 			</div>
 		</div>
 		<div class="card shadow mb-4">
@@ -169,12 +202,7 @@
                                         </span>
                                         <span class="text">Print to pdf</span>
                                     </a>
-                                     <a href="#" class="btn btn-primary btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-flag"></i>
-                                        </span>
-                                        <span class="text">결재선선택</span>
-                                    </a>
+
                                      <a href="#" class="btn btn-primary btn-icon-split btn-sm">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-flag"></i>
@@ -200,15 +228,21 @@
 									<thead>
 										<tr>
 											<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>품의서</h3></th>
-											<th class="tg-lboi" colspan="3" rowspan="5"><img src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
-											<th class="tg-lboi">결재선3</th>
-											<th class="tg-lboi">결재선2</th>
-											<th class="tg-lboi">결재선1</th>
+											<th class="tg-lboi" colspan="4" rowspan="5"><img src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
+											<th>
+												<div class="sigBox">
+													<div class="sigTitle"></div>
+													<div class="sigImg"></div>
+												</div>
+											</th>
+											<th>
+												<div class="sigBox">
+													<div class="sigTitle"></div>
+													<div class="sigImg"></div>
+												</div>
+											</th>
 										</tr>
 										<tr>
-											<th class="tg-lboi" rowspan="3"></th>
-											<th class="tg-lboi" rowspan="3"></th>
-											<th class="tg-lboi" rowspan="3"><div class="sigBox" ><img src="<c:url value='/resources/img/signature_img.png'/>"></div></th>
 										</tr>
 										<tr>
 										</tr>

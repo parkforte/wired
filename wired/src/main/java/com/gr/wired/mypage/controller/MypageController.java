@@ -21,7 +21,7 @@ import com.gr.wired.mypage.model.MypageService;
 @RequestMapping("/mypage")
 public class MypageController {
 	private static final Logger logger
-		=LoggerFactory.getLogger(MypageController.class);
+		= LoggerFactory.getLogger(MypageController.class);
 
 	private final MypageService mypageService;
 
