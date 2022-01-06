@@ -59,6 +59,11 @@ public class EmplServiceImpl implements EmplService{
 		return emplDao.updateSignature(emplVo);
 	}
 
+	@Override
+	public List<Map<String, Object>> selectByMemName(EmplVO emplVo) {
+		return emplDao.selectByMemName(emplVo);
+	}
+
 
 
 
