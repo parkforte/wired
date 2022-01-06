@@ -98,15 +98,38 @@ span{
 				alert('비밀번호가 일치하지 않습니다!');
 				$('#memPwd2').focus();
 				event.preventDefault();
-			}else if(!validate_phone($('#memHp2').val()) ||
-					!validate_phone($('#memHp3').val()) ){
+			}else if(!validate_phone($('#memHp2').val())||
+					!validate_phone($('#memHp3').val())){
 				alert('전화번호는 숫자만 가능합니다.');
 				$('#memHp2').focus();
+				event.preventDefault();
+			}else if($('#memAddress').val().length<1){
+				alert('주소를 입력해주세요.');
+				$('#memAddressdetail').focus();
 				event.preventDefault();
 			}
 
 		});
+
+		/* $('select[name=memEmail2]').change(function() {
+			if($('#memEmail2').val()=='etc'){
+				$('#email3').css('visibility','visible');
+			}
+		}); */
+
+
+		$('#btZipcode').click(function(){
+			window.open(
+				"${pageContext.request.contextPath}/zipcode/zipcode",
+				"zipWin",
+				"left=50, top=20, width=500, height=500, scrollbars=yes,resizable=yes");
+		});
 	});
+	function validate_phone(tel){
+		var pattern = new RegExp(/^[0-9]*$/g);
+		return pattern.test(tel);
+
+	}
 
 	if(Character.compare(vo.getMemFlag(), 'N')==0){
 		alert('상세정보를 입력하세요.');
@@ -199,14 +222,29 @@ span{
 								<input type="text" name="memZipcode" id="memZipcode" title="우편번호" ReadOnly
 										style="width: 250px; display: inline-block"
 										class="form-control form-control-user c-size" placeholder="우편번호" value="${map['MEM_ZIPCODE'] }">
-								<input style="display: inline-block" type="Button" value="우편번호 찾기" id="btnZipcode" title="새창열림" class="btn btn-primary b-radius">
+								<input style="display: inline-block" type="Button" value="우편번호 찾기" id="btZipcode" title="새창열림" class="btn btn-primary b-radius">
 								<br /><span class="sp1">&nbsp;</span>
-								<input type="text" name="memAddress" ReadOnly title="주소"
+								<input type="text" name="memAddress" ReadOnly title="주소" id="memAddress"
 								class="form-control form-control-user c-size" placeholder="주소" value="${map['MEM_ADDRESS'] }">
 								<span class="sp1">&nbsp;</span>
-								<input type="text" name="memAddressdetail" title="상세주소"
+								<input type="text" name="memAddressdetail" title="상세주소" id="memAddressdetail"
 									class="form-control form-control-user c-size" placeholder="상세주소" value="${map['MEM_ADDRESSDETAIL'] }">
 							</div>
+							<!-- 이메일 -->
+						    <label for="email1">이메일 주소</label>
+							<div class="form-group row">
+						        <input type="text" name="memEmail1"  id="memEmail1" class="form-control  c-size s-half-style" title="이메일주소 앞자리">
+						        <span>@</span>
+						        <select class="form-control  c-size s-half-style" name="memEmail2" id="memEmail2"  title="이메일주소 뒷자리">
+						            <option value="naver.com">naver.com</option>
+						            <option value="hanmail.net">hanmail.net</option>
+						            <option value="nate.com">nate.com</option>
+						            <option value="gmail.com">gmail.com</option>
+						            <option value="etc">직접입력</option>
+						        </select>
+						        <input type="text" name="email3" id="email3" class="form-control  c-size s-half-style" title="직접입력인 경우 이메일주소 뒷자리"
+						        	style="visibility:hidden;">
+						    </div>
 							<hr>
 							<!-- 연봉 -->
 							<div class="form-group">

@@ -61,6 +61,13 @@
 
 <!-- chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<!-- script -->
+<script type="text/javascript">
+	if(${sessionScope.ranksNo}==3){
+		$('#emplManage_nav').css('display','block');
+	}
+</script>
 </head>
 <!-- sweetAlert -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -159,7 +166,7 @@
 					<i class="fas fa-fw fa-table"></i> <span>스케쥴러</span>
 			</a></li>
 			<!-- 사원관리 -->
-			<li class="nav-item"><a class="nav-link" href="#">
+			<li class="nav-item" id="emplManage_nav" style="display: none;"><a class="nav-link" href="#">
 					<i class="fas fa-fw fa-table"></i> <span>사원관리</span>
 			</a></li>
 
@@ -338,20 +345,30 @@
 
 						<div class="topbar-divider d-none d-sm-block"></div>
 
-						<!-- 로그인정보 -->
-						<li class="nav-item dropdown no-arrow"><a
-							class="nav-link dropdown-toggle" href="#" id="userDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <span
-								class="mr-2 d-none d-lg-inline text-gray-600 small">박지노</span>
-								<img class="img-profile rounded-circle"
-								src="${pageContext.request.contextPath}/resources/img/undraw_profile.svg">
-						</a>
+						<!-- 로그인 안된 경우 -->
+						<c:if test="${empty sessionScope.memId }">
+							<li class="nav-item dropdown no-arrow" style="margin-top: 4%;"><a
+								href="<c:url value='/login'/>" class="text-gray-600 small">로그인
+									<img
+									src="${pageContext.request.contextPath}/resources/img/logo/wired_logo2.png">
+							</a></li>
+						</c:if>
+						<!-- 로그인 된 경우 -->
+						<c:if test="${!empty sessionScope.memId }">
+							<li class="nav-item dropdown no-arrow"><a
+								class="nav-link dropdown-toggle" href="#" id="userDropdown"
+								role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> <span
+									class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.memName }</span>
+									<img class="img-profile rounded-circle"
+									src="${pageContext.request.contextPath}/resources/img/undraw_profile.svg">
+							</a>
+						</c:if>
 						<!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#"> <i
+								<a class="dropdown-item" href="<c:url value='/mypage/mypage'/>"> <i
 									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 마이페이지
 								</a> <a class="dropdown-item" href="#"> <i
 									class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -366,8 +383,8 @@
 									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									로그아웃
 								</a>
-							</div></li>
-
+							</div>
+								</li>
 					</ul>
 
 				</nav>
