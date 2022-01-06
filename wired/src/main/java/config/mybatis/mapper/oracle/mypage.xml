@@ -15,7 +15,7 @@
 
 	<update id="updateMember" parameterType="emplVo">
 		UPDATE MEMBER
-		SET MEM_PWD=#{memPwd}, MEM_HP1=#{memHp1}, MEM_HP2=#{memHp2}, MEM_HP3=#{memHp3},
+		SET MEM_PWD=#{memPwd}, MEM_HP1=#{memHp1}, MEM_HP2=#{memHp2}, MEM_HP3=#{memHp3}, MEM_EMAIL1=#{memEmail1}, MEM_EMAIL2=#{memEmail2},
 			MEM_ZIPCODE=#{memZipcode}, MEM_ADDRESS=#{memAddress}, MEM_ADDRESSDETAIL=#{memAddressdetail}, MEM_FLAG=#{memFlag}
 		WHERE MEM_ID=#{memId}
 	</update>
