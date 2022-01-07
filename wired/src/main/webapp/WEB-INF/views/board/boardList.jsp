@@ -171,7 +171,7 @@ input#exampleCheck1\ chkbox {
 											<c:if test="${!empty map['BOARD_FILENAME'] }">
 	                                   			<i class="bi bi-folder"></i><!-- 첨부파일 있는 게시물의 경우if처리 -->
 											</c:if>
-											<a href='<c:url value="/board/boardDetail?boardNo=${map['BOARD_NO'] }"/>'>
+											<a href='<c:url value="/board/readCount?boardNo=${map['BOARD_NO'] }"/>'>
 	                                   			${map['BOARD_TITLE'] }
 											</a>
 	                                   </td>

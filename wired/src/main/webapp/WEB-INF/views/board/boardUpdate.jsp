@@ -26,10 +26,22 @@ input#title {
 <script type="text/javascript">
 <!-- head 안에 추가 -->
 	$(function(){
-		$('#btList').click(function () {
-			location.href="<c:url value='/board/boardList?bdlistNo=${param.bdlistNo}'/>";
+		$('form[name=frmWrite]').submit(function(){
+			$('.infobox').each(function(idx, item){
+			if($(this).val().length<1){
+				alert($(this).prev().html() + "을(를) 입력하세요");
+				$(this).focus();
+				event.preventDefault();
+				return false;  //each 탈출
+			}
 		});
 
+	});
+
+	$(function () {
+		$('#btList').click(function(){
+			location.href="<c:url value='/board/boardList?bdlistNo=${param.bdListNo}'/>";
+		});
 
 
 		$("#submitbt").click(function(){
@@ -39,8 +51,13 @@ input#title {
 			$(".frmWrite").submit();
 
 		});
-
 	});
+
+
+
+
+
+
 
 </script>
 
@@ -60,21 +77,22 @@ input#title {
 		<div class="card-body">
         	<div class="table-responsive">
         		<!-- frm -->
-        		<form class="frmWrite" method="post" enctype="multipart/form-data" action='<c:url value="/board/boardWrite"/>'>
+        		<form class="frmWrite" method="post" enctype="multipart/form-data" action='<c:url value="/board/boardUpdate"/>'>
 
 		      		<!-- 누가 작성했는지 알기위해 세션에서 작성자 ID 받아올것 -->
 		      		<!-- 제목 -->
 			       	<label>제목</label>
-			  		<input type="text" class="form-control form-control-user c-size infobox" id="title" name="boardTitle" placeholder="" style="width: 800px">
+			  		<input type="text" class="form-control form-control-user c-size infobox" id="title" name="boardTitle" placeholder="" style="width: 800px"
+			  			value="${boardVo['BOARD_TITLE'] }">
 
 			       	<!-- 데이터 전송버튼 -->
 					<div id="se2_sample" style="margin:5px 0;">
-						<button type="submit" class="btn btn-primary f-left f-right"  id="submitbt">글쓰기</button>
+						<button type="submit" class="btn btn-primary f-left f-right"  id="submitbt">글수정</button>
 					</div>
 
-					<input type="hidden" name="boardContent" >
+					<input type="hidden"  name="boardNo" value="${param.boardNo} ">
 					<!-- 스마트에디터 -->
-					<textarea id="txtContent" rows="10" cols="100" style="width: 100%;" class="infobox" ></textarea>
+					<textarea id="txtContent" rows="10" cols="100" style="width: 100%;" class="infobox" name="boardContent">${boardVo['BOARD_CONTENT'] }</textarea>
 					<!-- textarea 밑에 script 작성하기 -->
 					<script id="smartEditor" type="text/javascript">
 						var oEditors = [];
@@ -117,7 +135,6 @@ input#title {
 					</div>
 					<div>
 						<button type="button" class="btn btn-primary f-left" id="btList">글목록</button>
-						<input type="text" value="${param.bdlistNo } ">
 					</div>
 				</form>
         	</div>

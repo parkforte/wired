@@ -4,7 +4,7 @@
 
 <mapper namespace="com.gr.wired.reply.model.ReplyDAO">
 
-	<insert id="insertBdList" parameterType="bdListVo">
+	<insert id="insertReply" parameterType="bdListVo">
 		<selectKey keyProperty="repNo" resultType="int" order="BEFORE">
 			SELECT REPLY_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
