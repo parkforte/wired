@@ -4,8 +4,8 @@
 
 <mapper namespace="com.gr.wired.confirm.model.ConfirmLineDAO">
 
-	<insert id="insertOrderDetail" parameterType="confirmLineVo">
-		insert into orderdetails(orderno, productno, quantity)
+	<insert id="insertConfirmLine" parameterType="confirmLineVo">
+		insert into confirmLine(orderno, productno, quantity)
 		select #{orderNo}, productno, quantity
 		from cart
 		where customerid = #{customerId}
