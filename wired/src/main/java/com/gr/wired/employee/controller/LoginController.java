@@ -54,6 +54,7 @@ public class LoginController {
 			session.setAttribute("memId", vo.getMemId());
 			session.setAttribute("memName", emplVo.getMemName());
 			session.setAttribute("ranksNo", emplVo.getRanksNo());
+			session.setAttribute("memNo", emplVo.getMemNo());
 
 			response.setContentType("text/html; charset=UTF-8");
 
@@ -74,8 +75,13 @@ public class LoginController {
 				msg=emplVo.getMemName() + "님 로그인되었습니다.";
 				url="/index";
 			}else {
-				msg=emplVo.getMemName() + "님 로그인되었습니다.";
-				url="/mypage/mypage";
+				if(emplVo.getRanksNo()==3) {
+					msg=emplVo.getMemName() + "님 로그인되었습니다.";
+					url="/index";
+				}else {
+					msg=emplVo.getMemName() + "님 로그인되었습니다.";
+					url="/mypage/mypage";
+				}
 			}
 
 		}else if(result==emplService.DISAGREE_PWD) {
