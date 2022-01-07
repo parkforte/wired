@@ -1,5 +1,8 @@
 package com.gr.wired.confirm.model;
 
-public interface LineregDAO {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public interface LineregDAO {
+	int insertLinereg(LineregVO lineregVo);
 }

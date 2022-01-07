@@ -30,25 +30,37 @@ public class ConfirmController {
 		this.emplService = emplService;
 	}
 
-	@GetMapping("/docbox")
-	public String docbox_get() {
-		return "e-approval/docbox";
+	@RequestMapping("/docbox")
+	public void docbox_get() {
+		logger.info("문서함!");
+	}
+
+	@RequestMapping("/signature/paint")
+	public void signature_get() {
+		logger.info("서명만들기 화면!");
 	}
 
 	@RequestMapping("/confirm/confirmLine")
-	public void addConfirmLine() {
-
+	public void confirmLinePage() {
+		logger.info("결재라인 등록화면!");
 	}
 
-
-	@GetMapping("/signature/paint")
-	public String signature_get() {
-		return "e-approval/signature/paint";
-	}
-
-	@PostMapping("/confirm/searchEmpl")
+	@PostMapping("/confirm/confirmLine")
 	public String searchMember(@ModelAttribute EmplVO emplVo, Model model) {
 		logger.info("라인등록 사원조회, emplVo={}", emplVo);
+
+		List<Map<String, Object>> emplList=emplService.selectByMemName(emplVo);
+		logger.info("사원조회 결과, emplList.size={}", emplList.size());
+
+		model.addAttribute("emplList", emplList);
+		logger.info("emplList={}",emplList);
+
+		return "e-approval/confirm/confirmLine";
+	}
+
+	@PostMapping("/confirm/lineOrder")
+	public String addLineOrder(@ModelAttribute EmplVO emplVo, Model model) {
+		logger.info("결재순서 등록, emplVo={}", emplVo);
 
 		List<Map<String, Object>> emplList=emplService.selectByMemName(emplVo);
 		logger.info("사원조회 결과, emplList.size={}", emplList.size());
