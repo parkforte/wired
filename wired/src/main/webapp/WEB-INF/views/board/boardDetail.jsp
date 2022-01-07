@@ -65,6 +65,13 @@ div#comment {
 			$('.replyWrite').show();
 		});
 
+// 		$('button').each(function () {
+// 			(this).click(function () {
+// 				alert("11111");
+// 				$(this).siblings('.replyWrite').show();
+// 			});
+// 		});
+
 		$('#btList').click(function(){
 			location.href="<c:url value='/board/boardList?bdlistNo=${boardVo["BDLIST_NO"]}'/>";
 		});
@@ -101,7 +108,10 @@ div#comment {
                             	<button type="button" class="btn btn-primary detailbt f-left" style="font-size: 0.7em" id="recommend">
                            			${boardVo['BOARD_RECOMMEND']} 추천
                           		</button>
-                          		<c:if test="${sessionScope.memNo }==${$map['MEM_NO'] }">
+                          		<c:set var="memNo" value="${sessionScope.memNo }"/>
+                          		<c:set var="MEM_NO" value="${$map['MEM_NO'] }"/>
+
+                          		<c:if test="${memNo==MEM_NO }">
 		                            <button type="button" class="btn btn-primary f-left detailbt" id="btList" >글목록</button>
 		                            <button type="button" class="btn btn-primary f-left detailbt" id="btUpdate">글수정</button>
                           		</c:if>
@@ -114,19 +124,22 @@ div#comment {
 								  <div class="modal-dialog modal-dialog-centered">
 								    <div class="modal-content">
 								      <div class="modal-header">
-								        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+								        <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
 								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								          <span aria-hidden="true">&times;</span>
 								        </button>
 								      </div>
 								      <div class="modal-body">
-								        ...
+								        정말 삭제 하시겠습니까?
 								      </div>
-								      <div class="modal-footer">
-
-								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								        <button type="button" class="btn btn-primary">Save changes</button>
-								      </div>
+								      <form name="frmDelete" method="post" action='<c:url value="/board/boardDelete"/>'>
+									      <div class="modal-footer">
+											<input type="text" name="boardNo" value="${param.boardNo}">
+											<input type="text" name="bdlistNo" value="${boardVo['BDLIST_NO']}">
+									        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									        <button type="submit" class="btn btn-primary">Delete</button>
+									      </div>
+								      </form>
 								    </div>
 								  </div>
 								</div>
@@ -161,12 +174,15 @@ div#comment {
                             	<hr>
 								<c:forEach var="map" items="${reList }">
 									<div>
-		                           		<div class="f-left"><span>${map['MEM_NAME'] }</span></div>&nbsp;&nbsp;<span>${map['REP_CONTENT'] }</span><button type="button" class="btn btn-outline-secondary">댓글</button>
+		                           		<div class="f-left"><span>${map['MEM_NAME'] }</span></div>&nbsp;&nbsp;<span>${map['REP_CONTENT'] }</span>
+		                           		<button type="button" class="btn btn-outline-secondary" name="reply${map[REP_NO] }">댓글</button>
 										<hr>
 									<!-- 대댓글 쓰기창  *자신을 제외한 댓들 등록창은 hide* -->
 										<div class="row replyWrite">
 											<div class="f-left" style="width:7%"><span>${sessionScop.memId }</span></div>&nbsp;&nbsp;
-											<div class="f-left" style="width:89%"><input type="text" class="form-control form-control-sm form-control-user c-size infobox f-right" id="title" placeholder="바르말 고운말 사용"></div><button type="button" class="btn btn-outline-primary">등록</button>
+
+											<div class="f-left" style="width:89%"><input type="text" class="form-control form-control-sm form-control-user c-size infobox f-right" id="title" placeholder="바르말 고운말 사용"></div>
+											<button type="submit" class="btn btn-outline-primary" id="btReply">등록</button>
 										</div>
 									</div>
 

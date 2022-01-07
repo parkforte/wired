@@ -230,6 +230,15 @@ public class BoardController {
 
 	}
 
+	@PostMapping("/boardDelete")
+	public String Delete(@ModelAttribute BoardVO boardVo) {
+		logger.info("게시글 삭제, 파라미터 boardNo={}", boardVo);
+
+		int cnt=boardService.deleteBoard(boardVo);
+		logger.info("글 삭제 결과,파라미터 cnt={}", cnt);
+
+		return "redirect:/board/boardList?bdlistNo="+boardVo.getBdlistNo();
+	}
 
 
 

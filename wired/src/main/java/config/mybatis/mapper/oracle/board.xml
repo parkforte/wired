@@ -22,7 +22,7 @@
 		SELECT BOARD_NO ,BOARD_TITLE, BOARD_REGDATE, BOARD_READCOUNT, BOARD_RECOMMEND, BOARD_FILENAME,
 		    (SELECT MEM_NAME FROM MEMBER M WHERE B.MEM_NO=M.MEM_NO)MEM_NAME
 		FROM BOARD B
-		WHERE BDLIST_NO=#{bdlistNo}
+		WHERE BDLIST_NO=#{bdlistNo} AND BOARD_DELFLAG LIKE 'N'
 		ORDER BY BOARD_REGDATE DESC
 	</select>
 	<select id="selectTotalRecord" parameterType="int" resultType="int">
@@ -53,6 +53,10 @@
 		UPDATE BOARD SET BOARD_RECOMMEND=BOARD_RECOMMEND+1
 		WHERE BOARD_NO=#{boardNo}
 	</update>
-
+	<update id="deleteBoard" parameterType="boardVo">
+		UPDATE BOARD
+		SET BOARD_DELFLAG='Y'
+		WHERE BOARD_NO=${boardNo}
+	</update>
 
 </mapper>

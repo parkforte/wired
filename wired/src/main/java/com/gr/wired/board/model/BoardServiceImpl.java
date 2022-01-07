@@ -55,7 +55,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.updateRecommend(boardNo);
 	}
 
-
+	@Override
+	public int deleteBoard(BoardVO boardVo) {
+		return boardDao.deleteBoard(boardVo);
+	}
 
 
 
