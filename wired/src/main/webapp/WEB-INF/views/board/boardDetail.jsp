@@ -111,7 +111,7 @@ div#comment {
                           		<c:set var="memNo" value="${sessionScope.memNo }"/>
                           		<c:set var="MEM_NO" value="${$map['MEM_NO'] }"/>
 
-                          		<c:if test="${memNo==MEM_NO }">
+                          		<c:if test="${sessionScope.memNo==$map['MEM_NO'] }">
 		                            <button type="button" class="btn btn-primary f-left detailbt" id="btList" >글목록</button>
 		                            <button type="button" class="btn btn-primary f-left detailbt" id="btUpdate">글수정</button>
                           		</c:if>
