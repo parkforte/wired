@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ReplyService {
-	int insertBdList(ReplyVO replyVo);
+	int insertReply(ReplyVO replyVo);
 	int selectById(String memId);
 	List<Map<String, Object>> selectAll(int boardNo);
 }

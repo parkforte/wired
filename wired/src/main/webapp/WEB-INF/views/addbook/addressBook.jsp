@@ -19,19 +19,16 @@
 .setMR10 {
 	margin-right: 10px;
 }
-
 .s-half-style {
-	width: 31.5%;
+    width: 31.5%;
 }
-
 span {
-	padding-top: 11px;
-	padding-left: 3px;
-	padding-right: 3px;
+    padding-top: 11px;
+    padding-left: 3px;
+    padding-right: 3px;
 }
-
 .rank-margin {
-	margin-top: 16px;
+    margin-top: 16px;
 }
 </style>
 <!-- javaScript영역 -->
@@ -82,60 +79,59 @@ span {
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">주소록 추가</h5>
-								</div>
-								<div class="modal-body">
+									</div>
+									<div class="modal-body">
 
 
 
-									<form class="user">
-										<div class="table-responsive">
-											<!-- 이름 -->
-											<div class="form-group">
-												<input type="text"
-													class="form-control form-control-user c-size" id="name"
-													placeholder="이름">
+										<form class="user">
+											<div class="table-responsive">
+												<!-- 이름 -->
+												<div class="form-group">
+													<input type="text"
+														class="form-control form-control-user c-size" id="name"
+														placeholder="이름">
+												</div>
+												<!-- 연락처 -->
+												<div class="form-group row">
+				                                <input type="text" class="form-control form-control-user c-size s-half-style" id="hp1"
+				                                    placeholder="010">
+				                                <span>-</span>
+				                                <input type="text" class="form-control form-control-user c-size s-half-style" id="hp2"
+				                                    placeholder="0000">
+				                                <span>-</span>
+				                                <input type="text" class="form-control form-control-user c-size s-half-style" id="hp3"
+				                                    placeholder="0000">
+			                                	</div>
+												<!-- 이메일 -->
+												<div class="form-group rank-margin">
+													<input type="text"
+														class="form-control form-control-user c-size" id="email"
+														placeholder="이메일">
+												</div>
+												<!-- 부서 -->
+												<div class="form-group">
+													<input type="text"
+														class="form-control form-control-user c-size" id="depart"
+														placeholder="부서">
+												</div>
+												<!-- 직급 -->
+												<div class="form-group">
+													<input type="text"
+														class="form-control form-control-user c-size" id="position"
+														placeholder="직급">
+												</div>
+												
 											</div>
-											<!-- 연락처 -->
-											<div class="form-group row">
-												<input type="text"
-													class="form-control form-control-user c-size s-half-style"
-													id="hp1" placeholder="010"> <span>-</span> <input
-													type="text"
-													class="form-control form-control-user c-size s-half-style"
-													id="hp2" placeholder="0000"> <span>-</span> <input
-													type="text"
-													class="form-control form-control-user c-size s-half-style"
-													id="hp3" placeholder="0000">
-											</div>
-											<!-- 이메일 -->
-											<div class="form-group rank-margin">
-												<input type="text"
-													class="form-control form-control-user c-size" id="email"
-													placeholder="이메일">
-											</div>
-											<!-- 부서 -->
-											<div class="form-group">
-												<input type="text"
-													class="form-control form-control-user c-size" id="depart"
-													placeholder="부서">
-											</div>
-											<!-- 직급 -->
-											<div class="form-group">
-												<input type="text"
-													class="form-control form-control-user c-size" id="position"
-													placeholder="직급">
-											</div>
-
-										</div>
-									</form>
+										</form>
 
 
 
 
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary b-radius"
-											data-dismiss="modal">취소</button>
-										<button type="submit" class="btn btn-primary b-radius">추가하기</button>
+									<button type="button" class="btn btn-secondary b-radius"
+										data-dismiss="modal">취소</button>
+									<button type="submit" class="btn btn-primary b-radius">추가하기</button>
 									</div>
 								</div>
 							</div>
@@ -194,25 +190,54 @@ span {
 							</tr>
 						</thead>
 						<tbody>
-							<c:if test="${empty addbookList }">
-								<tr>
-									<td colspan="6">데이터가 없습니다.</td>
-								</tr>
-							</c:if>
-							<c:if test="${!empty addbookList }">
-								<!-- 리스트 반복문 시작 -->
-								<c:forEach var="map" items="${addbookList }">
-									<tr>
-										<td>${map['ADDRBOOK_NAME'] }</td>
-										<td>${map['ADDRBOOK_TEL'] }</td>
-										<td>${map['ADDRBOOK_EMAIL'] }</td>
-										<td>${map['ADDRBOOK_COMNAME'] }</td>
-										<td>${map['ADDRBOOK_DEPT'] }</td>
-										<td>${map['ADDRBOOK_RANK'] }</td>
-									</tr>
-								</c:forEach>
-							</c:if>
-							<!-- 반복 끝 -->
+							<tr>
+								<td>지노지노</td>
+								<td>010-1234-5678</td>
+								<td>jinojino@wierd.com</td>
+								<td>wierd</td>
+								<td>백엔드 1팀</td>
+								<td>팀장</td>
+							</tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>송이송이</td>
+								<td>010-2345-6789</td>
+								<td>100Mushroom@wierd.com</td>
+								<td>wierd</td>
+								<td>백엔드 1팀</td>
+								<td>부팀장</td>
+							</tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>묭시기</td>
+								<td>010-5678-9012</td>
+								<td>myongsick@wierd.com</td>
+								<td>wierd</td>
+								<td>백엔드 2팀</td>
+								<td>팀장</td>
+							</tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>영서니</td>
+								<td>010-3456-7890</td>
+								<td>badgirl@wierd.com</td>
+								<td>wierd</td>
+								<td>백엔드 2팀</td>
+								<td>부팀장</td>
+							</tr>
+						</tbody>
+						<tr>
+							<td>강이강희</td>
+							<td>010-2287-8929</td>
+							<td>lecture@wierd.com</td>
+							<td>wierd</td>
+							<td>백엔드 1팀</td>
+							<td>인턴</td>
+						</tr>
+						<tbody>
 						</tbody>
 					</table>
 					<nav class="f-right" aria-label="...">
