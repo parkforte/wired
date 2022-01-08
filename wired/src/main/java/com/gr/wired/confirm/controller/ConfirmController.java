@@ -8,11 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gr.wired.employee.model.EmplService;
 import com.gr.wired.employee.model.EmplVO;
@@ -40,12 +38,12 @@ public class ConfirmController {
 		logger.info("서명만들기 화면!");
 	}
 
-	@RequestMapping("/confirm/confirmLine")
+	@RequestMapping("/confirm/confirmAdmin")
 	public void confirmLinePage() {
-		logger.info("결재라인 등록화면!");
+		logger.info("결재선관리 화면!");
 	}
 
-	@PostMapping("/confirm/confirmLine")
+	@PostMapping("/confirm/confirmAdmin")
 	public String searchMember(@ModelAttribute EmplVO emplVo, Model model) {
 		logger.info("라인등록 사원조회, emplVo={}", emplVo);
 
@@ -55,7 +53,7 @@ public class ConfirmController {
 		model.addAttribute("emplList", emplList);
 		logger.info("emplList={}",emplList);
 
-		return "e-approval/confirm/confirmLine";
+		return "e-approval/confirm/confirmAdmin";
 	}
 
 	@PostMapping("/confirm/lineOrder")
@@ -68,7 +66,7 @@ public class ConfirmController {
 		model.addAttribute("emplList", emplList);
 		logger.info("emplList={}",emplList);
 
-		return "e-approval/confirm/confirmLine";
+		return "e-approval/confirm/confirmAdmin";
 	}
 
 
