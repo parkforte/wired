@@ -146,7 +146,7 @@ input#exampleCheck1\ chkbox {
                                    <th style="width: 100px">추천</th>
                                   <!-- 관리자 모드일때만 보이게 if처리 -->
                                    <c:if test="${sessionScope.ranksNo==3}">
-	                                   <th style="width: 151px">관리</th>
+	                                   <th style="width: 100px">관리</th>
                            			</c:if>
                            			<input type="text" value="${sessionScope.ranksNo}">
                                </tr>
@@ -162,6 +162,7 @@ input#exampleCheck1\ chkbox {
 						</c:if>
 						<c:if test="${!empty list }">
                         <!-- 반복문 시작 -->
+
                            <c:forEach var="map" items="${list }">
 	                               <tr>
 	                                   <td>
@@ -172,8 +173,9 @@ input#exampleCheck1\ chkbox {
 											<c:if test="${!empty map['BOARD_FILENAME'] }">
 	                                   			<i class="bi bi-folder"></i><!-- 첨부파일 있는 게시물의 경우if처리 -->
 											</c:if>
-											<a href='<c:url value="/board/readCount?boardNo=${map['BOARD_NO'] }"/>'>
+											<a href='<c:url value="/board/readCount?boardNo=${map['BOARD_NO'] }&bdlistNo=${param.bdlistNo}"/>'>
 	                                   			${map['BOARD_TITLE'] }
+	                                   			<input type="hidden" value="${param.bdlistNo}">
 											</a>
 	                                   </td>
 	                                   <td>
@@ -185,8 +187,8 @@ input#exampleCheck1\ chkbox {
 	                                   <c:if test="${sessionScope.ranksNo==3}">
 		                                   <td>
 		                                   		<div class="bdListBtDiv">
-						                            <button type="button" class="btn btn-primary f-left detailbt"
-						                            	onclick="location.href=<c:url value='/board/boardDetail&boardNo=${map["BOARD_NO"] }'/>">글수정</button>
+<!-- 						                            <button type="button" class="btn btn-primary f-left detailbt" -->
+<%-- 						                            	onclick="location.href=<c:url value='/board/boardDetail&boardNo=${map["BOARD_NO"] }'/>">글수정</button> --%>
 													<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"
 														onclick="location.href=<c:url value='/board/boardDetail&boardNo=${map["BOARD_NO"] }'/>">글삭제</button>
 					                            </div>

@@ -30,5 +30,15 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyDao.selectAll(boardNo);
 	}
 
+	@Override
+	public int updateSortNo(ReplyVO replyVo) {
+		return replyDao.updateSortNo(replyVo);
+	}
+
+	@Override
+	public int reply(ReplyVO replyVo) {
+		return replyDao.reply(replyVo);
+	}
+
 
 }
