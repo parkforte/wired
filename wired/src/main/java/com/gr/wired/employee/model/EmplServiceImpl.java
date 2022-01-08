@@ -64,10 +64,6 @@ public class EmplServiceImpl implements EmplService{
 		return emplDao.selectByMemName(emplVo);
 	}
 
-	@Override
-	public int selectMemNo(String memId) {
-		return emplDao.selectMemNo(memId);
-	}
 
 
 

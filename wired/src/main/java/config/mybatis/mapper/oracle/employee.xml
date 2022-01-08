@@ -61,8 +61,4 @@
 		SELECT * FROM MEMBERINFO_VIEW
 		WHERE MEM_NAME LIKE '%'||#{memName}||'%'
 	</select>
-	<select id="selectMemNo" parameterType="string">
-		SELECT MEM_NO FROM MEMBER
-		WHERE MEM_ID='#{memId}'
-	</select>
 </mapper>
