@@ -20,4 +20,5 @@ public interface EmplService {
 	List<Map<String, Object>> selectByMemName(EmplVO emplVo);
 
 
+
 }

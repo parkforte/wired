@@ -4,11 +4,18 @@
 
 <mapper namespace="com.gr.wired.confirm.model.ConfirmLineDAO">
 
-	<insert id="insertConfirmLine" parameterType="confirmLineVo">
-		insert into confirmLine(orderno, productno, quantity)
-		select #{orderNo}, productno, quantity
-		from cart
-		where customerid = #{customerId}
+	<insert id="insertConfirmLine" parameterType="confirmlineVo">
+		<selectKey keyProperty="lineNo" resultType="int" order="BEFORE">
+			SELECT CONFIRMLINE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into confirmLine(line_no, reg_no)
+		values(#{lineNo}, #{regNo})
 	</insert>
+	<select id="selectALLRegNo" resultType="confirmlineVo">
+		SELECT * FROM CONFIRMLINE
+		WHERE REG_NO=#{regNo}
+		ORDER BY LINE_ORDER DESC
+	</select>
+
 
 </mapper>

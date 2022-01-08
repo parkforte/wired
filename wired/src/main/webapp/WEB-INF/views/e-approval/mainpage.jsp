@@ -29,23 +29,23 @@
 <%@ include file="include/navbar.jsp"%>
 	<div>
 		<!-- title1 -->
-		<div class="card shadow mb-4 setW40 setMR10 f-left" style="height: 300px">
+		<div class="card shadow mb-4 setW40 setMR10 f-left" style="height: 400px">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">D-DAY</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-				<!-- 
+				<!--
 				--emp테이블에서 사원의 입사일 90일 후의 날짜?
-				select ename, hiredate, hiredate+90 from emp; 
-				
+				select ename, hiredate, hiredate+90 from emp;
+
 				--emp테이블에서 사원의 입사후 1년이 되는 날짜?
 				select ename,hiredate,add_months(hiredate,12) from emp;
-				
+
 				--오늘부터 크리스마스까지 남은 일수는?
 				select to_date('2021-12-25') - sysdate from dual;
 				select to_date('2021-12-25') - trunc(sysdate) from dual;
-				
+
 				--오늘부터 크리스마스까지 남은 달수는? (months_between)
 				select months_between('2021-12-25',sysdate) from dual;
 				 -->
@@ -54,7 +54,7 @@
 		</div>
 
 		<!-- 차트 -->
-		<div class="card shadow mb-4" style="height: 300px">
+		<div class="card shadow mb-4" style="height: 400px">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">최근 7일간 결재완료 문서건수</h6>
 			</div>
@@ -143,34 +143,7 @@
 						    <a href="#" class="btn btn-primary">Go somewhere</a>
 					  	</div>
 					</div>
-					<div class="card text-center f-left setMR10" style="width: 15rem;">
-					  	<div class="card-body">
-						    <h5 class="card-title">품의서</h5>
-						    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						    <a href="#" class="btn btn-primary">Go somewhere</a>
-					  	</div>
-					</div>
-					<div class="card text-center f-left setMR10" style="width: 15rem;">
-					  	<div class="card-body">
-						    <h5 class="card-title">품의서</h5>
-						    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						    <a href="#" class="btn btn-primary">Go somewhere</a>
-					  	</div>
-					</div>
-					<div class="card text-center f-left setMR10" style="width: 15rem;">
-					  	<div class="card-body">
-						    <h5 class="card-title">품의서</h5>
-						    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						    <a href="#" class="btn btn-primary">Go somewhere</a>
-					  	</div>
-					</div>
-					<div class="card text-center f-left setMR10" style="width: 15rem;">
-					  	<div class="card-body">
-						    <h5 class="card-title">품의서</h5>
-						    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						    <a href="#" class="btn btn-primary">Go somewhere</a>
-					  	</div>
-					</div>
+
 				</div>
 			</div>
 		</div>

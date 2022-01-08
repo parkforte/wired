@@ -1,10 +1,11 @@
 package com.gr.wired.confirm.model;
 
-public class LineregVO {
+public class LineregVO extends ConfirmLineVO {
 	private int regNo;
 	private String regName;
 	private int memNo;
 	private String lineDel;
+	private ConfirmLineVO confirmlineVo;
 	public int getRegNo() {
 		return regNo;
 	}
@@ -29,10 +30,18 @@ public class LineregVO {
 	public void setLineDel(String lineDel) {
 		this.lineDel = lineDel;
 	}
+	public ConfirmLineVO getConfirmlineVo() {
+		return confirmlineVo;
+	}
+	public void setConfirmlineVo(ConfirmLineVO confirmlineVo) {
+		this.confirmlineVo = confirmlineVo;
+	}
 	@Override
 	public String toString() {
-		return "LineregVO [regNo=" + regNo + ", regName=" + regName + ", memNo=" + memNo + ", lineDel=" + lineDel + "]";
+		return "LineregVO [regNo=" + regNo + ", regName=" + regName + ", memNo=" + memNo + ", lineDel=" + lineDel
+				+ ", confirmlineVo=" + confirmlineVo + ", toString()=" + super.toString() + "]";
 	}
+
 
 
 }

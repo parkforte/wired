@@ -177,12 +177,6 @@
 					    <select class="form-control"  name="confirmLine" id="confirmLine">
 						      <option value="1">1</option>
 					    </select>
-					     <a href="#" class="btn btn-primary btn-icon-split btn-sm btnMargin">
-                             <span class="icon text-white-50">
-                                 <i class="fas fa-flag"></i>
-                             </span>
-                             <span class="text">결재라인추가</span>
-                         </a>
 				  </div>
 			</div>
 		</div>
@@ -202,14 +196,7 @@
                                         </span>
                                         <span class="text">Print to pdf</span>
                                     </a>
-
-                                     <a href="#" class="btn btn-primary btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-flag"></i>
-                                        </span>
-                                        <span class="text">임시저장</span>
-                                    </a>
-				<a href="#" class="btn btn-success btn-icon-split btn-sm">
+									<a href="#" class="btn btn-success btn-icon-split btn-sm">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-check"></i>
                                         </span>
@@ -300,7 +287,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td class="tg-0lax">파일첨부</td>
+											<td class="tg-0lax">증빙서류</td>
 											<td class="tg-0lax dnd" colspan="8"><form action="/file-upload"
       class="dropzone"
       id="my-awesome-dropzone"></form></td>
