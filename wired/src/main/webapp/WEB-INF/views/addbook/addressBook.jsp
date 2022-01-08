@@ -51,6 +51,43 @@ span {
 			}
 		});
 	});
+
+
+	$(function() {
+		 $('#addadd_button').click(function() {
+			if($('#addName').val().length<1){
+				alert('이름을 입력하세요');
+				$('#addName').focus();
+				event.preventDefault();
+			}else if($('#addTel').val().length<1){
+				alert('연락처를 입력하세요');
+				$('#addTel').focus();
+				event.preventDefault();
+			}else if(!validate_phone($('#addTel').val()) ||
+					!validate_phone($('#addTel').val()) ){
+				alert('연락처는 숫자만 가능합니다.');
+				$('#addTel').focus();
+				event.preventDefault();
+			}
+
+			if($('#addPosition').val()==""){
+				$('#addPosition').val();
+			}
+			if($('#addDepart').val()==""){
+				$('#adDdepart').val();
+			}
+			if($('#addCompany').val()==""){
+				$('#addCompany').val();
+			}
+			if($('#addEmail').val()==""){
+				$('#addEmail').val();
+			}
+
+		 });
+
+	});
+
+
 </script>
 <!-- 전자결재HOME -->
 <div class="container-fluid">
@@ -75,13 +112,14 @@ span {
 				<h6 class="m-0 font-weight-bold text-primary">지노지노님의 주소록</h6>
 				<nav class="f-right" aria-label="...">
 					<button type="button" class="btn btn-primary" data-toggle="modal"
-						data-target="#addbookModal">추가</button>
+						data-target="#addbookModal" >추가</button>
 					<div class="modal fade" id="addbookModal" tabindex="-1"
 						aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">주소록 추가</h5>
+
+									<h5 class="modal-title" id="addbookModal">주소록 추가</h5>
 								</div>
 								<div class="modal-body">
 
@@ -92,37 +130,37 @@ span {
 											<!-- 이름 -->
 											<div class="form-group">
 												<input type="text"
-													class="form-control form-control-user c-size" id="name"
+													class="form-control form-control-user c-size" id="addName" name="addName"
 													placeholder="이름">
 											</div>
 											<!-- 연락처 -->
 											<div class="form-group row">
 												<input type="text"
-													class="form-control form-control-user c-size s-half-style"
-													id="hp1" placeholder="010"> <span>-</span> <input
-													type="text"
-													class="form-control form-control-user c-size s-half-style"
-													id="hp2" placeholder="0000"> <span>-</span> <input
-													type="text"
-													class="form-control form-control-user c-size s-half-style"
-													id="hp3" placeholder="0000">
+													class="form-control form-control-user c-size"id="addTel" name="addTel"
+													placeholder="연락처"> 
 											</div>
 											<!-- 이메일 -->
 											<div class="form-group rank-margin">
 												<input type="text"
-													class="form-control form-control-user c-size" id="email"
+													class="form-control form-control-user c-size" id="addEmail" name="addEmail"
 													placeholder="이메일">
+											</div>
+											<!-- 회사 -->
+											<div class="form-group">
+												<input type="text"
+													class="form-control form-control-user c-size" id="addCompany" name="addCompany"
+													placeholder="회사명">
 											</div>
 											<!-- 부서 -->
 											<div class="form-group">
 												<input type="text"
-													class="form-control form-control-user c-size" id="depart"
+													class="form-control form-control-user c-size" id="addDepart" name="addDepart"
 													placeholder="부서">
 											</div>
 											<!-- 직급 -->
 											<div class="form-group">
 												<input type="text"
-													class="form-control form-control-user c-size" id="position"
+													class="form-control form-control-user c-size" id="addPosition" name="addPosition"
 													placeholder="직급">
 											</div>
 
@@ -132,10 +170,11 @@ span {
 
 
 
+
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary b-radius"
 											data-dismiss="modal">취소</button>
-										<button type="submit" class="btn btn-primary b-radius">추가하기</button>
+										<button type="submit" class="btn btn-primary b-radius" id="addadd_button" >추가하기</button>
 									</div>
 								</div>
 							</div>
@@ -150,7 +189,54 @@ span {
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">주소록 수정</h5>
 								</div>
-								<div class="modal-body">수정하시겠습니까?</div>
+
+								
+								<div class="modal-body">
+								<form class="user">
+										<div class="table-responsive">
+											<!-- 이름 -->
+											<div class="form-group">
+												<input type="text"
+													class="form-control form-control-user c-size" id="editName" name="editName
+													ReadOnly value="${map['ADDRBOOK_NAME'] }" >
+											</div>
+											<!-- 연락처 -->
+											<div class="form-group row">
+												<input type="text"
+													class="form-control form-control-user c-size"id="editTel" name="addTel"
+													placeholder="연락처"> 
+											</div>
+											<!-- 이메일 -->
+											<div class="form-group rank-margin">
+												<input type="text"
+													class="form-control form-control-user c-size" id="editEmail" name="editEmail"
+													placeholder="이메일">
+											</div>
+											<!-- 회사 -->
+											<div class="form-group">
+												<input type="text"
+													class="form-control form-control-user c-size" id="editCompany" name="editCompany"
+													placeholder="회사명">
+											</div>
+											<!-- 부서 -->
+											<div class="form-group">
+												<input type="text"
+													class="form-control form-control-user c-size" id="editDepart" name="editDepart"
+													placeholder="부서">
+											</div>
+											<!-- 직급 -->
+											<div class="form-group">
+												<input type="text"
+													class="form-control form-control-user c-size" id="editPosition" name="editPosition"
+													placeholder="직급">
+											</div>
+
+										</div>
+									</form>
+								</div>
+								
+								
+								
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary b-radius"
 										data-dismiss="modal">취소</button>
