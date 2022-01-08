@@ -8,14 +8,12 @@ public class ReplyVO {
 	private Timestamp repRegdate;
 
 	private int repGroup;
-	private int repSortNo;
+	private int repSortno;
 	private int repDepth;
-
+	//계층형답변
 	private char repSecret;
 	private int memNo;
 	private int boardNo;
-
-
 	public int getRepNo() {
 		return repNo;
 	}
@@ -40,11 +38,11 @@ public class ReplyVO {
 	public void setRepGroup(int repGroup) {
 		this.repGroup = repGroup;
 	}
-	public int getRepSortNo() {
-		return repSortNo;
+	public int getRepSortno() {
+		return repSortno;
 	}
-	public void setRepSortNo(int repSortNo) {
-		this.repSortNo = repSortNo;
+	public void setRepSortno(int repSortno) {
+		this.repSortno = repSortno;
 	}
 	public int getRepDepth() {
 		return repDepth;
@@ -70,12 +68,16 @@ public class ReplyVO {
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
 	}
+
+
 	@Override
 	public String toString() {
 		return "ReplyVO [repNo=" + repNo + ", repContent=" + repContent + ", repRegdate=" + repRegdate + ", repGroup="
-				+ repGroup + ", repSortNo=" + repSortNo + ", repDepth=" + repDepth + ", repSecret=" + repSecret
+				+ repGroup + ", repSortno=" + repSortno + ", repDepth=" + repDepth + ", repSecret=" + repSecret
 				+ ", memNo=" + memNo + ", boardNo=" + boardNo + "]";
 	}
+
+
 
 
 }

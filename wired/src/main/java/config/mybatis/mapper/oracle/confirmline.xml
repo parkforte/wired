@@ -2,6 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gr.wired.confirm.model.LineregDAO">
+<mapper namespace="com.gr.wired.confirm.model.ConfirmLineDAO">
+
+	<insert id="insertConfirmLine" parameterType="confirmLineVo">
+		insert into confirmLine(orderno, productno, quantity)
+		select #{orderNo}, productno, quantity
+		from cart
+		where customerid = #{customerId}
+	</insert>
 
 </mapper>

@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,13 +55,12 @@ public class BoardController {
 
 	@PostMapping("/boardWrite")
 	public String write_post(@ModelAttribute BoardVO boardVo,
-			@RequestParam(defaultValue = "0") int bdlistNo,
 			HttpServletRequest request, HttpSession session) {
 		//1
 		String memId=(String) session.getAttribute("memId");
 		int memNo= boardService.selectByMemId(memId);
 		boardVo.setMemNo(memNo);
-		boardVo.setBdlistNo(1);
+
 		logger.info("게시글 처리, 파라미터 memId={}", memId);
 		logger.info("작성자, 파라미터 vo={}", memNo);
 		logger.info("게시글 처리, 파라미터 vo={}", boardVo);
@@ -197,9 +197,10 @@ public class BoardController {
 	}
 
 	@RequestMapping("/readCount")
-	public String updateReadCount(@RequestParam(defaultValue = "0") int boardNo, Model model) {
+	public String updateReadCount(@RequestParam(defaultValue = "0") int boardNo,@RequestParam(defaultValue = "0") int bdlistNo
+			, Model model) {
 		logger.info("조회수 증가,파라미터 boardNo={}",boardNo);
-
+		logger.info("bdlistNo={}", bdlistNo);
 		if(boardNo==0) {
 			model.addAttribute("msg", "잘못된 url입니다.");
 			model.addAttribute("url", "/index");
@@ -209,7 +210,7 @@ public class BoardController {
 		int cnt=boardService.updateReadCount(boardNo);
 		logger.info("조회수 증가 결과, cnt={]",cnt);
 
-		return "redirect:/board/boardDetail?boardNo="+boardNo;
+		return "redirect:/board/boardDetail?boardNo="+boardNo+"&bdlistNo="+bdlistNo;
 
 	}
 
@@ -238,6 +239,25 @@ public class BoardController {
 		logger.info("글 삭제 결과,파라미터 cnt={}", cnt);
 
 		return "redirect:/board/boardList?bdlistNo="+boardVo.getBdlistNo();
+	}
+
+	@PostMapping("/boardReply")
+	@Transactional
+	public String reply_post(@ModelAttribute ReplyVO replyVo) {
+		// 파라미터 읽어오기
+		logger.info("대댓글 등록, 파라미터 replyVo={}", replyVo);
+		// db
+		// 솔트 증가
+		int cnt = replyService.updateSortNo(replyVo);
+		logger.info("댓글 솔트 업데이트 결과 cnt={}", cnt);
+		//댓글등록
+		cnt = replyService.reply(replyVo);
+		logger.info("대댓글 등록결과 cnt={}",cnt);
+
+		//모델에 결과저장
+
+		//뷰페이지 리턴
+		return "redirect:/board/boardDetail?boardNo="+replyVo.getBoardNo();
 	}
 
 

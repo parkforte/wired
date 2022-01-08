@@ -69,15 +69,7 @@
 			<div class="card-body">
 				<form method="post" enctype="multipart/form-data" name="noticeForm"
 					action="<c:url value='/e-approval/signature/upload'/>">
-					<div class="input-group mb-3">
-					  <div class="input-group-prepend">
-					    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-					  </div>
-					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-					    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-					  </div>
-					</div>
+					<input type="file">
 					<div style="text-align: center;">
 						<button type="button" data-toggle="modal"
 							data-target="#exampleModal" class="btn btn-primary b-radius">등록하기</button>

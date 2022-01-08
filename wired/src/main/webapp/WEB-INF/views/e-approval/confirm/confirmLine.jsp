@@ -18,10 +18,13 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css"
 	rel="stylesheet">
+<!-- sweetAlert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- 부트스트랩 version 4.6.0 -->
 <!-- 부트스트랩 icon -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
 <style type="text/css">
 body {
 	width: 800px;
@@ -36,7 +39,16 @@ body {
 .f-right {
 	float: right;
 }
+
+.W30{
+	width: 30%;
+}
 </style>
+
+<script type="text/javascript">
+
+
+</script>
 
 <body>
 	<div class="card shadow mb-4">
@@ -48,45 +60,56 @@ body {
 
 		<!-- 본문 -->
 		<div class="card-body">
-				<form method="post" action="<c:url value='/e-approval/confirm/searchEmpl'/>">
-			<!-- 1번  -->
-			<label for="formGroupExampleInput">1. 사원검색</label>
-			<div class="input-group mb-3">
-			  <input type="text" class="form-control" placeholder="사원명을 입력하세요" name="memName">
-			  <div class="input-group-append">
-			    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
+			 <!-- 1번 -->
+			 <div class="form-group">
+			    <label for="formGroupExampleInput">1. 라인생성</label>
+			    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="결재라인명을 입력하세요">
 			  </div>
-			  </form>
-			 <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-			 	<c:if test="${empty emplList }">
-				    <option selected></option>
-			 	</c:if>
-			 	<c:if test="${!empty emplList }">
-				 	<c:forEach var="map" items="${emplList }">
-					    <option value="${map['MEM_NO'] }">${map['DEPT_NAME']} ${map['POS_NAME'] } ${map['MEMBER_NAME'] }</option>
-				 	</c:forEach>
-			 	</c:if>
-			  </select>
-			  <div class="input-group-append">
-			    <button class="btn btn-outline-secondary" type="button">등록</button>
+
+			<!-- 2번  -->
+			<label for="formGroupExampleInput">2. 사원검색</label>
+				<form method="post" action="<c:url value='/e-approval/confirm/confirmLine'/>">
+				<div class="input-group-append" >
+				  	<input type="text" class="form-control" placeholder="사원명을 입력하세요" id="memName" name="memName" value="${mem['MEM_NAME'] }">
+				    <input class="btn btn-outline-secondary" type="submit" value="검색">
+			  	</div>
+				</form>
+				<br>
+			 <form method="post" action="<c:url value='/e-approval/confirm/lineOrder'/>">
+			 <div class="input-group-append">
+				 <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+					    <option selected>결재순서선택</option>
+					    <option value="1">1</option>
+					    <option value="2">2</option>
+			    </select>
+				 <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+				 	<c:if test="${empty emplList }">
+					    <option selected>사원선택</option>
+				 	</c:if>
+				 	<c:if test="${!empty emplList }">
+					 	<c:forEach var="map" items="${emplList }">
+						    <option value="${map['MEM_NO'] }">${map['DEPT_NAME']} ${map['POS_NAME'] } ${map['MEMBER_NAME'] }</option>
+					 	</c:forEach>
+				 	</c:if>
+				  </select>
+				    <input class="btn btn-outline-secondary" type="submit" value="등록">
 			  </div>
-			</div>
+			    </form>
+			  <br>
 			<div class="table-responsive">
-					<label for="formGroupExampleInput">2. 결재순서설정</label>
+					<label for="formGroupExampleInput">3. 결재순서확인</label>
 					<table class="table table-bordered" id="dataTable" width="100%"
 						cellspacing="0" style="text-align: center">
-						<col width="20%">
-						<col width="20%">
-						<col width="20%">
-						<col width="20%">
-						<col width="20%">
+						<col width="25%">
+						<col width="25%">
+						<col width="25%">
+						<col width="25%">
 						<thead>
 							<tr>
 								<th>결재순서</th>
 								<th>부서</th>
 								<th>직급</th>
 								<th>이름</th>
-								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -95,19 +118,15 @@ body {
 								<td>부서명</td>
 								<td>직급명</td>
 								<td>이름</td>
-								<td></td>
 							</tr>
 						</tbody>
 					</table>
-					 <div class="form-group">
-					    <label for="formGroupExampleInput">3. 라인생성</label>
-					    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="결재라인명을 입력하세요">
-					  </div>
+
 			<div class="f-right">
 				<button type="button" class="btn btn-secondary">닫기</button>
-				<button type="submit" class="btn btn-success">라인생성</button>
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>
