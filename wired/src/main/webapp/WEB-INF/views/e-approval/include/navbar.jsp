@@ -20,7 +20,7 @@
 					<li><a class="dropdown-item" href="<c:url value='/e-approval/docbox'/>">결재반려</a></li>
 				</ul>
 			</li>
-			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/confirm/confirmLine'/>">결재선관리</a></li>
+			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/confirm/confirmAdmin'/>">결재선관리</a></li>
 			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/signature/uploadPage'/>">문서결재</a></li>
 			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/signature/uploadPage'/>">서명관리</a></li>
 			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/doctype/admin'/>">문서관리</a></li>
