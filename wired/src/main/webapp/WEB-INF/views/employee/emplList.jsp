@@ -34,7 +34,18 @@
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
+$(function() {
+	$('.res_btn').each(function(index,item) {
+		$(this).click(function() {
+			var res=$(this).val();
+// 			$('#modal_btn').val(res);
+			$('#m_btn').click(function(){
+		        location.href="<c:url value='/employee/emplResign?memNo='/>"+res;
+		    });
+		});
 
+	});
+});
 
 </script>
 <!-- 페이징 처리를 위한 form -->
@@ -118,9 +129,11 @@
 									           - <span id="hp3">${map['MEM_HP3'] }</span>
 								           </c:if>
 								       </td>
-	                                   <td><button type="button" class="btn btn-success" onclick="location.href='/wired/employee/emplEdit'" >수정</button>
-											<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">퇴사</button></td>
+	                                   <td><button type="button" class="btn btn-success" onclick="location.href='/wired/employee/emplEdit?memNo=${map['MEM_NO'] }'" >수정</button>
+											<button type="button" class="btn btn-danger res_btn" data-toggle="modal" data-target="#exampleModal" value="${map['MEM_NO'] }">퇴사</button>
+											</td>
 	                               </tr>
+
 	               				</c:forEach>
                				<!-- 반복 끝 -->
                				</c:if>
@@ -167,27 +180,28 @@
 
 
                 </div>
+<!-- Modal -->
+									<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									  <div class="modal-dialog modal-dialog-centered">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									      	<h5 class="modal-title" id="exampleModalLabel"></h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+									        퇴사 처리 하시겠습니까?
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary" data-dismiss="modal" >취소</button>
+									        <button type="submit" id="m_btn" class="btn btn-danger" >확인</button>
+									        <!-- <input type="text" id="modal_btn" value=""> -->
+									      </div>
+									    </div>
+									  </div>
+									</div>
 
-    <!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog modal-dialog-centered">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			      	<h5 class="modal-title" id="exampleModalLabel">신청취소</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        퇴사 처리 하시겠습니까?
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >취소</button>
-			        <button type="submit" class="btn btn-primary">확인</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
     <!-- /.container-fluid -->
      </div>
 <!-- End of Main Content -->

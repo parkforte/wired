@@ -145,9 +145,10 @@ input#exampleCheck1\ chkbox {
                                    <th style="width: 80px">조회수</th>
                                    <th style="width: 100px">추천</th>
                                   <!-- 관리자 모드일때만 보이게 if처리 -->
-                                   <c:if test="${sessionScope.ranksNo == 3}">
+                                   <c:if test="${sessionScope.ranksNo==3}">
 	                                   <th style="width: 151px">관리</th>
-                                   </c:if>
+                           			</c:if>
+                           			<input type="text" value="${sessionScope.ranksNo}">
                                </tr>
                            </thead>
                            <tbody>
@@ -171,7 +172,7 @@ input#exampleCheck1\ chkbox {
 											<c:if test="${!empty map['BOARD_FILENAME'] }">
 	                                   			<i class="bi bi-folder"></i><!-- 첨부파일 있는 게시물의 경우if처리 -->
 											</c:if>
-											<a href='<c:url value="/board/boardDetail?boardNo=${map['BOARD_NO'] }"/>'>
+											<a href='<c:url value="/board/readCount?boardNo=${map['BOARD_NO'] }"/>'>
 	                                   			${map['BOARD_TITLE'] }
 											</a>
 	                                   </td>
@@ -181,14 +182,16 @@ input#exampleCheck1\ chkbox {
 	                                   <td>${map['BOARD_READCOUNT'] }</td>
 	                                   <td>${map['BOARD_RECOMMEND'] }</td>
 	                                   	<!-- 관리자 모드일때만 보이게 if처리 게시글 번호로 수정 페이지이동, 삭제 메시지이용-->
-	                                   <td>
-	                                   		<div class="bdListBtDiv">
-					                            <button type="button" class="btn btn-primary f-left detailbt"
-					                            	onclick="location.href=<c:url value='/board/boardDetail&boardNo=${map["BOARD_NO"] }'/>">글수정</button>
-												<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"
-													onclick="location.href=<c:url value='/board/boardDetail&boardNo=${map["BOARD_NO"] }'/>">글삭제</button>
-				                            </div>
-	                                   </td>
+	                                   <c:if test="${sessionScope.ranksNo==3}">
+		                                   <td>
+		                                   		<div class="bdListBtDiv">
+						                            <button type="button" class="btn btn-primary f-left detailbt"
+						                            	onclick="location.href=<c:url value='/board/boardDetail&boardNo=${map["BOARD_NO"] }'/>">글수정</button>
+													<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"
+														onclick="location.href=<c:url value='/board/boardDetail&boardNo=${map["BOARD_NO"] }'/>">글삭제</button>
+					                            </div>
+		                                   </td>
+	                                   </c:if>
 	                               </tr>
                            </c:forEach>
                            <!-- 반복 끝 -->

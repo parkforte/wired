@@ -9,7 +9,7 @@
 		</if>
 	</sql>
 
-	<insert id="insertEmployee" parameterType="emplVo">
+	<insert id="insertMember" parameterType="emplVo">
 		<selectKey keyProperty="memNo" resultType="int" order="BEFORE">
 			select MEMBER_SEQ.nextval from dual
 		</selectKey>
@@ -39,6 +39,7 @@
 		        ON M.DEPT_NO=D.DEPT_NO
 		        JOIN POSITION P
 		        ON M.POS_NO=P.POS_NO
+		        AND MEM_RESIGNDATE IS NULL
 		        ORDER BY MEM_NO DESC
 		    )A
 		)
@@ -60,5 +61,29 @@
 	<select id="selectByMemName" parameterType="emplVo" resultType="map">
 		select * from memberinfo_view
 		where mem_name like '%'||#{memName}||'%'
+	</select>
+
+	<select id="selectByView" parameterType="int" resultType="map">
+		SELECT * FROM MEMBERINFO_VIEW
+		WHERE MEM_NO=#{memNo}
+	</select>
+
+	<update id="updateMember" parameterType="emplVo">
+		UPDATE MEMBER
+		SET MEM_NAME=#{memName}, MEM_HP1=#{memHp1}, MEM_HP2=#{memHp2}, MEM_HP3=#{memHp3},
+			MEM_PAY=#{memPay}, MEM_HOLIDAY=#{memHoliday}, DEPT_NO=#{deptNo},
+			POS_NO=#{posNo}, RANKS_NO=#{ranksNo}
+		WHERE MEM_NO=#{memNo}
+	</update>
+
+	<update id="upResignMember" parameterType="int">
+		UPDATE MEMBER
+		SET MEM_RESIGNDATE=SYSDATE
+		WHERE MEM_NO=#{memNo}
+	</update>
+
+	<select id="resignMember" resultType="map">
+		SELECT * FROM MEMBERINFO_VIEW
+		WHERE MEM_RESIGNDATE IS NOT NULL
 	</select>
 </mapper>
