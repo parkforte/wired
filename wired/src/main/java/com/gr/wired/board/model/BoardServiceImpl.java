@@ -36,8 +36,28 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardVO selectByNo(int boardNo) {
+	public Map<String, Object> selectByNo(int boardNo) {
 		return boardDao.selectByNo(boardNo);
+	}
+
+	@Override
+	public int updateBoard(BoardVO boardVo) {
+		return boardDao.updateBoard(boardVo);
+	}
+
+	@Override
+	public int updateReadCount(int boardNo) {
+		return boardDao.updateReadCount(boardNo);
+	}
+
+	@Override
+	public int updateRecommend(int boardNo) {
+		return boardDao.updateRecommend(boardNo);
+	}
+
+	@Override
+	public int deleteBoard(BoardVO boardVo) {
+		return boardDao.deleteBoard(boardVo);
 	}
 
 
