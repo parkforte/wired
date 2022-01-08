@@ -24,3 +24,12 @@ create sequence linereg_seq
 start with 1
 increment by 1
 nocache;
+
+
+--confirmline 시퀀스
+drop sequence confirmline_seq;
+
+create sequence confirmline_seq
+start with 1
+increment by 1
+nocache;
