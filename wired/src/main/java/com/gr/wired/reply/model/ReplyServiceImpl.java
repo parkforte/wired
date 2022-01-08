@@ -12,12 +12,13 @@ public class ReplyServiceImpl implements ReplyService{
 
 	@Autowired
 	public ReplyServiceImpl(ReplyDAO replyDao) {
+		super();
 		this.replyDao = replyDao;
 	}
 
 	@Override
-	public int insertReply(ReplyVO replyVo) {
-		return replyDao.insertReply(replyVo);
+	public int insertBdList(ReplyVO replyVo) {
+		return replyDao.insertBdList(replyVo);
 	}
 
 	@Override

@@ -8,9 +8,5 @@ public interface BoardService {
 	List<Map<String, Object>> selectByBNoList(int bdlistNo);
 	int selectTotalRecord(int boardNo);
 	int selectByMemId(String memId);
-	Map<String, Object> selectByNo (int boardNo);
-	int updateBoard(BoardVO boardVo);
-	int updateReadCount(int boardNo);
-	int updateRecommend(int boardNo);
-	int deleteBoard(BoardVO boardVo);
+	BoardVO selectByNo (int boardNo);
 }

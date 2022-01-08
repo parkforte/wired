@@ -51,4 +51,6 @@
 	<select id="selectMenu" resultType="bdListVo">
 		SELECT BDLIST_NO, BDLIST_NAME FROM BOARDLIST
 	</select>
+
+
 </mapper>
