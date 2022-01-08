@@ -32,7 +32,6 @@ public class DoctypeController {
 	public DoctypeController(DoctypeService doctypeService, DocformService docformService) {
 		this.doctypeService = doctypeService;
 		this.docformService = docformService;
-		logger.info("DoctypeController, type, form 생성자주입!");
 	}
 
 	@GetMapping("/admin")
