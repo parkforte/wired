@@ -23,4 +23,5 @@ public interface EmplService {
 	int upResignMember(int memNo);
 	List<Map<String, Object>> resignMember();
 
+
 }

@@ -54,13 +54,13 @@
 	</select>
 
 	<update id="updateSignature" parameterType="emplVo">
-		update member
-		set mem_originalfilename=#{memOriginalfilename}
-		where mem_id=#{memId}
+		UPDATE MEMBER
+		SET MEM_ORIGINALFILENAME=#{memOriginalfilename}
+		WHERE MEM_ID=#{memId}
 	</update>
 	<select id="selectByMemName" parameterType="emplVo" resultType="map">
-		select * from memberinfo_view
-		where mem_name like '%'||#{memName}||'%'
+		SELECT * FROM MEMBERINFO_VIEW
+		WHERE MEM_NAME LIKE '%'||#{memName}||'%'
 	</select>
 
 	<select id="selectByView" parameterType="int" resultType="map">
