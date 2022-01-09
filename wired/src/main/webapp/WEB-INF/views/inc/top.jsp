@@ -64,9 +64,11 @@
 
 <!-- script -->
 <script type="text/javascript">
+$(function(){
 	if(${sessionScope.ranksNo}==3){
 		$('#emplManage_nav').css('display','block');
 	}
+});
 </script>
 </head>
 <!-- sweetAlert -->
@@ -166,9 +168,25 @@
 					<i class="fas fa-fw fa-table"></i> <span>스케쥴러</span>
 			</a></li>
 			<!-- 사원관리 -->
-			<li class="nav-item" id="emplManage_nav" style="display: none;"><a class="nav-link" href="#">
+			<!-- <li class="nav-item" id="emplManage_nav" style="display: none;"><a class="nav-link" href="#">
 					<i class="fas fa-fw fa-table"></i> <span>사원관리</span>
-			</a></li>
+			</a></li> -->
+			<!-- 사원관리 -->
+			<li class="nav-item" id="emplManage_nav" style="display: none;"><a class="nav-link collapsed" href="#" 
+				data-toggle="collapse" data-target="#collapseMember"
+				aria-expanded="true" aria-controls="collapsePages"> <i
+					class="fas fa-fw fa-folder"></i> <span>사원관리</span>
+				</a>
+				<div id="collapseMember" class="collapse" 
+					aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">사원관리:</h6>
+							<a class="collapse-item" href="<c:url value='/employee/emplRegister'/>">사원등록</a>
+							<a class="collapse-item" href="<c:url value='/employee/emplList'/>">사원목록</a>
+							<a class="collapse-item" href="<c:url value='/employee/emplResign'/>">퇴사자목록</a>
+					</div>
+				</div>
+			</li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">

@@ -19,16 +19,19 @@
 .setMR10 {
 	margin-right: 10px;
 }
+
 .s-half-style {
-    width: 31.5%;
+	width: 31.5%;
 }
+
 span {
-    padding-top: 11px;
-    padding-left: 3px;
-    padding-right: 3px;
+	padding-top: 11px;
+	padding-left: 3px;
+	padding-right: 3px;
 }
+
 .rank-margin {
-    margin-top: 16px;
+	margin-top: 16px;
 }
 </style>
 <!-- javaScript영역 -->
@@ -277,54 +280,25 @@ span {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>지노지노</td>
-								<td>010-1234-5678</td>
-								<td>jinojino@wierd.com</td>
-								<td>wierd</td>
-								<td>백엔드 1팀</td>
-								<td>팀장</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr>
-								<td>송이송이</td>
-								<td>010-2345-6789</td>
-								<td>100Mushroom@wierd.com</td>
-								<td>wierd</td>
-								<td>백엔드 1팀</td>
-								<td>부팀장</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr>
-								<td>묭시기</td>
-								<td>010-5678-9012</td>
-								<td>myongsick@wierd.com</td>
-								<td>wierd</td>
-								<td>백엔드 2팀</td>
-								<td>팀장</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<tr>
-								<td>영서니</td>
-								<td>010-3456-7890</td>
-								<td>badgirl@wierd.com</td>
-								<td>wierd</td>
-								<td>백엔드 2팀</td>
-								<td>부팀장</td>
-							</tr>
-						</tbody>
-						<tr>
-							<td>강이강희</td>
-							<td>010-2287-8929</td>
-							<td>lecture@wierd.com</td>
-							<td>wierd</td>
-							<td>백엔드 1팀</td>
-							<td>인턴</td>
-						</tr>
-						<tbody>
+							<c:if test="${empty addbookList }">
+								<tr>
+									<td colspan="6">데이터가 없습니다.</td>
+								</tr>
+							</c:if>
+							<c:if test="${!empty addbookList }">
+								<!-- 리스트 반복문 시작 -->
+								<c:forEach var="map" items="${addbookList }">
+									<tr>
+										<td>${map['ADDRBOOK_NAME'] }</td>
+										<td>${map['ADDRBOOK_TEL'] }</td>
+										<td>${map['ADDRBOOK_EMAIL'] }</td>
+										<td>${map['ADDRBOOK_COMNAME'] }</td>
+										<td>${map['ADDRBOOK_DEPT'] }</td>
+										<td>${map['ADDRBOOK_RANK'] }</td>
+									</tr>
+								</c:forEach>
+							</c:if>
+							<!-- 반복 끝 -->
 						</tbody>
 					</table>
 					<nav class="f-right" aria-label="...">

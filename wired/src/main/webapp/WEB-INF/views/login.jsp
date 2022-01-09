@@ -18,12 +18,12 @@
     <title>Login</title>
 
     <!-- Custom fonts for this template-->
-    <link href='<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>' rel="stylesheet" type="text/css">
-    <link href='<c:url value="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"/>'
+    <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href='<c:url value="/resources/css/sb-admin-2.min.css"/>' rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -42,7 +42,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block" style="background: white">
-                            	<img src='<c:url value="/resources/img/logo/wired_Biglogo.png"/>'
+                            	<img src="${pageContext.request.contextPath}/resources/img/logo/wired_Biglogo.png"
                             		style="width: 437px;margin-left: 6%;margin-top: 5%;">
                             </div>
                             <div class="col-lg-6">
@@ -55,7 +55,7 @@
                                         <!-- 아이디 -->
 		                            	<div class="form-group">
 	                                    <input type="text" class="form-control form-control-user c-size" name="memId" id="memId"
-	                                        placeholder="Id" value="${cookie.ck_userid.value }">
+	                                        placeholder="Id" value="${cookie.ck_memId.value }">
 	                                	</div>
                                         <!-- 비밀번호 -->
 		                            	<div class="form-group">
@@ -66,7 +66,7 @@
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck"
                                                 	name="chkSave" id="chkSave"
-                                                	<c:if test="${!empty cookie.ck_userid }">
+                                                	<c:if test="${!empty cookie.ck_memId }">
                                                 		checked="checked"
                                                 	</c:if>
                                                 	>

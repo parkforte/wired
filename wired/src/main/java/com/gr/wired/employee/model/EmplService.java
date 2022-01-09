@@ -11,14 +11,17 @@ public interface EmplService {
 	public static final int DISAGREE_PWD=2; //비번 불일치
 	int USERID_NONE=3; //아이디 존재하지 않음
 
-	int insertEmployee(EmplVO emplVo);
+	int insertMember(EmplVO emplVo);
 	int loginCheck(String memId, String memPwd);
 	EmplVO selectByMemId(String memId);
 	List<Map<String, Object>> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
 	int updateSignature(EmplVO emplVo);
 	List<Map<String, Object>> selectByMemName(EmplVO emplVo);
-
+	Map<String, Object> selectByView(int memNo);
+	int updateMember(EmplVO emplVo);
+	int upResignMember(int memNo);
+	List<Map<String, Object>> resignMember();
 
 
 }

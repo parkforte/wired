@@ -16,16 +16,6 @@
 .c-size {
     margin-left: 5px;
 }
-.s-half-style{
-	width: 30.8%;
-}
-.half-style{
-	width: 47.5%;
-}
-span {
-    padding-top: 11px;
-    padding-left: 5px;
-}
 .rank-margin {
     margin-top: 16px;
 }
@@ -111,11 +101,11 @@ span{
 
 		});
 
-		/* $('select[name=memEmail2]').change(function() {
+		$('select[name=memEmail2]').change(function() {
 			if($('#memEmail2').val()=='etc'){
 				$('#email3').css('visibility','visible');
 			}
-		}); */
+		});
 
 
 		$('#btZipcode').click(function(){
@@ -124,16 +114,21 @@ span{
 				"zipWin",
 				"left=50, top=20, width=500, height=500, scrollbars=yes,resizable=yes");
 		});
+		
+		
 	});
 	function validate_phone(tel){
 		var pattern = new RegExp(/^[0-9]*$/g);
 		return pattern.test(tel);
 
 	}
-
-	if(Character.compare(vo.getMemFlag(), 'N')==0){
-		alert('상세정보를 입력하세요.');
-	}
+	
+	<%-- function windowonload(){
+		var flag='<%=(String)session.getAttribute("memFlag")%>';
+		
+	} --%>
+	window.onload = windowonload;
+	
 </script>
 
 		<!-- myPage -->
@@ -231,19 +226,58 @@ span{
 									class="form-control form-control-user c-size" placeholder="상세주소" value="${map['MEM_ADDRESSDETAIL'] }">
 							</div>
 							<!-- 이메일 -->
+						    <c:set var="etcYn" value=""/>
+						    <c:choose>
+						    	<c:when test="${map['MEM_EMAIL2'] != 'naver.com' && map['MEM_EMAIL2'] != 'nate.com'
+						    		&& map['MEM_EMAIL2'] != 'daum.net' && map['MEM_EMAIL2'] != 'gmail.com'
+						    		&& !empty map['MEM_EMAIL2']}">
+								    <c:set var="etcYn" value="Y"/>
+						    	</c:when>
+						    	<c:otherwise>
+								    <c:set var="etcYn" value="N"/>
+						    	</c:otherwise>
+						    </c:choose>
 						    <label for="email1">이메일 주소</label>
-							<div class="form-group row">
-						        <input type="text" name="memEmail1"  id="memEmail1" class="form-control  c-size s-half-style" title="이메일주소 앞자리">
+						    <div class="form-group row">
+						        <input type="text" name="memEmail1"  id="memEmail1"
+						        	title="이메일주소 앞자리" class="form-control  c-size s-half-style" value="${map['MEM_EMAIL1']}">
 						        <span>@</span>
 						        <select class="form-control  c-size s-half-style" name="memEmail2" id="memEmail2"  title="이메일주소 뒷자리">
-						            <option value="naver.com">naver.com</option>
-						            <option value="hanmail.net">hanmail.net</option>
-						            <option value="nate.com">nate.com</option>
-						            <option value="gmail.com">gmail.com</option>
-						            <option value="etc">직접입력</option>
+						            <option value="naver.com"
+						            	<c:if test = "${map['MEM_EMAIL2'] == 'naver.com'}">
+						            		selected="selected"
+						            	</c:if>
+						            >naver.com</option>
+						            <option value="daum.net"
+						            	<c:if test = "${map['MEM_EMAIL2'] == 'daum.net'}">
+						            		selected="selected"
+						            	</c:if>
+						            >daum.net</option>
+						            <option value="nate.com"
+						            	<c:if test = "${map['MEM_EMAIL2'] == 'nate.com'}">
+						            		selected="selected"
+						            	</c:if>
+						            >nate.com</option>
+						            <option value="gmail.com"
+						            	<c:if test = "${map['MEM_EMAIL2'] == 'gmail.com'}">
+						            		selected="selected"
+						            	</c:if>
+						            >gmail.com</option>
+						            <option value="etc"
+						            	<c:if test = "${etcYn == 'Y'}">
+						            		selected="selected"
+						            	</c:if>
+						            >직접입력</option>
 						        </select>
-						        <input type="text" name="email3" id="email3" class="form-control  c-size s-half-style" title="직접입력인 경우 이메일주소 뒷자리"
-						        	style="visibility:hidden;">
+						        <input type="text" class="form-control  c-size s-half-style" name="email3" id="email3" title="직접입력인 경우 이메일주소 뒷자리"
+						           	<c:if test = "${etcYn == 'Y'}">
+							        	style="visibility:visible;"
+							        	value="${map['MEM_EMAIL2']}"
+							        </c:if>
+						           	<c:if test = "${etcYn != 'Y'}">
+						        		style="visibility:hidden;"
+							        </c:if>
+						        	>
 						    </div>
 							<hr>
 							<!-- 연봉 -->
@@ -260,6 +294,13 @@ span{
 									 class="form-control form-control-user c-size"
 									id="memHoliday" name="memHoliday" ReadOnly value="${map['MEM_HOLIDAY'] }">
 							</div>
+							<!-- 사용연차 -->
+							<div class="form-group">
+								<label for="memUseholiday">사용연차</label>
+								<input type="text"
+									 class="form-control form-control-user c-size"
+									id="memUseholiday" name="memUseholiday" ReadOnly value="${map['MEM_USEHOLIDAY'] }">
+							</div>
 							<!-- 부서 -->
 							<div class="form-group">
 								<label for="deptName">부서</label>
@@ -274,6 +315,13 @@ span{
 									 class="form-control form-control-user c-size"
 									id="posName" name="posName" ReadOnly value="${map['POS_NAME'] }">
 							</div>
+							<!-- 입사일 -->
+							<div class="form-group">
+								<label for="memJoindate">입사일</label>
+								<input type="text"
+									 class="form-control form-control-user c-size"
+									id="memJoindate" name="memJoindate" ReadOnly value="${map['MEM_JOINDATE'] }">
+							</div>
 							<!-- 인증여부 -->
 							<div class="form-group">
 								<input type="hidden"
@@ -283,16 +331,15 @@ span{
 							<!-- button -->
 							<div class="form-group c-size" style="text-align: center;">
 								<br>
-								<button type="submit" id="edit_submit" data-toggle="modal"
-									data-target="#exampleModal" class="btn btn-primary b-radius">등록</button>
 								<button type="button" class="btn btn-danger b-radius" onclick="location.href='<c:url value='../index'/>'">취소</button>
+								<button type="submit" id="edit_submit" class="btn btn-primary b-radius">수정</button>
 							</div>
 						</div>
 					</form>
 				</div>
 			</div>
-
 		</div>
+
 
 
 <%@ include file="../inc/bottom.jsp" %>
