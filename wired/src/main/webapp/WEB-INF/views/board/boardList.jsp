@@ -36,6 +36,9 @@ input#exampleCheck1\ chkbox {
     margin-left: 7px;
     margin-top: 10px;
 }
+#btWrite{
+	font-size: 0.7em;
+}
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
@@ -48,38 +51,37 @@ input#exampleCheck1\ chkbox {
 		$('#btWrite').click(function () {
 			location.href="<c:url value='/board/boardWrite?bdlistNo=${param.bdlistNo}'/>";
 		});
+
+		$('input[name=chkAll]').click(function(){
+			$('tbody input[type=checkbox]').prop('checked', this.checked);
+		});
+
+		$('#btMultiDel').click(function(){
+			var count=$('tbody input[type=checkbox]:checked').length;
+			if(count>0){
+				$('form[name=frmList]')
+					.prop('action',"<c:url value='/board/deleteMulti?bdlistNo=${param.bdlistNo}'/>")
+				$('form[name=frmList]').submit();
+			}else{
+				alert('삭제하고 싶은 게시글을 먼저 체크하세요');
+			}
+		});
+
+
+
+
 	});
 </script>
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">관리자 글삭제</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        게시글을 정말 삭제하시겠습니까?
-	      </div>
-	      <div class="modal-footer">
 
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary">삭제</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
 	<!-- 페이징 처리를 위한 form 시작-->
-	<form name="frmPage" method="post" action="<c:url value='/bdList/bdListmanagement'/>">
+	<form name="frmPage" method="post" action="<c:url value='/board/boardList?bdlistNo=${param.bdlistNo }'/>">
 		<input type="text" name="currentPage" id="currentPage">
 		<input type="text" name="searchKeyword" value="${param.searchKeyword }">
 	</form>
 	<!-- 페이징 처리를 위한 form 끝-->
 
 
-    <form name="frmList" method="post" action="<c:url value=''/>">
+    <form name="frmList" method="post" action="<c:url value='/board/boardList?bdlistNo=${param.bdlistNo }'/>">
    	<!-- defaultPage -->
     <div class="container-fluid">
 
@@ -102,12 +104,8 @@ input#exampleCheck1\ chkbox {
                    <h6 class="m-0 font-weight-bold text-primary f-left" >게시판이름</h6><!-- 게시판 이름 -->
 					<div class="f-right">
 						<button type="button" class="btn btn-primary f-left" id="btWrite">글쓰기</button>
+						<button type="button" id="btMultiDel" class="btn btn-danger f-left detailbt">글삭제</button>
 					</div>
-
-
-
-
-
                </div>
                <div class="card-body">
 
@@ -138,17 +136,17 @@ input#exampleCheck1\ chkbox {
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
-                               	   <th style="width:50px"><input type="checkbox" class="form-check-input" id="exampleCheck1 chkAll"></th>
+                                   <c:if test="${sessionScope.ranksNo==3}">
+                               	  	 <th style="width:50px"><input type="checkbox" name="chkAll" class="form-check-input" id="exampleCheck1 chkAll"></th>
+                           			</c:if>
                                    <th style="width: 151px">Name</th>
                                    <th>title</th>
                                    <th style="width: 140px">등록일</th>
                                    <th style="width: 80px">조회수</th>
                                    <th style="width: 100px">추천</th>
                                   <!-- 관리자 모드일때만 보이게 if처리 -->
-                                   <c:if test="${sessionScope.ranksNo==3}">
-	                                   <th style="width: 100px">관리</th>
-                           			</c:if>
-                           			<input type="text" value="${sessionScope.ranksNo}">
+<!-- 	                                   <th style="width: 100px">관리</th> -->
+                           			<input type="hidden" value="${sessionScope.ranksNo}">
                                </tr>
                            </thead>
                            <tbody>
@@ -162,12 +160,15 @@ input#exampleCheck1\ chkbox {
 						</c:if>
 						<c:if test="${!empty list }">
                         <!-- 반복문 시작 -->
-
+						<c:set var="idx" value="0"/>
                            <c:forEach var="map" items="${list }">
 	                               <tr>
+	                               		<c:if test="${sessionScope.ranksNo==3}">
 	                                   <td>
-	                                   		<input type="checkbox" class="form-check-input" id="exampleCheck1 chkbox">
+	                                   		<input type="checkbox"  class="form-check-input" id="exampleCheck1 chkbox" value="${map['BOARD_NO']}" name="boardItems[${idx}].boardNo">
+	                                   		<input type="hidden"  value="${map['BOARD_FILENAME'] }" name="boardItems[${idx}].boardFilename">
 	                                   </td>
+	                                   </c:if>
 	                                   <td>${map['MEM_NAME'] }</td>
 	                                   <td>
 											<c:if test="${!empty map['BOARD_FILENAME'] }">
@@ -185,18 +186,17 @@ input#exampleCheck1\ chkbox {
 	                                   <td>${map['BOARD_RECOMMEND'] }</td>
 	                                   	<!-- 관리자 모드일때만 보이게 if처리 게시글 번호로 수정 페이지이동, 삭제 메시지이용-->
 	                                   <c:if test="${sessionScope.ranksNo==3}">
-		                                   <td>
-		                                   		<div class="bdListBtDiv">
-<!-- 						                            <button type="button" class="btn btn-primary f-left detailbt" -->
-<%-- 						                            	onclick="location.href=<c:url value='/board/boardDetail&boardNo=${map["BOARD_NO"] }'/>">글수정</button> --%>
-													<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"
-														onclick="location.href=<c:url value='/board/boardDetail&boardNo=${map["BOARD_NO"] }'/>">글삭제</button>
-					                            </div>
-		                                   </td>
+<!-- 		                                   <td> -->
+<!-- 		                                   		<div class="bdListBtDiv"> -->
+<%-- 		                                   			<input type="text" name="boardNo2" value="${map['BOARD_NO']}"> --%>
+<!-- 					                            </div> -->
+<!-- 		                                   </td> -->
 	                                   </c:if>
 	                               </tr>
+	                               <c:set var="idx" value="${idx+1 }"/>
                            </c:forEach>
                            <!-- 반복 끝 -->
+
 						</c:if>
 
                            </tbody>
@@ -215,7 +215,9 @@ input#exampleCheck1\ chkbox {
               				<nav class="f-right" aria-label="...">
 	                       		<!-- 페이지 번호추가 -->
 								<ul class="pagination">
-									<li class="page-item disabled"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
+									<c:if test="${pagingInfo.firstPage>1 }">
+										<li class="page-item "><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
+									</c:if>
 
 									<!-- [1][2][3][4][5][6][7][8][9][10] -->
 									<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
@@ -229,7 +231,6 @@ input#exampleCheck1\ chkbox {
 												class="page-item"
 											</c:if>
 										><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li>
-
 									</c:forEach>
 
 									<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
@@ -239,6 +240,7 @@ input#exampleCheck1\ chkbox {
 								</ul>
 							</nav>
               			</div>
+              			<input type="text" value="${pagingInfo.lastPage }"/>
 
               		</div>
                        </div>

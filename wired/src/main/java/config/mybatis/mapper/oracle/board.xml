@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -18,12 +19,23 @@
 		SELECT MEM_NO FROM MEMBER WHERE MEM_ID LIKE #{memId}
 	</select>
 
-	<select id="selectByBNoList" parameterType="int" resultType="map">
-		SELECT BOARD_NO ,BOARD_TITLE, BOARD_REGDATE, BOARD_READCOUNT, BOARD_RECOMMEND, BOARD_FILENAME,
-		    (SELECT MEM_NAME FROM MEMBER M WHERE B.MEM_NO=M.MEM_NO)MEM_NAME
-		FROM BOARD B
-		WHERE BDLIST_NO=#{bdlistNo} AND BOARD_DELFLAG LIKE 'N'
-		ORDER BY BOARD_REGDATE DESC
+	<select id="selectByBNoList" parameterType="searchVo" resultType="map">
+			SELECT *
+			from
+			(
+				select rownum AS RNUM, A.*
+				from
+				(
+					SELECT BOARD_NO ,BOARD_TITLE, BOARD_REGDATE, BOARD_READCOUNT, BOARD_RECOMMEND, BOARD_FILENAME,
+					    (SELECT MEM_NAME FROM MEMBER M WHERE B.MEM_NO=M.MEM_NO)MEM_NAME
+					FROM BOARD B
+					WHERE BDLIST_NO=#{bdlistNo} AND BOARD_DELFLAG LIKE 'N'
+					ORDER BY BOARD_REGDATE DESC
+				)A
+			)
+			<![CDATA[
+			WHERE RNUM>#{firstRecordIndex}
+				AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
 	</select>
 	<select id="selectTotalRecord" parameterType="int" resultType="int">
 		SELECT COUNT(*) FROM BOARD
@@ -53,10 +65,11 @@
 		UPDATE BOARD SET BOARD_RECOMMEND=BOARD_RECOMMEND+1
 		WHERE BOARD_NO=#{boardNo}
 	</update>
-	<update id="deleteBoard" parameterType="boardVo">
+	<update id="deleteBoard" parameterType="int">
 		UPDATE BOARD
 		SET BOARD_DELFLAG='Y'
-		WHERE BOARD_NO=${boardNo}
+		WHERE BOARD_NO=#{boardNo}
 	</update>
+
 
 </mapper>
