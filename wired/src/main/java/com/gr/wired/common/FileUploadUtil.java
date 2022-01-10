@@ -133,8 +133,7 @@ public class FileUploadUtil {
 			float fSize = fileSize/1000f;
 			fSize=Math.round(fSize*10)/10f;
 
-			result="<img src='"+request.getContextPath()
-				+"/resources/images/file.gif/'> "
+			result="<i class=\"bi bi-folder\"></i>"
 				+originName+" ("+ fSize +"KB)";
 		}
 

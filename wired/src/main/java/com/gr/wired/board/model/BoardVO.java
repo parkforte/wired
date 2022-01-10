@@ -12,6 +12,8 @@ public class BoardVO {
 	private Timestamp boardRegdate;
 	private Timestamp boardChangedate;
 
+	private String memName;
+
 //	자료실 필드 추가
 	private String boardFilename;
 	private String boardOriginalfilename;
@@ -19,7 +21,6 @@ public class BoardVO {
 	private int boardDowncount;
 	private char boardDelflag;
 	private int boardRecommend;
-
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -68,6 +69,12 @@ public class BoardVO {
 	public void setBoardChangedate(Timestamp boardChangedate) {
 		this.boardChangedate = boardChangedate;
 	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
 	public String getBoardFilename() {
 		return boardFilename;
 	}
@@ -104,17 +111,15 @@ public class BoardVO {
 	public void setBoardRecommend(int boardRecommend) {
 		this.boardRecommend = boardRecommend;
 	}
-
 	@Override
 	public String toString() {
 		return "BoardVO [boardNo=" + boardNo + ", memNo=" + memNo + ", bdlistNo=" + bdlistNo + ", boardTitle="
 				+ boardTitle + ", boardContent=" + boardContent + ", boardReadcount=" + boardReadcount
-				+ ", boardRegdate=" + boardRegdate + ", boardChangedate=" + boardChangedate + ", boardFilename="
-				+ boardFilename + ", boardOriginalfilename=" + boardOriginalfilename + ", boardFilesize="
-				+ boardFilesize + ", boardDowncount=" + boardDowncount + ", boardDelflag=" + boardDelflag
-				+ ", boardRecommend=" + boardRecommend + "]";
+				+ ", boardRegdate=" + boardRegdate + ", boardChangedate=" + boardChangedate + ", memName=" + memName
+				+ ", boardFilename=" + boardFilename + ", boardOriginalfilename=" + boardOriginalfilename
+				+ ", boardFilesize=" + boardFilesize + ", boardDowncount=" + boardDowncount + ", boardDelflag="
+				+ boardDelflag + ", boardRecommend=" + boardRecommend + "]";
 	}
-
 
 
 
