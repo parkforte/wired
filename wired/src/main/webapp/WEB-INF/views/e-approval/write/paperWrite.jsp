@@ -116,7 +116,7 @@
 .bs4-order-tracking li {
     list-style-type: none;
     font-size: 13px;
-    width: 25%;
+    width: 33%;
     float: left;
     position: relative;
     font-weight: 400;
@@ -170,16 +170,16 @@
 }
 
 .bs4-order-tracking li.active {
-    font-weight: bold;
-    color: pink;
+    font-weight: #FF73B8;
+    color: #FF73B8;
 }
 
 .bs4-order-tracking li.active>div {
-    background: pink;
+    background: #FF73B8;
 }
 
 .bs4-order-tracking li.active:after {
-    background: pink;
+    background: #FF73B8;
 }
 
 .card-timeline {
@@ -239,16 +239,13 @@
 <div class="card card-timeline px-2 border-none">
     <ul class="bs4-order-tracking">
         <li class="step active">
-            <div><i class="fas fa-user"></i></div> Order Placed
+            <div><i class="fas fa-user"></i></div> 문서양식&결재라인선택
         </li>
         <li class="step">
-            <div><i class="fas fa-bread-slice"></i></div> In transit
+            <div><i class="fas fa-bread-slice"></i></div> 문서작성
         </li>
         <li class="step">
-            <div><i class="fas fa-truck"></i></div> Out for delivery
-        </li>
-        <li class="step ">
-            <div><i class="fas fa-birthday-cake"></i></div> Delivered
+            <div><i class="fas fa-truck"></i></div> 상신완료
         </li>
     </ul>
     <h5 class="text-center"><b>In transit</b>. The order has been shipped!</h5>

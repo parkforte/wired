@@ -52,12 +52,13 @@
 											href="<c:url value='/e-approval/confirm/confirmLineDetail?regNo=${vo.regNo }'/>"
 											class="btn btn-primary"> 상세보기</a> <a
 											href="<c:url value='/e-approval/confirm/deleteLine?regNo=${vo.regNo}'/>"
-											class="btn btn-primary">삭제</a>
+											class="btn btn-danger">삭제</a>
 									</div>
 								</div>
 							</c:forEach>
 						</c:if>
 					</div>
+					<br>
 					<div class="f-center">
 						<form method="post"
 							action="<c:url value='/e-approval/confirm/addLine'/>">
