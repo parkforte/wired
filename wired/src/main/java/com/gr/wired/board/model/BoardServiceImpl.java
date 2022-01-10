@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Map<String, Object> selectByNo(int boardNo) {
+	public BoardVO selectByNo(int boardNo) {
 		return boardDao.selectByNo(boardNo);
 	}
 
@@ -84,6 +84,11 @@ public class BoardServiceImpl implements BoardService{
 		//선언적 트랜잭션에서는 런타임 예외가 발생하면 롤백 한다.
 		//반면에 예외가 전혀 발생하지 않거나 체크 예외가 발생하면 커밋한다.
 		return cnt;
+	}
+
+	@Override
+	public int updateDownCount(int boardNo) {
+		return boardDao.updateDownCount(boardNo);
 	}
 
 

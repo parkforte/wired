@@ -80,7 +80,7 @@ button#btReply {
 			});
 		});
 		$('#btList').click(function(){
-			location.href="<c:url value='/board/boardList?bdlistNo=${boardVo["BDLIST_NO"]}'/>";
+			location.href="<c:url value='/board/boardList?bdlistNo=${boardVo.bdlistNo}'/>";
 		});
 		$('#btUpdate').click(function(){
 			location.href="<c:url value='/board/boardUpdate?boardNo=${param.boardNo}'/>";
@@ -108,17 +108,17 @@ button#btReply {
                     <!-- title1 -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">${boardVo['BOARD_TITLE']}</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">${boardVo.boardTitle}</h6>
 
                             <!-- 작성자만 볼수있게 버튼if 처리 세션에서 아이디 가져와 셀렉트-->
                             <div class="f-right bdDetailBtDiv">
                             	<button type="button" class="btn btn-primary detailbt f-left" style="font-size: 0.7em" id="recommend">
-                           			${boardVo['BOARD_RECOMMEND']} 추천
+                           			${boardVo.boardRecommend} 추천
                           		</button>
-								<input type="hidden" value="${boardVo['MEM_NO']}">
+								<input type="hidden" value="${boardVo.memNo}">
 								<input type="hidden" value="${sessionScope.memNo }">
 	                            <button type="button" class="btn btn-primary f-left detailbt" id="btList" >글목록</button>
-                          		<c:if test="${sessionScope.memNo==boardVo['MEM_NO'] }">
+                          		<c:if test="${sessionScope.memNo == boardVo.memNo}">
 		                            <button type="button" class="btn btn-primary f-left detailbt" id="btUpdate">글수정</button>
 		                            <!-- 삭제버튼 클릭하면 모달창 생성후 삭제하겠습니다 라는 입력받아서 같으면 처리해보기-->
 									<button type="button" class="btn btn-danger f-left detailbt" id="deleteBt" data-toggle="modal" data-target="#exampleModal">글삭제</button>
@@ -141,7 +141,7 @@ button#btReply {
 								      <form name="frmDelete" method="post" action='<c:url value="/board/boardDelete"/>'>
 									      <div class="modal-footer">
 											<input type="text" name="boardNo" value="${param.boardNo}">
-											<input type="text" name="bdlistNo" value="${boardVo['BDLIST_NO']}">
+											<input type="text" name="bdlistNo" value="${boardVo.bdlistNo}">
 									        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 									        <button type="submit" class="btn btn-primary">Delete</button>
 									      </div>
@@ -154,8 +154,20 @@ button#btReply {
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            	<p>${boardVo['BOARD_CONTENT']}</p>
-
+                            	<div>
+	                            	<p>${boardVo.boardContent}</p>
+                            	</div>
+								<div class="f-right">
+									<span class="sp1">첨부파일</span>
+									<c:if test="${!empty boardVo.boardFilename }">
+										<span>
+											<a href
+						='<c:url value="/board/download?boareNo=${param.boardNo }&boardFilename=${boardVo.boardFilename }"/>'>
+												${fileInfo}</a>
+											다운 : ${boardVo.boardDowncount}
+										</span>
+									</c:if>
+								</div>
                             </div>
                         </div>
                     </div>
