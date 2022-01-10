@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.gr.wired.board.model;
 
 import java.util.List;
@@ -5,6 +6,18 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+package com.gr.wired.board.model;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import com.gr.wired.common.SearchVO;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -21,8 +34,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectByBNoList(int bdlistNo) {
-		return boardDao.selectByBNoList(bdlistNo);
+	public List<Map<String, Object>> selectByBNoList(SearchVO searchVo) {
+		return boardDao.selectByBNoList(searchVo);
 	}
 
 	@Override
@@ -56,8 +69,30 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int deleteBoard(BoardVO boardVo) {
-		return boardDao.deleteBoard(boardVo);
+	public int deleteBoard(int boardNo) {
+		return boardDao.deleteBoard(boardNo);
+	}
+
+	@Override
+	@Transactional
+	public int deleteMulti(List<BoardVO> list) {
+		int cnt=0;
+		try {
+			for(BoardVO vo : list) {
+				int boardNo=vo.getBoardNo();
+				if(boardNo!=0) {
+					cnt=boardDao.deleteBoard(boardNo);
+				}
+			}
+
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			cnt=-1; //실패
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		//선언적 트랜잭션에서는 런타임 예외가 발생하면 롤백 한다.
+		//반면에 예외가 전혀 발생하지 않거나 체크 예외가 발생하면 커밋한다.
+		return cnt;
 	}
 
 
@@ -70,3 +105,4 @@ public class BoardServiceImpl implements BoardService{
 
 
 }
+
