@@ -27,7 +27,7 @@ import com.gr.wired.employee.model.EmplVO;
 @RequestMapping("/employee")
 public class EmplController {
 	private static final Logger logger
-	=LoggerFactory.getLogger(EmplController.class);
+		=LoggerFactory.getLogger(EmplController.class);
 
 	private final EmplService emplService;
 
@@ -149,18 +149,18 @@ public class EmplController {
 		if(cnt>0) {
 			logger.info("퇴사 처리 완료");
 		}
-		
+
 		model.addAttribute("msg","퇴사처리 되었습니다.");
 		model.addAttribute("url","/employee/emplList");
-		
+
 		return "common/message";
-		
+
 	}
-	
+
 	@RequestMapping("/emplResign")
 	public String ResighList(Model model) {
 		logger.info("퇴사자목록페이지");
-		
+
 		List<Map<String, Object>> list = emplService.resignMember();
 		logger.info("퇴사목록, 조회 결과 list={}", list);
 
@@ -168,20 +168,20 @@ public class EmplController {
 
 		return "employee/emplResign";
 	}
-	
+
 	@RequestMapping("/emplBack")
 	public String emplback(@RequestParam(defaultValue = "0") int memNo,
 			Model model) {
 		logger.info("복직처리, 파라미터 memNo={}", memNo);
-		
+
 		int cnt=emplService.upBackMember(memNo);
 		if(cnt>0) {
 			logger.info("복직 처리 완료");
 		}
-		
+
 		model.addAttribute("msg", "복직처리 되었습니다.");
 		model.addAttribute("url", "/employee/emplResign");
-		
+
 		return "common/message";
 	}
 }
