@@ -27,7 +27,7 @@ import com.gr.wired.employee.model.EmplVO;
 @RequestMapping("/employee")
 public class EmplController {
 	private static final Logger logger
-	=LoggerFactory.getLogger(EmplController.class);
+		=LoggerFactory.getLogger(EmplController.class);
 
 	private final EmplService emplService;
 
@@ -131,6 +131,7 @@ public class EmplController {
 		String msg="사원정보 수정 실패", url="/employee/emplEdit";
 		if(cnt>0) {
 			msg="사원정보 수정 완료";
+			url="/employee/emplList";
 		}
 
 		model.addAttribute("msg", msg);
@@ -139,21 +140,48 @@ public class EmplController {
 		return "common/message";
 	}
 
-	@RequestMapping("/emplResign")
+	@RequestMapping("/emplQuit")
 	public String emplquit(@RequestParam(defaultValue = "0") int memNo,
 			Model model) {
-		logger.info("퇴사처리페이지, 파라미터 memNo={}", memNo);
+		logger.info("퇴사처리, 파라미터 memNo={}", memNo);
 
 		int cnt=emplService.upResignMember(memNo);
 		if(cnt>0) {
 			logger.info("퇴사 처리 완료");
 		}
 
+		model.addAttribute("msg","퇴사처리 되었습니다.");
+		model.addAttribute("url","/employee/emplList");
+
+		return "common/message";
+
+	}
+
+	@RequestMapping("/emplResign")
+	public String ResighList(Model model) {
+		logger.info("퇴사자목록페이지");
+
 		List<Map<String, Object>> list = emplService.resignMember();
-		logger.info("퇴사완료, 조회 결과 list={}", list);
+		logger.info("퇴사목록, 조회 결과 list={}", list);
 
 		model.addAttribute("list", list);
 
 		return "employee/emplResign";
+	}
+
+	@RequestMapping("/emplBack")
+	public String emplback(@RequestParam(defaultValue = "0") int memNo,
+			Model model) {
+		logger.info("복직처리, 파라미터 memNo={}", memNo);
+
+		int cnt=emplService.upBackMember(memNo);
+		if(cnt>0) {
+			logger.info("복직 처리 완료");
+		}
+
+		model.addAttribute("msg", "복직처리 되었습니다.");
+		model.addAttribute("url", "/employee/emplResign");
+
+		return "common/message";
 	}
 }

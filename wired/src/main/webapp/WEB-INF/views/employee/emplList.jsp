@@ -40,7 +40,7 @@ $(function() {
 			var res=$(this).val();
 // 			$('#modal_btn').val(res);
 			$('#m_btn').click(function(){
-		        location.href="<c:url value='/employee/emplResign?memNo='/>"+res;
+		        location.href="<c:url value='/employee/emplQuit?memNo='/>"+res;
 		    });
 		});
 
