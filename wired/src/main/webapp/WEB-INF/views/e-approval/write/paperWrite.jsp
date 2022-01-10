@@ -8,12 +8,12 @@
 	href="<c:url value='/resources/api/jsTree/dist/themes/proton/style.min.css' />" />
 
 <style type="text/css">
-.f-right{
+.f-right {
 	float: right;
 }
 
-.f-left{
-	float:left;
+.f-left {
+	float: left;
 }
 
 .setW20 {
@@ -76,119 +76,119 @@
 	vertical-align: middle
 }
 
-.dnd{
+.dnd {
 	background-color: silver;
 }
 
-.sigTitle{
-	width:50px;
+.sigTitle {
+	width: 50px;
 	height: 20px;
 	background-color: pink;
 }
-.sigImg{
-	margin-top20px;
-	width:50px;
+
+.sigImg {margin-top20px;
+	width: 50px;
 	height: 50px;
 	background-color: silver;
 }
 
-.sigBox{
+.sigBox {
 	padding: 0;
 	width: 50px;
 	height: 70px;
 	background-color: silver;
 }
 
-.btnMargin{
+.btnMargin {
 	margin-left: 40px;
 	margin-top: 5px;
 }
 
-
 .bs4-order-tracking {
-    margin-bottom: 30px;
-    overflow: hidden;
-    color: #878788;
-    padding-left: 0px;
-    margin-top: 30px
+	margin-bottom: 30px;
+	overflow: hidden;
+	color: #878788;
+	padding-left: 0px;
+	margin-top: 30px
 }
 
 .bs4-order-tracking li {
-    list-style-type: none;
-    font-size: 13px;
-    width: 25%;
-    float: left;
-    position: relative;
-    font-weight: 400;
-    color: #878788;
-    text-align: center
+	list-style-type: none;
+	font-size: 13px;
+	width: 33%;
+	float: left;
+	position: relative;
+	font-weight: 400;
+	color: #878788;
+	text-align: center
 }
 
 .bs4-order-tracking li:first-child:before {
-    margin-left: 15px !important;
-    padding-left: 11px !important;
-    text-align: left !important
+	margin-left: 15px !important;
+	padding-left: 11px !important;
+	text-align: left !important
 }
 
 .bs4-order-tracking li:last-child:before {
-    margin-right: 5px !important;
-    padding-right: 11px !important;
-    text-align: right !important
+	margin-right: 5px !important;
+	padding-right: 11px !important;
+	text-align: right !important
 }
 
 .bs4-order-tracking li>div {
-    color: #fff;
-    width: 29px;
-    text-align: center;
-    line-height: 29px;
-    display: block;
-    font-size: 12px;
-    background: #878788;
-    border-radius: 50%;
-    margin: auto
+	color: #fff;
+	width: 29px;
+	text-align: center;
+	line-height: 29px;
+	display: block;
+	font-size: 12px;
+	background: #878788;
+	border-radius: 50%;
+	margin: auto
 }
 
 .bs4-order-tracking li:after {
-    content: '';
-    width: 150%;
-    height: 2px;
-    background: #878788;
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 15px;
-    z-index: -1
+	content: '';
+	width: 150%;
+	height: 2px;
+	background: #878788;
+	position: absolute;
+	left: 0%;
+	right: 0%;
+	top: 15px;
+	z-index: -1
 }
 
 .bs4-order-tracking li:first-child:after {
-    left: 50%
+	left: 50%
 }
 
 .bs4-order-tracking li:last-child:after {
-    left: 0% !important;
-    width: 0% !important
+	left: 0% !important;
+	width: 0% !important
 }
 
 .bs4-order-tracking li.active {
-    font-weight: bold;
-    color: pink;
+	font-weight: #FF73B8;
+	color: #FF73B8;
 }
 
 .bs4-order-tracking li.active>div {
-    background: pink;
+	background: #FF73B8;
 }
 
 .bs4-order-tracking li.active:after {
-    background: pink;
+	background: #FF73B8;
 }
 
 .card-timeline {
-    background-color: #fff;
-    z-index: 0
+	background-color: #fff;
+	z-index: 0
 }
-
 </style>
-<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+<link rel="stylesheet"
+	href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
+	type="text/css" />
 <script
 	src="<c:url value='/resources/api/jsTree/dist/libs/jquery.js'/> "></script>
 <script src="<c:url value='/resources/api/jsTree/dist/jstree.min.js'/> "></script>
@@ -196,14 +196,6 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#jstree').jstree({
-			'core' : {
-				'themes' : {
-					'name' : 'proton',
-					'responsive' : true
-				}
-			}
-		});
 
 		$('form[name=frmWrite]').submit(function(){
 			$('.infobox').each(function(idx, item){
@@ -235,141 +227,115 @@
 </script>
 <!-- 전자결재HOME -->
 <div class="container-fluid">
-<%@ include file="../include/navbar.jsp"%>
-<div class="card card-timeline px-2 border-none">
-    <ul class="bs4-order-tracking">
-        <li class="step active">
-            <div><i class="fas fa-user"></i></div> Order Placed
-        </li>
-        <li class="step">
-            <div><i class="fas fa-bread-slice"></i></div> In transit
-        </li>
-        <li class="step">
-            <div><i class="fas fa-truck"></i></div> Out for delivery
-        </li>
-        <li class="step ">
-            <div><i class="fas fa-birthday-cake"></i></div> Delivered
-        </li>
-    </ul>
-    <h5 class="text-center"><b>In transit</b>. The order has been shipped!</h5>
-</div>
+	<%@ include file="../include/navbar.jsp"%>
+	<div class="card card-timeline px-2 border-none">
+		<ul class="bs4-order-tracking">
+			<li class="step active">
+				<div>
+					<i class="fas fa-user"></i>
+				</div> 문서양식&결재라인선택
+			</li>
+			<li class="step active">
+				<div>
+					<i class="fas fa-bread-slice"></i>
+				</div> 문서작성
+			</li>
+			<li class="step ">
+				<div>
+					<i class="fas fa-truck"></i>
+				</div> 상신완료
+			</li>
+		</ul>
+		<h5 class="text-center">
+			<b>결재 문서를 작성하세요.</b>
+		</h5>
+	</div>
 
 
 	<div>
-		<!-- title1 -->
-		<div class="card shadow mb-4 setW20 setMR10 f-left">
-			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">문서양식 & 결재라인</h6>
-			</div>
-			<div class="card-body">
-				<div class="table-responsive">
-				 <label for="exampleFormControlSelect1">문서양식선택</label>
-					<div id="jstree">
-						<c:if test="${!empty formList }">
-						<c:forEach var="formVo" items="${formList }">
-							<ul>
-								<li>${formVo.typeNo}-${formVo.formName }</li>
-							</ul>
-						</c:forEach>
-						</c:if>
-					</div>
-				</div>
-				<br><br>
-				<div class="form-group">
-				    <label for="exampleFormControlSelect1">결재라인선택</label>
-					    <select class="form-control"  name="confirmLine" id="confirmLine">
-						      <option value="1">1</option>
-					    </select>
-				  </div>
-			</div>
-		</div>
 		<div class="card shadow mb-4">
 			<div class="card-header py-3 ">
-				<div class="setW20 f-left"><h6 class="m-0 font-weight-bold text-primary">문서작성</h6></div>
+				<div class="setW20 f-left">
+					<h6 class="m-0 font-weight-bold text-primary">문서작성</h6>
+				</div>
 				<div class="f-right">
-                                     <a href="#" class="btn btn-primary btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-flag"></i>
-                                        </span>
-                                        <span class="text">Export to Excel</span>
-                                    </a>
-                                     <a href="#" class="btn btn-primary btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-flag"></i>
-                                        </span>
-                                        <span class="text">Print to pdf</span>
-                                    </a>
-									<a href="#" class="btn btn-success btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-check"></i>
-                                        </span>
-                                        <span class="text">상신하기</span>
-                                    </a>
-                                    </div>
+					<a href="#" class="btn btn-primary btn-icon-split btn-sm"> <span
+						class="icon text-white-50"> <i class="fas fa-flag"></i>
+					</span> <span class="text">Export to Excel</span>
+					</a> <a href="#" class="btn btn-primary btn-icon-split btn-sm"> <span
+						class="icon text-white-50"> <i class="fas fa-flag"></i>
+					</span> <span class="text">Print to pdf</span>
+					</a> <a href="#" class="btn btn-success btn-icon-split btn-sm"> <span
+						class="icon text-white-50"> <i class="fas fa-check"></i>
+					</span> <span class="text">상신하기</span>
+					</a>
+				</div>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 
+					<c:forEach var="vo" items="confirmVo">
+					<div class="paper">
+						<div class="content">
 
-						<div class="paper">
-							<div class="content">
-
-								<table class="tg" style="table-layout: fixed; width: 100%;">
-									<thead>
-										<tr>
-											<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>품의서</h3></th>
-											<th class="tg-lboi" colspan="4" rowspan="5"><img src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
-											<th>
-												<div class="sigBox">
-													<div class="sigTitle"></div>
-													<div class="sigImg"></div>
-												</div>
-											</th>
-											<th>
-												<div class="sigBox">
-													<div class="sigTitle"></div>
-													<div class="sigImg"></div>
-												</div>
-											</th>
-										</tr>
-										<tr>
-										</tr>
-										<tr>
-										</tr>
-										<tr>
-										</tr>
-										<tr>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td class="tg-lboi">기안부서</td>
-											<td class="tg-lboi" colspan="2"></td>
-											<td class="tg-lboi">기안일</td>
-											<td class="tg-lboi" colspan="2">${cfRegdate }</td>
-											<td class="tg-lboi">문서번호</td>
-											<td class="tg-lboi" colspan="2">WIRED-1-1</td>
-										</tr>
-										<tr>
-											<td class="tg-lboi">기안자</td>
-											<td class="tg-lboi" colspan="2"></td>
-											<td class="tg-lboi">보존년한</td>
-											<td class="tg-lboi" colspan="2">5년</td>
-											<td class="tg-lboi">비밀등급</td>
-											<td class="tg-lboi" colspan="2">대외비</td>
-										</tr>
-										<tr>
-											<td class="tg-lboi">제목</td>
-											<td class="tg-lboi" colspan="8"><input class="form-control" type="text" placeholder="제목을 입력하세요"></td>
-										</tr>
-										<tr>
-											<td class="tg-0lax" colspan="9" rowspan="14"><textarea
-													id="txtContent" rows="20" cols="100" style="width: 100%;"
-													class="infobox"></textarea> <!-- textarea 밑에 script 작성하기 -->
-												<script type="text/javascript"
-													src='<c:url value="/resources/api/smarteditor/js/service/HuskyEZCreator.js"/>'
-													charset="utf-8"></script> <script id="smartEditor"
-													type="text/javascript">
+							<table class="tg" style="table-layout: fixed; width: 100%;">
+								<thead>
+									<tr>
+										<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>품의서</h3></th>
+										<th class="tg-lboi" colspan="4" rowspan="5"><img
+											src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
+										<th>
+											<div class="sigBox">
+												<div class="sigTitle"></div>
+												<div class="sigImg"></div>
+											</div>
+										</th>
+										<th>
+											<div class="sigBox">
+												<div class="sigTitle"></div>
+												<div class="sigImg"></div>
+											</div>
+										</th>
+									</tr>
+									<tr>
+									</tr>
+									<tr>
+									</tr>
+									<tr>
+									</tr>
+									<tr>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="tg-lboi">기안부서</td>
+										<td class="tg-lboi" colspan="2"></td>
+										<td class="tg-lboi">기안일</td>
+										<td class="tg-lboi" colspan="2">${cfRegdate }</td>
+										<td class="tg-lboi">문서번호</td>
+										<td class="tg-lboi" colspan="2">WIRED-${vo.memNo }-${vo.cfNo }</td>
+									</tr>
+									<tr>
+										<td class="tg-lboi">기안자</td>
+										<td class="tg-lboi" colspan="2">${vo.memNo  }</td>
+										<td class="tg-lboi">보존년한</td>
+										<td class="tg-lboi" colspan="2">5년</td>
+										<td class="tg-lboi">비밀등급</td>
+										<td class="tg-lboi" colspan="2">대외비</td>
+									</tr>
+									<tr>
+										<td class="tg-lboi">제목</td>
+										<td class="tg-lboi" colspan="8"><input
+											class="form-control" type="text" placeholder="제목을 입력하세요." ></td>
+									</tr>
+									<tr>
+										<td class="tg-0lax" colspan="9" rowspan="14"><textarea
+												id="txtContent" rows="20" cols="100" style="width: 100%;"
+												class="infobox"></textarea> <!-- textarea 밑에 script 작성하기 -->
+											<script type="text/javascript"
+												src='<c:url value="/resources/api/smarteditor/js/service/HuskyEZCreator.js"/>'
+												charset="utf-8"></script> <script id="smartEditor"
+												type="text/javascript">
 													var oEditors = [];
 													nhn.husky.EZCreator.createInIFrame({
 													    oAppRef: oEditors,
@@ -386,20 +352,21 @@
 													    }
 													});
 												</script></td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td class="tg-0lax">증빙서류</td>
-											<td class="tg-0lax dnd" colspan="8"><form action="/file-upload"
-      class="dropzone"
-      id="my-awesome-dropzone"></form></td>
-										</tr>
-									</tfoot>
-								</table>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td class="tg-0lax">증빙서류</td>
+										<td class="tg-0lax dnd" colspan="8"><form
+												action="/file-upload" class="dropzone"
+												id="my-awesome-dropzone"></form></td>
+									</tr>
+								</tfoot>
+							</table>
 
-							</div>
 						</div>
+					</div>
+					</c:forEach>
 				</div>
 			</div>
 

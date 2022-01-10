@@ -62,3 +62,9 @@ create sequence confirmline_seq
 start with 1
 increment by 1
 nocache;
+
+--confirm 시퀀스
+create sequence confirm_seq
+start with 1
+increment by 1
+nocache;

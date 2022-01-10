@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gr.wired.confirm.model.ConfirmDAO">
+	<insert id="insertPaper">
+		<selectKey keyProperty="cfNo" resultType="int" order="BEFORE">
+			SELECT CONFIRM_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CONFIRM(CF_NO,FORM_NO, MEM_NO, REG_NO, CF_TITLE, CF_STATE)
+		VALUES(#{cfNo}, #{formNo}, #{memNo}, #{regNo}, #{cfTitle} ,#{cfState})
+	</insert>
+	<select id="selectTempByMemNo" parameterType="int" resultType="confirmVo">
+		SELECT * FROM CONFIRM
+		WHERE MEM_NO=#{memNo}
+		AND CF_STATE=0
+	</select>
+
+</mapper>
