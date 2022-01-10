@@ -29,7 +29,7 @@ public class LineregServiceImpl implements LineregService {
 	public int insertLinereg(LineregVO lineregVo) {
 		int cnt=lineregDao.insertLinereg(lineregVo);
 		logger.info("결재라인생성중 cnt={}, lineregVo={}", cnt, lineregVo);
-		cnt=confirmlineDao.insertConfirmLine(lineregVo);
+		cnt=confirmlineDao.insertAddLine(lineregVo);
 		logger.info("LINE_NO, REG_NO INSERT 트랜젝션중, cnt={}, lineregVo={}", cnt, lineregVo);
 		return cnt;
 	}

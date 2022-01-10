@@ -61,10 +61,10 @@ public class ConfirmController {
 
 		//DB
 		List<LineregVO> lineregList= lineregService.SelectAllLinereg(memNo);
-		List<ConfirmLineVO> confirmlineList= confirmlineService.selectALLRegNo(regNo);
+		//List<Map<String, Object>> confirmlineList= confirmlineService.selectALLRegNo(regNo);
 
 		model.addAttribute("lineregList", lineregList);
-		model.addAttribute("confirmlineList", confirmlineList);
+		//model.addAttribute("confirmlineList", confirmlineList);
 
 
 	}
@@ -92,7 +92,6 @@ public class ConfirmController {
 		logger.info("결재라인명 추가 lineregVo={}, memNo={} ", lineregVo, memNo);
 
 		lineregVo.setMemNo(memNo);
-
 		//DB
 		int result=lineregService.insertLinereg(lineregVo);
 		if(result>0) {
@@ -122,18 +121,57 @@ public class ConfirmController {
 	}
 
 
+	@GetMapping("/confirm/confirmLineDetail")
+	public String lineDetail(@RequestParam(defaultValue = "0") int regNo, Model model) {
+		logger.info("결재라인정보 상세페이지 regNo={}", regNo);
 
-	@PostMapping("/confirm/lineOrder")
-	public String addOrder(@ModelAttribute EmplVO emplVo, Model model) {
-		logger.info("결재순서 등록, emplVo={}", emplVo);
+		//DB
+		List<Map<String, Object>> confirmlineList=confirmlineService.selectALLRegNo(regNo);
+
+		model.addAttribute("confirmlineList", confirmlineList);
+		logger.info("ConfirmLine 조회결과 list.size={}", confirmlineList.size());
+
+		return "e-approval/confirm/confirmLineDetail";
+
+	}
+
+
+	@PostMapping("/confirm/searchMember")
+	public String addOrder(@ModelAttribute EmplVO emplVo, @RequestParam(defaultValue = "0") int regNo, Model model) {
+		logger.info("사원조회, emplVo={}, regNo={}", emplVo, regNo);
 
 		List<Map<String, Object>> emplList=emplService.selectByMemName(emplVo);
 		logger.info("사원조회 결과, emplList.size={}", emplList.size());
 
+		List<Map<String, Object>> confirmlineList=confirmlineService.selectALLRegNo(regNo);
+
+		model.addAttribute("confirmlineList", confirmlineList);
+		logger.info("ConfirmLine 조회결과 list.size={}", confirmlineList.size());
+
+
 		model.addAttribute("emplList", emplList);
 		logger.info("emplList={}",emplList);
 
-		return "e-approval/confirm/confirmAdmin";
+		return "e-approval/confirm/confirmLineDetail";
+	}
+
+	@PostMapping("/confirm/addLineOrder")
+	public String addLineOrder(@ModelAttribute ConfirmLineVO lineVo, Model model) {
+		logger.info("결재순서 등록 lineVo={}", lineVo);
+
+		//DB
+		int result=confirmlineService.insertAddLine(lineVo);
+
+		String msg="결재라인등록 실패!", url="/e-approval/confirm/confirmLineDetail?regNo="+lineVo.getRegNo();
+		if(result>0) {
+			msg="결재라인등록 성공!";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+
 	}
 
 

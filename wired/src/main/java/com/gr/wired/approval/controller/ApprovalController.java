@@ -117,7 +117,7 @@ public class ApprovalController {
 		return "common/message";
 	}
 
-	@GetMapping("/paperWrite")
+	@GetMapping("/write/paperWrite")
 	public String approvalTree_get(HttpSession session, Model model) {
 		//memId로 문서작성자 뿌리기
 		String memId=(String) session.getAttribute("memId");
@@ -135,7 +135,7 @@ public class ApprovalController {
 		model.addAttribute("formList", formList);
 		model.addAttribute("cfRegdate", cfRegdate);
 
-		return "e-approval/paperWrite";
+		return "e-approval/write/paperWrite";
 	}
 
 }
