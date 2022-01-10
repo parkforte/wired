@@ -11,11 +11,32 @@
 		insert into confirmLine(line_no, reg_no)
 		values(#{lineNo}, #{regNo})
 	</insert>
-	<select id="selectALLRegNo" resultType="confirmlineVo">
-		SELECT * FROM CONFIRMLINE
+	<select id="selectALLRegNo" parameterType="int" resultType="map">
+		SELECT *
+        FROM CONFIRMLINEINFO_VIEW
 		WHERE REG_NO=#{regNo}
-		ORDER BY LINE_ORDER DESC
+        AND LINE_ORDER >0
+		ORDER BY LINE_ORDER
 	</select>
+	<insert id="insertAddLine" parameterType="confirmlineVo">
+		<selectKey keyProperty="lineNo" resultType="int" order="BEFORE">
+			SELECT CONFIRMLINE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO CONFIRMLINE(LINE_NO, REG_NO, MEM_NO, LINE_ORDER)
+		VALUES(#{lineNo}, #{regNo}, #{memNo},#{lineOrder} )
+	</insert>
+	<delete id="deleteOrder" parameterType="confirmlineVo">
+		DELETE FROM CONFIRMLINE
+		WHERE REG_NO=#{regNo}
+		AND MEM_NO=#{memNo}
+	</delete>
+	<update id="updateOrder" parameterType="confirmlineVo">
+		UPDATE CONFIRMLINE
+		SET LINE_ORDER=1
+		WHERE REG_NO=#{regNo}
+		AND MEM_NO=#{memNo}
+		AND LINE_ORDER=2
+	</update>
 
 
 </mapper>
