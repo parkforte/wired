@@ -25,6 +25,18 @@
 		INSERT INTO CONFIRMLINE(LINE_NO, REG_NO, MEM_NO, LINE_ORDER)
 		VALUES(#{lineNo}, #{regNo}, #{memNo},#{lineOrder} )
 	</insert>
+	<delete id="deleteOrder" parameterType="confirmlineVo">
+		DELETE FROM CONFIRMLINE
+		WHERE REG_NO=#{regNo}
+		AND MEM_NO=#{memNo}
+	</delete>
+	<update id="updateOrder" parameterType="confirmlineVo">
+		UPDATE CONFIRMLINE
+		SET LINE_ORDER=1
+		WHERE REG_NO=#{regNo}
+		AND MEM_NO=#{memNo}
+		AND LINE_ORDER=2
+	</update>
 
 
 </mapper>

@@ -174,5 +174,22 @@ public class ConfirmController {
 
 	}
 
+	@GetMapping("/confirm/deleteOrder")
+	public String deleteOrder(@ModelAttribute ConfirmLineVO confirmlineVo, Model model) {
+		logger.info("라인삭제 confirmlineVo={}", confirmlineVo);
+
+		//DB
+		String msg="결재라인 삭제 실패!", url="/e-approval/confirm/confirmLineDetail?regNo="+confirmlineVo.getRegNo();
+		int result=confirmlineService.deleteOrder(confirmlineVo);
+		if(result>0) {
+			msg="결재라인 삭제 성공!";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+
+	}
 
 }

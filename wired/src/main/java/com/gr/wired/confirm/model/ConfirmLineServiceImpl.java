@@ -32,5 +32,10 @@ public class ConfirmLineServiceImpl implements ConfirmLineService {
 		return confirmlineDao.insertAddLine(lineVo);
 	}
 
+	@Override
+	public int deleteOrder(ConfirmLineVO confirmlineVo) {
+		return confirmlineDao.deleteOrder(confirmlineVo);
+	}
+
 
 }
