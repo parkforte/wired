@@ -22,6 +22,7 @@ public interface EmplService {
 	int updateMember(EmplVO emplVo);
 	int upResignMember(int memNo);
 	List<Map<String, Object>> resignMember();
+	int upBackMember(int memNo);
 
 
 }

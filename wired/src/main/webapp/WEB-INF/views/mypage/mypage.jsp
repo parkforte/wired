@@ -122,11 +122,13 @@ span{
 		return pattern.test(tel);
 
 	}
-	
-	<%-- function windowonload(){
-		var flag='<%=(String)session.getAttribute("memFlag")%>';
+	function windowonload(){
+		if('${map['MEM_FLAG']}'=='N'){
+			alert("상세정보를 입력해주세요.");		
+			
+		}
 		
-	} --%>
+	}
 	window.onload = windowonload;
 	
 </script>
@@ -320,7 +322,7 @@ span{
 								<label for="memJoindate">입사일</label>
 								<input type="text"
 									 class="form-control form-control-user c-size"
-									id="memJoindate" name="memJoindate" ReadOnly value="${map['MEM_JOINDATE'] }">
+									id="memJoindate" name="memJoindate" ReadOnly value='<fmt:formatDate value="${map['MEM_JOINDATE'] }" pattern="yyyy-MM-dd"/>'>
 							</div>
 							<!-- 인증여부 -->
 							<div class="form-group">

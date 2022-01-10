@@ -55,7 +55,6 @@ public class LoginController {
 			session.setAttribute("memName", emplVo.getMemName());
 			session.setAttribute("ranksNo", emplVo.getRanksNo());
 			session.setAttribute("memNo", emplVo.getMemNo());
-			session.setAttribute("memFlag", emplVo.getMemFlag());
 
 			response.setContentType("text/html; charset=UTF-8");
 
@@ -105,7 +104,6 @@ public class LoginController {
 		session.removeAttribute("memName");
 		session.removeAttribute("ranksNo");
 		session.removeAttribute("memNo");
-		session.removeAttribute("memFlag");
 
 		return "redirect:/index";
 	}
