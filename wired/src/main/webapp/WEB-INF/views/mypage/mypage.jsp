@@ -79,6 +79,17 @@ label {
 span{
 	margin-bottom: 10px;
 }
+.check-margin {
+    margin-top: -17px;
+    margin-left: 6px;
+}
+.check-margin2 {
+    margin-top: 13px;
+    margin-left: 6px;
+}
+#t-width {
+    width: 3%;
+}
 </style>
 
 
