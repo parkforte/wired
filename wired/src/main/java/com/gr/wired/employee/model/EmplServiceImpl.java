@@ -84,6 +84,11 @@ public class EmplServiceImpl implements EmplService{
 		return emplDao.resignMember();
 	}
 
+	@Override
+	public int upBackMember(int memNo) {
+		return emplDao.upBackMember(memNo);
+	}
+
 
 
 

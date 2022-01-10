@@ -86,4 +86,10 @@
 		SELECT * FROM MEMBERINFO_VIEW
 		WHERE MEM_RESIGNDATE IS NOT NULL
 	</select>
+	
+	<update id="upBackMember" parameterType="int">
+		UPDATE MEMBER
+		SET MEM_RESIGNDATE=NULL
+		WHERE MEM_NO=#{memNo}
+	</update>
 </mapper>

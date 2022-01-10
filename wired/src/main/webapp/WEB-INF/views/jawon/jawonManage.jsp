@@ -42,7 +42,7 @@ a{
 
 
 </script>
-                        
+
       <!-- defaultPage -->
     <div class="container-fluid font">
 		<div id="topTitle">
@@ -51,19 +51,19 @@ a{
         <p class="mb-4">Resource Management</p>
 		</div>
         <!-- title1 -->
-           
+
          <div class="card shadow mb-4">
-            
+
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
                    <h6 class="m-0 font-weight-bold text-primary p-absolute">자원리스트</h6><!-- 게시판 이름 -->
   						<button type="button" class="btn btn-success listAdd" data-toggle="modal" data-target="#exampleList">리스트추가</button>
-         
-   		
+
+
          <!-- Topbar Navbar -->
            <ul class="navbar-nav ml-auto">
-      
+
                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                <li class="nav-item dropdown no-arrow d-sm-none">
                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -88,7 +88,7 @@ a{
                    </div>
                </li>
                </div>
-                <c:forEach var="i" begin="1" end="2">  
+                <c:forEach var="i" begin="1" end="2">
                <div class="card-body p-bottom-0">
                    <div class="table-responsive">
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -118,7 +118,7 @@ a{
                        </table>
                    </div>
                </div>
-    			</c:forEach> 
+    			</c:forEach>
     			<div class="card-body p-bottom-0">
                    <div class="table-responsive">
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -148,7 +148,7 @@ a{
                            </tbody>
                        </table>
                    </div>
-               </div> 
+               </div>
                 </div>
                 <!-- 리스트추가 Modal -->
                 <div class="modal fade" id="exampleList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -179,7 +179,7 @@ a{
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
-			        <button type="submit" class="btn btn-success">추가</button>
+			        <button type="submit" class="btn btn-success" onclick="location.href='/wired/jawon/listAdd'">추가</button>
 			      </div>
 			    </div>
 			  </div>
@@ -278,5 +278,4 @@ a{
      </div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
-         
-			
+

@@ -38,7 +38,16 @@
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
-
+$(function(){
+	$('.btn-back').each(function(index,item) {
+		$(this).click(function() {
+			var res=$(this).val();
+			$('#m-btn').click(function() {
+				location.href="<c:url value='/employee/emplBack?memNo='/>"+res;
+			});
+		});
+	});
+});	
 </script>
 
       <!-- defaultPage -->
@@ -114,8 +123,9 @@
 								   <td>${map['MEM_JOINDATE'] }</td>
 								   <td>${map['MEM_RESIGNDATE'] }</td>
                                    <td>
-									<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"
-										onclick="location.href=''"><i class="bi bi-box-arrow-left">복직</i></button>
+									<button type="button" class="btn btn-info btn-back" value="${map['MEM_NO'] }"
+									data-toggle="modal" data-target="#exampleModal">
+									<i class="bi bi-box-arrow-left">복직</i></button>
 									</td>
                                </tr>
                            </c:forEach>
@@ -171,7 +181,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >취소</button>
-			        <button type="submit" class="btn btn-primary">확인</button>
+			        <button type="submit" id="m-btn" class="btn btn-primary">확인</button>
 			      </div>
 			    </div>
 			  </div>
