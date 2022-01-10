@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gr.wired.confirm.model.ConfirmLineService;
 import com.gr.wired.confirm.model.ConfirmLineVO;
+import com.gr.wired.confirm.model.ConfirmService;
+import com.gr.wired.confirm.model.ConfirmVO;
 import com.gr.wired.confirm.model.LineregService;
 import com.gr.wired.confirm.model.LineregVO;
 import com.gr.wired.docform.model.DocformService;
@@ -28,7 +30,7 @@ import com.gr.wired.doctype.model.DoctypeService;
 import com.gr.wired.doctype.model.DoctypeVO;
 import com.gr.wired.employee.model.EmplService;
 import com.gr.wired.employee.model.EmplVO;
-import com.gr.wired.util.ApprovalUtil;
+import com.gr.wired.util.ConfirmUtil;
 import com.gr.wired.util.Signature.SignatureConst;
 import com.gr.wired.util.Signature.SignatureUploadUtil;
 
@@ -38,6 +40,7 @@ public class ConfirmController {
 
 	private static Logger logger = LoggerFactory.getLogger(ConfirmController.class);
 
+	private final ConfirmService confirmService;
 	private final EmplService emplService;
 	private final LineregService lineregService;
 	private final ConfirmLineService confirmlineService;
@@ -47,10 +50,11 @@ public class ConfirmController {
 
 
 	@Autowired
-	public ConfirmController(EmplService emplService, LineregService lineregService,
+	public ConfirmController(ConfirmService confirmService, EmplService emplService, LineregService lineregService,
 			ConfirmLineService confirmlineService, DocformService docformService, DoctypeService doctypeService,
 			SignatureUploadUtil signatureUploadUtil) {
 		super();
+		this.confirmService = confirmService;
 		this.emplService = emplService;
 		this.lineregService = lineregService;
 		this.confirmlineService = confirmlineService;
@@ -62,10 +66,12 @@ public class ConfirmController {
 
 
 
+
 	@RequestMapping("/docbox")
 	public void docbox_get() {
 		logger.info("문서함!");
 	}
+
 
 
 
@@ -282,11 +288,10 @@ public class ConfirmController {
 
 	@GetMapping("/write/selectForm")
 	public String selectForm_get(HttpSession session, Model model) {
-		//memId로 문서작성자 뿌리기
-		String memId=(String) session.getAttribute("memId");
-		logger.info("전자결재 문서작성페이지, memId={}", memId);
-		//날짜
-		String cfRegdate=ApprovalUtil.getToDay();
+		//memNo
+		int memNo=(int) session.getAttribute("memNo");
+		logger.info("전자결재 문서양식 선택페이지, memNo={}", memNo);
+
 		//양식선택목록
 		List<DocformVO> formList=docformService.selectAll();
 		logger.info("문서양식 formList.size={}",formList.size());
@@ -294,33 +299,58 @@ public class ConfirmController {
 		List<DoctypeVO> list=doctypeService.selectAll();
 		logger.info("문서종류 list.size={}",list.size());
 
+		//결재라인선택
+		List<LineregVO> lineregList=lineregService.SelectAllLinereg(memNo);
+		logger.info("결재라인종류 lineregList.size={}", lineregList.size());
+
 		model.addAttribute("list", list);
 		model.addAttribute("formList", formList);
-		model.addAttribute("cfRegdate", cfRegdate);
+		model.addAttribute("lineregList", lineregList);
 
 		return "e-approval/write/selectForm";
 	}
 
-	@GetMapping("/write/paperWrite")
-	public String approvalTree_get(HttpSession session, Model model) {
-		//memId로 문서작성자 뿌리기
-		String memId=(String) session.getAttribute("memId");
-		logger.info("전자결재 문서작성페이지, memId={}", memId);
+	@PostMapping("/write/insertConfirm")
+	public String insertConfirm(@ModelAttribute ConfirmVO confirmVo,HttpSession session, Model model) {
+		int memNo=(int) session.getAttribute("memNo");
+		logger.info("문서생성 완료 및 문서화면 이동 memNo={}", memNo);
+
+		confirmVo.setMemNo(memNo);
+		confirmVo.setCfState(ConfirmUtil.STATE_TEMP);
+		confirmVo.setCfTitle("제목을 입력하세요.");
+
+		int result=confirmService.insertPaper(confirmVo);
+		logger.info("result={},confirmVo={}",result,confirmVo);
+
+		String msg="문서생성 실패!", url="/e-approval/write/paperWrite";
+		if(result>0) {
+			msg="문서생성 성공! 작성 페이지로 이동합니다!";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
+
+
+	@RequestMapping("/write/paperWrite")
+	public void paperWrite_get(HttpSession session, Model model) {
+		int memNo=(int) session.getAttribute("memNo");
+		logger.info("전자결재 문서작성페이지, memNo={}", memNo);
+
 		//날짜
-		String cfRegdate=ApprovalUtil.getToDay();
-		//양식선택목록
-		List<DocformVO> formList=docformService.selectAll();
-		logger.info("문서양식 formList.size={}",formList.size());
+		String cfRegdate=ConfirmUtil.getToDay();
 
-		List<DoctypeVO> list=doctypeService.selectAll();
-		logger.info("문서종류 list.size={}",list.size());
+		//문서상세내용
+		ConfirmVO confirmVo=confirmService.selectTempByMemNo(memNo);
+		logger.info("confirmVo={}",confirmVo);
 
-		model.addAttribute("list", list);
-		model.addAttribute("formList", formList);
+		model.addAttribute("confirmVo", confirmVo);
 		model.addAttribute("cfRegdate", cfRegdate);
 
-		return "e-approval/write/paperWrite";
 	}
+
 
 
 

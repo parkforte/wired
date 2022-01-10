@@ -243,6 +243,7 @@
 			<b>문서양식과 결재라인을 선택하세요.</b>
 		</h5>
 	</div>
+	<form method="post" action="<c:url value='/e-approval/write/insertConfirm'/>">
 	<div>
 		<!-- title1 -->
 		<div class="card shadow mb-4 setMR10 f-left setW50 ">
@@ -251,15 +252,18 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<div id="jstree">
-						<c:if test="${!empty formList }">
-							<c:forEach var="formVo" items="${formList }">
-								<ul>
-									<li>${formVo.typeNo}-${formVo.formName }</li>
-								</ul>
-							</c:forEach>
-						</c:if>
-					</div>
+					<c:if test="${!empty formList }">
+						<c:forEach var="formVo" items="${formList }">
+							<div class="card" style="width: 18rem;">
+							  <ul class="list-group list-group-flush">
+							    <li class="list-group-item">
+							     &nbsp;&nbsp;<input class="form-check-input" type="radio" name="formNo" id="formNo" value="${formVo.formNo }" checked>
+							   	&nbsp;<i class="bi bi-clipboard"></i>${formVo.typeNo}-${formVo.formName }
+							    </li>
+							  </ul>
+							</div>
+						</c:forEach>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -271,13 +275,22 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<select class="form-control" name="confirmLine" id="confirmLine">
-						<option value="1">1</option>
+					<select class="form-control" name="regNo" id="regNo">
+						<c:if test="${empty lineregList }">
+							<option>결재라인종류를 선택하세요.</option>
+						</c:if>
+						<c:if test="${!empty lineregList}">
+							<c:forEach var="lineregVo" items="${lineregList }">
+								<option value="${lineregVo.regNo }">${lineregVo.regName }</option>
+							</c:forEach>
+						</c:if>
 					</select>
 				</div>
+				<button type="submit" class="btn btn-primary f-right setMRT10">문서생성</button>
 			</div>
 		</div>
 	</div>
+	</form>
 </div>
 <!-- /.container-fluid -->
 
