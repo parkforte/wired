@@ -24,7 +24,7 @@
 
 
 </script>
-                        
+
       <!-- defaultPage -->
     <div class="container-fluid font">
 		<div id="topTitle">
@@ -39,18 +39,18 @@
 		</form>
 		</div>
         <!-- title1 -->
-       <c:forEach var="i" begin="1" end="3">       
+       <c:forEach var="i" begin="1" end="3">
          <div class="card shadow mb-4 c-both">
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
                    <h6 class="m-0 font-weight-bold text-primary">내역이름</h6><!-- 게시판 이름 -->
-                   
-             
-   
+
+
+
          <!-- Topbar Navbar -->
            <ul class="navbar-nav ml-auto">
-      
+
                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                <li class="nav-item dropdown no-arrow d-sm-none">
                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -101,7 +101,7 @@
                    </div>
                </div>
                 </div>
-                
+
     </div>
     <!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -124,9 +124,8 @@
 			  </div>
 			</div>
     <!-- /.container-fluid -->
-    </c:forEach>  
+    </c:forEach>
      </div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
-         
-			
+
