@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gr.wired.addBook.model.addressBookDAO">
+	<sql id="searchWhere">
+		<if test="searchKeyword!=null and searchKeyword!=''">
+			where ${searchCondition} like '%' || #{searchKeyword} || '%'
+		</if>
+	</sql>
+
+	<insert id="insertAddressBook" parameterType="addressBookVO">
+		<selectKey keyProperty="addbookNo" resultType="int" order="BEFORE">
+			select ADDBOOK_SEQ.nextval from dual
+		</selectKey>
+		insert into ADDRESSBOOK (ADDRBOOK_NO, ADDRBOOK_NAME, ADDRBOOK_COMNAME,ADDRBOOK_TEL,ADDRBOOK_EMAIL,MEM_NO,ADDRBOOK_DEPT,ADDRBOOK_RANK)
+		values (#{addbookNo},#{addbookName},#{addbookComname},#{addbookTel},#{addbookEmail},#{memNo},#{addbookDept},#{addbookRank})
+	</insert>
+
+	<select id="selectPwd" parameterType="string" resultType="string">
+		SELECT MEM_PWD FROM MEMBER
+		WHERE MEM_ID=#{memId}
+	</select>
+
+	<select id="selectByMemId" parameterType="string" resultType="emplVo">
+		SELECT * FROM MEMBER
+		WHERE MEM_ID=#{memId}
+	</select>
+
+	<select id="selectAll" parameterType="searchVo" resultType="map">
+		SELECT *
+		FROM
+		(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM
+		    (
+		        SELECT ADDRBOOK_NAME, ADDRBOOK_COMNAME, ADDRBOOK_TEL, ADDRBOOK_EMAIL,ADDRBOOK_DEPT,ADDRBOOK_RANK
+		        FROM ADDRESSBOOK
+		        ORDER BY ADDRBOOK_NO DESC
+		    )A
+		)
+		<![CDATA[
+		WHERE RNUM>#{firstRecordIndex}
+			AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+
+	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+		<include refid="searchWhere"></include>
+	</select>
+
+	<update id="updateadd" parameterType="emplVo">
+		UPDATE MEMBER
+		SET MEM_NAME=#{memName}, MEM_HP1=#{memHp1}, MEM_HP2=#{memHp2}, MEM_HP3=#{memHp3},
+			MEM_PAY=#{memPay}, MEM_HOLIDAY=#{memHoliday}, DEPT_NO=#{deptNo},
+			POS_NO=#{posNo}, RANKS_NO=#{ranksNo}
+		WHERE MEM_NO=#{memNo}
+	</update>
+	<select id="selectByMemName" parameterType="emplVo" resultType="map">
+		select * from memberinfo_view
+		where mem_name like '%'||#{memName}||'%'
+	</select>
+</mapper>

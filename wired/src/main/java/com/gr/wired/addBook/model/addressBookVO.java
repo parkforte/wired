@@ -6,24 +6,9 @@ public class addressBookVO {
 	private String addbookComname;
 	private String addbookTel;
 	private String addbookEmail;
+	private int memNo;
 	private String addbookDept;
 	private String addbookRank;
-	public String getAddbookDept() {
-		return addbookDept;
-	}
-	public void setAddbookDept(String addbookDept) {
-		this.addbookDept = addbookDept;
-	}
-	public String getAddbookRank() {
-		return addbookRank;
-	}
-	public void setAddbookRank(String addbookRank) {
-		this.addbookRank = addbookRank;
-	}
-
-	private int memNo;
-	
-	
 	public int getAddbookNo() {
 		return addbookNo;
 	}
@@ -48,7 +33,6 @@ public class addressBookVO {
 	public void setAddbookTel(String addbookTel) {
 		this.addbookTel = addbookTel;
 	}
-	
 	public String getAddbookEmail() {
 		return addbookEmail;
 	}
@@ -61,11 +45,23 @@ public class addressBookVO {
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
-	
+	public String getAddbookDept() {
+		return addbookDept;
+	}
+	public void setAddbookDept(String addbookDept) {
+		this.addbookDept = addbookDept;
+	}
+	public String getAddbookRank() {
+		return addbookRank;
+	}
+	public void setAddbookRank(String addbookRank) {
+		this.addbookRank = addbookRank;
+	}
 	@Override
 	public String toString() {
 		return "addressBookVO [addbookNo=" + addbookNo + ", addbookName=" + addbookName + ", addbookComname="
-				+ addbookComname + ", addbookTel=" + addbookTel + ", addbookEmail=" + addbookEmail + ", addbookDept="
-				+ addbookDept + ", addbookRank=" + addbookRank + ", memNo=" + memNo + "]";
+				+ addbookComname + ", addbookTel=" + addbookTel + ", addbookEmail=" + addbookEmail + ", memNo=" + memNo
+				+ ", addbookDept=" + addbookDept + ", addbookRank=" + addbookRank + "]";
 	}
+	
 }
