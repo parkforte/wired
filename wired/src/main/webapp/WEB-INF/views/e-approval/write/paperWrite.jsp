@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp"%>
+<%@ include file="../../inc/top.jsp"%>
 
 <!-- http://localhost:9091/wired/default/defaultPage -->
 <!-- 2 load the theme CSS file -->
@@ -103,6 +103,90 @@
 	margin-left: 40px;
 	margin-top: 5px;
 }
+
+
+.bs4-order-tracking {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #878788;
+    padding-left: 0px;
+    margin-top: 30px
+}
+
+.bs4-order-tracking li {
+    list-style-type: none;
+    font-size: 13px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: #878788;
+    text-align: center
+}
+
+.bs4-order-tracking li:first-child:before {
+    margin-left: 15px !important;
+    padding-left: 11px !important;
+    text-align: left !important
+}
+
+.bs4-order-tracking li:last-child:before {
+    margin-right: 5px !important;
+    padding-right: 11px !important;
+    text-align: right !important
+}
+
+.bs4-order-tracking li>div {
+    color: #fff;
+    width: 29px;
+    text-align: center;
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #878788;
+    border-radius: 50%;
+    margin: auto
+}
+
+.bs4-order-tracking li:after {
+    content: '';
+    width: 150%;
+    height: 2px;
+    background: #878788;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 15px;
+    z-index: -1
+}
+
+.bs4-order-tracking li:first-child:after {
+    left: 50%
+}
+
+.bs4-order-tracking li:last-child:after {
+    left: 0% !important;
+    width: 0% !important
+}
+
+.bs4-order-tracking li.active {
+    font-weight: bold;
+    color: pink;
+}
+
+.bs4-order-tracking li.active>div {
+    background: pink;
+}
+
+.bs4-order-tracking li.active:after {
+    background: pink;
+}
+
+.card-timeline {
+    background-color: #fff;
+    z-index: 0
+}
+
 </style>
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 <script
@@ -151,7 +235,26 @@
 </script>
 <!-- 전자결재HOME -->
 <div class="container-fluid">
-<%@ include file="include/navbar.jsp"%>
+<%@ include file="../include/navbar.jsp"%>
+<div class="card card-timeline px-2 border-none">
+    <ul class="bs4-order-tracking">
+        <li class="step active">
+            <div><i class="fas fa-user"></i></div> Order Placed
+        </li>
+        <li class="step">
+            <div><i class="fas fa-bread-slice"></i></div> In transit
+        </li>
+        <li class="step">
+            <div><i class="fas fa-truck"></i></div> Out for delivery
+        </li>
+        <li class="step ">
+            <div><i class="fas fa-birthday-cake"></i></div> Delivered
+        </li>
+    </ul>
+    <h5 class="text-center"><b>In transit</b>. The order has been shipped!</h5>
+</div>
+
+
 	<div>
 		<!-- title1 -->
 		<div class="card shadow mb-4 setW20 setMR10 f-left">
@@ -305,4 +408,4 @@
 </div>
 <!-- /.container-fluid -->
 
-<%@ include file="../inc/bottom.jsp"%>
+<%@ include file="../../inc/bottom.jsp"%>

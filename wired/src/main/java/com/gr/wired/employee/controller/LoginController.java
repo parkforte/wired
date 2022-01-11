@@ -48,7 +48,7 @@ public class LoginController {
 		int result=emplService.loginCheck(vo.getMemId(), vo.getMemPwd());
 		if(result==emplService.LOGIN_OK) {
 			EmplVO emplVo=emplService.selectByMemId(vo.getMemId());
-
+			logger.info("emplV={}",emplVo.getMemFlag());
 			//[1] 세션에 아이디 저장
 			HttpSession session=request.getSession();
 			session.setAttribute("memId", vo.getMemId());
@@ -102,6 +102,8 @@ public class LoginController {
 
 		session.removeAttribute("memId");
 		session.removeAttribute("memName");
+		session.removeAttribute("ranksNo");
+		session.removeAttribute("memNo");
 
 		return "redirect:/index";
 	}

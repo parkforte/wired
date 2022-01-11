@@ -9,11 +9,16 @@ import com.gr.wired.common.SearchVO;
 
 @Mapper
 public interface EmplDAO {
-	int insertEmployee(EmplVO emplVo);
+	int insertMember(EmplVO emplVo);
 	String selectPwd(String memId);
 	EmplVO selectByMemId(String memId);
 	List<Map<String, Object>> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
 	int updateSignature(EmplVO emplVo);
 	List<Map<String, Object>> selectByMemName(EmplVO emplVo);
+	Map<String, Object> selectByView(int memNo);
+	int updateMember(EmplVO emplVo);
+	int upResignMember(int memNo);
+	List<Map<String, Object>> resignMember();
+	int upBackMember(int memNo);
 }

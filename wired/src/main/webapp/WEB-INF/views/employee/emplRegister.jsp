@@ -89,7 +89,7 @@ span {
 	                    <!-- title1 -->
 	                    <div class="card shadow mb-4 r-table">
 	                        <div class="card-body">
-	                        <form name="frm1" class="user" method="post" action="<c:url value='/employee/emplRegister'/>">
+	           				 <form name="frm1" class="user" method="post" action="<c:url value='/employee/emplRegister'/>">
 	                            <div class="table-responsive">
 				                    <div class="outer">
 					                    <h1 class="h3 mb-2 text-gray-800 h1-style">사원등록</h1>
@@ -172,38 +172,20 @@ span {
 								        <option value="3">관리자</option>
 								    </select>
 								    </div>
-	                                <div class="form-group c-size">
+	                                <div class="form-group c-size" style="text-align: center;">
 	                                <br>
 	                                    <button type="submit" class="btn btn-primary b-radius" id="first_button">등록</button>
 	                                    <button type="button" class="btn btn-danger b-radius" onclick="location.href='<c:url value='../index'/>'">취소</button>
 	                                    <button type="button" class="btn btn-secondary b-radius" onclick="location.href='<c:url value='emplList'/>'">목록</button>
                                 	</div>
 	                            </div>
-	                          </form>
+								</form>
 	                        </div>
 						</div>
 
                 </div>
                 <!-- Modal -->
-			<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog modal-dialog-centered">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			      	<h5 class="modal-title" id="exampleModalLabel">사원등록</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        등록하시겠습니까?
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary b-radius" data-dismiss="modal" >취소</button>
-			        <button type="submit" class="btn btn-primary b-radius" id="regi_submit">확인</button>
-			      </div>
-			    </div>
-			  </div>
-			</div> -->
+
                 <!-- /.container-fluid -->
 
 <%@ include file="../inc/bottom.jsp" %>

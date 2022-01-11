@@ -9,7 +9,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 .wi-color{
-	background-color: #6868AC; 
+	background-color: #6868AC;
 	border-color: #6868AC;
 	color: white;
 }
@@ -38,10 +38,18 @@
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
-
-
+$(function(){
+	$('.btn-back').each(function(index,item) {
+		$(this).click(function() {
+			var res=$(this).val();
+			$('#m-btn').click(function() {
+				location.href="<c:url value='/employee/emplBack?memNo='/>"+res;
+			});
+		});
+	});
+});	
 </script>
-                        
+
       <!-- defaultPage -->
     <div class="container-fluid font">
 		<div id="topTitle">
@@ -57,11 +65,11 @@
 		</div>
         <!-- title1 -->
          <div class="card shadow mb-4 c-both">
-            
+
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-         
+
                    <!-- Dropdown - Messages -->
                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                        aria-labelledby="searchDropdown">
@@ -91,22 +99,37 @@
                                    <th>부서</th>
                                    <th>직급</th>
                                    <th>연락처</th>
+                                   <th>입사일</th>
+                                   <th>퇴사일</th>
                                    <th>복직</th>
                                </tr>
                            </thead>
                            <tbody>
+                           <!-- 데이터 있는 경우, 반복 시작 -->
+                           <c:forEach var="map" items="${list }">
                                <tr>
                                	   <td><input type="checkbox" class="form-check-input check-margin2" id="exampleCheck1"></td>
-                                   <td>1</td>
-                                   <td>송지효</td>
-                                   <td>총무부</td>
-                                   <td>과장</td>
-                                   <td>010-1234-5678</td>
+                                   <td>${map['MEM_NO'] }</td>
+                                   <td>${map['MEM_NAME'] }</td>
+                                   <td>${map['DEPT_NAME'] }</td>
+                                   <td>${map['POS_NO'] }</td>
                                    <td>
-									<button type="button" class="btn wi-color" 
-										data-toggle="modal" data-target="#exampleModal" onclick="location.href=''">복직</button>
+										<c:if test="${!empty map['MEM_HP1'] }">
+									           <span id="hp1">${map['MEM_HP1'] }</span>
+									           - <span id="hp2">${map['MEM_HP2'] }</span>
+									           - <span id="hp3">${map['MEM_HP3'] }</span>
+								        </c:if>
+								   </td>
+								   <td>${map['MEM_JOINDATE'] }</td>
+								   <td>${map['MEM_RESIGNDATE'] }</td>
+                                   <td>
+									<button type="button" class="btn btn-info btn-back" value="${map['MEM_NO'] }"
+									data-toggle="modal" data-target="#exampleModal">
+									<i class="bi bi-box-arrow-left">복직</i></button>
 									</td>
                                </tr>
+                           </c:forEach>
+                           <!-- 반복 끝 -->
                            </tbody>
                        </table>
                    </div>
@@ -118,9 +141,9 @@
               				<div class="dataTables_info" id="dataTables_info" role="status">
               					Showing 1 to 10 of 57 entries
               				</div>
-              			
+
               			</div>
-              			
+
               			<!-- 페이징 1,2,3,4,5, -->
               			<div class="col-sm-12 col-md-7">
               				<nav aria-label="...">
@@ -140,9 +163,9 @@
 							</nav>
               			</div>
               		</div>
-                
+
     </div>
-    
+
     <!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">
@@ -158,7 +181,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >취소</button>
-			        <button type="submit" class="btn btn-primary">확인</button>
+			        <button type="submit" id="m-btn" class="btn btn-primary">확인</button>
 			      </div>
 			    </div>
 			  </div>
@@ -167,5 +190,4 @@
      </div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
-         
-			
+

@@ -5,7 +5,7 @@
 <mapper namespace="com.gr.wired.mypage.model.MypageDAO">
 
 	<select id="selectByMemId" parameterType="string" resultType="map">
-		SELECT *
+		SELECT DISTINCT *
 		FROM MEMBER M JOIN DEPARTMENT D
 		ON M.DEPT_NO=D.DEPT_NO
 		JOIN POSITION P

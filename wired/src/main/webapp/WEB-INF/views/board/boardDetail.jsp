@@ -41,6 +41,13 @@ button.btn.btn-primary.f-right {
 div#comment {
     margin-bottom: 29px;
 }
+/* 댓글 */
+.row.replyWrite {
+    MARGIN-BOTTOM: 9px;
+}
+button#btReply {
+    margin-left: 9px;
+}
 </style>
 <script type="text/javascript" src="/libs/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -61,17 +68,17 @@ div#comment {
 
 	$(function () {
 		$('.replyWrite').hide();
-		$('.btn-outline-secondary').click(function () {
-			$('.replyWrite').show();
-		});
-
-// 		$('button').each(function () {
-// 			(this).click(function () {
-// 				alert("11111");
-// 				$(this).siblings('.replyWrite').show();
-// 			});
+// 		$('.btn-outline-secondary').click(function () {
+// 			$('.replyWrite').hide();
+// 			$('.replyWrite').show();
 // 		});
 
+		$('.btn-outline-secondary').each(function (index, item) {
+			$(this).click(function () {
+				$('.replyWrite').hide();
+				$(this).siblings('.replyWrite').show();
+			});
+		});
 		$('#btList').click(function(){
 			location.href="<c:url value='/board/boardList?bdlistNo=${boardVo["BDLIST_NO"]}'/>";
 		});
@@ -108,16 +115,15 @@ div#comment {
                             	<button type="button" class="btn btn-primary detailbt f-left" style="font-size: 0.7em" id="recommend">
                            			${boardVo['BOARD_RECOMMEND']} 추천
                           		</button>
-                          		<c:set var="memNo" value="${sessionScope.memNo }"/>
-                          		<c:set var="MEM_NO" value="${$map['MEM_NO'] }"/>
-
-                          		<c:if test="${memNo==MEM_NO }">
-		                            <button type="button" class="btn btn-primary f-left detailbt" id="btList" >글목록</button>
+								<input type="hidden" value="${boardVo['MEM_NO']}">
+								<input type="hidden" value="${sessionScope.memNo }">
+	                            <button type="button" class="btn btn-primary f-left detailbt" id="btList" >글목록</button>
+                          		<c:if test="${sessionScope.memNo==boardVo['MEM_NO'] }">
 		                            <button type="button" class="btn btn-primary f-left detailbt" id="btUpdate">글수정</button>
+		                            <!-- 삭제버튼 클릭하면 모달창 생성후 삭제하겠습니다 라는 입력받아서 같으면 처리해보기-->
+									<button type="button" class="btn btn-danger f-left detailbt" id="deleteBt" data-toggle="modal" data-target="#exampleModal">글삭제</button>
                           		</c:if>
 
-	                            <!-- 삭제버튼 클릭하면 모달창 생성후 삭제하겠습니다 라는 입력받아서 같으면 처리해보기-->
-								<button type="button" class="btn btn-danger f-left detailbt" id="deleteBt" data-toggle="modal" data-target="#exampleModal">글삭제</button>
 
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -165,7 +171,7 @@ div#comment {
                             	<!-- 댓글창 -->
                             	<form name="frmDetail" method="post" action='<c:url value="/board/boardDetail"/>'>
                             	<div style="height:117px" id="comment">
-                            		<input type="text" name="boardNo" value="${param.boardNo }">
+                            		<input type="hidden" name="boardNo" value="${param.boardNo }">
                             		<textarea class="form-control" name="repContent" id="exampleFormControlTextarea1" rows="3" placeholder="바르말 고운말 사용"></textarea>
                             		<button type="submit" class="btn btn-primary f-right">등록</button>
                             	</div>
@@ -174,24 +180,42 @@ div#comment {
                             	<hr>
 								<c:forEach var="map" items="${reList }">
 									<div>
-		                           		<div class="f-left"><span>${map['MEM_NAME'] }</span></div>&nbsp;&nbsp;<span>${map['REP_CONTENT'] }</span>
-		                           		<button type="button" class="btn btn-outline-secondary" name="reply${map[REP_NO] }">댓글</button>
-										<hr>
-									<!-- 대댓글 쓰기창  *자신을 제외한 댓들 등록창은 hide* -->
-										<div class="row replyWrite">
-											<div class="f-left" style="width:7%"><span>${sessionScop.memId }</span></div>&nbsp;&nbsp;
+										<form name="frmReply" method="post" action='<c:url value="/board/boardReply"/>'>
+			                           		<input type="hidden" name="repGroup" value="${map['REP_GROUP'] }">
+			                           		<input type="hidden" name="repSortno" value="${map['REP_SORTNO'] }">
+			                           		<input type="hidden" name="repDepth" value="${map['REP_DEPTH'] }">
+											<input type="hidden" name="boardNo" value="${param.boardNo }">
+											<input type="hidden" name="memNo" value="${sessionScope.memNo }">
 
-											<div class="f-left" style="width:89%"><input type="text" class="form-control form-control-sm form-control-user c-size infobox f-right" id="title" placeholder="바르말 고운말 사용"></div>
-											<button type="submit" class="btn btn-outline-primary" id="btReply">등록</button>
+		                           			<div class="f-left">
+		                           			<c:if test="${map['REP_DEPTH'] > 0}">
+			                           			<c:forEach var="i" begin="1" end="${map['REP_DEPTH'] }">
+			                           				&nbsp;&nbsp;
+			                           			</c:forEach>
+			                           			<i class="bi bi-arrow-return-right"></i>
+			                           		</c:if>
+		                           			<span>${map['MEM_NAME'] }</span>
+		                           			</div>&nbsp;&nbsp;<span>${map['REP_CONTENT'] }</span>
+
+			                           		<button type="button" class="btn btn-outline-secondary" name="reply">댓글</button>
+											<hr>
+										<!-- 대댓글 쓰기창  *자신을 제외한 댓들 등록창은 hide* -->
+											<div class="row replyWrite">
+												<div class="f-left" style="width:7%"><span>${sessionScope.memId }</span></div>&nbsp;&nbsp;
+
+												<div class="f-left" style="width:86%">
+													<input type="text" name="repContent" class="form-control form-control-sm form-control-user c-size infobox f-right" id="title" placeholder="바르말 고운말 사용">
+												</div>
+												<button type="submit" class="btn btn-outline-primary" id="btReply" name="btReply">등록</button>
+											</div>
+											</form>
 										</div>
-									</div>
 
 								</c:forEach>
-								<hr>
 
                             	<!-- 대댓글 -->
-                            	<i class="bi bi-arrow-return-right"></i><label class="replylabel">김방방</label>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span><button type="button" class="btn btn-outline-secondary">댓글</button>
-                            	<hr style="">
+<!--                             	<i class="bi bi-arrow-return-right"></i><label class="replylabel">김방방</label>&nbsp;&nbsp;<span>샬라샬라샷ㄹ샬사라</span><button type="button" class="btn btn-outline-secondary">댓글</button> -->
+<!--                             	<hr style=""> -->
 
 
 

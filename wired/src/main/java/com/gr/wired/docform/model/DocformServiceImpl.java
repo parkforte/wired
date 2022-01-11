@@ -18,7 +18,6 @@ public class DocformServiceImpl implements DocformService {
 	@Autowired
 	public DocformServiceImpl(DocformDAO docformDao) {
 		this.docformDao = docformDao;
-		logger.info("DocformServiceImpl 생성자주입!");
 	}
 
 

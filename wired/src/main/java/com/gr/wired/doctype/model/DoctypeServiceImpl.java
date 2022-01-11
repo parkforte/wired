@@ -18,7 +18,6 @@ public class DoctypeServiceImpl implements DoctypeService{
 	@Autowired
 	public DoctypeServiceImpl(DoctypeDAO doctypeDao) {
 		this.doctypeDao = doctypeDao;
-		logger.info("DoctypeServiceImpl 생성자주입");
 	}
 
 

@@ -1,5 +1,14 @@
 package com.gr.wired.confirm.model;
 
-public interface ConfirmLineDAO {
+import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ConfirmLineDAO {
+	int insertConfirmLine(LineregVO lineregVo);
+	List<Map<String, Object>> selectALLRegNo(int regNo);
+	int insertAddLine(ConfirmLineVO lineVo);
+	int deleteOrder(ConfirmLineVO confirmlineVo);
 }

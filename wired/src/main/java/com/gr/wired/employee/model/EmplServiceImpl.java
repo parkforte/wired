@@ -18,8 +18,8 @@ public class EmplServiceImpl implements EmplService{
 	}
 
 	@Override
-	public int insertEmployee(EmplVO emplVo) {
-		return emplDao.insertEmployee(emplVo);
+	public int insertMember(EmplVO emplVo) {
+		return emplDao.insertMember(emplVo);
 	}
 
 	@Override
@@ -63,6 +63,36 @@ public class EmplServiceImpl implements EmplService{
 	public List<Map<String, Object>> selectByMemName(EmplVO emplVo) {
 		return emplDao.selectByMemName(emplVo);
 	}
+
+	@Override
+	public Map<String, Object> selectByView(int memNo) {
+		return emplDao.selectByView(memNo);
+	}
+
+	@Override
+	public int updateMember(EmplVO emplVo) {
+		return emplDao.updateMember(emplVo);
+	}
+
+	@Override
+	public int upResignMember(int memNo) {
+		return emplDao.upResignMember(memNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> resignMember() {
+		return emplDao.resignMember();
+	}
+
+	@Override
+	public int upBackMember(int memNo) {
+		return emplDao.upBackMember(memNo);
+	}
+
+
+
+
+
 
 
 

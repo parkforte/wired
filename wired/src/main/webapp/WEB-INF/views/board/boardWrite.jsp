@@ -117,7 +117,7 @@ input#title {
 					</div>
 					<div>
 						<button type="button" class="btn btn-primary f-left" id="btList">글목록</button>
-						<input type="text" value="${param.bdlistNo } ">
+						<input type="text" name="bdlistNo" value="${param.bdlistNo } ">
 					</div>
 				</form>
         	</div>
