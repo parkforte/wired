@@ -6,4 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ConfirmDAO {
 	int insertPaper(ConfirmVO confirmVo);
 	ConfirmVO selectTempByMemNo(int memNo);
+	int countTemp(int memNo);
+	int deleteTemp(int memNo);
+	int updateContent(ConfirmVO confirmVo);
 }

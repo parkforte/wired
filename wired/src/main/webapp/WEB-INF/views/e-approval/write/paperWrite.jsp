@@ -61,7 +61,6 @@
 	font-size: 14px;
 	font-weight: normal;
 	overflow: hidden;
-	padding: 10px 5px;
 	word-break: normal;
 }
 
@@ -81,20 +80,16 @@
 }
 
 .sigTitle {
-	width: 50px;
 	height: 20px;
 	background-color: pink;
 }
 
-.sigImg {margin-top20px;
-	width: 50px;
-	height: 50px;
+.sigImg {
+	margin-top:20px;
 	background-color: silver;
 }
 
 .sigBox {
-	padding: 0;
-	width: 50px;
 	height: 70px;
 	background-color: silver;
 }
@@ -186,41 +181,11 @@
 	z-index: 0
 }
 </style>
-<link rel="stylesheet"
-	href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
-	type="text/css" />
-<script
-	src="<c:url value='/resources/api/jsTree/dist/libs/jquery.js'/> "></script>
-<script src="<c:url value='/resources/api/jsTree/dist/jstree.min.js'/> "></script>
-<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+<script src="<c:url value='/resources/api/jsTree/dist/libs/jquery.js'/> "></script>
 
 <script type="text/javascript">
 	$(function() {
 
-		$('form[name=frmWrite]').submit(function(){
-			$('.infobox').each(function(idx, item){
-				if($(this).val().length<1){
-					alert($(this).prev().html() + "을(를) 입력하세요");
-					$(this).focus();
-					event.preventDefault();
-					return false;  //each 탈출
-				}
-			});
-		});
-
-		$('#btList').click(function(){
-			location.href="<c:url value='/board/boardList'/>";
-		});
-		function save(){
-			oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
-		    		//스마트 에디터 값을 텍스트컨텐츠로 전달
-			var content = document.getElementById("smartEditor").value;
-			alert(document.getElementById("txtContent").value);
-		    		// 값을 불러올 땐 document.get으로 받아오기
-			return;
-		}
-
-		$("div#myId").dropzone({ url: "/file/post" });
 	});
 
 
@@ -271,10 +236,9 @@
 					</a>
 				</div>
 			</div>
+			<form method="post" id="paperWrite" action="<c:url value='/e-approval/write/updating'/>">
 			<div class="card-body">
 				<div class="table-responsive">
-
-					<c:forEach var="vo" items="confirmVo">
 					<div class="paper">
 						<div class="content">
 
@@ -282,14 +246,14 @@
 								<thead>
 									<tr>
 										<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>품의서</h3></th>
-										<th class="tg-lboi" colspan="4" rowspan="5"><img
+										<th class="tg-lboi" colspan="5" rowspan="5"><img
 											src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
-										<th>
+									<!-- 	<th>
 											<div class="sigBox">
 												<div class="sigTitle"></div>
 												<div class="sigImg"></div>
 											</div>
-										</th>
+										</th> -->
 										<th>
 											<div class="sigBox">
 												<div class="sigTitle"></div>
@@ -309,15 +273,15 @@
 								<tbody>
 									<tr>
 										<td class="tg-lboi">기안부서</td>
-										<td class="tg-lboi" colspan="2"></td>
+										<td class="tg-lboi" colspan="2">${map["DEPT_NAME"]}</td>
 										<td class="tg-lboi">기안일</td>
 										<td class="tg-lboi" colspan="2">${cfRegdate }</td>
 										<td class="tg-lboi">문서번호</td>
-										<td class="tg-lboi" colspan="2">WIRED-${vo.memNo }-${vo.cfNo }</td>
+										<td class="tg-lboi" colspan="2">WIRED-${confirmVo.memNo }-${confirmVo.cfNo }</td>
 									</tr>
 									<tr>
 										<td class="tg-lboi">기안자</td>
-										<td class="tg-lboi" colspan="2">${vo.memNo  }</td>
+										<td class="tg-lboi" colspan="2">${map["MEM_NAME"] }</td>
 										<td class="tg-lboi">보존년한</td>
 										<td class="tg-lboi" colspan="2">5년</td>
 										<td class="tg-lboi">비밀등급</td>
@@ -326,11 +290,11 @@
 									<tr>
 										<td class="tg-lboi">제목</td>
 										<td class="tg-lboi" colspan="8"><input
-											class="form-control" type="text" placeholder="제목을 입력하세요." ></td>
+											class="form-control" type="text" id="cfTitle" name="cfTitle" placeholder="제목을 입력하세요." ></td>
 									</tr>
 									<tr>
 										<td class="tg-0lax" colspan="9" rowspan="14"><textarea
-												id="txtContent" rows="20" cols="100" style="width: 100%;"
+												id="txtContent" name="cfContent" rows="20" cols="100" style="width: 100%;"
 												class="infobox"></textarea> <!-- textarea 밑에 script 작성하기 -->
 											<script type="text/javascript"
 												src='<c:url value="/resources/api/smarteditor/js/service/HuskyEZCreator.js"/>'
@@ -350,6 +314,20 @@
 														// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
 														bUseModeChanger : false
 													    }
+
+													$("#submit").click(function(){
+														oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
+														if($('#cfTitle').val().length<1){
+															if($('#cfTitle').val().length<1){
+																alert('제목을 입력하세요');
+																$('cfTitle').focus();
+																event.preventDefault();
+															}
+														}else{
+															$('#paperWrite').submit();
+														}
+													});
+
 													});
 												</script></td>
 									</tr>
@@ -357,19 +335,18 @@
 								<tfoot>
 									<tr>
 										<td class="tg-0lax">증빙서류</td>
-										<td class="tg-0lax dnd" colspan="8"><form
-												action="/file-upload" class="dropzone"
-												id="my-awesome-dropzone"></form></td>
+										<td class="tg-0lax dnd" colspan="8"><input type="file" name="cfFile"></td>
 									</tr>
 								</tfoot>
 							</table>
-
+							<input type="text" name="memNo" value="${map['MEM_NO'] }">
+							<input type="text" name="deptNo" value="${map['DEPT_NO'] }">
+							<input type="submit" id="submit" value="submit">
 						</div>
 					</div>
-					</c:forEach>
 				</div>
 			</div>
-
+			</form>
 		</div>
 	</div>
 </div>
