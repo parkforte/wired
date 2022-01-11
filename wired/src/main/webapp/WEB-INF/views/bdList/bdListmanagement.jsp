@@ -31,7 +31,26 @@
 
 </script>
 
-
+				<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        ...
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        <button type="button" class="btn btn-primary">Save changes</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 
                <!-- defaultPage -->
                 <div class="container-fluid" >
@@ -42,8 +61,8 @@
 
 					<!-- 페이징 처리를 위한 form 시작-->
 					<form name="frmPage" method="post" action="<c:url value='/bdList/bdListmanagement'/>">
-						<input type="hidden" name="currentPage" id="currentPage">
-						<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+						<input type="text" name="currentPage" id="currentPage">
+						<input type="text" name="searchKeyword" value="${param.searchKeyword }">
 					</form>
 					<!-- 페이징 처리를 위한 form 끝-->
 
@@ -81,27 +100,6 @@
 				                                   <td>
 				                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
 				                                   </td>
-				                                   <!-- Modal -->
-													<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													  <div class="modal-dialog modal-dialog-centered">
-													    <div class="modal-content">
-													      <div class="modal-header">
-													        <h5 class="modal-title" id="exampleModalLabel">게시판 삭제</h5>
-													        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													          <span aria-hidden="true">&times;</span>
-													        </button>
-													      </div>
-													      <div class="modal-body">
-													       	${map['BDLIST_NAME'] }게시판을 삭제 하시겠습니까?
-													      </div>
-													      <div class="modal-footer">
-													        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-													        <button type="button" class="btn btn-danger"
-													        	onclick="location.href='<c:url value="/bdList/bdListmanagement?bdlistNo=${map['BDLIST_NO'] }"/>'">Delete</button>
-													      </div>
-													    </div>
-													  </div>
-													</div>
 				                               </tr>
 				                           </c:forEach>
 											<!-- 반복 끝 -->

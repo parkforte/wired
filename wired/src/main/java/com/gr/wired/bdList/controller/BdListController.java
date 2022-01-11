@@ -33,16 +33,9 @@ public class BdListController {
 	}
 
 	@RequestMapping("/bdListmanagement")
-	public String bdlist(@ModelAttribute SearchVO searchVo, @RequestParam(defaultValue = "0") int bdlistNo, Model model) {
+	public String bdlist(@ModelAttribute SearchVO searchVo, Model model) {
 		//1. 파라미터 읽어오기
 		logger.info("관리자 게시판목록 화면");
-		logger.info("게시판 삭제,  파라미터 bdlistNo={}", bdlistNo);
-		if(bdlistNo>0) {
-			int cnt=bdListService.deleteBoardList(bdlistNo);
-			if(cnt>0) {
-				logger.info("게시판 삭제 완료");
-			}
-		}
 
 		//[1] paginationInfo
 		PaginationInfo pagingInfo = new PaginationInfo();
@@ -86,15 +79,6 @@ public class BdListController {
 		String msg="게시판 등록 실패", url="/bdList/bdListmanagement";
 		logger.info("게시판 생성, 파라미터 vo={}", bdListVo);
 		logger.info("frmNum={}", frmNum);
-		if(bdListVo.getBdlistRe()!='Y') {
-			bdListVo.setBdlistRe('N');
-		}
-		if(bdListVo.getBdlistUp()!='Y') {
-			bdListVo.setBdlistUp('N');
-		}
-		if(bdListVo.getBdlistRc()!='Y') {
-			bdListVo.setBdlistRc('N');
-		}
 		//2 db
 		int cnt=0;
 		if(frmNum==1) {
@@ -120,15 +104,6 @@ public class BdListController {
 		//4 뷰페이지 리턴
 		return "common/message";
 	}
-
-
-
-
-
-
-
-
-
 
 
 

@@ -68,6 +68,11 @@ button#btReply {
 
 	$(function () {
 		$('.replyWrite').hide();
+// 		$('.btn-outline-secondary').click(function () {
+// 			$('.replyWrite').hide();
+// 			$('.replyWrite').show();
+// 		});
+
 		$('.btn-outline-secondary').each(function (index, item) {
 			$(this).click(function () {
 				$('.replyWrite').hide();
@@ -81,30 +86,35 @@ button#btReply {
 			location.href="<c:url value='/board/boardUpdate?boardNo=${param.boardNo}'/>";
 		});
 		$('#recommend').click(function(){
-			location.href="<c:url value='/board/recommend?boardNo=${param.boardNo}&bdlistNo=${param.bdlistNo}'/>";
+			location.href="<c:url value='/board/recommend?boardNo=${param.boardNo}'/>";
 		});
+
+
+
 	});
 
+
+
+
 </script>
+
                <!-- defaultPage -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">게시판-${bdListVo.bdlistName }</h1>
+                    <h1 class="h3 mb-2 text-gray-800">게시판</h1>
                     <p class="mb-4">Company bulletin board.</p>
 
                     <!-- title1 -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">${boardVo.boardTitle}</h6>
+
                             <!-- 작성자만 볼수있게 버튼if 처리 세션에서 아이디 가져와 셀렉트-->
                             <div class="f-right bdDetailBtDiv">
-                            	<c:if test="${bdListVo.bdlistRc eq '89'}">
-	                            	<button type="button" class="btn btn-primary detailbt f-left" style="font-size: 0.7em" id="recommend">
-	                           			${boardVo.boardRecommend} 추천
-	                          		</button>
-                            	</c:if>
-
+                            	<button type="button" class="btn btn-primary detailbt f-left" style="font-size: 0.7em" id="recommend">
+                           			${boardVo.boardRecommend} 추천
+                          		</button>
 								<input type="hidden" value="${boardVo.memNo}">
 								<input type="hidden" value="${sessionScope.memNo }">
 	                            <button type="button" class="btn btn-primary f-left detailbt" id="btList" >글목록</button>
@@ -148,11 +158,11 @@ button#btReply {
 	                            	<p>${boardVo.boardContent}</p>
                             	</div>
 								<div class="f-right">
-									<c:if test="${!empty boardVo.boardFilename }">
 									<span class="sp1">첨부파일</span>
+									<c:if test="${!empty boardVo.boardFilename }">
 										<span>
 											<a href
-						='<c:url value="/board/download?boardNo=${param.boardNo }&boardFilename=${boardVo.boardFilename }"/>'>
+						='<c:url value="/board/download?boareNo=${param.boardNo }&boardFilename=${boardVo.boardFilename }"/>'>
 												${fileInfo}</a>
 											다운 : ${boardVo.boardDowncount}
 										</span>
@@ -161,8 +171,8 @@ button#btReply {
                             </div>
                         </div>
                     </div>
+                    <!-- 데이터 전송버튼 -->
 
-					<c:if test="${bdListVo.bdlistRe eq '89'}">
                     <!-- title2 여러개필요시사용 -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -173,7 +183,6 @@ button#btReply {
                             	<!-- 댓글창 -->
                             	<form name="frmDetail" method="post" action='<c:url value="/board/boardDetail"/>'>
                             	<div style="height:117px" id="comment">
-                            		<input type="hidden" name="bdlistNo" value="${param.bdlistNo }">
                             		<input type="hidden" name="boardNo" value="${param.boardNo }">
                             		<textarea class="form-control" name="repContent" id="exampleFormControlTextarea1" rows="3" placeholder="바르말 고운말 사용"></textarea>
                             		<button type="submit" class="btn btn-primary f-right">등록</button>
@@ -184,7 +193,6 @@ button#btReply {
 								<c:forEach var="map" items="${reList }">
 									<div>
 										<form name="frmReply" method="post" action='<c:url value="/board/boardReply"/>'>
-			                           		<input type="hidden" name="bdlistNo" value="${param.bdlistNo }">
 			                           		<input type="hidden" name="repGroup" value="${map['REP_GROUP'] }">
 			                           		<input type="hidden" name="repSortno" value="${map['REP_SORTNO'] }">
 			                           		<input type="hidden" name="repDepth" value="${map['REP_DEPTH'] }">
@@ -228,7 +236,6 @@ button#btReply {
                             </div>
                         </div>
                     </div>
-                    </c:if>
 
                 </div>
                 <!-- /.container-fluid -->
