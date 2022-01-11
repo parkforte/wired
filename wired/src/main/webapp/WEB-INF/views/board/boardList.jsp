@@ -75,8 +75,8 @@ input#exampleCheck1\ chkbox {
 
 	<!-- 페이징 처리를 위한 form 시작-->
 	<form name="frmPage" method="post" action="<c:url value='/board/boardList?bdlistNo=${param.bdlistNo }'/>">
-		<input type="text" name="currentPage" id="currentPage">
-		<input type="text" name="searchKeyword" value="${param.searchKeyword }">
+		<input type="hidden" name="currentPage" id="currentPage">
+		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
 	</form>
 	<!-- 페이징 처리를 위한 form 끝-->
 
@@ -101,7 +101,7 @@ input#exampleCheck1\ chkbox {
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-                   <h6 class="m-0 font-weight-bold text-primary f-left" >게시판이름</h6><!-- 게시판 이름 -->
+                   <h6 class="m-0 font-weight-bold text-primary f-left" >${bdListVo.bdlistName } 게시판</h6><!-- 게시판 이름 -->
 					<div class="f-right">
 						<button type="button" class="btn btn-primary f-left" id="btWrite">글쓰기</button>
 						<c:if test="${sessionScope.ranksNo==3}">
@@ -176,7 +176,7 @@ input#exampleCheck1\ chkbox {
 											<c:if test="${!empty map['BOARD_FILENAME'] }">
 	                                   			<i class="bi bi-folder"></i><!-- 첨부파일 있는 게시물의 경우if처리 -->
 											</c:if>
-											<a href='<c:url value="/board/readCount?boardNo=${map['BOARD_NO'] }&bdlistNo=${param.bdlistNo}"/>'>
+											<a id="a-hover" href='<c:url value="/board/readCount?boardNo=${map['BOARD_NO'] }&bdlistNo=${param.bdlistNo}"/>'>
 	                                   			${map['BOARD_TITLE'] }
 	                                   			<input type="hidden" value="${param.bdlistNo}">
 											</a>
@@ -242,7 +242,7 @@ input#exampleCheck1\ chkbox {
 								</ul>
 							</nav>
               			</div>
-              			<input type="text" value="${pagingInfo.lastPage }"/>
+              			<input type="hidden" value="${pagingInfo.lastPage }"/>
 
               		</div>
                        </div>

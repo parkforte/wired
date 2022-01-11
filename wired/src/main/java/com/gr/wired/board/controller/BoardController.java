@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gr.wired.bdList.model.BdListService;
+import com.gr.wired.bdList.model.BdListVO;
 import com.gr.wired.board.model.BoardListVO;
 import com.gr.wired.board.model.BoardService;
 import com.gr.wired.board.model.BoardVO;
@@ -39,20 +41,26 @@ public class BoardController {
 		=LoggerFactory.getLogger(BoardController.class);
 
 	private final BoardService boardService;
+	private final BdListService bdlistService;
 	private final ReplyService replyService;
 	private final FileUploadUtil fileUploadUtil;
 
 	@Autowired
-	public BoardController(BoardService boardService, ReplyService replyService, FileUploadUtil fileUploadUtil) {
-		this.boardService = boardService;
+	public BoardController(BoardService boardService, BdListService bdlistService, ReplyService replyService,
+			FileUploadUtil fileUploadUtil) {
+	this.boardService = boardService;
+		this.bdlistService = bdlistService;
 		this.replyService = replyService;
 		this.fileUploadUtil = fileUploadUtil;
 	}
 
-	@GetMapping("/boardWrite")
-	public String write_get() {
-		logger.info("게시글 등록 화면");
+	@RequestMapping("/boardWrite")
+	public String write_get(@RequestParam(defaultValue = "0") int bdlistNo, Model model) {
+		logger.info("게시글 등록 화면, bdlistNo={}", bdlistNo);
+		BdListVO bdListVo = bdlistService.selectByBdNo(bdlistNo);
+		logger.info("bdListVo={}", bdListVo);
 
+		model.addAttribute("bdListVo", bdListVo);
 		return "board/boardWrite";
 	}
 
@@ -128,6 +136,9 @@ public class BoardController {
 		List<Map<String,Object>> list = boardService.selectByBNoList(searchVo);
 		logger.info("게시글 목록 list={}", list);
 
+		BdListVO bdListVo = bdlistService.selectByBdNo(bdlistNo);
+		logger.info("bdListVo={}", bdListVo);
+
 		//[3] totalPage
 		int totalRecord=boardService.selectTotalRecord(bdlistNo);
 		logger.info("totalRecord={}", totalRecord);
@@ -135,6 +146,7 @@ public class BoardController {
 
 		// 모델에 결과저장
 		model.addAttribute("list", list);
+		model.addAttribute("bdListVo", bdListVo);
 		model.addAttribute("pagingInfo", pagingInfo);
 		// 뷰페이지리턴
 		return "board/boardList";
@@ -142,13 +154,16 @@ public class BoardController {
 
 
 	@RequestMapping("/boardDetail")
-	public String detail(@RequestParam(defaultValue = "0") int boardNo,
+	public String detail(@RequestParam(defaultValue = "0") int boardNo, @RequestParam(defaultValue = "0")int bdlistNo,
 			HttpServletRequest request, Model model) {
 		//1
 		logger.info("게시글 디테일 화면, 파라미터 boardNo={}", boardNo);
 		//2
 		BoardVO boardVo = boardService.selectByNo(boardNo);
 		logger.info("boardVo={}", boardVo);
+
+		BdListVO bdListVo = bdlistService.selectByBdNo(bdlistNo);
+		logger.info("bdListVo={}", bdListVo);
 
 		String fileInfo
 		= fileUploadUtil.getFileInfo(boardVo.getBoardOriginalfilename(), boardVo.getBoardFilesize(), request);
@@ -157,6 +172,7 @@ public class BoardController {
 		logger.info("list={}",list.size());
 		//3
 		model.addAttribute("boardVo", boardVo);
+		model.addAttribute("bdListVo", bdListVo);
 		model.addAttribute("reList", list);
 		model.addAttribute("fileInfo", fileInfo);
 		//4
@@ -164,7 +180,7 @@ public class BoardController {
 	}
 
 	@PostMapping("/boardDetail")
-	public String reWrite(@ModelAttribute ReplyVO replyVo, HttpSession session) {
+	public String reWrite(@ModelAttribute ReplyVO replyVo, @RequestParam(defaultValue = "0") int bdlistNo, HttpSession session,Model model) {
 		//1 파라미터 읽어오기
 		String memId=(String)session.getAttribute("memId");
 		logger.info("댓글 달기, 파라미터 replyVo={}", replyVo);
@@ -174,10 +190,13 @@ public class BoardController {
 		if(cnt>0) {
 			logger.info("댓글 작성 성공!");
 		}
-		//3 모델에 결과저장
 
+		BdListVO bdListVo = bdlistService.selectByBdNo(bdlistNo);
+		logger.info("bdListVo={}", bdListVo);
+		//3 모델에 결과저장
+		model.addAttribute("bdListVo", bdListVo);
 		//4 뷰페이지 리턴
-		return "redirect:/board/boardDetail?boardNo="+replyVo.getBoardNo();
+		return "redirect:/board/boardDetail?boardNo="+replyVo.getBoardNo()+"&bdlistNo="+bdlistNo;
 	}
 
 	@RequestMapping("/download")
@@ -210,8 +229,12 @@ public class BoardController {
 		BoardVO boardVo = boardService.selectByNo(boardNo);
 		logger.info("게시글 업데이트, boardVo={}", boardVo);
 
+		BdListVO bdListVo = bdlistService.selectByBdNo(boardVo.getBdlistNo());
+		logger.info("bdListVo={}", bdListVo);
+
 		String fileInfo = fileUploadUtil.getFileInfo(boardVo.getBoardOriginalfilename(), boardVo.getBoardFilesize(), request);
 
+		model.addAttribute("bdListVo", bdListVo);
 		model.addAttribute("boardVo", boardVo);
 		model.addAttribute("fileInfo", fileInfo);
 
@@ -219,18 +242,51 @@ public class BoardController {
 	}
 
 	@PostMapping("/boardUpdate")
-	public String boardUpdate_post(@ModelAttribute BoardVO boardVo) {
+	public String boardUpdate_post(@ModelAttribute BoardVO boardVo, @RequestParam String oldFileName, @RequestParam(defaultValue = "0") int bdlistNo,
+			HttpServletRequest request, Model model) {
 		//1
 		logger.info("게시글 업데이트, 파라미터 boardVo={}", boardVo);
+
+		//업로드 처리
+		String fileName="";
+		try {
+			List<Map<String, Object>> fileList = fileUploadUtil.fileUpload(request, ConstUtil.UPLOAD_FILE_FLAG);
+
+			for(Map<String, Object> fileMap : fileList) {
+				fileName=(String) fileMap.get("fileName");
+				boardVo.setBoardFilename(fileName);
+				boardVo.setBoardOriginalfilename((String)fileMap.get("originalFileName"));
+				boardVo.setBoardFilesize((Long)fileMap.get("fileSize"));
+			}//for
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		//2
 		int cnt=boardService.updateBoard(boardVo);
 		if(cnt>0) {
 			logger.info("게시글 업데이트 성공");
+
+			//새로 업로드하는 경우, 기존파일이 있다면 기존파일 삭제처리
+			if(fileName!=null && fileName.isEmpty() && oldFileName!=null && oldFileName.isEmpty()) {
+				String upPath=fileUploadUtil.getUploadPath(ConstUtil.UPLOAD_FILE_FLAG, request);
+				File oldFile = new File(upPath, oldFileName);
+				if(oldFile.exists()) {
+					boolean bool = oldFile.delete();
+					logger.info("글수정, 파일삭제여부:{}", bool);
+				}
+			}
 		}
+		BdListVO bdListVo = bdlistService.selectByBdNo(bdlistNo);
+		logger.info("bdListVo={}", bdListVo);
+
 		//3
+		model.addAttribute("bdListVo", bdListVo);
 
 		//4
-		return "redirect:/board/boardDetail?boardNo="+boardVo.getBoardNo();
+		return "redirect:/board/boardDetail?boardNo="+boardVo.getBoardNo()+"&bdlistNo="+bdlistNo;
 	}
 
 	@RequestMapping("/readCount")
@@ -252,7 +308,8 @@ public class BoardController {
 	}
 
 	@RequestMapping("/recommend")
-	public String updateRecommend(@RequestParam(defaultValue = "0") int boardNo, Model model) {
+	public String updateRecommend(@RequestParam(defaultValue = "0") int boardNo, @RequestParam(defaultValue = "0")int bdlistNo
+			, Model model) {
 		logger.info("추천수 증가,파라미터 boardNo={}",boardNo);
 		if(boardNo==0) {
 			model.addAttribute("msg", "잘못된 url입니다.");
@@ -260,11 +317,15 @@ public class BoardController {
 
 			return "common/message";
 		}
+		BdListVO bdListVo = bdlistService.selectByBdNo(bdlistNo);
+		logger.info("bdListVo={}", bdListVo);
 
 		int cnt=boardService.updateRecommend(boardNo);
 		logger.info("조회수 증가 결과, cnt={]",cnt);
 
-		return "redirect:/board/boardDetail?boardNo="+boardNo;
+		model.addAttribute("bdListVo", bdListVo);
+
+		return "redirect:/board/boardDetail?boardNo="+boardNo+"&bdlistNo="+bdlistNo;
 
 	}
 
@@ -280,7 +341,7 @@ public class BoardController {
 
 	@PostMapping("/boardReply")
 	@Transactional
-	public String reply_post(@ModelAttribute ReplyVO replyVo) {
+	public String reply_post(@ModelAttribute ReplyVO replyVo, @RequestParam(defaultValue = "0") int bdlistNo, Model model) {
 		// 파라미터 읽어오기
 		logger.info("대댓글 등록, 파라미터 replyVo={}", replyVo);
 		// db
@@ -291,10 +352,13 @@ public class BoardController {
 		cnt = replyService.reply(replyVo);
 		logger.info("대댓글 등록결과 cnt={}",cnt);
 
-		//모델에 결과저장
+		BdListVO bdListVo = bdlistService.selectByBdNo(bdlistNo);
+		logger.info("bdListVo={}", bdListVo);
 
+		//모델에 결과저장
+		model.addAttribute("bdlistVo", bdListVo);
 		//뷰페이지 리턴
-		return "redirect:/board/boardDetail?boardNo="+replyVo.getBoardNo();
+		return "redirect:/board/boardDetail?boardNo="+replyVo.getBoardNo()+"&bdlistNo="+bdlistNo;
 	}
 
 	@RequestMapping("/deleteMulti")

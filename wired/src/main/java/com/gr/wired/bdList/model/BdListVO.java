@@ -6,9 +6,9 @@ public class BdListVO {
 
 	private int bdlistNo;
 	private String bdlistName;
-	private char bdlistRe;
-	private char bdlistUp;
-	private char bdlistRc;
+	private char bdlistRe; //댓글 허용 여부
+	private char bdlistUp; //파일 업로드 가능 여부
+	private char bdlistRc; //추천 가능 여부
 	private int ranksNo;
 	private Timestamp bdlistRegdate;
 

@@ -20,6 +20,7 @@ input#title {
 
 .btn-primary{
 	font-size: 0.7em;
+	margin-left: 2px;
 }
 
 h6.m-0.font-weight-bold.text-primary {
@@ -57,9 +58,11 @@ h6.m-0.font-weight-bold.text-primary {
 	<div class="card shadow mb-4">
    		<form class="frmWrite" method="post" enctype="multipart/form-data" action='<c:url value="/board/boardWrite"/>'>
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary">게시판 이름</h6>
+			<h6 class="m-0 font-weight-bold text-primary">${bdListVo.bdlistName }</h6>
 			<div id="se2_sample"  class="f-right">
+				<button type="button" class="btn btn-primary f-left" id="btList">글목록</button>
 				<button type="button" class="btn btn-primary f-left"  id="submitbt">글쓰기</button>
+				<input type="hidden" name="bdlistNo" value="${param.bdlistNo } ">
 	    	</div>
 	    </div>
 
@@ -121,20 +124,24 @@ h6.m-0.font-weight-bold.text-primary {
 <!-- 					       data-max-file-size="3MB" -->
 <!-- 					       data-max-files="3" /> -->
 <!-- 					</div> -->
+					<c:if test="${bdListVo.bdlistUp eq '89'}">
+						<div class="f-right">
+				            <label for="upfile">첨부파일</label>
+					        <input type="file" name="upfile" id="upfile" multiple="multiple">(최대 5M)
+					        <input type="text" value="${bdListVo.bdlistUp }">
+				        </div>
+			        </c:if>
+			        <c:if test="${bdListVo.bdlistRe eq '78'}">
+			        	<div class="f-right">
+			        		<span>본 게시판은 파일첨부가 불가능 합니다.</span>
+			        	</div>
+			        </c:if>
 
-					<div class="f-right">
-			            <label for="upfile">첨부파일</label>
-				        <input type="file" name="upfile" id="upfile" multiple="multiple">(최대 5M)
-			        </div>
 
 
 					<!-- 공백 -->
 					<div class="form-group f-right">
 
-					</div>
-					<div>
-						<button type="button" class="btn btn-primary f-left" id="btList">글목록</button>
-						<input type="text" name="bdlistNo" value="${param.bdlistNo } ">
 					</div>
 	        	</div>
 	   		</div>

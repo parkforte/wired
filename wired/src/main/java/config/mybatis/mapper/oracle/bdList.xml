@@ -51,4 +51,13 @@
 	<select id="selectMenu" resultType="bdListVo">
 		SELECT BDLIST_NO, BDLIST_NAME FROM BOARDLIST
 	</select>
+	<select id="selectByBdNo" parameterType="int" resultType="bdlistVo">
+		SELECT * FROM BOARDLIST
+		WHERE BDLIST_NO=#{bdlistNo}
+	</select>
+	<delete id="deleteBoardList" parameterType="int">
+		DELETE FROM BOARDLIST
+		WHERE BDLIST_NO=#{bdlistNo}
+	</delete>
+
 </mapper>

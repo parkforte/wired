@@ -16,4 +16,6 @@ public interface BdListDAO {
 	int insertBdList(BdListVO bdListVo);
 	int updatebdList(BdListVO bsListVo);
 	List<BdListVO> selectMenu();
+	BdListVO selectByBdNo(int bdlistNo);
+	int deleteBoardList(int bdlistNo);
 }
