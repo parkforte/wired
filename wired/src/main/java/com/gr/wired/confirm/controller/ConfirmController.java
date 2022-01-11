@@ -315,9 +315,16 @@ public class ConfirmController {
 		int memNo=(int) session.getAttribute("memNo");
 		logger.info("문서생성 완료 및 문서화면 이동 memNo={}", memNo);
 
+		//DEPT_NO구하기
+		Map<String, Object> map=emplService.selectByView(memNo);
+		logger.info("DEPT_NO={}",map.get("DEPT_NO"));
+		int deptNo=Integer.parseInt(map.get("DEPT_NO").toString());
+
 		confirmVo.setMemNo(memNo);
-		confirmVo.setCfState(ConfirmUtil.STATE_TEMP);
+		confirmVo.setDeptNo(deptNo);
 		confirmVo.setCfTitle("제목을 입력하세요.");
+		confirmVo.setCfState(ConfirmUtil.STATE_TEMP);	//0
+		confirmVo.setCfOrder(ConfirmUtil.MY_TURN);	//0
 
 		int result=confirmService.insertPaper(confirmVo);
 		logger.info("result={},confirmVo={}",result,confirmVo);
@@ -344,11 +351,34 @@ public class ConfirmController {
 
 		//문서상세내용
 		ConfirmVO confirmVo=confirmService.selectTempByMemNo(memNo);
+		Map<String, Object> map=emplService.selectByView(memNo);
 		logger.info("confirmVo={}",confirmVo);
 
+		model.addAttribute("map", map);
 		model.addAttribute("confirmVo", confirmVo);
 		model.addAttribute("cfRegdate", cfRegdate);
 
+	}
+
+	@PostMapping("/write/updating")
+	public String complete_post(@ModelAttribute ConfirmVO confirmVo) {
+		logger.info("문서상신완료 페이지 confirmVo={}", confirmVo);
+
+		//DB
+		int result=confirmService.updateContent(confirmVo);
+		if(result>0) {
+			logger.info("문서상신성공! result={}", result);
+		}else {
+			logger.info("문서상신실패! result={}", result);
+		}
+
+		return "redirect:/e-approval/write/complete";
+
+	}
+
+	@RequestMapping("/write/complete")
+	public void completePage() {
+		logger.info("상신완료 페이지!");
 	}
 
 

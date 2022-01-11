@@ -7,13 +7,23 @@
 		<selectKey keyProperty="cfNo" resultType="int" order="BEFORE">
 			SELECT CONFIRM_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO CONFIRM(CF_NO,FORM_NO, MEM_NO, REG_NO, CF_TITLE, CF_STATE)
-		VALUES(#{cfNo}, #{formNo}, #{memNo}, #{regNo}, #{cfTitle} ,#{cfState})
+		INSERT INTO CONFIRM(CF_NO,FORM_NO, MEM_NO, DEPT_NO ,REG_NO, CF_TITLE, CF_STATE, CF_ORDER)
+		VALUES(#{cfNo}, #{formNo}, #{memNo}, #{deptNo} ,#{regNo}, #{cfTitle} ,#{cfState}, #{cfOrder})
 	</insert>
 	<select id="selectTempByMemNo" parameterType="int" resultType="confirmVo">
 		SELECT * FROM CONFIRM
 		WHERE MEM_NO=#{memNo}
 		AND CF_STATE=0
 	</select>
-
+	<select id="countTemp" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM CONFIRM WHERE MEM_NO=#{memNo} AND CF_STATE=0
+	</select>
+	<delete id="deleteTemp" parameterType="int">
+		DELETE FROM CONFIRM WHERE MEM_NO=#{memNo} AND CF_STATE=0
+	</delete>
+	<update id="updateContent" parameterType="confirmVo">
+		UPDATE CONFIRM
+		SET CF_TITLE=#{cfTitle}, CF_CONTENT=#{cfContent}, CF_ORDER=1, CF_STATE=1, CF_REGDATE=SYSDATE
+		WHERE MEM_NO=#{memNo}
+	</update>
 </mapper>

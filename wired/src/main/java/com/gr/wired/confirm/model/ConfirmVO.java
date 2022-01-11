@@ -18,6 +18,7 @@ public class ConfirmVO {
 	private int cfOrder;
 	private Timestamp cfRegdate;
 	private Timestamp cfOkdate;
+	private ConfirmLineVO confirmlineVo;
 	public int getCfNo() {
 		return cfNo;
 	}
@@ -102,14 +103,20 @@ public class ConfirmVO {
 	public void setCfOkdate(Timestamp cfOkdate) {
 		this.cfOkdate = cfOkdate;
 	}
+	public ConfirmLineVO getConfirmlineVo() {
+		return confirmlineVo;
+	}
+	public void setConfirmlineVo(ConfirmLineVO confirmlineVo) {
+		this.confirmlineVo = confirmlineVo;
+	}
 	@Override
 	public String toString() {
 		return "ConfirmVO [cfNo=" + cfNo + ", formNo=" + formNo + ", memNo=" + memNo + ", deptNo=" + deptNo + ", regNo="
 				+ regNo + ", cfTitle=" + cfTitle + ", cfContent=" + cfContent + ", cfState=" + cfState + ", cfFile="
 				+ cfFile + ", cfTmpstorage=" + cfTmpstorage + ", cfDel=" + cfDel + ", cfOrder=" + cfOrder
-				+ ", cfRegdate=" + cfRegdate + ", cfOkdate=" + cfOkdate + "]";
+				+ ", cfRegdate=" + cfRegdate + ", cfOkdate=" + cfOkdate + ", confirmlineVo=" + confirmlineVo
+				+ ", toString()=" + super.toString() + "]";
 	}
-
 
 
 }
