@@ -132,8 +132,8 @@ $(function(){
 								${bdListVo.bdlistName }</a>
 						</c:forEach>
 					</div>
-				</div></li>
-
+				</div>
+			</li>
 
 			<!-- Heading -->
 			<div class="sidebar-heading"></div>
@@ -172,12 +172,12 @@ $(function(){
 					<i class="fas fa-fw fa-table"></i> <span>사원관리</span>
 			</a></li> -->
 			<!-- 사원관리 -->
-			<li class="nav-item" id="emplManage_nav" style="display: none;"><a class="nav-link collapsed" href="#" 
+			<li class="nav-item" id="emplManage_nav" style="display: none;"><a class="nav-link collapsed" href="#"
 				data-toggle="collapse" data-target="#collapseMember"
 				aria-expanded="true" aria-controls="collapsePages"> <i
 					class="fas fa-fw fa-folder"></i> <span>사원관리</span>
 				</a>
-				<div id="collapseMember" class="collapse" 
+				<div id="collapseMember" class="collapse"
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">사원관리:</h6>
@@ -187,10 +187,24 @@ $(function(){
 					</div>
 				</div>
 			</li>
+			<!-- 게시판 관리 -->
+			<c:if test="${sessionScope.ranksNo==3}">
+				<li class="nav-item" id="emplManage_nav" style="display: none;"><a class="nav-link collapsed" href="#"
+					data-toggle="collapse" data-target="#collapseMember"
+					aria-expanded="true" aria-controls="collapsePages"> <i
+						class="fas fa-fw fa-folder"></i> <span>게시판 관리</span>
+					</a>
+					<div id="collapseMember" class="collapse"
+						aria-labelledby="headingPages" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+								<a class="collapse-item" href="<c:url value='/bdList/bdListmanagement'/>">게시판 관리</a>
+						</div>
+					</div>
+				</li>
+			</c:if>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
-
 		</ul>
 		<!-- End of Sidebar -->
 

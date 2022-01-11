@@ -104,7 +104,9 @@ input#exampleCheck1\ chkbox {
                    <h6 class="m-0 font-weight-bold text-primary f-left" >게시판이름</h6><!-- 게시판 이름 -->
 					<div class="f-right">
 						<button type="button" class="btn btn-primary f-left" id="btWrite">글쓰기</button>
-						<button type="button" id="btMultiDel" class="btn btn-danger f-left detailbt">글삭제</button>
+						<c:if test="${sessionScope.ranksNo==3}">
+							<button type="button" id="btMultiDel" class="btn btn-danger f-left detailbt">글삭제</button>
+						</c:if>
 					</div>
                </div>
                <div class="card-body">

@@ -2,6 +2,7 @@ package com.gr.wired.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +20,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.gr.wired.board.model.BoardDAO;
 import com.gr.wired.board.model.BoardListVO;
 import com.gr.wired.board.model.BoardService;
 import com.gr.wired.board.model.BoardVO;
@@ -141,18 +142,23 @@ public class BoardController {
 
 
 	@RequestMapping("/boardDetail")
-	public String detail(@RequestParam(defaultValue = "0") int boardNo, Model model) {
+	public String detail(@RequestParam(defaultValue = "0") int boardNo,
+			HttpServletRequest request, Model model) {
 		//1
 		logger.info("게시글 디테일 화면, 파라미터 boardNo={}", boardNo);
 		//2
-		Map<String, Object> boardVo = boardService.selectByNo(boardNo);
+		BoardVO boardVo = boardService.selectByNo(boardNo);
 		logger.info("boardVo={}", boardVo);
+
+		String fileInfo
+		= fileUploadUtil.getFileInfo(boardVo.getBoardOriginalfilename(), boardVo.getBoardFilesize(), request);
 
 		List<Map<String, Object>> list = replyService.selectAll(boardNo);
 		logger.info("list={}",list.size());
 		//3
 		model.addAttribute("boardVo", boardVo);
 		model.addAttribute("reList", list);
+		model.addAttribute("fileInfo", fileInfo);
 		//4
 		return "board/boardDetail";
 	}
@@ -174,14 +180,40 @@ public class BoardController {
 		return "redirect:/board/boardDetail?boardNo="+replyVo.getBoardNo();
 	}
 
+	@RequestMapping("/download")
+	public ModelAndView download(@RequestParam(defaultValue = "0") int boardNo,
+			@RequestParam String boardFilename, HttpServletRequest request) {
+		logger.info("파일다운로드 페이지, 파라미터 boardNo={}, boardFilename={}", boardNo, boardFilename);
+
+		int cnt=boardService.updateDownCount(boardNo);
+		logger.info("다운로드 수 등가 결과 boardNo={}", boardNo);
+
+		String upPath = fileUploadUtil.getUploadPath(ConstUtil.UPLOAD_FILE_FLAG, request);
+
+		File file = new File(upPath, boardFilename);
+
+		Map<String, Object> map = new HashMap<>();
+		map.put("file", file);
+
+		ModelAndView mav = new ModelAndView("boardDownloadView", map);
+
+		return mav;
+	}
+
+
+
 	@GetMapping("/boardUpdate")
-	public String boardUpdate(@RequestParam(defaultValue = "0") int boardNo, Model model) {
+	public String boardUpdate(@RequestParam(defaultValue = "0") int boardNo,
+			HttpServletRequest request, Model model) {
 		logger.info("게시글 업데이트 화면, 파라미터 boardNo={}",boardNo);
 
-		Map<String, Object> boardVo = boardService.selectByNo(boardNo);
+		BoardVO boardVo = boardService.selectByNo(boardNo);
 		logger.info("게시글 업데이트, boardVo={}", boardVo);
 
+		String fileInfo = fileUploadUtil.getFileInfo(boardVo.getBoardOriginalfilename(), boardVo.getBoardFilesize(), request);
+
 		model.addAttribute("boardVo", boardVo);
+		model.addAttribute("fileInfo", fileInfo);
 
 		return "board/boardUpdate";
 	}
@@ -300,6 +332,7 @@ public class BoardController {
 
 		return "common/message";
 	}
+
 
 
 

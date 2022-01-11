@@ -35,11 +35,38 @@ a{
 	background: #1CC88A;
 	color: white;
 }
+.m-set{
+	background: grey;
+	color: white;
+}
+.listSet{
+    float: right;
+    margin-right: -140px;
+    background: grey;
+    border: 1px solid;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-size: 0.9em;
+    font-weight: 500;
+    padding: 0.5em 0.5em;
+    position: relative;
+}
+
+.listSet:hover {
+  color: grey;
+  background:#fff;
+  border: 1px solid grey;
+}
 
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
-
+$(function() {
+// 	$('.listSet').click(function() {
+// 		location.href="<c:url value='/jawon/jawonSet'/>";
+// 	});
+});
 
 </script>
 
@@ -59,6 +86,7 @@ a{
                <div class="card-header py-3">
                    <h6 class="m-0 font-weight-bold text-primary p-absolute">자원리스트</h6><!-- 게시판 이름 -->
   						<button type="button" class="btn btn-success listAdd" data-toggle="modal" data-target="#exampleList">리스트추가</button>
+  						<button type="button" class="btn btn-secondary listSet" data-toggle="modal" data-target="#exampleSetting">설정</button>
 
 
          <!-- Topbar Navbar -->
@@ -88,7 +116,6 @@ a{
                    </div>
                </li>
                </div>
-                <c:forEach var="i" begin="1" end="2">
                <div class="card-body p-bottom-0">
                    <div class="table-responsive">
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -105,52 +132,30 @@ a{
                                </tr>
                            </thead>
                            <tbody>
+                            <c:if test="${empty list }">
+                            	<tr>
+                            		<td colspan="6">데이터가 없습니다.</td>
+                            	</tr>
+                            </c:if>
+                            <c:if test="${!empty list }">
+                             <c:forEach var="map" items="${list }">
                                <tr>
-                                   <td>차량</td>
-                                   <td>아반떼</td>
-                                   <td>본관 지하주차장</td>
-                                   <td>2021-12-21 17:00 ~ 2021-12-21 18:00</td>
+                                   <td>${map['TYPE_NAME'] }</td>
+                                   <td>${map['RES_NAME'] }</td>
+                                   <td>${map['RES_LOCATION'] }</td>
+                                   <td>${map['USE_REGDATE'] }</td>
                                    <td><button type="button" class="btn btn-warning">사용중</button></td>
                                    <td><a href="#" id="a-hover" data-toggle="modal" data-target="#exampleEdit">수정</a>&nbsp;
                                    		<a href="#" id="a-hover" data-toggle="modal" data-target="#exampleDelete">삭제</a></td>
                                </tr>
+
+                             </c:forEach>
+                            </c:if>
                            </tbody>
                        </table>
                    </div>
                </div>
-    			</c:forEach>
-    			<div class="card-body p-bottom-0">
-                   <div class="table-responsive">
-                       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                           <thead>
-                               <tr>
-                                   <th>자원명</th>
-                                   <th>자원정보</th>
-                                   <th>자원위치</th>
-                                   <th>예약시간</th>
-                                   <th>상태</th>
-                                   <th>
-                                   	<button type="button" class="btn btn-light jawonAdd" data-toggle="modal" data-target="#exampleAdd">추가</button>
-                                   </th>
-                               </tr>
-                           </thead>
-                           <tbody>
-                               <tr>
-                                   <td>차량</td>
-                                   <td>아반떼</td>
-                                   <td>본관 지하주차장</td>
-                                   <td>2021-12-21 17:00 ~ 2021-12-21 18:00</td>
-                                   <td>
-                                   <button type="button" class="btn btn-waiting">미사용</button></td>
-                                   <td><a href="#" id="a-hover" data-toggle="modal" data-target="#exampleEdit">수정</a>&nbsp;
-                                   		<a href="#" id="a-hover" data-toggle="modal" data-target="#exampleDelete">삭제</a></td>
-                               </tr>
-                           </tbody>
-                       </table>
-                   </div>
-               </div>
-                </div>
-                <!-- 리스트추가 Modal -->
+				<!-- 리스트추가 Modal -->
                 <div class="modal fade" id="exampleList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
@@ -164,22 +169,43 @@ a{
 			        <form>
 					  <div class="form-group">
 					    <label for="exampleInputEmail1">자원명</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-					  </div>
-					  <div class="form-group">
-					    <label for="exampleInputPassword1">자원정보</label>
-					    <input type="password" class="form-control" id="exampleInputPassword1">
-					  </div>
-					  <div class="form-group">
-					    <label for="exampleInputEmail1">자원위치</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-					    <small id="emailHelp" class="form-text text-muted">위치를 지정해주세요.</small>
+					    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+					    	value="${map['TYPE_NAME'] }">
 					  </div>
 					</form>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
-			        <button type="submit" class="btn btn-success" onclick="location.href='/wired/jawon/listAdd'">추가</button>
+			        <button type="submit" class="btn btn-success" id="">추가</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+                <!-- 리스트설정 Modal -->
+                <div class="modal fade" id="exampleSetting" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      <div class="modal-header m-set">
+			      	<h5 class="modal-title" id="exampleModalLabel">자원리스트 설정</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+					  <div class="form-group">
+			      <c:forEach var="vo" items="${vList }">
+					    <label for="exampleInputEmail1">자원명</label>
+					    <input type="text" class="form-control" id="exampleInputEmail1" value="${vo.typeName }"
+					    	style="width: 250px;" aria-describedby="emailHelp">
+					    <button type="button" class="btn btn-danger" >삭제</button>
+			      </c:forEach>
+					  </div>
+					</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
+			        <button type="submit" class="btn btn-success">수정</button>
 			      </div>
 			    </div>
 			  </div>

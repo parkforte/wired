@@ -9,7 +9,7 @@
 		<ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll"
 			style="max-height: 100px;">
 			<li class="nav-item active"><a class="nav-link active" href="<c:url value='/e-approval/mainpage'/>">Home</a></li>
-			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/paperWrite'/>">문서작성</a></li>
+			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/write/selectForm'/>">문서작성</a></li>
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#"
 				id="navbarScrollingDropdown" role="button" data-toggle="dropdown"
