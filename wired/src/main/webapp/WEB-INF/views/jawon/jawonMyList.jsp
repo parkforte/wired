@@ -14,14 +14,26 @@
 .c-both{
 	clear: both;
 }
-.m-search{
+.jawonSel{
 	margin-bottom: 12px;
 	margin-top: -12px;
 }
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
-
+$(function() {
+	$('.jawonSelRes').change(function(){
+		location.href=($(this).val());
+	});
+	$('.btn-cancel').each(function(index,item) {
+		$(this).click(function() {
+			var res=$(this).val();
+			$('#m-cancel').click(function() {
+				location.href="<c:url value='/jawon/reserveCancel?reservNo='/>"+res;
+			});
+		});
+	});
+});
 
 </script>
 
@@ -30,21 +42,21 @@
 		<div id="topTitle">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800 h1-style">자원예약현황</h1>
-		<h5 class="m-0 font-weight-bold text-primary h5-style f-left">내 예약 현황</h5><!-- 부제 -->
-		<!-- search -->
-		<form class="d-flex f-right m-search">
-			<input class="form-control mr-2" type="search" placeholder="Search"
-				aria-label="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
-		</form>
+		<h5 class="m-0 font-weight-bold text-primary h5-style f-left">내 예약현황</h5><!-- 부제 -->
+		<!-- select -->
+		<div class=" d-flex f-right jawonSel">
+			<select class="form-control jawonSelRes">
+				<option>자원예약현황</option>
+				<option value="<c:url value='/jawon/jawonAllList'/>">전체예약현황</option>
+				<option value="<c:url value='/jawon/jawonMyList'/>">내 예약현황</option>
+			</select>
+		</div>
 		</div>
         <!-- title1 -->
-       <c:forEach var="i" begin="1" end="3">
          <div class="card shadow mb-4 c-both">
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-                   <h6 class="m-0 font-weight-bold text-primary">내역이름</h6><!-- 게시판 이름 -->
 
 
 
@@ -75,6 +87,8 @@
                    </div>
                </li>
                </div>
+               <form name="frm">
+               <input type="hidden" name="memNo" value="${sessionScope.memNo }">
                <div class="card-body">
                    <div class="table-responsive">
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -83,23 +97,34 @@
                                    <th>자원명</th>
                                    <th>자원정보</th>
                                    <th>기간</th>
-                                   <th></th>
+                                   <th>예약정보</th>
                                    <th></th>
                                </tr>
                            </thead>
                            <tbody>
+                           <c:if test="${empty mList }">
+                            	<tr>
+                            		<td colspan="5">데이터가 없습니다.</td>
+                            	</tr>
+                            </c:if>
+                            <c:if test="${!empty mList }">
+                        	<c:forEach var="map" items="${mList }">
                                <tr>
-                                   <td>회의실</td>
-                                   <td>A회의실</td>
-                                   <td>2021-12-21 17:00 ~ 2021-12-21 18:00</td>
-                                   <td><button type="button" class="btn btn-danger b-radius" data-toggle="modal" data-target="#exampleModal" onclick="location.href='#'">신청취소</button></td>
-                                   <td><button type="button" class="btn btn-success">검토중</button>
-                                   <button type="button" class="btn btn-waiting">승인</button></td>
+                                   <td>${map['TYPE_NAME'] }</td>
+                                   <td>${map['RES_NAME'] }</td>
+                                   <td>
+                                   <fmt:formatDate value="${map['USE_REGDATE'] }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${map['RETURN_REGDATE'] }" pattern="yyyy-MM-dd"/></td>
+                                   <td>${map['RESERV_CONTENT'] }</td>
+                                   <td><button type="button" class="btn btn-danger b-radius btn-cancel"
+                                   	data-toggle="modal" data-target="#exampleModal" value="${map['RESERV_NO'] }">신청취소</button></td>
                                </tr>
+                        </c:forEach>
+                        </c:if>
                            </tbody>
                        </table>
                    </div>
                </div>
+                </form>
                 </div>
 
     </div>
@@ -118,13 +143,12 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary b-radius" data-dismiss="modal" >닫기</button>
-			        <button type="submit" class="btn btn-danger b-radius">신청취소</button>
+			        <button type="submit" class="btn btn-danger b-radius" id="m-cancel">신청취소</button>
 			      </div>
 			    </div>
 			  </div>
 			</div>
     <!-- /.container-fluid -->
-    </c:forEach>
      </div>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>

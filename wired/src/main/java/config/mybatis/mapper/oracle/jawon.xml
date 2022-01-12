@@ -11,12 +11,67 @@
 		VALUES(#{typeNo}, #{typeName})
 	</insert>
 
-	<select id="selectJawonAll" resultType="map">
-		SELECT * FROM RESLIST_VIEW
+<!-- 	<select id="selectJawonAll" resultType="map"> -->
+<!-- 		SELECT * FROM RESLIST_VIEW -->
+<!-- 	</select> -->
+
+<!-- 	<select id="selectJawonName" resultType="jawonVo"> -->
+<!-- 		SELECT * FROM RESTYPE -->
+<!-- 	</select> -->
+	<select id="selectType" resultType="resTypeVo">
+		SELECT * FROM RESTYPE
 	</select>
 
-	<select id="selectJawonName" resultType="jawonVo">
+	<select id="selectJawonDetailsView" parameterType="int" resultType="map">
+		SELECT * FROM JAWONLIST_VIEW
+		WHERE TYPE_NO=#{typeNo}
+		ORDER BY RESERV_NO DESC
+	</select>
+
+	<resultMap type="JawonAllVO" id="jawonListResultMap">
+		<association property="resTypeVo" column="typeNo" javaType="ResTypeVO">
+			<id column="type_no" property="typeNo" jdbcType="BIGINT"/>
+			<result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+		</association>
+		<collection property="typeDetailsList" column="type_no"
+			javaType="ArrayList" ofType="map" select="selectJawonDetailsView">
+		</collection>
+	</resultMap>
+
+	<select id="selectJawonAll" resultMap="jawonListResultMap">
 		SELECT * FROM RESTYPE
+		ORDER BY TYPE_NO
+	</select>
+
+	<select id="selectByType" resultType="map" parameterType="int">
+		SELECT T.*, R.RES_NAME, R.RES_NO
+		FROM RESTYPE T JOIN RESOURCES R
+		ON T.TYPE_NO=R.TYPE_NO
+		AND T.TYPE_NO=#{type_no}
+	</select>
+
+	<insert id="insertJawonReserve" parameterType="resScheduleVo">
+		<selectKey keyProperty="reservNo" resultType="int" order="BEFORE">
+			select RESSD_SEQ.NEXTVAL from dual
+		</selectKey>
+		INSERT INTO RESSCHEDULE(RESERV_NO,MEM_NO,RES_NO,
+			USE_REGDATE,RETURN_REGDATE,RESERV_CONTENT)
+		VALUES(#{reservNo},#{memNo},#{resNo},#{useRegdate},#{returnRegdate},#{reservContent})
+	</insert>
+
+	<select id="selectJawonMyView" parameterType="int" resultType="map">
+		SELECT * FROM JAWONLIST_VIEW
+		WHERE MEM_NO=#{memNo}
+		ORDER BY RESERV_NO DESC
+	</select>
+
+	<delete id="deleteReserve" parameterType="int">
+		DELETE FROM RESSCHEDULE WHERE RESERV_NO=#{reservNo}
+	</delete>
+
+	<select id="selectJawonAllView" resultType="map">
+		SELECT * FROM JAWONMEM_VIEW
+		ORDER BY RESERV_NO DESC
 	</select>
 
 </mapper>
