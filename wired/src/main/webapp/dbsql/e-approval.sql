@@ -1,4 +1,5 @@
 
+
 --사원정보 3중 join
 select distinct m.*, m.mem_name as member_name , d.dept_name, p.pos_name
 from member m join department d
