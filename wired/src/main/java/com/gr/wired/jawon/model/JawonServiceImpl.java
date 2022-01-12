@@ -21,15 +21,44 @@ public class JawonServiceImpl implements JawonService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectJawonAll() {
+	public List<ResTypeVO> selectType() {
+		return jawonDao.selectType();
+	}
+
+	@Override
+	public List<Map<String, Object>> selectJawonDetailsView(int typeNo) {
+		return jawonDao.selectJawonDetailsView(typeNo);
+	}
+
+	@Override
+	public List<JawonAllVO> selectJawonAll() {
 		return jawonDao.selectJawonAll();
 	}
 
 	@Override
-	public List<JawonVO> selectJawonName() {
-		return jawonDao.selectJawonName();
+	public List<Map<String, Object>> selectByType(int typeNo) {
+		return jawonDao.selectByType(typeNo);
 	}
 
+	@Override
+	public int insertJawonReserve(ResScheduleVO resScheduleVo) {
+		return jawonDao.insertJawonReserve(resScheduleVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectJawonMyView(int memNo) {
+		return jawonDao.selectJawonMyView(memNo);
+	}
+
+	@Override
+	public int deleteReserve(int reservNo) {
+		return jawonDao.deleteReserve(reservNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectJawonAllView() {
+		return jawonDao.selectJawonAllView();
+	}
 
 
 }

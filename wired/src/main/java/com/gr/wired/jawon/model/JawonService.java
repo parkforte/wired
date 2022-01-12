@@ -5,6 +5,12 @@ import java.util.Map;
 
 public interface JawonService {
 	int insertJawonList(JawonVO jawonVo);
-	List<Map<String, Object>> selectJawonAll();
-	List<JawonVO> selectJawonName();
+	List<ResTypeVO> selectType();
+	List<Map<String, Object>> selectJawonDetailsView(int typeNo);
+	List<JawonAllVO> selectJawonAll();
+	List<Map<String, Object>> selectByType(int typeNo);
+	int insertJawonReserve(ResScheduleVO resScheduleVo);
+	List<Map<String, Object>> selectJawonMyView(int memNo);
+	int deleteReserve(int reservNo);
+	List<Map<String, Object>> selectJawonAllView();
 }

@@ -116,6 +116,10 @@ div#topTitle {
 }
 
 /* a태그 호버시 색상 */
+#a-hover{
+	text-decoration: none;
+	color: gray;
+}
 #a-hover:hover{
 	text-decoration: none;
 	color: #6868AC;
@@ -150,7 +154,6 @@ label#fileinputlabel {
     margin-left: -137px;
     margin-top: 3px;
 }
-
 
 /* boardList.jsp */
 /* 페이징 */
