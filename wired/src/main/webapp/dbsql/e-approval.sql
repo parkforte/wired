@@ -68,3 +68,40 @@ create sequence confirm_seq
 start with 1
 increment by 1
 nocache;
+
+
+--결재선 추출 join
+select c.cf_no , c.mem_no ,c.reg_no,l.line_order ,l.mem_no as mem_line , m.mem_name, m.mem_originalfilename
+from confirm c join linereg r
+on c.reg_no=r.reg_no
+join confirmline l
+on r.reg_no=l.reg_no
+join member m
+on l.mem_no=m.mem_no
+where l.mem_no>0
+--결재선정보 view
+create or replace view lineorder_view
+as
+(
+select c.cf_no , c.mem_no ,c.reg_no,l.line_order ,l.mem_no as mem_line , m.mem_name, m.mem_originalfilename
+from confirm c join linereg r
+on c.reg_no=r.reg_no
+join confirmline l
+on r.reg_no=l.reg_no
+join member m
+on l.mem_no=m.mem_no
+where l.mem_no>0
+);
+
+--문서정보 전체 join
+
+select c.*, 
+    m.mem_name, m.mem_originalfilename , f.form_name , l.line_order,
+    DECODE(c.cf_state, 0 , '임시저장',1,'대기',2,'승인',3,'반려') as state_name
+from confirm c join member m
+on c.mem_no=m.mem_no
+join docform f
+on c.form_no=f.form_no
+join confirmline l
+on l.line_order=c.cf_order
+;

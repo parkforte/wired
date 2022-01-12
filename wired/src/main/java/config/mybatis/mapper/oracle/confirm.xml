@@ -24,6 +24,11 @@
 	<update id="updateContent" parameterType="confirmVo">
 		UPDATE CONFIRM
 		SET CF_TITLE=#{cfTitle}, CF_CONTENT=#{cfContent}, CF_ORDER=1, CF_STATE=1, CF_REGDATE=SYSDATE
-		WHERE MEM_NO=#{memNo}
+		WHERE MEM_NO=#{memNo} and CF_NO=#{cfNo}
 	</update>
+	<select id="selectLineorder" parameterType="int" resultType="map">
+		SELECT * FROM LINEORDER_VIEW
+		WHERE CF_NO=#{cfNo}
+		ORDER BY LINE_ORDER DESC
+	</select>
 </mapper>

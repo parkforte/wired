@@ -355,9 +355,14 @@ public class ConfirmController {
 		Map<String, Object> map=emplService.selectByView(memNo);
 		logger.info("confirmVo={}",confirmVo);
 
+		//결재라인
+		int cfNo=confirmVo.getCfNo();
+		List<Map<String, Object>> orderList =confirmService.selectLineorder(cfNo);
+
 		model.addAttribute("map", map);
 		model.addAttribute("confirmVo", confirmVo);
 		model.addAttribute("cfRegdate", cfRegdate);
+		model.addAttribute("orderList", orderList);
 
 	}
 
