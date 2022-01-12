@@ -30,10 +30,10 @@
 <div class="container-fluid">
 <%@ include file="include/navbar.jsp"%>
 	<div>
-		<!-- title1 -->
+		<!-- 정렬기준 -->
 		<div class="card shadow mb-4 setW15 setMR10 f-left">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">문서상태</h6>
+				<h6 class="m-0 font-weight-bold text-primary">정렬기준</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">

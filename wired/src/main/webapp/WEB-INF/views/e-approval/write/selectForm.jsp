@@ -113,135 +113,111 @@
 }
 
 .bs4-order-tracking {
-	margin-bottom: 30px;
-	overflow: hidden;
-	color: #878788;
-	padding-left: 0px;
-	margin-top: 30px
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #878788;
+    padding-left: 0px;
+    margin-top: 30px
 }
 
 .bs4-order-tracking li {
-	list-style-type: none;
-	font-size: 13px;
-	width: 33%;
-	float: left;
-	position: relative;
-	font-weight: 400;
-	color: #878788;
-	text-align: center
+    list-style-type: none;
+    font-size: 13px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: #878788;
+    text-align: center
 }
 
 .bs4-order-tracking li:first-child:before {
-	margin-left: 15px !important;
-	padding-left: 11px !important;
-	text-align: left !important
+    margin-left: 15px !important;
+    padding-left: 11px !important;
+    text-align: left !important
 }
 
 .bs4-order-tracking li:last-child:before {
-	margin-right: 5px !important;
-	padding-right: 11px !important;
-	text-align: right !important
+    margin-right: 5px !important;
+    padding-right: 11px !important;
+    text-align: right !important
 }
 
 .bs4-order-tracking li>div {
-	color: #fff;
-	width: 29px;
-	text-align: center;
-	line-height: 29px;
-	display: block;
-	font-size: 12px;
-	background: #878788;
-	border-radius: 50%;
-	margin: auto
+    color: #fff;
+    width: 29px;
+    text-align: center;
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #878788;
+    border-radius: 50%;
+    margin: auto
 }
 
 .bs4-order-tracking li:after {
-	content: '';
-	width: 150%;
-	height: 2px;
-	background: #878788;
-	position: absolute;
-	left: 0%;
-	right: 0%;
-	top: 15px;
-	z-index: -1
+    content: '';
+    width: 150%;
+    height: 2px;
+    background: #878788;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 15px;
+    z-index: -1
 }
 
 .bs4-order-tracking li:first-child:after {
-	left: 50%
+    left: 50%
 }
 
 .bs4-order-tracking li:last-child:after {
-	left: 0% !important;
-	width: 0% !important
+    left: 0% !important;
+    width: 0% !important
 }
 
 .bs4-order-tracking li.active {
-	font-weight: #FF73B8;
-	color: #FF73B8;
+    font-weight: bold;
+    color: #FF73B8
 }
 
 .bs4-order-tracking li.active>div {
-	background: #FF73B8;
+    background: #FF73B8
 }
 
 .bs4-order-tracking li.active:after {
-	background: #FF73B8;
+    background: #FF73B8
 }
 
 .card-timeline {
-	background-color: #fff;
-	z-index: 0
-}
-
-.3step {
-	width: 45% !important;
+    background-color: #fff;
+    z-index: 0
 }
 </style>
-<link rel="stylesheet"
-	href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
-	type="text/css" />
 <script
 	src="<c:url value='/resources/api/jsTree/dist/libs/jquery.js'/> "></script>
-<script src="<c:url value='/resources/api/jsTree/dist/jstree.min.js'/> "></script>
-<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
 <script type="text/javascript">
-	$(function() {
-		$('#jstree').jstree({
-			'core' : {
-				'themes' : {
-					'name' : 'proton',
-					'responsive' : true
-				}
-			}
-		});
-	});
 </script>
 <!-- 전자결재HOME -->
 <div class="container-fluid">
 	<%@ include file="../include/navbar.jsp"%>
-	<div class="card card-timeline px-2 border-none setMRB10">
-		<ul class="bs4-order-tracking">
-			<li class="step active">
-				<div>
-					<i class="fas fa-user"></i>
-				</div> 문서양식&결재라인선택
-			</li>
-			<li class="step">
-				<div>
-					<i class="fas fa-bread-slice"></i>
-				</div> 문서작성
-			</li>
-			<li class="step">
-				<div>
-					<i class="fas fa-truck"></i>
-				</div> 상신완료
-			</li>
-		</ul>
-		<h5 class="text-center">
-			<b>문서양식과 결재라인을 선택하세요.</b>
-		</h5>
+	<div class="card card-timeline px-2 border-none">
+	    <ul class="bs4-order-tracking">
+	        <li class="step active">
+	            <div><i class="fas fa-user"></i></div> 문서선택
+	        </li>
+	        <li class="step">
+	            <div><i class="fas fa-bread-slice"></i></div> 문서작성
+	        </li>
+	        <li class="step">
+	            <div><i class="fas fa-truck"></i></div> 문서확인
+	        </li>
+	        <li class="step ">
+	            <div><i class="fas fa-birthday-cake"></i></div> 상신완료
+	        </li>
+	    </ul>
+	    <h5 class="text-center"><b>문서양식과 결재라인을 선택하세요.</b></h5>
 	</div>
 	<form method="post" action="<c:url value='/e-approval/write/insertConfirm'/>">
 	<div>

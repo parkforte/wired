@@ -1,5 +1,8 @@
 package com.gr.wired.confirm.model;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +50,10 @@ public class ConfirmServiceImpl implements ConfirmService {
 	@Override
 	public int updateContent(ConfirmVO confirmVo) {
 		return confirmDao.updateContent(confirmVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectLineorder(int cfNo) {
+		return confirmDao.selectLineorder(cfNo);
 	}
 }

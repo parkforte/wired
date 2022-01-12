@@ -258,7 +258,8 @@ public class ConfirmController {
 			List<Map<String, Object>> list
 				=signatureUploadUtil.fileUpload(request, SignatureConst.UPLOAD_SIGNATURE_FLAG);
 			for(Map<String, Object> map : list) {
-				memOriginalfilename=(String) map.get("fileName");
+				memOriginalfilename=map.get("fileName").toString();
+				logger.info("서명변경 성공! memOriginalfilename={}", memOriginalfilename);
 			}
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -274,7 +275,7 @@ public class ConfirmController {
 		logger.info("업데이트 후 emplVo={}", emplVo);
 
 		String msg="서명 등록 실패!", url="/e-approval/signature/uploadPage";
-		if(result>0) {
+		if(result>0 || memOriginalfilename.length()>1) {
 			msg="서명 등록 성공!";
 			logger.info("서명등록 결과, result={}", result);
 		}
@@ -354,9 +355,14 @@ public class ConfirmController {
 		Map<String, Object> map=emplService.selectByView(memNo);
 		logger.info("confirmVo={}",confirmVo);
 
+		//결재라인
+		int cfNo=confirmVo.getCfNo();
+		List<Map<String, Object>> orderList =confirmService.selectLineorder(cfNo);
+
 		model.addAttribute("map", map);
 		model.addAttribute("confirmVo", confirmVo);
 		model.addAttribute("cfRegdate", cfRegdate);
+		model.addAttribute("orderList", orderList);
 
 	}
 

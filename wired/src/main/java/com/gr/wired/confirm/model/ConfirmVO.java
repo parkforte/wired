@@ -2,6 +2,9 @@ package com.gr.wired.confirm.model;
 
 import java.sql.Timestamp;
 
+import com.gr.wired.docform.model.DocformVO;
+import com.gr.wired.employee.model.EmplVO;
+
 public class ConfirmVO {
 
 	private int cfNo;
@@ -19,6 +22,9 @@ public class ConfirmVO {
 	private Timestamp cfRegdate;
 	private Timestamp cfOkdate;
 	private ConfirmLineVO confirmlineVo;
+	private DocformVO docformVo;
+	private EmplVO emplVo;
+
 	public int getCfNo() {
 		return cfNo;
 	}
@@ -109,14 +115,28 @@ public class ConfirmVO {
 	public void setConfirmlineVo(ConfirmLineVO confirmlineVo) {
 		this.confirmlineVo = confirmlineVo;
 	}
+	public DocformVO getDocformVo() {
+		return docformVo;
+	}
+	public void setDocformVo(DocformVO docformVo) {
+		this.docformVo = docformVo;
+	}
+	public EmplVO getEmplVo() {
+		return emplVo;
+	}
+	public void setEmplVo(EmplVO emplVo) {
+		this.emplVo = emplVo;
+	}
 	@Override
 	public String toString() {
 		return "ConfirmVO [cfNo=" + cfNo + ", formNo=" + formNo + ", memNo=" + memNo + ", deptNo=" + deptNo + ", regNo="
 				+ regNo + ", cfTitle=" + cfTitle + ", cfContent=" + cfContent + ", cfState=" + cfState + ", cfFile="
 				+ cfFile + ", cfTmpstorage=" + cfTmpstorage + ", cfDel=" + cfDel + ", cfOrder=" + cfOrder
 				+ ", cfRegdate=" + cfRegdate + ", cfOkdate=" + cfOkdate + ", confirmlineVo=" + confirmlineVo
-				+ ", toString()=" + super.toString() + "]";
+				+ ", docformVo=" + docformVo + ", emplVo=" + emplVo + ", toString()=" + super.toString() + "]";
 	}
+
+
 
 
 }

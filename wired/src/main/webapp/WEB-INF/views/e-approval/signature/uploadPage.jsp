@@ -69,7 +69,7 @@
 			<div class="card-body">
 				<form method="post" enctype="multipart/form-data" name="noticeForm"
 					action="<c:url value='/e-approval/signature/upload'/>">
-					<input type="file">
+					<input type="file" name="file">
 					<div style="text-align: center;">
 						<button type="button" data-toggle="modal"
 							data-target="#exampleModal" class="btn btn-primary b-radius">등록하기</button>

@@ -79,7 +79,7 @@
 						                    label: 'test1', //차트 제목
 						                    fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
 						                    data: [
-						                        21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
+						                        0,1,2,3,4,5,6 //x축 label에 대응되는 데이터 값
 						                    ],
 						                    backgroundColor: [
 						                        //색상
@@ -132,7 +132,7 @@
 		<!-- 결재할 문서목록 -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">결재해야 할 문서</h6>
+				<h6 class="m-0 font-weight-bold text-primary">바로결재</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
