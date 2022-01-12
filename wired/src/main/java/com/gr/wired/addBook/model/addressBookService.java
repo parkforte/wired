@@ -13,12 +13,14 @@ public interface addressBookService {
 
 	int insertAddressBook(addressBookVO addressBookVo);
 	int loginCheck(String memId, String memPwd);
-	addressBookVO selectByMemId(String memId);
+	addressBookVO selectByAddNo(int addbookNo);
 	List<Map<String, Object>> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
 	int updateSignature(addressBookVO addressBookVo);
 	List<Map<String, Object>> selectByMemName(addressBookVO addressBookVo);
-	int updateAdd(addressBookVO addressBookVo);
+	int updateAddressBook(addressBookVO addressBookVo);
+	addressBookVO selectByMemId(String memId);
+	int deleteAddressBook(int addbookNo);
 	
 }
 

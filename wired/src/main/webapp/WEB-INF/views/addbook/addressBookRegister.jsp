@@ -124,8 +124,6 @@ span {
 							id="first_button">등록</button>
 						<button type="button" class="btn btn-danger b-radius"
 							onclick="location.href='<c:url value='addressBookList'/>'">취소</button>
-						<button type="button" class="btn btn-secondary b-radius"
-							onclick="location.href='<c:url value='addressBookList'/>'">목록</button>
 					</div>
 				</div>
 			</form>

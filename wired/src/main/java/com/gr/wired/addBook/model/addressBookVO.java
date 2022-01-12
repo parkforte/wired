@@ -9,6 +9,7 @@ public class addressBookVO {
 	private int memNo;
 	private String addbookDept;
 	private String addbookRank;
+	
 	public int getAddbookNo() {
 		return addbookNo;
 	}

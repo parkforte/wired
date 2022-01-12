@@ -6,18 +6,19 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gr.wired.common.SearchVO;
-import com.gr.wired.employee.model.EmplVO;
 
 @Mapper
 public interface addressBookDAO {
 	int insertAddressBook(addressBookVO addressBookVo);
-	String selectPwd(String memId);
-	addressBookVO selectByMemId(String memId);
+	int loginCheck(String memId, String memPwd);
+	addressBookVO selectByAddNo(int addbookNo);
 	List<Map<String, Object>> selectAll(SearchVO searchVo);
-	int updateSignature(addressBookVO addressBookVo);
 	int selectTotalRecord(SearchVO searchVo);
+	int updateSignature(addressBookVO addressBookVo);
 	List<Map<String, Object>> selectByMemName(addressBookVO addressBookVo);
-	int updateAdd(addressBookVO addressBookVo);
+	int updateAddressBook(addressBookVO addressBookVo);
+	addressBookVO selectByMemId(String memId);
+	int deleteAddressBook(int addbookNo);
 }
 
 

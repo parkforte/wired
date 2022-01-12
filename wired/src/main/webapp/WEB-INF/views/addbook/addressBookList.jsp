@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<!-- http://localhost:9091/wired/addbook/addressBook -->
+<!-- http://localhost:9091/wired/addbook/addressBookList -->
 <!-- 2 load the theme CSS file -->
 <link rel="stylesheet"
 	href="<c:url value='/resources/api/jsTree/dist/themes/proton/style.min.css' />" />
@@ -51,6 +51,7 @@ span {
 			}
 		});
 	});
+
 </script>
 <!-- 전자결재HOME -->
 <div class="container-fluid">
@@ -80,44 +81,46 @@ span {
 			</div>
 			<div class="card-body">
 				<div class="table-responsive" id="dataform">
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
-						<thead>
-							<tr>
-								<th>이름</th>
-								<th>연락처</th>
-								<th>이메일</th>
-								<th>회사명</th>
-								<th>부서명</th>
-								<th>직급</th>
-								<th>수정/삭제</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${empty addbookList }">
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
 								<tr>
-									<td colspan="6">데이터가 없습니다.</td>
+									<th>이름</th>
+									<th>연락처</th>
+									<th>이메일</th>
+									<th>회사명</th>
+									<th>부서명</th>
+									<th>직급</th>
+									<th>수정/삭제</th>
 								</tr>
-							</c:if>
-							<c:if test="${!empty addbookList }">
-								<!-- 리스트 반복문 시작 -->
-								<c:forEach var="map" items="${addbookList }">
+							</thead>
+							<tbody>
+								<c:if test="${empty addbookList }">
 									<tr>
-										<td>${map['ADDRBOOK_NAME'] }</td>
-										<td>${map['ADDRBOOK_TEL'] }</td>
-										<td>${map['ADDRBOOK_EMAIL'] }</td>
-										<td>${map['ADDRBOOK_COMNAME'] }</td>
-										<td>${map['ADDRBOOK_DEPT'] }</td>
-										<td>${map['ADDRBOOK_RANK'] }</td>
-										<td><button type="button" class="btn btn-success"
-										onclick="location.href='/wired/addbook/addressBookEdit'">수정</button>
-											<button type="button" class="btn btn-danger">삭제</button></td>
+										<td colspan="6">데이터가 없습니다.</td>
 									</tr>
-								</c:forEach>
-							</c:if>
-							<!-- 반복 끝 -->
-						</tbody>
-					</table>
+								</c:if>
+								<c:if test="${!empty addbookList }">
+									<!-- 리스트 반복문 시작 -->
+									<c:forEach var="map" items="${addbookList }">
+										<tr>
+											<td>${map['ADDRBOOK_NAME'] }</td>
+											<td>${map['ADDRBOOK_TEL'] }</td>
+											<td>${map['ADDRBOOK_EMAIL'] }</td>
+											<td>${map['ADDRBOOK_COMNAME'] }</td>
+											<td>${map['ADDRBOOK_DEPT'] }</td>
+											<td>${map['ADDRBOOK_RANK'] }</td>
+											
+											<td><button type="button" class="btn btn-success"
+													onclick="location.href='/wired/addbook/addressBookEdit'">수정</button>
+												<button type="button" class="btn btn-danger" id="btDel"
+												onclick="location.href='<c:url value="/addbook/addressBookDelete?addbookNo=${map['ADDRBOOK_NO'] }"/>'">삭제</button></td>
+										</tr>
+									</c:forEach>
+								</c:if>
+								<!-- 반복 끝 -->
+							</tbody>
+						</table>
 					<nav class="f-right" aria-label="...">
 						<ul class="pagination">
 							<li class="page-item disabled"><a class="page-link">Previous</a>
