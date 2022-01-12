@@ -105,3 +105,16 @@ on c.form_no=f.form_no
 join confirmline l
 on l.line_order=c.cf_order
 ;
+
+
+
+select c.*, 
+    m.mem_name, m.mem_originalfilename , f.form_name , l.line_order,
+    DECODE(c.cf_state, 0 , '임시저장',1,'대기',2,'승인',3,'반려') as state_name
+from confirm c join member m
+on c.mem_no=m.mem_no
+join docform f
+on c.form_no=f.form_no
+join confirmline l
+on l.line_order=c.cf_order
+;
