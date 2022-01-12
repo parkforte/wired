@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gr.wired.commute.model.CommuteDAO">
+
+	<select id="comCheck" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM COMMUTE
+		WHERE MEM_NO=#{memNo} AND TO_CHAR(COM_INDATE,'YYYYMMDD') = TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select>
+	<insert id="insertCommute" parameterType="commuteVo">
+		<selectKey keyProperty="comNo" resultType="int" order="BEFORE">
+			SELECT COMMUTE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+			INSERT INTO COMMUTE(COM_NO, MEM_NO, COM_STATUS)
+			VALUES(#{comNo}, #{memNo}, 'Y')
+	</insert>
+
+	<select id="selectByCNo" parameterType="int" resultType="int">
+		SELECT MAX(COM_NO)COM_NO FROM COMMUTE
+		WHERE MEM_NO=#{memNo}
+	</select>
+
+	<update id="updateCommute" parameterType="int" >
+		update commute
+		set com_outdate=sysdate, com_status='N'
+		where com_no=#{comNo}
+	</update>
+
+	<select id="selectDeNo" parameterType="int" resultType="int">
+		SELECT DEPT_NO FROM MEMBER
+		WHERE MEM_NO=#{memNo}
+	</select>
+
+	<select id="selectAll" parameterType="commuteVo" resultType="map">
+		SELECT C.*, MEM_NAME,
+	    (SELECT DEPT_NAME FROM DEPARTMENT D WHERE M.DEPT_NO=D.DEPT_NO) DEPT_NAME,
+	    (SELECT POS_NAME FROM POSITION P WHERE M.POS_NO=P.POS_NO) POS_NAME
+		FROM COMMUTE C JOIN MEMBER M
+		ON C.MEM_NO=M.MEM_NO
+		<if test="deptNo == null || deptNo ==''">
+			WHERE C.MEM_NO=#{memNo}
+		</if>
+		<if test="deptNo != null and deptNo !=''">
+			WHERE DEPT_NO=#{deptNo}
+		</if>
+		ORDER BY COM_NO DESC
+	</select>
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -35,6 +35,10 @@ div#se2_sample {
 	margin-right: 2px;
 }
 
+a{
+
+}
+
 </style>
 <!-- javaScript영역 -->
 <!-- 네이버 스마트에디터  -->
@@ -42,34 +46,18 @@ div#se2_sample {
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/api/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src='<c:url value="//code.jquery.com/jquery-1.11.0.min.js"/>'></script>
 
+
 <script type="text/javascript">
 <!-- head 안에 추가 -->
-	$(function(){
-		$('form[name=frmWrite]').submit(function(){
-			$('.infobox').each(function(idx, item){
-			if($(this).val().length<1){
-				alert($(this).prev().html() + "을(를) 입력하세요");
-				$(this).focus();
-				event.preventDefault();
-				return false;  //each 탈출
-			}
-		});
-
-	});
 
 	$(function () {
+
+
 		$('#btList').click(function(){
-			location.href="<c:url value='/board/boardList?bdlistNo=${param.bdListNo}'/>";
+			location.href="<c:url value='/board/boardList?bdlistNo=${bdListVo.bdlistNo}'/>";
 		});
 
 
-		$("#submitbt").click(function(){
-			var inputContent=oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
-			$('#txtContent').val(inputContent);
-			alert(inputContent);
-			$(".frmWrite").submit();
-
-		});
 	});
 
 
@@ -91,7 +79,11 @@ div#se2_sample {
 	<div class="card shadow mb-4">
    		<form class="frmWrite" method="post" enctype="multipart/form-data" action='<c:url value="/board/boardUpdate"/>'>
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary"  >게시판 이름</h6>
+
+			<input type="text" name="bdlistNo" value="${bdListVo.bdlistNo}">
+			<input type="hidden" name="oldFileName" value="${boardVo.boardFilename}">
+
+			<h6 class="m-0 font-weight-bold text-primary"  >게시판-${bdListVo.bdlistName }</h6>
 		<!-- 데이터 전송버튼 -->
 			<div id="se2_sample"  class="f-right">
 				<button type="button" class="btn btn-primary f-left" id="btList">글목록</button>
@@ -136,7 +128,15 @@ div#se2_sample {
 
 							$("#submitbt").click(function(){
 								oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
-								$('.frmWrite').submit();
+								if($('#title').val().length<1){
+									if($('#title').val().length<1){
+										alert('제목을 입력하세요');
+										$('#title').focus();
+										event.preventDefault();
+									}
+								}else{
+									$('.frmWrite').submit();
+								}
 							});
 						});
 					</script>
@@ -151,11 +151,21 @@ div#se2_sample {
 <!-- 					       data-max-file-size="3MB" -->
 <!-- 					       data-max-files="3" /> -->
 <!-- 					</div> -->
-
-					<div class="f-right">
-			            <label for="upfile">첨부파일</label>
-				        <input type="file" name="upfile" id="upfile" multiple="multiple">(최대 5M)
-			        </div>
+					<c:if test="${bdListVo.bdlistUp eq '89'}">
+						<div class="f-right">
+				            <label for="upfile">첨부파일</label>
+					        <input type="file" name="upfile" id="upfile" multiple="multiple">(최대 5M)
+				        </div>
+				         <c:if test="${!empty boardVo.boardFilename }">
+	            		<span style="color:green; font-size:0.7em;">
+	            			첨부파일을 새로 지정할 경우 기존 파일 ${fileInfo }는 삭제됩니다</span>
+	          		 	</c:if>
+				    </c:if>
+				    <c:if test="${bdListVo.bdlistRe eq '78'}">
+			        	<div class="f-right">
+			        		<span>본 게시판은 파일첨부가 불가능 합니다.</span>
+			        	</div>
+			        </c:if>
 
 
 					<!-- 공백 -->

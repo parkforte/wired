@@ -131,9 +131,16 @@ $(function(){
 				href='<c:url value="/board/boardList?bdlistNo=${bdListVo.bdlistNo }"/>'>
 								${bdListVo.bdlistName }</a>
 						</c:forEach>
+						<c:if test="${sessionScope.ranksNo==3}">
+							<a class="collapse-item"
+				href='<c:url value="/bdList/bdListmanagement"/>'>
+								게시판 관리</a>
+						</c:if>
 					</div>
 				</div>
 			</li>
+
+
 
 			<!-- Heading -->
 			<div class="sidebar-heading"></div>
@@ -187,21 +194,7 @@ $(function(){
 					</div>
 				</div>
 			</li>
-			<!-- 게시판 관리 -->
-			<c:if test="${sessionScope.ranksNo==3}">
-				<li class="nav-item" id="emplManage_nav" style="display: none;"><a class="nav-link collapsed" href="#"
-					data-toggle="collapse" data-target="#collapseMember"
-					aria-expanded="true" aria-controls="collapsePages"> <i
-						class="fas fa-fw fa-folder"></i> <span>게시판 관리</span>
-					</a>
-					<div id="collapseMember" class="collapse"
-						aria-labelledby="headingPages" data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-								<a class="collapse-item" href="<c:url value='/bdList/bdListmanagement'/>">게시판 관리</a>
-						</div>
-					</div>
-				</li>
-			</c:if>
+
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
@@ -402,7 +395,7 @@ $(function(){
 								aria-labelledby="userDropdown">
 								<a class="dropdown-item" href="<c:url value='/mypage/mypage'/>"> <i
 									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 마이페이지
-								</a> <a class="dropdown-item" href="#"> <i
+								</a> <a class="dropdown-item" href="<c:url value='/commute/commuteList?memNo=${sessionScope.memNo }'/>"> <i
 									class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 									근태관리
 								</a> <a class="dropdown-item" href="#"> <i

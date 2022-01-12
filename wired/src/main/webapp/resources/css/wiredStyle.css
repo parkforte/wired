@@ -5,7 +5,7 @@
 
 .font{
 	font-family: 'Noto Sans KR';
-	
+
 }
 
 /* 사이드바 */
@@ -49,7 +49,7 @@
 .p-bottom-0{
 	padding-bottom: 0;
 }
-	
+
 /* 공통 div class="row" 마진 0*/
 div .row{
 	margin: 0;
@@ -62,7 +62,7 @@ div .row{
 
 /* 로고 */
 .logo1{
-	
+
 }
 
 /* 탑 타이틀 - 자원 */
@@ -150,11 +150,7 @@ label#fileinputlabel {
     margin-left: -137px;
     margin-top: 3px;
 }
-/* 글등록버튼 */
-div#se2_sample {
-    width: 100px;
-    float: right;
-}
+
 
 /* boardList.jsp */
 /* 페이징 */
@@ -185,7 +181,7 @@ label.f-right {
 	margin-left: 2px;
 }
 .bdDetailBtDiv{
-	margin-top: -22px;	
+	margin-top: -22px;
 }
 
 

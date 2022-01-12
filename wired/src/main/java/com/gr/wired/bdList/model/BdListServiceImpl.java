@@ -57,6 +57,18 @@ public class BdListServiceImpl implements BdListService{
 	}
 
 
+	@Override
+	public BdListVO selectByBdNo(int bdlistNo) {
+		return bdListDao.selectByBdNo(bdlistNo);
+	}
+
+
+	@Override
+	public int deleteBoardList(int bdlistNo) {
+		return bdListDao.deleteBoardList(bdlistNo);
+	}
+
+
 
 
 

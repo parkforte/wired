@@ -23,7 +23,6 @@ public class HomeController {
 
 	@Autowired
 	public HomeController(BdListService bdListService) {
-		super();
 		this.bdListService = bdListService;
 	}
 
