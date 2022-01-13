@@ -10,11 +10,11 @@
 	</sql>
 
 	<insert id="insertAddressBook" parameterType="addressBookVO">
-		<selectKey keyProperty="addbookNo" resultType="int" order="BEFORE">
+		<selectKey keyProperty="addrbookNo" resultType="int" order="BEFORE">
 			select ADDBOOK_SEQ.nextval from dual
 		</selectKey>
 		insert into ADDRESSBOOK (ADDRBOOK_NO, ADDRBOOK_NAME, ADDRBOOK_COMNAME,ADDRBOOK_TEL,ADDRBOOK_EMAIL,MEM_NO,ADDRBOOK_DEPT,ADDRBOOK_RANK)
-		values (#{addbookNo},#{addbookName},#{addbookComname},#{addbookTel},#{addbookEmail},#{memNo},#{addbookDept},#{addbookRank})
+		values (#{addrbookNo},#{addrbookName},#{addrbookComname},#{addrbookTel},#{addrbookEmail},#{memNo},#{addrbookDept},#{addrbookRank})
 	</insert>
 
 	<select id="selectPwd" parameterType="string" resultType="string">
@@ -48,18 +48,21 @@
 		SELECT COUNT(*) FROM MEMBER
 		<include refid="searchWhere"></include>
 	</select>
-
+	<select id="selectByAddNo" parameterType="int" resultType="addressBookVo">
+		SELECT * FROM ADDRESSBOOK
+		WHERE ADDRBOOK_NO=#{addrbookNo}
+	</select>
 	<update id="updateAddressBook" parameterType="addressBookVO">
 		UPDATE ADDRESSBOOK
-		SET ADDRBOOK_NAME=#{addbookName}, ADDRBOOK_TEL=#{addbookTel}, ADDRBOOK_COMNAME=#{addbookComname}, ADDRBOOK_EMAIL=#{addbookEmail},
-			ADDRBOOK_DEPT=#{addbookDept}, ADDRBOOK_RANK=#{addbookRank}
-		WHERE ADDRBOOK_NO=#{addbookNo}
+		SET ADDRBOOK_NAME=#{addrbookName}, ADDRBOOK_TEL=#{addrbookTel}, ADDRBOOK_COMNAME=#{addrbookComname}, ADDRBOOK_EMAIL=#{addrbookEmail},
+			ADDRBOOK_DEPT=#{addrbookDept}, ADDRBOOK_RANK=#{addrbookRank}
+		WHERE ADDRBOOK_NO=#{addrbookNo}
 	</update>
 	<select id="selectByMemName" parameterType="addressBookVo" resultType="map">
 		select * from memberinfo_view
 		where mem_name like '%'||#{memName}||'%'
 	</select>
 	<delete id="deleteAddressBook" parameterType="int">
-		DELETE FROM ADDRESSBOOK WHERE ADDRBOOK_NO=#{addbookNo}
+		DELETE FROM ADDRESSBOOK WHERE ADDRBOOK_NO=#{addrbookNo}
 	</delete>
 </mapper>

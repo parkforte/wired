@@ -102,34 +102,34 @@ label#posNo {
 					<!-- 이름 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookName" id="addbookName" value="${map['ADDRBOOK_NAME'] }">
+							name="addrbookName" id="addrbookName" value="${addressBookVo.addrbookName }">
 					</div>
 					<!-- 연락처 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookTel" id="addbookTel" placeholder="연락처">
+							name="addrbookTel" id="addrbookTel" value="${addressBookVo.addrbookTel }">
 					</div>
 					<!-- 이메일 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookEmail" id="addbookEmail" placeholder="이메일">
+							name="addrbookEmail" id="addrbookEmail" value="${addressBookVo.addrbookEmail }">
 					</div>
 					<!-- 회사명 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookComname" id="addbookComname" placeholder="회사명">
+							name="addrbookComname" id="addrbookComname" value="${addressBookVo.addrbookComname }">
 					</div>
 					<!-- 부서명 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookDept" id="addbookDept" placeholder="부서명">
+							name="addrbookDept" id="addrbookDept" value="${addressBookVo.addrbookDept }">
 					</div>
 					<!-- 직급 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookRank" id="addbookRank" placeholder="직급">
+							name="addrbookRank" id="addrbookRank" value="${addressBookVo.addrbookRank }">
 					</div>
-					<input type="text" name="addbookNo" value="${map['ADDRBOOK_NO'] }">
+					<input type="hidden" name="addrbookNo" value="${param.addrbookNo }">
 					<div class="form-group c-size" style="text-align: center;">
 						<br>
 						<button type="button" class="btn btn-success b-radius"

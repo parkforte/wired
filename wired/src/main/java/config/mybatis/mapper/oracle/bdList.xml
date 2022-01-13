@@ -60,4 +60,5 @@
 		WHERE BDLIST_NO=#{bdlistNo}
 	</delete>
 
+
 </mapper>

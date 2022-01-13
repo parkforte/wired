@@ -111,10 +111,10 @@ span {
 											<td>${map['ADDRBOOK_DEPT'] }</td>
 											<td>${map['ADDRBOOK_RANK'] }</td>
 											
-											<td><button type="button" class="btn btn-success"
-													onclick="location.href='/wired/addbook/addressBookEdit'">수정</button>
+											<td><button type="button" class="btn btn-success" id="btEdit"
+												onclick="location.href='<c:url value="/addbook/addressBookEdit?addrbookNo=${map['ADDRBOOK_NO'] }"/>'">수정</button>
 												<button type="button" class="btn btn-danger" id="btDel"
-												onclick="location.href='<c:url value="/addbook/addressBookDelete?addbookNo=${map['ADDRBOOK_NO'] }"/>'">삭제</button></td>
+												onclick="location.href='<c:url value="/addbook/addressBookDelete?addrbookNo=${map['ADDRBOOK_NO'] }"/>'">삭제</button></td>
 										</tr>
 									</c:forEach>
 								</c:if>

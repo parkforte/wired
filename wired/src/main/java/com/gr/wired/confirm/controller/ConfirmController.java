@@ -343,7 +343,7 @@ public class ConfirmController {
 
 
 	@RequestMapping("/write/paperWrite")
-	public void paperWrite_get(HttpSession session, Model model) {
+	public String paperWrite_get(HttpSession session, Model model) {
 		int memNo=(int) session.getAttribute("memNo");
 		logger.info("전자결재 문서작성페이지, memNo={}", memNo);
 
@@ -352,6 +352,14 @@ public class ConfirmController {
 
 		//문서상세내용
 		ConfirmVO confirmVo=confirmService.selectTempByMemNo(memNo);
+		if(confirmVo==null) {
+			String msg="생성하신 문서가 없습니다. 문서선택화면으로 이동합니다.";
+			String url="/e-approval/write/selectForm";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			return "common/message";
+		}
+
 		Map<String, Object> map=emplService.selectByView(memNo);
 		logger.info("confirmVo={}",confirmVo);
 
@@ -364,6 +372,7 @@ public class ConfirmController {
 		model.addAttribute("cfRegdate", cfRegdate);
 		model.addAttribute("orderList", orderList);
 
+		return "e-approval/write/paperWrite";
 	}
 
 	@PostMapping("/write/updating")

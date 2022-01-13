@@ -12,15 +12,14 @@ public interface addressBookService {
 	int USERID_NONE=3; //아이디 존재하지 않음
 
 	int insertAddressBook(addressBookVO addressBookVo);
-	int loginCheck(String memId, String memPwd);
-	addressBookVO selectByAddNo(int addbookNo);
+	addressBookVO selectByAddNo(int addrbookNo);
 	List<Map<String, Object>> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
 	int updateSignature(addressBookVO addressBookVo);
 	List<Map<String, Object>> selectByMemName(addressBookVO addressBookVo);
 	int updateAddressBook(addressBookVO addressBookVo);
 	addressBookVO selectByMemId(String memId);
-	int deleteAddressBook(int addbookNo);
+	int deleteAddressBook(int addrbookNo);
 	
 }
 
