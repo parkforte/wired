@@ -127,11 +127,6 @@ public class BoardController {
 		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 
-		//[2] searchVo에 값 셋팅
-		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		logger.info("값 셋팅 후 searchVo={}", searchVo);
-
 		//db작업
 		List<Map<String,Object>> list = boardService.selectByBNoList(searchVo);
 		logger.info("게시글 목록 list={}", list);

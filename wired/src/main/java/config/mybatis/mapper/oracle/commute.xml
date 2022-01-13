@@ -32,10 +32,33 @@
 		WHERE MEM_NO=#{memNo}
 	</select>
 
-	<select id="selectAll" parameterType="commuteVo" resultType="map">
-		SELECT C.*, MEM_NAME,
-	    (SELECT DEPT_NAME FROM DEPARTMENT D WHERE M.DEPT_NO=D.DEPT_NO) DEPT_NAME,
-	    (SELECT POS_NAME FROM POSITION P WHERE M.POS_NO=P.POS_NO) POS_NAME
+	<select id="selectAll" parameterType="searchVo" resultType="map">
+		SELECT *
+			from
+			(
+				select rownum AS RNUM, A.*
+				from
+				(
+					SELECT C.*, MEM_NAME,
+				    (SELECT DEPT_NAME FROM DEPARTMENT D WHERE M.DEPT_NO=D.DEPT_NO) DEPT_NAME,
+				    (SELECT POS_NAME FROM POSITION P WHERE M.POS_NO=P.POS_NO) POS_NAME
+					FROM COMMUTE C JOIN MEMBER M
+					ON C.MEM_NO=M.MEM_NO
+					<if test="deptNo == null || deptNo ==''">
+						WHERE C.MEM_NO=#{memNo}
+					</if>
+					<if test="deptNo != null and deptNo !=''">
+						WHERE DEPT_NO=#{deptNo}
+					</if>
+					ORDER BY COM_NO DESC
+				)A
+			)
+			<![CDATA[
+			WHERE RNUM>#{firstRecordIndex}
+				AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
+		SELECT COUNT(*)
 		FROM COMMUTE C JOIN MEMBER M
 		ON C.MEM_NO=M.MEM_NO
 		<if test="deptNo == null || deptNo ==''">
@@ -44,7 +67,6 @@
 		<if test="deptNo != null and deptNo !=''">
 			WHERE DEPT_NO=#{deptNo}
 		</if>
-		ORDER BY COM_NO DESC
 	</select>
 
 

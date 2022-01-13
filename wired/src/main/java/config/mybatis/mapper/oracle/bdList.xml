@@ -49,7 +49,7 @@
 		WHERE BDLIST_NO=#{bdlistNo}
 	</update>
 	<select id="selectMenu" resultType="bdListVo">
-		SELECT BDLIST_NO, BDLIST_NAME FROM BOARDLIST
+		SELECT BDLIST_NO, BDLIST_NAME, RANKS_NO FROM BOARDLIST
 	</select>
 	<select id="selectByBdNo" parameterType="int" resultType="bdlistVo">
 		SELECT * FROM BOARDLIST
