@@ -10,15 +10,14 @@ import com.gr.wired.common.SearchVO;
 @Mapper
 public interface addressBookDAO {
 	int insertAddressBook(addressBookVO addressBookVo);
-	int loginCheck(String memId, String memPwd);
-	addressBookVO selectByAddNo(int addbookNo);
+	addressBookVO selectByAddNo(int addrbookNo);
 	List<Map<String, Object>> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
 	int updateSignature(addressBookVO addressBookVo);
 	List<Map<String, Object>> selectByMemName(addressBookVO addressBookVo);
 	int updateAddressBook(addressBookVO addressBookVo);
 	addressBookVO selectByMemId(String memId);
-	int deleteAddressBook(int addbookNo);
+	int deleteAddressBook(int addrbookNo);
 }
 
 

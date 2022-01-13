@@ -13,12 +13,10 @@ import com.gr.wired.employee.model.EmplDAO;
 @Service
 public class addressBookServiceImpl implements addressBookService{
 	private final addressBookDAO addressBookDao;
-	private final EmplDAO emplDao;
 
 	@Autowired
 	public addressBookServiceImpl(addressBookDAO addressBookDao) {
 		this.addressBookDao = addressBookDao;
-		this.emplDao = null;
 	}
 
 	@Override
@@ -26,22 +24,6 @@ public class addressBookServiceImpl implements addressBookService{
 		return addressBookDao.insertAddressBook(addressBookVo);
 	}
 
-	@Override
-	public int loginCheck(String memId, String memPwd) {
-		String dbPwd = emplDao.selectPwd(memId);
-		int result=0;
-		if(dbPwd==null || dbPwd.isEmpty()) {
-			result=USERID_NONE;
-		}else {
-			if(dbPwd.equals(memPwd)) {
-				result=LOGIN_OK;
-			}else {
-				result=DISAGREE_PWD;
-			}
-		}
-
-		return result;
-	}
 
 	@Override
 	public addressBookVO selectByMemId(String memId) {
@@ -74,14 +56,15 @@ public class addressBookServiceImpl implements addressBookService{
 	}
 
 	@Override
-	public 	addressBookVO selectByAddNo(int addbookNo) {
-		return addressBookDao.selectByAddNo(addbookNo);
+	public int deleteAddressBook(int addrbookNo) {
+		return addressBookDao.deleteAddressBook(addrbookNo);
 	}
 
 	@Override
-	public int deleteAddressBook(int addbookNo) {
-		return addressBookDao.deleteAddressBook(addbookNo);
+	public addressBookVO selectByAddNo(int addrbookNo) {
+		return addressBookDao.selectByAddNo(addrbookNo);
 	}
+
 
 
 

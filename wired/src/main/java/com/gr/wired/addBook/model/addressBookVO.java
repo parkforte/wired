@@ -1,44 +1,43 @@
 package com.gr.wired.addBook.model;
 
 public class addressBookVO {
-	private int addbookNo;
-	private String addbookName;
-	private String addbookComname;
-	private String addbookTel;
-	private String addbookEmail;
+	private int addrbookNo;
+	private String addrbookName;
+	private String addrbookComname;
+	private String addrbookTel;
+	private String addrbookEmail;
 	private int memNo;
-	private String addbookDept;
-	private String addbookRank;
-	
-	public int getAddbookNo() {
-		return addbookNo;
+	private String addrbookDept;
+	private String addrbookRank;
+	public int getAddrbookNo() {
+		return addrbookNo;
 	}
-	public void setAddbookNo(int addbookNo) {
-		this.addbookNo = addbookNo;
+	public void setAddrbookNo(int addrbookNo) {
+		this.addrbookNo = addrbookNo;
 	}
-	public String getAddbookName() {
-		return addbookName;
+	public String getAddrbookName() {
+		return addrbookName;
 	}
-	public void setAddbookName(String addbookName) {
-		this.addbookName = addbookName;
+	public void setAddrbookName(String addrbookName) {
+		this.addrbookName = addrbookName;
 	}
-	public String getAddbookComname() {
-		return addbookComname;
+	public String getAddrbookComname() {
+		return addrbookComname;
 	}
-	public void setAddbookComname(String addbookComname) {
-		this.addbookComname = addbookComname;
+	public void setAddrbookComname(String addrbookComname) {
+		this.addrbookComname = addrbookComname;
 	}
-	public String getAddbookTel() {
-		return addbookTel;
+	public String getAddrbookTel() {
+		return addrbookTel;
 	}
-	public void setAddbookTel(String addbookTel) {
-		this.addbookTel = addbookTel;
+	public void setAddrbookTel(String addrbookTel) {
+		this.addrbookTel = addrbookTel;
 	}
-	public String getAddbookEmail() {
-		return addbookEmail;
+	public String getAddrbookEmail() {
+		return addrbookEmail;
 	}
-	public void setAddbookEmail(String addbookEmail) {
-		this.addbookEmail = addbookEmail;
+	public void setAddrbookEmail(String addrbookEmail) {
+		this.addrbookEmail = addrbookEmail;
 	}
 	public int getMemNo() {
 		return memNo;
@@ -46,23 +45,26 @@ public class addressBookVO {
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
-	public String getAddbookDept() {
-		return addbookDept;
+	public String getAddrbookDept() {
+		return addrbookDept;
 	}
-	public void setAddbookDept(String addbookDept) {
-		this.addbookDept = addbookDept;
+	public void setAddrbookDept(String addrbookDept) {
+		this.addrbookDept = addrbookDept;
 	}
-	public String getAddbookRank() {
-		return addbookRank;
+	public String getAddrbookRank() {
+		return addrbookRank;
 	}
-	public void setAddbookRank(String addbookRank) {
-		this.addbookRank = addbookRank;
+	public void setAddrbookRank(String addrbookRank) {
+		this.addrbookRank = addrbookRank;
 	}
 	@Override
 	public String toString() {
-		return "addressBookVO [addbookNo=" + addbookNo + ", addbookName=" + addbookName + ", addbookComname="
-				+ addbookComname + ", addbookTel=" + addbookTel + ", addbookEmail=" + addbookEmail + ", memNo=" + memNo
-				+ ", addbookDept=" + addbookDept + ", addbookRank=" + addbookRank + "]";
+		return "addressBookVO [addrbookNo=" + addrbookNo + ", addrbookName=" + addrbookName + ", addrbookComname="
+				+ addrbookComname + ", addrbookTel=" + addrbookTel + ", addrbookEmail=" + addrbookEmail + ", memNo="
+				+ memNo + ", addrbookDept=" + addrbookDept + ", addrbookRank=" + addrbookRank + "]";
 	}
+	
+	
+	
 	
 }
