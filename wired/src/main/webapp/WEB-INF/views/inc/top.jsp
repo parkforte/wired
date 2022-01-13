@@ -68,6 +68,12 @@ $(function(){
 	if(${sessionScope.ranksNo}==3){
 		$('#emplManage_nav').css('display','block');
 	}
+	$('#a-jawon').click(function() {
+		if(${sessionScope.ranksNo}!=3){
+			alert('관리자 페이지 입니다.');
+			event.preventDefault();
+		}
+	});
 });
 </script>
 </head>
@@ -157,13 +163,8 @@ $(function(){
 						<h6 class="collapse-header">자원관리:</h6>
 							<a class="collapse-item" href="<c:url value='/jawon/jawonAllList'/>">전체예약현황</a>
 							<a class="collapse-item" href="<c:url value='/jawon/jawonMyList'/>">내 예약현황</a>
-							<hr>
-							<c:forEach var="resTypeVo" items="${tList }">
-								<a class="collapse-item"
-					href='<c:url value="/jawon/jawonReserve?typeNo=${resTypeVo.typeNo }"/>'>
-									${resTypeVo.typeName }</a>
-									<input type="text" value="${resTypeVo.typeNo }">
-							</c:forEach>
+							<a class="collapse-item" href="<c:url value='/jawon/jawonReserve?typeNo=1'/>">자원예약</a>
+							<a class="collapse-item" id="a-jawon" href="<c:url value='/jawon/jawonManage'/>">자원관리</a>
 					</div>
 				</div>
 			</li>

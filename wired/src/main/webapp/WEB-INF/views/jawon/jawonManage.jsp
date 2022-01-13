@@ -63,8 +63,18 @@ a{
 <!-- javaScript영역 -->
 <script type="text/javascript">
 $(function() {
+	$('.jawonDel').each(function(index,item) {
+		$(this).click(function() {
+			var res=$(this).val();
+			$('#m_btn').click(function(){
+		        location.href="<c:url value='/jawon/listdelete?typeNo='/>"+res;
+		    });
+		});
+
+	});
 
 });
+
 
 // function windowonload(){
 
@@ -119,6 +129,7 @@ $(function() {
                        </form>
                    </div>
                </li>
+               </ul>
                </div>
                <div class="card-body p-bottom-0">
                    <div class="table-responsive">
@@ -131,18 +142,19 @@ $(function() {
                                    <th>예약시간</th>
                                    <th>상태</th>
                                    <th>
-                                   	<button type="button" class="btn btn-light jawonAdd" data-toggle="modal" data-target="#exampleAdd">추가</button>
+                                   	<button type="button" class="btn btn-light jawonAdd" value="${jawonAllVo.resTypeVo.typeNo }"
+                                   		data-toggle="modal" data-target="#exampleAdd">추가</button>
                                    </th>
                                </tr>
                            </thead>
                            <tbody>
-                            <c:if test="${empty tList }">
-                            	<tr>
-                            		<td colspan="5">데이터가 없습니다.</td>
-                            	</tr>
-                            </c:if>
                             <c:if test="${!empty tList }">
                              <c:forEach var="map" items="${jawonAllVo.typeDetailsList }">
+	                            <c:if test="${empty jawonAllVo.typeDetailsList }">
+	                            	<tr>
+	                            		<td colspan="5">데이터가 없습니다.</td>
+	                            	</tr>
+	                            </c:if>
                                <tr>
                                    <td>${map['RES_NAME'] }</td>
                                    <td>${map['RES_LOCATION'] }</td>
@@ -169,19 +181,19 @@ $(function() {
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
+			        <form name="frm2" action="<c:url value='/jawon/listAdd'/>">
 			      <div class="modal-body">
-			        <form>
 					  <div class="form-group">
 					    <label for="exampleInputEmail1">자원명</label>
-					    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-					    	value="${map['TYPE_NAME'] }">
+					    <input type="text" class="form-control" id="jawonListAdd" aria-describedby="emailHelp"
+					    	name="typeName">
 					  </div>
-					</form>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
-			        <button type="submit" class="btn btn-success" id="">추가</button>
+			        <button type="submit" class="btn btn-success" id="list-add">추가</button>
 			      </div>
+					</form>
 			    </div>
 			  </div>
 			</div>
@@ -196,20 +208,41 @@ $(function() {
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <form>
 					  <div class="form-group">
-			      <c:forEach var="vo" items="${vList }">
+			      <c:forEach var="jawonAllVo" items="${tList}">
 					    <label for="exampleInputEmail1">자원명</label>
-					    <input type="text" class="form-control" id="exampleInputEmail1" value="${vo.typeName }"
-					    	style="width: 250px;" aria-describedby="emailHelp">
-					    <button type="button" class="btn btn-danger" >삭제</button>
+					    <div>
+					    <input type="text" class="form-control" value="${jawonAllVo.resTypeVo.typeName }"
+					    	style="width: 250px;" readonly>
+					    <button type="button" class="btn btn-danger jawonDel" data-toggle="modal" data-target="#typeDel"
+					    	 value="${jawonAllVo.resTypeVo.typeNo }">삭제</button>
+					    </div>
 			      </c:forEach>
 					  </div>
-					</form>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
-			        <button type="submit" class="btn btn-success">수정</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="typeDel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			      	<h5 class="modal-title" id="exampleModalLabel"></h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        삭제 하시겠습니까?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >취소</button>
+			        <button type="submit" id="m_btn" class="btn btn-danger" >확인</button>
+			        <!-- <input type="text" id="modal_btn" value=""> -->
 			      </div>
 			    </div>
 			  </div>
@@ -219,24 +252,26 @@ $(function() {
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
 			      <div class="modal-header back-color">
-			      	<h5 class="modal-title" id="exampleModalLabel">자원(종류이름) 추가</h5>
+			      	<h5 class="modal-title" id="exampleModalLabel">자원정보 추가</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <form>
+			        <form name="frmRes" action="<c:url value='/jawon/jawon'/>">
 					  <div class="form-group">
 					    <label for="exampleInputEmail1">자원명</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="기존자원명고정" >
+					    <input type="email" class="form-control" id="exampleInputEmail1"  name="typeNo"
+					    	aria-describedby="emailHelp" value="" ><span></span>
 					  </div>
 					  <div class="form-group">
 					    <label for="exampleInputPassword1">자원정보</label>
-					    <input type="password" class="form-control" id="exampleInputPassword1">
+					    <input type="password" class="form-control" id="exampleInputPassword1" name="resName">
 					  </div>
 					  <div class="form-group">
 					    <label for="exampleInputEmail1">자원위치</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+					    <input type="email" class="form-control" id="exampleInputEmail1"
+					    	aria-describedby="emailHelp" name="resLocation">
 					    <small id="emailHelp" class="form-text text-muted">위치를 지정해주세요.</small>
 					  </div>
 					</form>
@@ -302,7 +337,7 @@ $(function() {
 			    </div>
 			  </div>
 			</div>
-
+		</div>
     </div>
     <!-- /.container-fluid -->
      </div>

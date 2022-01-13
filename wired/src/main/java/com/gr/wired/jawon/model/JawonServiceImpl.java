@@ -16,8 +16,8 @@ public class JawonServiceImpl implements JawonService{
 	}
 
 	@Override
-	public int insertJawonList(JawonVO jawonVo) {
-		return jawonDao.insertJawonList(jawonVo);
+	public int insertJawonList(ResTypeVO resTypeVo) {
+		return jawonDao.insertJawonList(resTypeVo);
 	}
 
 	@Override
@@ -59,6 +59,12 @@ public class JawonServiceImpl implements JawonService{
 	public List<Map<String, Object>> selectJawonAllView() {
 		return jawonDao.selectJawonAllView();
 	}
+
+	@Override
+	public int deleteJawonType(int typeNo) {
+		return jawonDao.deleteJawonType(typeNo);
+	}
+
 
 
 }

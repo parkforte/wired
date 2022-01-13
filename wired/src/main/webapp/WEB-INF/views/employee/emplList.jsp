@@ -38,7 +38,6 @@ $(function() {
 	$('.res_btn').each(function(index,item) {
 		$(this).click(function() {
 			var res=$(this).val();
-// 			$('#modal_btn').val(res);
 			$('#m_btn').click(function(){
 		        location.href="<c:url value='/employee/emplQuit?memNo='/>"+res;
 		    });

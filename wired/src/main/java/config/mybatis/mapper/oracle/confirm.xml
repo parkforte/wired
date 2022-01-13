@@ -29,6 +29,7 @@
 	<select id="selectLineorder" parameterType="int" resultType="map">
 		SELECT * FROM LINEORDER_VIEW
 		WHERE CF_NO=#{cfNo}
+		AND LINE_ORDER>0
 		ORDER BY LINE_ORDER DESC
 	</select>
 </mapper>

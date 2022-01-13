@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gr.wired.jawon.model.JawonAllVO;
 import com.gr.wired.jawon.model.JawonService;
-import com.gr.wired.jawon.model.JawonVO;
 import com.gr.wired.jawon.model.ResScheduleVO;
 import com.gr.wired.jawon.model.ResTypeVO;
 
@@ -36,16 +35,33 @@ public class JawonController {
 	}
 
 	@RequestMapping("/listAdd")
-	public String listAdd(@ModelAttribute JawonVO vo, Model model) {
-		logger.info("자원리스트 등록 처리, 파라미터 vo={}", vo);
+	public String listAdd(@ModelAttribute ResTypeVO vo, Model model) {
+		logger.info("자원종류 등록 처리, 파라미터 vo={}", vo);
 
 		int cnt = jawonService.insertJawonList(vo);
-		logger.info("자원리스트 등록 결과, cnt={}", cnt);
+		logger.info("자원종류 등록 결과, cnt={}", cnt);
 
-		String msg="리스트 등록 실패", url="/jawon/jawonManage";
+		String msg="자원종류 등록 실패", url="/jawon/jawonManage";
 		if(cnt>0) {
-			msg="자원리스트 등록 성공";
-			url="/jawon/jawonManage";
+			msg="자원종류 등록 성공";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
+
+	@RequestMapping("/listdelete")
+	public String listDel(@RequestParam(defaultValue = "0") int typeNo, Model model) {
+		logger.info("자원종류 삭제 처리, 파라미터 typeNo={}", typeNo);
+
+		int cnt=jawonService.deleteJawonType(typeNo);
+		logger.info("자원종류 삭제 결과, cnt={}",cnt);
+
+		String msg="자원종류 삭제 실패 ", url="/jawon/jawonManage";
+		if(cnt>0) {
+			msg="자원종류 삭제 성공";
 		}
 
 		model.addAttribute("msg", msg);

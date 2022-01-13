@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
 
-<!-- 2 load the theme CSS file -->
-<link rel="stylesheet"
-	href="<c:url value='/resources/api/jsTree/dist/themes/proton/style.min.css' />" />
 
 <style>
 .setW15 {
@@ -31,6 +28,7 @@
 <%@ include file="include/navbar.jsp"%>
 	<div>
 		<!-- 정렬기준 -->
+		<!--
 		<div class="card shadow mb-4 setW15 setMR10 f-left">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">정렬기준</h6>
@@ -49,31 +47,39 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">문서함</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable" width="100%"
+					<table class="table table-bordered t-center" id="dataTable" width="100%"
 						cellspacing="0">
+						<col width="10%">
+						<col width="15%">
+						<col width="25%">
+						<col width="20%">
+						<col width="20%">
+						<col width="10%">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Position</th>
-								<th>Office</th>
-								<th>Age</th>
-								<th>Start date</th>
+								<th>번호</th>
+								<th>문서양식</th>
+								<th>문서제목</th>
+								<th>기안일</th>
+								<th>결재일</th>
+								<th>결재상태</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>Tiger Nixon</td>
-								<td>System Architect</td>
-								<td>Edinburgh</td>
-								<td>61</td>
-								<td>2011/04/25</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 						</tbody>
 					</table>
@@ -89,6 +95,12 @@
 							</li>
 						</ul>
 					</nav>
+					<form>
+					<div id='f-right' style="width: 20%;">
+						<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" name="searchKeyword">
+						<button class="btn btn-outline-success" type="submit">Search</button>
+					</div>
+					</form>
 				</div>
 			</div>
 		</div>
