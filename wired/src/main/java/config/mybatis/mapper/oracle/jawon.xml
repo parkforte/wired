@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.gr.wired.jawon.model.JawonDAO">
-	<insert id="insertJawonList" parameterType="jawonVo">
+	<insert id="insertJawonList" parameterType="resTypeVo">
 		<selectKey keyProperty="typeNo" resultType="int" order="BEFORE">
 			select RESTYPE_SEQ.nextval from dual
 		</selectKey>
@@ -74,4 +74,11 @@
 		ORDER BY RESERV_NO DESC
 	</select>
 
+	<delete id="deleteJawonType" parameterType="int">
+		DELETE FROM RESTYPE WHERE TYPE_NO=#{typeNo}
+	</delete>
+
+	<insert id="">
+
+	</insert>
 </mapper>

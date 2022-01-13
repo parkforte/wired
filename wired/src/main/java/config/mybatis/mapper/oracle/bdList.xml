@@ -59,4 +59,5 @@
 		DELETE FROM BOARDLIST
 		WHERE BDLIST_NO=#{bdlistNo}
 	</delete>
+
 </mapper>

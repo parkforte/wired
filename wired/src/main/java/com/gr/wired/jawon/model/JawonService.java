@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface JawonService {
-	int insertJawonList(JawonVO jawonVo);
+	int insertJawonList(ResTypeVO resTypeVo);
 	List<ResTypeVO> selectType();
 	List<Map<String, Object>> selectJawonDetailsView(int typeNo);
 	List<JawonAllVO> selectJawonAll();
@@ -13,4 +13,5 @@ public interface JawonService {
 	List<Map<String, Object>> selectJawonMyView(int memNo);
 	int deleteReserve(int reservNo);
 	List<Map<String, Object>> selectJawonAllView();
+	int deleteJawonType(int typeNo);
 }
