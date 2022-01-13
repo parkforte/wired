@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gr.wired.common.SearchVO;
+
 @Mapper
 public interface CommuteDAO {
 	int comCheck(int memNo);
@@ -12,6 +14,7 @@ public interface CommuteDAO {
 	int selectByCNo(int memNo);
 	int updateCommute(int comNo);
 	int selectDeNo(int memNo);
-	List<Map<String, Object>> selectAll(CommuteVO commuteVo);
+	List<Map<String, Object>> selectAll(SearchVO searchVo);
+	int selectTotalRecord(SearchVO searchVo);
 
 }

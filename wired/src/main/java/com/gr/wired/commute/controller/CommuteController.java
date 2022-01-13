@@ -10,8 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gr.wired.common.ConstUtil;
+import com.gr.wired.common.PaginationInfo;
+import com.gr.wired.common.SearchVO;
 import com.gr.wired.commute.model.CommuteService;
 import com.gr.wired.commute.model.CommuteVO;
 
@@ -28,30 +32,65 @@ public class CommuteController {
 	}
 
 	@RequestMapping("/commuteList")
-	public String commuteList(HttpSession session, Model model) {
-		int memNo=(int) session.getAttribute("memNo");
-		CommuteVO commuteVo= new CommuteVO();
-		commuteVo.setMemNo(memNo);
-		logger.info("개인 근태 조회 파라미터, memNo={}", memNo);
-		List<Map<String, Object>> clist=commuteService.selectAll(commuteVo);
+	public String commuteList(@ModelAttribute SearchVO searchVo, HttpSession session, Model model) {
+		int memNo = (int) session.getAttribute("memNo");
+		searchVo.setMemNo(memNo);
+		logger.info("개인 근태 조회 파라미터, memNo={}", searchVo.getMemNo());
+
+		//[1] paginationInfo
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+
+		//[2] searchVo에 값 셋팅
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("값 셋팅 후 searchVo={}", searchVo);
+
+		List<Map<String, Object>> clist=commuteService.selectAll(searchVo);
+		logger.info("clist.size={}", clist.size());
+
+		//[3] totalPage
+		int totalRecord=commuteService.selectTotalRecord(searchVo);
+		logger.info("totalRecord={}", totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+
 		model.addAttribute("clist", clist);
+		model.addAttribute("pagingInfo", pagingInfo);
 
 		return "commute/commuteList";
 	}
 
 	@RequestMapping("/commuteDList")
-	public String commuteDList(HttpSession session, Model model) {
+	public String commuteDList(@ModelAttribute SearchVO searchVo, HttpSession session, Model model) {
 		int memNo=(int) session.getAttribute("memNo");
-
 		int deptNo=commuteService.selectDeNo(memNo);
+		searchVo.setDeptNo(deptNo);
+		logger.info("부서별 근태 조회 파라미터, deptNo={}", searchVo.getDeptNo());
 
-		CommuteVO commuteVo= new CommuteVO();
-		commuteVo.setDeptNo(deptNo);
-		logger.info("부서별 근태 조회 파라미터, deptNo={}", commuteVo.getDeptNo());
-		List<Map<String, Object>> clist=commuteService.selectAll(commuteVo);
+		//[1] paginationInfo
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 
-		model.addAttribute("deptNo", deptNo);
+		//[2] searchVo에 값 셋팅
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("값 셋팅 후 searchVo={}", searchVo);
+
+		List<Map<String, Object>> clist=commuteService.selectAll(searchVo);
+		logger.info("clist.size={}", clist.size());
+
+		//[3] totalPage
+		int totalRecord=commuteService.selectTotalRecord(searchVo);
+		logger.info("totalRecord={}", totalRecord);
+		pagingInfo.setTotalRecord(totalRecord);
+
+		model.addAttribute("deptNo", searchVo.getDeptNo());
 		model.addAttribute("clist", clist);
+		model.addAttribute("pagingInfo", pagingInfo);
 
 		return "commute/commuteList";
 	}

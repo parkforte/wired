@@ -34,7 +34,12 @@ public class SearchVO {
 
     /**게시판 bdlistNo*/
     private int bdlistNo;
-   /**
+    /**근태관리 memNo*/
+    private int memNo;
+    /**근태관리 deptNo*/
+    private int deptNo;
+
+    /**
      * 검색 조건을  설정한다.
      * @param bean 검색조건
      */
@@ -50,61 +55,96 @@ public class SearchVO {
     	this.lastRecordIndex = bean.lastRecordIndex;
     	this.recordCountPerPage = bean.recordCountPerPage;
     	this.bdlistNo = bean.bdlistNo;
+    	this.memNo = bean.memNo;
+    	this.deptNo = bean.deptNo;
     }
 
 	public String getSearchCondition() {
 		return searchCondition;
 	}
+
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
 	}
+
 	public String getSearchKeyword() {
 		return searchKeyword;
 	}
+
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
 	}
+
 	public String getSearchUseYn() {
 		return searchUseYn;
 	}
+
 	public void setSearchUseYn(String searchUseYn) {
 		this.searchUseYn = searchUseYn;
 	}
+
 	public int getCurrentPage() {
 		return currentPage;
 	}
+
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
+
 	public int getBlockSize() {
 		return blockSize;
 	}
+
 	public void setBlockSize(int blockSize) {
 		this.blockSize = blockSize;
 	}
+
 	public int getFirstRecordIndex() {
 		return firstRecordIndex;
 	}
+
 	public void setFirstRecordIndex(int firstRecordIndex) {
 		this.firstRecordIndex = firstRecordIndex;
 	}
+
 	public int getLastRecordIndex() {
 		return lastRecordIndex;
 	}
+
 	public void setLastRecordIndex(int lastRecordIndex) {
 		this.lastRecordIndex = lastRecordIndex;
 	}
+
 	public int getRecordCountPerPage() {
 		return recordCountPerPage;
 	}
+
 	public void setRecordCountPerPage(int recordCountPerPage) {
 		this.recordCountPerPage = recordCountPerPage;
 	}
+
 	public int getBdlistNo() {
 		return bdlistNo;
 	}
+
 	public void setBdlistNo(int bdlistNo) {
 		this.bdlistNo = bdlistNo;
+	}
+
+	public int getMemNo() {
+		return memNo;
+	}
+
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+
+	public int getDeptNo() {
+		return deptNo;
+	}
+
+	public void setDeptNo(int deptNo) {
+		this.deptNo = deptNo;
 	}
 
 	@Override
@@ -112,8 +152,11 @@ public class SearchVO {
 		return "SearchVO [searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword + ", searchUseYn="
 				+ searchUseYn + ", currentPage=" + currentPage + ", blockSize=" + blockSize + ", firstRecordIndex="
 				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex + ", recordCountPerPage="
-				+ recordCountPerPage + ", bdlistNo=" + bdlistNo + "]";
+				+ recordCountPerPage + ", bdlistNo=" + bdlistNo + ", memNo=" + memNo + ", deptNo=" + deptNo + "]";
 	}
+
+
+
 
 
 

@@ -128,7 +128,7 @@ h6.m-0.font-weight-bold.text-primary {
 						<div class="f-right">
 				            <label for="upfile">첨부파일</label>
 					        <input type="file" name="upfile" id="upfile" multiple="multiple">(최대 5M)
-					        <input type="text" value="${bdListVo.bdlistUp }">
+					        <input type="hidden" value="${bdListVo.bdlistUp }">
 				        </div>
 			        </c:if>
 			        <c:if test="${bdListVo.bdlistRe eq '78'}">

@@ -1,0 +1,139 @@
+스프링
+
+스프링은 DI 지원
+(Dependency Inicetion)
+   의존성          주입
+
+POJO지원 임플리먼트나, 익스텐즈를 하지않은클래스
+
+<bean> 엘리먼트는 스프링에서 가장 기본적인 설정단위로, 스프링에게 객
+체를 만들어 달라는 의미다 (빈등록)
+
+property이름= 세터의 이름 첫글자를 소문자로 바꾼것
+
+종속객체 주입을 와이어링이라 한다.
+
+IOC(Inversion of Control)  제어의 역행 반대로 주입
+DI((Dependency Injection)
+
+애플리케이션 컨텍스트 - 객체생성과 와이어링을 책임진다
+
+AOP - 로깅, 트랜잭션 보안 등
+         AOP 에서는 핵심 로직을 구현한 클래스를 실행하기 전, 후에
+         Aspect 를 적용하고, 그 결과로 핵심 로직을 수행하면 그에 앞서 공
+         통 모듈을 실행하거나 또는 로직 수행 이후에 공통 모듈을 수행하는
+         방식으로 공통 기능을 실행하게 됨
+	
+         핵심로직 코드에서 공통기능을 직접적으로 호출하지 않아서 공통기능이 바뀌어도 
+         핵심로직은 수정하지 않아도 된다.
+
+뷰에서 접근시
+Command 클래스이름 을 소문자로해서 접근해야함
+
+기본값설정도 @RequestParam을 이용하면 간당하게 처리할 수 있다.
+public String getUserList(
+@RequestParam(value="searchCondition", defaultValue="NAME") String searchCondition,
+@RequestParam(value="searchKeyword", defaultValue="") String searchKeyword){
+return null;
+}
+
+@RequestParam 어노테이션이 적용된 파라미터는 기본적으로 필수 파라미터임************************
+ @RequestParam 어노테이션에 명시된 Http 요청 파라미터가 존재하지 않을 경우 스
+프링MVC는 잘못된 요청(Bad Request)을 의미하는 400 응답 코드를 웹 브라우저에 전송함
+	-필수가 아닌 파라미터의 경우 required 속성 값을 false 로 지정해 주면 됨
+ 	required 속성의 기본값은 true
+
+dispatcher-servlet.xml 의 viewResolver에서
+prefix의 value인 /WEB-INF/views/ 를 hello의 앞에 붙이고
+suffix의 value인 .jsp를 hello의 뒤에 붙여서 완성돼
+
+
+di와 interface는 같이간다
+
+
+※mybatis※  
+매퍼XML
+
+환경설정 가장 중요한것
+데이터베이스 연결정보, 매퍼위치 지정
+
+중요항 객체
+SqlsessionFactory, 에서 SqlSession를만들어 얻더낸다☆
+
+1.설정파일만들기
+2.설정파일을 로드해 마이바티스 객체 생성
+3.매퍼XML에 매핑 구문을 넣어준다.
+4.id를 넣어서 실행
+
+* id는 유니크 해야한다.
+네임스페이스만 다르면 id이름 이같아도된다
+
+xml 동적 sql 사용시 파라미터타입이 map나 vo여야한다
+
+
+*mybatis-spring*
+
+★★★db에 대문자로 작업해서 _쓰니까★★★
+vo에서는 _언더바쓰면 안되니 설정파일의 mapUnderscoreToCamelCase 설정을 true로 설정!!!!!
+그러면 _언더바를 카멜케이스로 자동 매핑해준다
+
+@Controller(Controller), @Service(service), @Repository(DAO), @Component(나머지)
+4개의 어노테이션이 붙은 클래스를 빈등록 자동으로 변경
+
+<context:component-scan base-package="com.mysite.pd">
+com.mysite.pd 경로의 클래스와 이하에 있는 하위클래스에서 
+@Controller, @Service, @Repository, @Component 어노테이션이 붙혀진 클래스를 찾아 
+자동으로 빈으로 등록한다
+
+@Controller(Controller)
+해주면 자동빈등록, 컨트롤러 임플리먼츠 안해도됨
+
+★원래 넣어줘~하고 손 벌려서 setter 주입+serviceImpl객체 자식객체 넣어줘~했는데
+@Autowired 하면
+자동으로 와이어링 해줌
+
+중요항 객체
+SqlsessionFactory = +Bean
+ 에서 
+SqlSession = + template 
+를만들어 얻더낸다☆
+
+SqlsessionFactoryTemplate 에 sqlSessionBean을 넣어준다
+
+sql
+com.gr.herb 이하의 하위클래스들은 패키지명 생략하고 
+클래스명만 쓰는데 이때 클래스명은 대소문자 구분 안한다
+
+
+DispatcherServlet은 해당 서블릿에서 사용할 자식 WebApplicationContext 를 만들고 
+웹에 종속적인 빈을 관리한다
+
+@repostory 로 객체생성을 해야해야 서비스에서 가능하다.
+
+BoardServiceImpl의 @Service되있으면 보드컨트롤러에서 오토와이어드 주입가능
+
+
+
+동적sql 일때는 파라미터 타입 map, vo 만가능
+
+login처리후
+세션에 아이디 저장 / 쿠키에 chkSave 저장
+checked 되면 on 아니면 null
+on이 아닌경우 null포인트익셉션 이일어나 check!=null 로 해야함
+
+session.invalidate(); //세션모두삭제
+
+※400에러 필수인 파라미터 가 넘어오지 않을때
+※coud not set<< 
+
+interceptor(가로채다)
+
+
+
+
+
+
+
+
+
+

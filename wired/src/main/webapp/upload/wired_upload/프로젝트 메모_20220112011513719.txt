@@ -1,0 +1,5 @@
+게시판 관리자페이지 게시판 삭제 하기
+boardList 검색기능
+boardWrite 파일 업로드
+boardWrite boareUpdate 게시판 이름 불러와서 수정하기 게시판 온오프 기능 구현
+boardDetail 게시글에서 파일 다운 
