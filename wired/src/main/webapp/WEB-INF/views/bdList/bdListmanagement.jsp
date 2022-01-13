@@ -29,6 +29,33 @@
 		$('form[name=frmPage]').submit();
 	}
 
+	$(function () {
+		$('#bdWrite').click(function () {
+			if($('input[name=bdlistName]').val().length<1){
+				alert('게시판 이름을 입력하세요');
+				$('#bdWrite').focus();
+				event.preventDefault();
+			}else if($('form[name=frmPage2] select[name=ranksNo]').val()=='etc'){
+				alert('게시판 권한을 설정하세요');
+				$('#inlineFormCustomSelect').focus();
+				event.preventDefault();
+			}
+
+		});
+
+		$('#bdEdit').click(function () {
+			if($('select[name=bdlistNo]').val()=='etc'){
+				alert('게시판을 선택 하세요');
+				$('select[name=bdlistNo]').focus();
+				event.preventDefault();
+			}else if($('form[name=frmPage3] select[name=ranksNo]').val()=='etc'){
+				alert('게시판 권한을 설정하세요');
+				$('select[name=ranksNo]').focus();
+				event.preventDefault();
+			}
+		});
+	});
+
 </script>
 
 
@@ -111,7 +138,12 @@
 			                       <nav class="f-right" aria-label="...">
 			                       		<!-- 페이지 번호추가 -->
 										<ul class="pagination">
-											<li class="page-item disabled"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
+
+											<li class="page-item
+											<c:if test="${pagingInfo.firstPage==1 }">
+												disabled
+											</c:if>
+											"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
 
 											<!-- [1][2][3][4][5][6][7][8][9][10] -->
 											<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
@@ -128,14 +160,17 @@
 
 											</c:forEach>
 
-											<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-												<li class="page-item"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
-											</c:if>
+
+												<li class="page-item
+												<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
+													disabled
+												</c:if>
+												"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
 											<!-- 페이지 번호끝 -->
 										</ul>
 									</nav>
 			              		</div>
-			              		<input type="text" value="${pagingInfo.lastPage }"/>
+			              		<input type="hidden" value="${pagingInfo.lastPage }"/>
                             </div>
                         </div>
                     </div>
@@ -165,7 +200,7 @@
 		                                  <td>
 		                                  		<div class="custom-control custom-switch">
 											  <input type="checkbox" name="bdlistRe" class="custom-control-input" id="customSwitch1" checked="checked" value='Y'>
-											  <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+											  <label class="custom-control-label" for="customSwitch1">선택 해주세요</label>
 											</div>
 		                                  </td>
 		                              </tr>
@@ -174,7 +209,7 @@
 		                                  <td>
 		                                  		<div class="custom-control custom-switch">
 											  <input type="checkbox" name="bdlistUp" class="custom-control-input" id="customSwitch2" checked="checked" value='Y'>
-											  <label class="custom-control-label" for="customSwitch2">Toggle this switch element</label>
+											  <label class="custom-control-label" for="customSwitch2">선택 해주세요</label>
 											</div>
 		                                  </td>
 		                              </tr>
@@ -184,7 +219,7 @@
 		                                  <td>
 		                                  		<div class="custom-control custom-switch">
 											  <input type="checkbox" name="bdlistRc" class="custom-control-input" id="customSwitch3" checked="checked" value='Y'>
-											  <label class="custom-control-label" for="customSwitch3">Toggle this switch element</label>
+											  <label class="custom-control-label" for="customSwitch3">선택 해주세요</label>
 											</div>
 		                                  </td>
 		                              </tr>
@@ -193,7 +228,7 @@
 		                                  <td>
 		                                  		<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
 											    <select class="custom-select mr-sm-2" name="ranksNo" id="inlineFormCustomSelect">
-											        <option selected value="">권한 선택</option>
+											        <option selected value="etc">권한 선택</option>
 											        <c:forEach var="map" items="${ranksList }">
 											        	<option value="${map['RANKS_NO'] }">${map['RANKS_NAME'] }</option>
 											        </c:forEach>
@@ -204,7 +239,7 @@
 		                                  <td>등록</td>
 		                                  <td>
 		                                  		<div id="bdsubmitDiv" style="margin:5px 0;">
-						                    	<button type="submit" class="btn btn-primary">게시판 등록</button>
+						                    	<button type="submit" class="btn btn-primary" id="bdWrite">게시판 등록</button>
 											</div>
 		                                  </td>
 		                              </tr>
@@ -237,6 +272,7 @@
 				                                   <td>
 				                                   		 <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
 														    <select class="custom-select mr-sm-2" name="bdlistNo" id="inlineFormCustomSelect">
+														        <option selected value="etc">게시판 선택</option>
 														        <c:forEach var="vo" items="${eList }">
 														        	<option value="${vo.bdlistNo }">${vo.bdlistName }</option>
 														        </c:forEach>
@@ -248,7 +284,7 @@
 				                                   <td>
 				                                   		<div class="custom-control custom-switch">
 														  <input type="checkbox" name="bdlistRe" class="custom-control-input" id="customSwitch4" checked="checked" value='Y'>
-														  <label class="custom-control-label" for="customSwitch4">Toggle this switch element</label>
+														  <label class="custom-control-label" for="customSwitch4">선택 해주세요</label>
 														</div>
 				                                   </td>
 				                               </tr>
@@ -257,7 +293,7 @@
 				                                   <td>
 				                                   		<div class="custom-control custom-switch">
 														  <input type="checkbox" name="bdlistUp" class="custom-control-input" id="customSwitch5" checked="checked" value='Y'>
-														  <label class="custom-control-label" for="customSwitch5">Toggle this switch element</label>
+														  <label class="custom-control-label" for="customSwitch5">선택 해주세요</label>
 														</div>
 				                                   </td>
 				                               </tr>
@@ -267,7 +303,7 @@
 				                                   <td>
 				                                   		<div class="custom-control custom-switch">
 														  <input type="checkbox" name="bdlistRc" class="custom-control-input" id="customSwitch6" checked="checked" value='Y'>
-														  <label class="custom-control-label" for="customSwitch6">Toggle this switch element</label>
+														  <label class="custom-control-label" for="customSwitch6">선택 해주세요</label>
 														</div>
 				                                   </td>
 				                               </tr>
@@ -276,7 +312,7 @@
 				                                  <td>
 				                                  		<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
 													    <select class="custom-select mr-sm-2" name="ranksNo" id="inlineFormCustomSelect">
-													        <option selected value="">권한 선택</option>
+													        <option selected value="etc">권한 선택</option>
 													        <c:forEach var="map" items="${ranksList }">
 													        	<option value="${map['RANKS_NO'] }">${map['RANKS_NAME'] }</option>
 													        </c:forEach>
@@ -287,7 +323,7 @@
 				                                   <td>등록</td>
 				                                   <td>
 				                                   		<div id="bdsubmitDiv" style="margin:5px 0;">
-									                    	<button type="submit" class="btn btn-primary">게시판 수정</button>
+									                    	<button type="submit" class="btn btn-primary" id="bdEdit">게시판 수정</button>
 														</div>
 				                                   </td>
 				                               </tr>

@@ -207,7 +207,7 @@ input#exampleCheck1\ chkbox {
               		<div class="row">
               			<div class="col-sm-12 col-md-5">
               				<div class="dataTables_info" id="dataTables_info" role="status">
-              					Showing ${pagingInfo.firstPage } to ${pagingInfo.lastPage } of ${pagingInfo.totalPage } entries
+              					Showing ${pagingInfo.firstPage } to ${pagingInfo.currentPage } of ${pagingInfo.totalPage } entries
               				</div>
 
               			</div>
@@ -217,9 +217,12 @@ input#exampleCheck1\ chkbox {
               				<nav class="f-right" aria-label="...">
 	                       		<!-- 페이지 번호추가 -->
 								<ul class="pagination">
-									<c:if test="${pagingInfo.firstPage>1 }">
-										<li class="page-item "><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
-									</c:if>
+
+										<li class="page-item
+										<c:if test="${pagingInfo.firstPage==1 }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
 
 									<!-- [1][2][3][4][5][6][7][8][9][10] -->
 									<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
@@ -235,9 +238,11 @@ input#exampleCheck1\ chkbox {
 										><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li>
 									</c:forEach>
 
-									<c:if test="${pagingInfo.lastPage<pagingInfo.totalPage }">
-										<li class="page-item"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
-									</c:if>
+										<li class="page-item
+										<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
 									<!-- 페이지 번호끝 -->
 								</ul>
 							</nav>

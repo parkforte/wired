@@ -27,9 +27,20 @@
 
 </style>
 <!-- javaScript영역 -->
+<script type="text/javascript">
+	function boardList(curPage) {
+		$('#currentPage').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
 
+</script>
 
+<form name="frmPage" method="post" action="<c:url value='/commute/commuteList'/>">
+	<input type="hidden" name="currentPage" id="currentPage">
+	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+</form>
 <div class="container-fluid">
+
 	<!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">근태관리</h1>
 	<p class="mb-4">Attendance management.</p>
@@ -38,9 +49,6 @@
          <ul class="nav">
           <li class="nav-item">
             <a class="nav-link active" id="a-hover" data-value="1" href="<c:url value='/commute/commuteList'/>">개인근태조회</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-value="2" id="a-hover" href="<c:url value='/jawon/jawonReserve?typeNo=2'/>">개인연차조회</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-value="3" id="a-hover" href="<c:url value='/commute/commuteDList'/>">부서근태조회</a>
@@ -59,7 +67,7 @@
             		<c:if test="${empty deptNo }">
 						개인근태조회
             		</c:if>
-					<input type="text" value="${deptNo}">
+            		<input type="text" value="${deptNo }">
 				</h6>
 				<div id="se2_sample"  class="f-right">
 					<button type="button" class="btn btn-primary f-left" id="btIn"
@@ -70,16 +78,23 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+							<tr>
+								<th width="30%">남은연차</th>
+								<th width="20%">15</th>
+								<th width="30%">사용연차</th>
+								<th width="20%">1</th>
+							</tr>
+					</table>
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<thead>
 							<tr>
 								<th>사원이름</th>
 								<th>부서</th>
 								<th>직급</th>
 								<!-- if문으로 출퇴근시간에 값이있으면 -->
-								<th>출근시간</th>
-								<th>퇴근시간</th>
+								<th width="25%">출근시간</th>
+								<th width="25%">퇴근시간</th>
 								<th>근무상태</th>
 							</tr>
 <!-- 							<tr> -->
@@ -101,7 +116,7 @@
 									<td><fmt:formatDate value="${map['COM_INDATE'] }" type="both"/></td>
 									<td><fmt:formatDate value="${map['COM_OUTDATE'] }" type="both"/></td>
 									<td>
-										<input type="text" value="${map['COM_STATUS']}">
+										<input type="hidden" value="${map['COM_STATUS']}">
 										<c:if test="${map['COM_STATUS'] == 'Y'}">
 											<span>출근</span>
 										</c:if>
@@ -113,20 +128,57 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<nav class="f-right" aria-label="...">
-						<ul class="pagination">
-							<li class="page-item disabled"><a class="page-link">Previous</a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item active" aria-current="page"><a
-								class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a>
-							</li>
-						</ul>
-					</nav>
+					<!-- 페이징 시작 -->
+					<div class="row">
+              			<div class="col-sm-12 col-md-5">
+              				<div class="dataTables_info" id="dataTables_info" role="status">
+              					Showing ${pagingInfo.firstPage } to ${pagingInfo.currentPage } of ${pagingInfo.totalPage } entries
+              				</div>
+
+              			</div>
+
+              			<!-- 페이징 1,2,3,4,5, -->
+              			<div class="col-sm-12 col-md-7">
+              				<nav class="f-right" aria-label="...">
+	                       		<!-- 페이지 번호추가 -->
+								<ul class="pagination">
+
+										<li class="page-item
+										<c:if test="${pagingInfo.firstPage==1 }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
+
+									<!-- [1][2][3][4][5][6][7][8][9][10] -->
+									<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+
+
+										<li
+											<c:if test="${i==pagingInfo.currentPage }">
+												class="page-item active" aria-current="page"
+											</c:if>
+											<c:if test="${i!=pagingInfo.currentPage }">
+												class="page-item"
+											</c:if>
+										><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li>
+									</c:forEach>
+
+										<li class="page-item
+										<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+									<!-- 페이지 번호끝 -->
+								</ul>
+							</nav>
+              			</div>
+              			<input type="hidden" value="${pagingInfo.lastPage }"/>
+
+              		</div>
 				</div>
 			</div>
+			<!-- 페이징 끝 -->
+
 		</div>
 
 	</div>

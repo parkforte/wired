@@ -127,9 +127,11 @@ $(function(){
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">사내게시판:</h6>
 						<c:forEach var="bdListVo" items="${bdlist }">
-							<a class="collapse-item"
-				href='<c:url value="/board/boardList?bdlistNo=${bdListVo.bdlistNo }"/>'>
-								${bdListVo.bdlistName }</a>
+							<c:if test="${sessionScope.ranksNo>=bdListVo.ranksNo}">
+								<a class="collapse-item"
+								href='<c:url value="/board/boardList?bdlistNo=${bdListVo.bdlistNo }"/>'>
+									${bdListVo.bdlistName }</a>
+							</c:if>
 						</c:forEach>
 						<c:if test="${sessionScope.ranksNo==3}">
 							<a class="collapse-item"
