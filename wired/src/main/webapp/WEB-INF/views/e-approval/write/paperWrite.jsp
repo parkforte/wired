@@ -197,7 +197,7 @@
 	<div class="card card-timeline px-2 border-none">
 	    <ul class="bs4-order-tracking">
 	        <li class="step active">
-	            <div><i class="fas fa-user"></i></div> 문서선택
+	            <div><i class="fas fa-user"></i></div> 문서양식&결재라인
 	        </li>
 	        <li class="step active">
 	            <div><i class="fas fa-bread-slice"></i></div> 문서작성
@@ -228,7 +228,7 @@
 					<div class="paper">
 						<div class="content">
 
-							<table class="tg" style="table-layout: fixed; width: 100%;">
+							<table class="tg t-center" style="table-layout: fixed; width: 100%;">
 								<thead>
 									<tr>
 										<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>품의서</h3></th>
@@ -332,7 +332,7 @@
 							<input type="text" name="cfNo" value="${confirmVo.cfNo }">
 							<input type="text" name="memNo" value="${map['MEM_NO'] }">
 							<input type="text" name="deptNo" value="${map['DEPT_NO'] }">
-							<input type="submit" id="submit" value="submit">
+							<button type="submit" class="btn btn-primary f-right">확인</button>
 						</div>
 					</div>
 				</div>

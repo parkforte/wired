@@ -181,6 +181,10 @@
     background-color: #fff;
     z-index: 0
 }
+
+.margin0{
+	margin: 0 auto;
+}
 </style>
 <script
 	src="<c:url value='/resources/api/jsTree/dist/libs/jquery.js'/> "></script>
@@ -194,7 +198,7 @@
 	<div class="card card-timeline px-2 border-none">
 	    <ul class="bs4-order-tracking">
 	        <li class="step active">
-	            <div><i class="fas fa-user"></i></div> 문서선택
+	            <div><i class="fas fa-user"></i></div> 문서양식&결재라인
 	        </li>
 	        <li class="step active">
 	            <div><i class="fas fa-bread-slice"></i></div> 문서작성
@@ -220,10 +224,12 @@
 			<div class="card-body">
 
 			<div class="card">
-             <div class="text-right cross"> <i class="fa fa-times"></i> </div>
+             <div class="text-right cross"> </div>
              <div class="card-body text-center"> <img src="https://i.imgur.com/HGAvgxi.png">
-                 <h4>Phrase "Discovery" sent!</h4>
                  <p>문서를 PDF로 출력하시거나 알림메일도 송신 가능합니다.</p>
+                 <button type="button" class="btn btn-primary btn-lg btn-block setW20 margin0">문서상세보기</button>
+				<button type="button" class="btn btn-secondary btn-lg btn-block setW20 margin0">알림메일 보내기</button>
+                 <button type="button" class="btn btn-primary btn-lg btn-block setW20 margin0">PDF출력하기</button>
              </div>
        		  </div>
 

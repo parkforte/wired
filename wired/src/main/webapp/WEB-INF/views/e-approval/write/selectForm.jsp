@@ -205,7 +205,7 @@
 	<div class="card card-timeline px-2 border-none">
 	    <ul class="bs4-order-tracking">
 	        <li class="step active">
-	            <div><i class="fas fa-user"></i></div> 문서선택
+	            <div><i class="fas fa-user"></i></div> 문서양식&결재라인
 	        </li>
 	        <li class="step">
 	            <div><i class="fas fa-bread-slice"></i></div> 문서작성

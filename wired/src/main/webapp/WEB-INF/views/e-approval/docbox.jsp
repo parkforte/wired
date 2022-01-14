@@ -19,6 +19,10 @@
 .f-center{
 	margin: 0 auto;
 }
+
+.margin0{
+	margin: 0 auto;
+}
 </style>
 <!-- javaScript영역 -->
 
