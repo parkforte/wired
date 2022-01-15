@@ -58,13 +58,13 @@ span {
 <script type="text/javascript">
 	$(function() {
 		 $('#first_button').click(function() {
-			if($('#addrName').val().length<1){
+			if($('#addrbookName').val().length<1){
 				alert('이름을 입력하세요');
-				$('#addrName').focus();
+				$('#addrbookName').focus();
 				event.preventDefault();
-			}else if($('#addrTel').val().length<1){
+			}else if($('#addrbookTel').val().length<1){
 				alert('연락처를 입력하세요');
-				$('#addrTel').focus();
+				$('#addrbookTel').focus();
 				event.preventDefault();
 			}
 		 });
@@ -73,7 +73,7 @@ span {
 
 </script>
 
-<!-- emplRegister -->
+<!-- addressbookRegister -->
 <div class="container-fluid font">
 	<!-- Page Heading -->
 	<!-- title1 -->
@@ -120,9 +120,9 @@ span {
 						<input type="hidden" name="memNo" value="${sessionScope.memNo }">
 					<div class="form-group c-size" style="text-align: center;">
 						<br>
-						<button type="submit" class="btn btn-primary b-radius"
+						<button type="submit" class="btn btn-primary "
 							id="first_button">등록</button>
-						<button type="button" class="btn btn-danger b-radius"
+						<button type="button" class="btn btn-danger "
 							onclick="location.href='<c:url value='addressBookList'/>'">취소</button>
 					</div>
 				</div>

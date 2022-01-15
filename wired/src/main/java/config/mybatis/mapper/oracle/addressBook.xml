@@ -48,6 +48,9 @@
 		SELECT COUNT(*) FROM MEMBER
 		<include refid="searchWhere"></include>
 	</select>
+	
+	
+	
 	<select id="selectByAddNo" parameterType="int" resultType="addressBookVo">
 		SELECT * FROM ADDRESSBOOK
 		WHERE ADDRBOOK_NO=#{addrbookNo}
@@ -55,7 +58,7 @@
 	<update id="updateAddressBook" parameterType="addressBookVO">
 		UPDATE ADDRESSBOOK
 		SET ADDRBOOK_NAME=#{addrbookName}, ADDRBOOK_TEL=#{addrbookTel}, ADDRBOOK_COMNAME=#{addrbookComname}, ADDRBOOK_EMAIL=#{addrbookEmail},
-			ADDRBOOK_DEPT=#{addrbookDept}, ADDRBOOK_RANK=#{addrbookRank}
+			ADDRBOOK_DEPT=#{addrbookDept}, ADDRBOOK_RANK=#{addrbookRank}, MEM_NO=#{memNo}
 		WHERE ADDRBOOK_NO=#{addrbookNo}
 	</update>
 	<select id="selectByMemName" parameterType="addressBookVo" resultType="map">

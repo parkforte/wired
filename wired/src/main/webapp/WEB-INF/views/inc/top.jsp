@@ -176,9 +176,13 @@ $(function(){
 					<i class="fas fa-fw fa-chart-area"></i> <span>웹하드</span>
 			</a></li>
 
+			<!-- 조직도 -->
+			<li class="nav-item"><a class="nav-link" href="<c:url value='/organChart/organizationChart'/>">
+					<i class="fas fa-user fa-sm fa-fw "></i> <span>조직도</span>
+			</a></li>
 			<!-- 주소록 -->
-			<li class="nav-item"><a class="nav-link" href="#">
-					<i class="fas fa-fw fa-table"></i> <span>주소록</span>
+			<li class="nav-item"><a class="nav-link" href="<c:url value='/addbook/addressBookList'/>">
+					<i class="fas fa-list fa-sm fa-fw "></i> <span>주소록</span>
 			</a></li>
 			<!-- 스케쥴러 -->
 			<li class="nav-item"><a class="nav-link" href="#">

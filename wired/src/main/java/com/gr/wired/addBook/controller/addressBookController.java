@@ -99,26 +99,43 @@ public class addressBookController {
 	}
 
 	@PostMapping("/addressBookEdit")
-	public String addbookUpdate_post(@ModelAttribute addressBookVO addressBookVo) {
+	public String addbookUpdate_post(@ModelAttribute addressBookVO addressBookVo, Model model) {
 
 		logger.info("연락처 수정, 파라미터 addressBookVo={}", addressBookVo);
 
 		int cnt=addressBookService.updateAddressBook(addressBookVo);
+		logger.info("연락처 수정 결과, cnt={}", cnt);
+		
+		String msg="연락처 수정 실패", url="/index";
 		if(cnt>0) {
-			logger.info("연락처 수정 성공");
+			msg="연락처 수정 성공";
+			url="/addbook/addressBookList";
 		}
 
-		return "redirect:/addbook/addressBookEdit?addrbookNo="+addressBookVo.getAddrbookNo();
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
 	}
+
 	
 	@RequestMapping("/addressBookDelete")
-	public String Delete(@RequestParam(defaultValue = "0")int addrbookNo) {
+	public String Delete(@RequestParam(defaultValue = "0")int addrbookNo, Model model) {
 		logger.info("연락처 삭제, 파라미터 addrbookNo={}", addrbookNo);
 
 		int cnt = addressBookService.deleteAddressBook(addrbookNo);
 		logger.info("연락처 삭제 결과,파라미터 cnt={}", cnt);
+		
+		String msg="연락처 삭제 실패", url="/index";
+		if(cnt>0) {
+			msg="연락처 삭제 성공";
+			url="/addbook/addressBookList";
+		}
 
-		return "redirect:/addbook/addressBookList";
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
 	}
 
 }

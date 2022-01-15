@@ -80,15 +80,27 @@ label#posNo {
 }
 </style>
 
+
 <!-- javaScript영역 -->
 <script type="text/javascript">
-
+	$(function() {
+		 $('#first_button').click(function() {
+			if($('#addrName').val().length<1){
+				alert('이름을 입력하세요');
+				$('#addrName').focus();
+				event.preventDefault();
+			}else if($('#addrTel').val().length<1){
+				alert('연락처를 입력하세요');
+				$('#addrTel').focus();
+				event.preventDefault();
+			}
+		 });
+	});
 
 </script>
-<!-- emplRegister -->
+<!-- addressbookRegister -->
 <form name="frm" class="user" method="post"
 	action="<c:url value='/addbook/addressBookEdit'/>">
-	<input type="hidden" name="memNo" value="${param.memNo }">
 	<div class="container-fluid font">
 		<!-- Page Heading -->
 		<!-- title1 -->
@@ -130,11 +142,12 @@ label#posNo {
 							name="addrbookRank" id="addrbookRank" value="${addressBookVo.addrbookRank }">
 					</div>
 					<input type="hidden" name="addrbookNo" value="${param.addrbookNo }">
+					<input type="hidden" name="memNo" value="${addressBookVo.memNo }">
 					<div class="form-group c-size" style="text-align: center;">
 						<br>
-						<button type="button" class="btn btn-success b-radius"
+						<button type="button" class="btn btn-success "
 							data-toggle="modal" data-target="#exampleModal">수정</button>
-						<button type="button" class="btn btn-danger b-radius"
+						<button type="button" class="btn btn-danger "
 							onclick="location.href='<c:url value='/addbook/addressBookList'/>'">취소</button>
 					</div>
 				</div>
@@ -157,10 +170,10 @@ label#posNo {
 				</div>
 				<div class="modal-body">수정하시겠습니까?</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary b-radius"
+					<button type="button" class="btn btn-secondary "
 						data-dismiss="modal">취소</button>
 					<button type="submit" id="addEdit_submit"
-						class="btn btn-primary b-radius">확인</button>
+						class="btn btn-primary ">확인</button>
 				</div>
 			</div>
 		</div>
