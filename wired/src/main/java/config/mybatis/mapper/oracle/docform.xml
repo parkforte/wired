@@ -8,18 +8,18 @@
 		<selectKey keyProperty="formNo" resultType="int" order="BEFORE">
 			SELECT docform_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		insert into docform (form_no, form_name, TYPE_NO, ranks_no)
-		values(#{formNo}, #{formName}, #{typeNo} ,3)
+		INSERT INTO DOCFORM (FORM_NO, FORM_NAME, TYPE_NO, RANKS_NO)
+		VALUES(#{formNo}, #{formName}, #{typeNo} ,3)
 	</insert>
 	<select id="selectAll" resultType="docformVo">
-		select * from docform order by type_no
+		SELECT * FROM DOCFORM ORDER BY TYPE_NO
 	</select>
 	<delete id="deleteDocform" parameterType="int">
-		delete docform where form_no=#{formNo}
+		DELETE DOCFORM WHERE FORM_NO=#{formNo}
 	</delete>
-	<select id="selectByFormNo" resultType="int">
-		select * from docform
-		where formNo=#{formNo}
+	<select id="selectByFormNo" parameterType="int" resultType="docformVo">
+		SELECT * FROM DOCFORM
+		WHERE FORM_NO=#{formNo}
 	</select>
 
 </mapper>
