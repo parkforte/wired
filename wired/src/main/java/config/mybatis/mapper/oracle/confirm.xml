@@ -39,12 +39,12 @@
 	</select>
 	<update id="updateCfOrder" parameterType="int">
 		UPDATE CONFIRM
-		SET CF_ORDER=CF_ORDER+1, CF_STATE=CF_STATE+1
+		SET CF_ORDER=CF_ORDER+1, CF_STATE=CF_STATE+1, CF_OKDATE=SYSDATE
 		WHERE CF_NO=#{cfNo}
 	</update>
 	<update id="updateReject" parameterType="int">
 		UPDATE CONFIRM
-		SET CF_STATE=4
+		SET CF_STATE=4, CF_OKDATE=SYSDATE
 		WHERE CF_NO=#{cfNo}
 	</update>
 </mapper>

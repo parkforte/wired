@@ -94,7 +94,24 @@ on l.mem_no=m.mem_no
 where l.mem_no>0
 );
 
---문서정보 전체 join
+
+--결재상태 view
+create or replace view confirming_view
+as
+(
+    select c.cf_no,c.cf_title, m.mem_name ,
+        c.cf_regdate, c.cf_state ,c.cf_order, l.line_order, l.mem_no  "LINE_MEM" 
+    from confirm c join linereg r
+    on c.reg_no=r.reg_no
+    join confirmline l
+    on r.reg_no=l.reg_no
+    join member m
+    on c.mem_no = m.mem_no
+    where c.cf_order=l.line_order
+    and c.cf_order>0
+);
+
+--docbox join
 
 select c.*, 
     m.mem_name, m.mem_originalfilename , f.form_name , l.line_order,
