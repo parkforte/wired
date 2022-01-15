@@ -24,6 +24,9 @@
 	float: left;
 }
 </style>
+<head>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+</head>
 <!-- 전자결재HOME -->
 <div class="container-fluid">
 <%@ include file="include/navbar.jsp"%>
@@ -31,74 +34,34 @@
 		<!-- 차트 -->
 		<div class="card shadow mb-4" style="height: 400px">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">최근 7일간 결재완료 문서건수</h6>
+				<h6 class="m-0 font-weight-bold text-primary">나의 문서 상태</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
 					<div class="f-center" style="width: 50%;">
 						<!--차트가 그려질 부분-->
-						<canvas id="myChart"></canvas>
+						<canvas id="doughnut-chart"></canvas>
 						<script type="text/javascript">
-						    var context = document
-						        .getElementById('myChart')
-						        .getContext('2d');
-						    var myChart = new Chart(context, {
-						        type: 'bar', // 차트의 형태
-						        data: { // 차트에 들어갈 데이터
-						            labels: [
-						                //x 축
-						                '1','2','3','4','5','6','7'
-						            ],
-						            datasets: [
-						                { //데이터
-						                    label: 'test1', //차트 제목
-						                    fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-						                    data: [
-						                        0,1,2,3,4,5,6 //x축 label에 대응되는 데이터 값
-						                    ],
-						                    backgroundColor: [
-						                        //색상
-						                        'rgba(255, 99, 132, 0.2)',
-						                        'rgba(54, 162, 235, 0.2)',
-						                        'rgba(255, 206, 86, 0.2)',
-						                        'rgba(75, 192, 192, 0.2)',
-						                        'rgba(153, 102, 255, 0.2)',
-						                        'rgba(255, 159, 64, 0.2)'
-						                    ],
-						                    borderColor: [
-						                        //경계선 색상
-						                        'rgba(255, 99, 132, 1)',
-						                        'rgba(54, 162, 235, 1)',
-						                        'rgba(255, 206, 86, 1)',
-						                        'rgba(75, 192, 192, 1)',
-						                        'rgba(153, 102, 255, 1)',
-						                        'rgba(255, 159, 64, 1)'
-						                    ],
-						                    borderWidth: 1 //경계선 굵기
-						                }/* ,
-						                {
-						                    label: 'test2',
-						                    fill: false,
-						                    data: [
-						                        8, 34, 12, 24
-						                    ],
-						                    backgroundColor: 'rgb(157, 109, 12)',
-						                    borderColor: 'rgb(157, 109, 12)'
-						                } */
-						            ]
-						        },
-						        options: {
-						            scales: {
-						                yAxes: [
-						                    {
-						                        ticks: {
-						                            beginAtZero: true
-						                        }
-						                    }
-						                ]
-						            }
+						new Chart(document.getElementById("doughnut-chart"), {
+						    type: 'doughnut',
+						    data: {
+						      labels: ["결재대기", "결재중", "승인", "반려"],
+						      datasets: [
+						        {
+						          label: "Population (millions)",
+						          backgroundColor: ["#7340e3", "#ff00ec","#00ff7b","#ffe400"],
+						          data: [${state1},${state2},${state3},${state4}]
 						        }
-						    });
+						      ]
+						    }
+							/* ,
+						    options: {
+						      title: {
+						        display: true,
+						        text: '나의 문서 현황'
+						      }
+						    } */
+						});
 						</script>
 					</div>
 				</div>

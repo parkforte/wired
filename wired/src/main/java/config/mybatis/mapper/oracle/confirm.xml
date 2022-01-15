@@ -47,4 +47,24 @@
 		SET CF_STATE=4, CF_OKDATE=SYSDATE
 		WHERE CF_NO=#{cfNo}
 	</update>
+	<select id="countState1" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM CONFIRM
+		WHERE CF_STATE=1
+		AND MEM_NO=#{memNo}
+	</select>
+	<select id="countState2" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM CONFIRM
+		WHERE CF_STATE=2
+		AND MEM_NO=#{memNo}
+	</select>
+	<select id="countState3" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM CONFIRM
+		WHERE CF_STATE=3
+		AND MEM_NO=#{memNo}
+	</select>
+	<select id="countState4" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM CONFIRM
+		WHERE CF_STATE=4
+		AND MEM_NO=#{memNo}
+	</select>
 </mapper>

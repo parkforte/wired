@@ -280,7 +280,7 @@
 									<tr>
 										<td class="tg-lboi">제목</td>
 										<td class="tg-lboi" colspan="8"><input
-											class="form-control" type="text" id="cfTitle" name="cfTitle" placeholder="제목을 입력하세요." ></td>
+											class="form-control" type="text" id="cfTitle" name="cfTitle" value="${confirmVo.cfTitle }"></td>
 									</tr>
 									<tr>
 										<td class="tg-0lax" colspan="9" rowspan="14"><textarea

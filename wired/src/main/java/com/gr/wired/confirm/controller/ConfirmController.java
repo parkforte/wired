@@ -228,8 +228,17 @@ public class ConfirmController {
 		List<Map<String, Object>> confirmingList=confirmService.selectConfirmingView(memNo);
 		logger.info("confirmingList.size={}", confirmingList.size());
 
-		model.addAttribute("confirmingList", confirmingList);
+		int state1=confirmService.countState1(memNo);
+		int state2=confirmService.countState2(memNo);
+		int state3=confirmService.countState3(memNo);
+		int state4=confirmService.countState4(memNo);
 
+
+		model.addAttribute("confirmingList", confirmingList);
+		model.addAttribute("state1",state1);
+		model.addAttribute("state2",state2);
+		model.addAttribute("state3",state3);
+		model.addAttribute("state4",state4);
 		return "e-approval/mainpage";
 	}
 

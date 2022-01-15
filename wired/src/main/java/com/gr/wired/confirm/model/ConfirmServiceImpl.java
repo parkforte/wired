@@ -71,4 +71,24 @@ public class ConfirmServiceImpl implements ConfirmService {
 	public int updateReject(int cfNo) {
 		return confirmDao.updateReject(cfNo);
 	}
+
+	@Override
+	public int countState1(int memNo) {
+		return confirmDao.countState1(memNo);
+	}
+
+	@Override
+	public int countState2(int memNo) {
+		return confirmDao.countState2(memNo);
+	}
+
+	@Override
+	public int countState3(int memNo) {
+		return confirmDao.countState3(memNo);
+	}
+
+	@Override
+	public int countState4(int memNo) {
+		return confirmDao.countState4(memNo);
+	}
 }
