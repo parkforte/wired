@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.gr.wired.common.BSearchVO;
 import com.gr.wired.common.SearchVO;
 
 @Service
@@ -25,13 +26,18 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectByBNoList(SearchVO searchVo) {
+	public List<Map<String, Object>> selectByBNoList(BSearchVO searchVo) {
 		return boardDao.selectByBNoList(searchVo);
 	}
 
 	@Override
-	public int selectTotalRecord(int boardNo) {
-		return boardDao.selectTotalRecord(boardNo);
+	public int selectTotalRecord(BSearchVO searchVo) {
+		return boardDao.selectTotalRecord(searchVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMainNotice() {
+		return boardDao.selectMainNotice();
 	}
 
 	@Override
@@ -90,6 +96,7 @@ public class BoardServiceImpl implements BoardService{
 	public int updateDownCount(int boardNo) {
 		return boardDao.updateDownCount(boardNo);
 	}
+
 
 
 

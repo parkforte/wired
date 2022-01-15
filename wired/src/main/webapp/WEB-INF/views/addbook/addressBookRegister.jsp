@@ -89,32 +89,32 @@ span {
 					<!-- 이름 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookName" id="addbookName" placeholder="이름">
+							name="addrbookName" id="addrbookName" placeholder="이름">
 					</div>
 					<!-- 연락처 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookTel" id="addbookTel" placeholder="연락처">
+							name="addrbookTel" id="addrbookTel" placeholder="연락처">
 					</div>
 					<!-- 이메일 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookEmail" id="addbookEmail" placeholder="이메일">
+							name="addrbookEmail" id="addrbookEmail" placeholder="이메일">
 					</div>
 					<!-- 회사명 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookComname" id="addbookComname" placeholder="회사명">
+							name="addrbookComname" id="addrbookComname" placeholder="회사명">
 					</div>
 					<!-- 부서명 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookDept" id="addbookDept" placeholder="부서명">
+							name="addrbookDept" id="addrbookDept" placeholder="부서명">
 					</div>
 					<!-- 직급 -->
 					<div class="form-group">
 						<input type="text" class="form-control form-control-user c-size"
-							name="addbookRank" id="addbookRank" placeholder="직급">
+							name="addrbookRank" id="addrbookRank" placeholder="직급">
 					</div>
 					<!-- memNO갖고올거임 -->
 						<input type="hidden" name="memNo" value="${sessionScope.memNo }">

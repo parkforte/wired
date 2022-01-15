@@ -73,7 +73,7 @@ span {
 		<!-- title1 -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">지노지노님의 주소록</h6>
+				<h6 class="m-0 font-weight-bold text-primary">${sessionScope.memName }님의 개인 주소록</h6>
 				<nav class="f-right" aria-label="...">
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='/wired/addbook/addressBookRegister'">추가</button>
@@ -110,7 +110,7 @@ span {
 											<td>${map['ADDRBOOK_COMNAME'] }</td>
 											<td>${map['ADDRBOOK_DEPT'] }</td>
 											<td>${map['ADDRBOOK_RANK'] }</td>
-											
+
 											<td><button type="button" class="btn btn-success" id="btEdit"
 												onclick="location.href='<c:url value="/addbook/addressBookEdit?addrbookNo=${map['ADDRBOOK_NO'] }"/>'">수정</button>
 												<button type="button" class="btn btn-danger" id="btDel"

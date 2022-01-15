@@ -42,9 +42,27 @@
 			WHERE RNUM>#{firstRecordIndex}
 				AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
 	</select>
-	<select id="selectTotalRecord" parameterType="int" resultType="int">
+	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
 		SELECT COUNT(*) FROM BOARD
-		WHERE BDLIST_NO=#{bdlistNo}
+		WHERE BDLIST_NO=#{bdlistNo} AND BOARD_DELFLAG='N' <include refid="searchWhere"></include>
+	</select>
+
+	<select id="selectMainNotice" resultType="map">
+		SELECT *
+		from
+		(
+			select rownum AS RNUM, A.*
+			from
+			(
+			SELECT BOARD_NO ,BOARD_TITLE, BDLIST_NO, BOARD_REGDATE, BOARD_READCOUNT, BOARD_RECOMMEND, BOARD_FILENAME,
+						    (SELECT MEM_NAME FROM MEMBER M WHERE B.MEM_NO=M.MEM_NO)MEM_NAME
+						FROM BOARD B
+						WHERE BDLIST_NO=1 AND BOARD_DELFLAG LIKE 'N'
+						ORDER BY BOARD_REGDATE DESC
+			)A
+		)
+		<![CDATA[
+		WHERE RNUM<7]]>
 	</select>
 
 	<select id="selectByNo" parameterType="int" resultType="boardVo">

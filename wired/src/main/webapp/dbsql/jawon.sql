@@ -23,6 +23,11 @@ create sequence res_seq
 increment by 1
 start with 1
 nocache;
+--
+create sequence RESSD_SEQ
+increment by 1
+start with 1
+nocache;
 
 --자원테이블
 INSERT INTO RESOURCES(RES_NO, TYPE_NO, RES_NAME, RES_LOCATION)

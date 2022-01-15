@@ -6,7 +6,7 @@ package com.gr.wired.common;
  * 페이징 처리 관련 변수 포함
 */
 
-public class SearchVO {
+public class BSearchVO {
 	/** 검색조건 */
 	private String searchCondition = "";
 
@@ -32,12 +32,12 @@ public class SearchVO {
     /**페이지 별 레코드 갯수 (pageSize) */
     private int recordCountPerPage;
 
+    /**게시판 bdlistNo*/
+    private int bdlistNo;
 
 
 
-
-
-    public void setSearchVO(SearchVO bean){
+    public void setSearchVO(BSearchVO bean){
     	this.currentPage = bean.currentPage;
     	this.searchCondition = bean.getSearchCondition();
     	this.searchKeyword = bean.getSearchKeyword();
@@ -46,6 +46,7 @@ public class SearchVO {
     	this.firstRecordIndex = bean.firstRecordIndex;
     	this.lastRecordIndex = bean.lastRecordIndex;
     	this.recordCountPerPage = bean.recordCountPerPage;
+    	this.bdlistNo=bean.bdlistNo;
     }
     public String getSearchCondition() {
     	return searchCondition;
@@ -113,17 +114,20 @@ public class SearchVO {
 		this.recordCountPerPage = recordCountPerPage;
 	}
 
+
+	public int getBdlistNo() {
+		return bdlistNo;
+	}
+	public void setBdlistNo(int bdlistNo) {
+		this.bdlistNo = bdlistNo;
+	}
 	@Override
 	public String toString() {
-		return "SearchVO [searchCondition=" + searchCondition
-				+ ", searchKeyword=" + searchKeyword + ", searchUseYn="
-				+ searchUseYn + ", currentPage=" + currentPage
-				+ ", blockSize=" + blockSize + ", firstRecordIndex="
-				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex
-				+ ", recordCountPerPage=" + recordCountPerPage + "]";
+		return "BSearchVO [searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword + ", searchUseYn="
+				+ searchUseYn + ", currentPage=" + currentPage + ", blockSize=" + blockSize + ", firstRecordIndex="
+				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex + ", recordCountPerPage="
+				+ recordCountPerPage + ", bdlistNo=" + bdlistNo + "]";
 	}
-
-
 
 
 }
