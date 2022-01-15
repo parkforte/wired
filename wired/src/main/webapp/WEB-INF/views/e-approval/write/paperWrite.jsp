@@ -231,7 +231,7 @@
 							<table class="tg t-center" style="table-layout: fixed; width: 100%;">
 								<thead>
 									<tr>
-										<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>품의서</h3></th>
+										<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>${docformVo.formName }</h3></th>
 										<th class="tg-lboi" colspan="4" rowspan="5"><img
 											src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
 									<!-- 	<th>
@@ -290,7 +290,8 @@
 												src='<c:url value="/resources/api/smarteditor/js/service/HuskyEZCreator.js"/>'
 												charset="utf-8"></script> <script id="smartEditor"
 												type="text/javascript">
-													var oEditors = [];
+												$(function(){
+												var oEditors = [];
 													nhn.husky.EZCreator.createInIFrame({
 													    oAppRef: oEditors,
 													    elPlaceHolder: "txtContent",  //textarea ID 입력
@@ -305,8 +306,11 @@
 														bUseModeChanger : false
 													    }
 
+													});
+
 													$("#submit").click(function(){
 														oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
+														$("#txtContent").value = $("#txtContent").value.replace(/<br>$/<p>, "");	//정제
 														if($('#cfTitle').val().length<1){
 															if($('#cfTitle').val().length<1){
 																alert('제목을 입력하세요');
@@ -317,8 +321,7 @@
 															$('#paperWrite').submit();
 														}
 													});
-
-													});
+												});
 												</script></td>
 									</tr>
 								</tbody>
@@ -329,10 +332,10 @@
 									</tr>
 								</tfoot>
 							</table>
-							<input type="text" name="cfNo" value="${confirmVo.cfNo }">
-							<input type="text" name="memNo" value="${map['MEM_NO'] }">
-							<input type="text" name="deptNo" value="${map['DEPT_NO'] }">
-							<button type="submit" class="btn btn-primary f-right">확인</button>
+							<input type="hidden" name="cfNo" value="${confirmVo.cfNo }">
+							<input type="hidden" name="memNo" value="${map['MEM_NO'] }">
+							<input type="hidden" name="deptNo" value="${map['DEPT_NO'] }">
+							<button type="submit" id="submit" class="btn btn-primary btn-lg btn-block">작성하기</button>
 						</div>
 					</div>
 				</div>
