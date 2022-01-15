@@ -25,20 +25,50 @@
 	margin-left: 2px;
 }
 
+/* date search */
+#navVar{
+	float: left;
+}
+
+#selBox{
+	float: right;
+	display: inline-flex;
+}
+#selBox input{
+	height: 30px;
+}
+#mainDiv{
+	clear: both;
+}
+#selBox button{
+	font-size: 0.7em;
+	margin-left: 2px;
+}
+
+
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
-	function boardList(curPage) {
-		$('#currentPage').val(curPage);
+	function pageFunc(curPage){
+		$('input[name=currentPage]').val(curPage);
 		$('form[name=frmPage]').submit();
 	}
-
 </script>
 
-<form name="frmPage" method="post" action="<c:url value='/commute/commuteList'/>">
-	<input type="hidden" name="currentPage" id="currentPage">
-	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+<%-- <form name="frmPage" method="post" action="<c:url value='/commute/commuteList'/>"> --%>
+<!-- 	<input type="hidden" name="currentPage" id="currentPage"> -->
+<%-- 	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }"> --%>
+<!-- </form> -->
+
+<!-- 페이징 처리를 위한 form 시작-->
+<form name="frmPage" method="post"
+	action="<c:url value='/commute/commuteList'/>">
+	<input type="hidden" name="startDay" value="${dateSearchVO.startDay}">
+	<input type="hidden" name="endDay" value="${dateSearchVO.endDay}">
+	<input type="hidden" name="currentPage">
 </form>
+<!-- 페이징 처리 form 끝 -->
+
 <div class="container-fluid">
 
 	<!-- Page Heading -->
@@ -46,6 +76,7 @@
 	<p class="mb-4">Attendance management.</p>
 	<div>
 		 <!-- nav -->
+		 <div id="navVar">
          <ul class="nav">
           <li class="nav-item">
             <a class="nav-link active" id="a-hover" data-value="1" href="<c:url value='/commute/commuteList'/>">개인근태조회</a>
@@ -57,17 +88,19 @@
             <a class="nav-link" data-value="3" id="a-hover" href="<c:url value='/commute/commuteGraph'/>">부서근태통계</a>
           </li>
         </ul>
+		 </div>
+        <form name="frm1" method="post" action="<c:url value='/commute/commuteList'/>" >
+	        <div id="selBox">
+				<!-- 조회기간 include -->
+				<%@ include file="../inc/dateTerm2.jsp" %>
+				<button class="btn btn-outline-success" type="submit">Search</button>
+	        </div>
+		</form>
 		<!-- title1 -->
-		<div class="card shadow mb-4">
+		<div class="card shadow mb-4" id="mainDiv">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary f-left">
-            		<c:if test="${!empty deptNo }">
-            			부서근태조회
-            		</c:if>
-            		<c:if test="${empty deptNo }">
-						개인근태조회
-            		</c:if>
-            		<input type="text" value="${deptNo }">
+					개인근태조회
 				</h6>
 				<div id="se2_sample"  class="f-right">
 					<button type="button" class="btn btn-primary f-left" id="btIn"
@@ -147,7 +180,7 @@
 										<c:if test="${pagingInfo.firstPage==1 }">
 											disabled
 										</c:if>
-										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
+										"><a class="page-link" href="#" onclick="pageFunc(${pagingInfo.firstPage-1})">Previous</a></li>
 
 									<!-- [1][2][3][4][5][6][7][8][9][10] -->
 									<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
@@ -160,14 +193,14 @@
 											<c:if test="${i!=pagingInfo.currentPage }">
 												class="page-item"
 											</c:if>
-										><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li>
+										><a class="page-link" href="#" onclick="pageFunc(${i })">${i }</a></li>
 									</c:forEach>
 
 										<li class="page-item
 										<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
 											disabled
 										</c:if>
-										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+										"><a class="page-link" href="#" onclick="pageFunc(${pagingInfo.lastPage+1})">Next</a></li>
 									<!-- 페이지 번호끝 -->
 								</ul>
 							</nav>

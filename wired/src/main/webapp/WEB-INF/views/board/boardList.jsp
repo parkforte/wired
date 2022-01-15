@@ -204,6 +204,7 @@ input#exampleCheck1\ chkbox {
                            </tbody>
                        </table>
               		</div>
+              		<!-- 페이징 -->
               		<div class="row">
               			<div class="col-sm-12 col-md-5">
               				<div class="dataTables_info" id="dataTables_info" role="status">
@@ -248,8 +249,8 @@ input#exampleCheck1\ chkbox {
 							</nav>
               			</div>
               			<input type="hidden" value="${pagingInfo.lastPage }"/>
-
               		</div>
+              		<!-- 페이징 -->
                        </div>
                    </div>
 

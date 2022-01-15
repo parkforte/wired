@@ -8,6 +8,13 @@ public class DateSearchVO extends SearchVO{
 	private String year;	//통계처리에서 사용
 	private String month;
 
+	/**게시판 memNo*/
+    private int memNo;
+    /**게시판 deptNo*/
+    private int deptNo;
+
+
+
 	public String getStartDay() {
 		return startDay;
 	}
@@ -39,10 +46,26 @@ public class DateSearchVO extends SearchVO{
 		this.month = month;
 	}
 
+
+
+	public int getMemNo() {
+		return memNo;
+	}
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+	public int getDeptNo() {
+		return deptNo;
+	}
+	public void setDeptNo(int deptNo) {
+		this.deptNo = deptNo;
+	}
+
+
 	@Override
 	public String toString() {
 		return "DateSearchVO [startDay=" + startDay + ", endDay=" + endDay + ", memId=" + memId + ", year=" + year
-				+ ", month=" + month + ", toString()=" + super.toString() + "]";
+				+ ", month=" + month + ", memNo=" + memNo + ", deptNo=" + deptNo + "]";
 	}
 
 }

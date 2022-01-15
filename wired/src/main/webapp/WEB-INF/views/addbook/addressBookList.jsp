@@ -73,8 +73,12 @@ span {
 		<!-- title1 -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
+<<<<<<< HEAD
+				<h6 class="m-0 font-weight-bold text-primary">${sessionScope.memName }님의 개인 주소록</h6>
+=======
 				<h6 class="m-0 font-weight-bold text-primary">${sessionScope.memName }님의
 					개인 주소록</h6>
+>>>>>>> branch 'main' of https://github.com/parkforte/wired.git
 				<nav class="f-right" aria-label="...">
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='/wired/addbook/addressBookRegister'">추가</button>
@@ -105,6 +109,7 @@ span {
 								<!-- 리스트 반복문 시작 -->
 								<c:forEach var="map" items="${addbookList }">
 									<tr>
+
 										<td>${map['ADDRBOOK_NAME'] }</td>
 										<td>${map['ADDRBOOK_TEL'] }</td>
 										<td>${map['ADDRBOOK_EMAIL'] }</td>
@@ -133,7 +138,7 @@ span {
 									class="page-item
 										<c:if test="${pagingInfo.firstPage==1 }">
 											disabled
-										</c:if>"><a class="page-link" href="#" 
+										</c:if>"><a class="page-link" href="#"
 										onclick="addressBookList(${pagingInfo.firstPage-1})">Previous</a></li>
 
 								<!-- [1][2][3][4][5][6][7][8][9][10] -->

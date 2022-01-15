@@ -5,13 +5,15 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gr.wired.common.BSearchVO;
 import com.gr.wired.common.SearchVO;
 
 @Mapper
 public interface BoardDAO {
 	int insertBoard(BoardVO boardVo);
-	List<Map<String, Object>> selectByBNoList(SearchVO searchVo);
-	int selectTotalRecord(int boardNo);
+	List<Map<String, Object>> selectByBNoList(BSearchVO searchVo);
+	int selectTotalRecord(BSearchVO searchVo);
+	List<Map<String, Object>> selectMainNotice();
 	int selectByMemId(String memId);
 	BoardVO selectByNo (int boardNo);
 	int updateBoard(BoardVO boardVo);
