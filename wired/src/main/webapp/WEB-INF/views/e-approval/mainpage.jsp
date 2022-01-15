@@ -111,13 +111,24 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<div class="card text-center f-left setMR10" style="width: 15rem;">
-					  	<div class="card-body">
-						    <h5 class="card-title">품의서</h5>
-						    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-						    <a href="#" class="btn btn-primary">Go somewhere</a>
+					<c:if test="${empty confirmingList }">
+						<div class="card-body">
+						    <p>현재 결재대기중인 문서가 없습니다.</p>
 					  	</div>
-					</div>
+					</c:if>
+					<c:if test="${!empty confirmingList }">
+						<c:forEach var="map" items="${confirmingList }">
+						<div class="card text-center f-left setMR10" style="width: 15rem;">
+					  	<div class="card-body">
+						    <h5 class="card-title">${map["CF_TITLE"] }</h5>
+						    <p class="card-text">기안자 : ${map["MEM_NAME"] }</p>
+						    <p class="card-text">기안일 :<fmt:formatDate value='${map["CF_REGDATE"] }' pattern="yyyy-MM-dd"/></p>
+						    <a href="<c:url value='/e-approval/approval?cfNo=${map["CF_NO"] }'/>" class="btn btn-primary">결재</a>
+						    <a href="<c:url value='/e-approval/reject?cfNo=${map["CF_NO"] }'/>" class="btn btn-danger">반려</a>
+					  	</div>
+					  	</div>
+					  	</c:forEach>
+					  </c:if>
 				</div>
 			</div>
 		</div>

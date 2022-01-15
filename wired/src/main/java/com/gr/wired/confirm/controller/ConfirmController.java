@@ -220,8 +220,16 @@ public class ConfirmController {
 
 
 	@GetMapping("/mainpage")
-	public String mainpage_get() {
-		logger.info("전자결재 메인페이지");
+	public String mainpage_get(HttpSession session, Model model) {
+		int memNo=(int) session.getAttribute("memNo");
+		logger.info("전자결재 메인페이지 memNo={}", memNo);
+
+		//DB
+		List<Map<String, Object>> confirmingList=confirmService.selectConfirmingView(memNo);
+		logger.info("confirmingList.size={}", confirmingList.size());
+
+		model.addAttribute("confirmingList", confirmingList);
+
 		return "e-approval/mainpage";
 	}
 
@@ -352,6 +360,7 @@ public class ConfirmController {
 
 		//문서상세내용
 		ConfirmVO confirmVo=confirmService.selectTempByMemNo(memNo);
+		logger.info("confirmVo={}",confirmVo);
 		if(confirmVo==null) {
 			String msg="생성하신 문서가 없습니다. 문서선택화면으로 이동합니다.";
 			String url="/e-approval/write/selectForm";
@@ -361,23 +370,85 @@ public class ConfirmController {
 		}
 
 		Map<String, Object> map=emplService.selectByView(memNo);
-		logger.info("confirmVo={}",confirmVo);
 
 		//결재라인
 		int cfNo=confirmVo.getCfNo();
 		List<Map<String, Object>> orderList =confirmService.selectLineorder(cfNo);
 
+		//문서이름
+		DocformVO docformVo=docformService.selectByFormNo(confirmVo.getFormNo());
+
 		model.addAttribute("map", map);
 		model.addAttribute("confirmVo", confirmVo);
+		model.addAttribute("docformVo", docformVo);
 		model.addAttribute("cfRegdate", cfRegdate);
 		model.addAttribute("orderList", orderList);
 
 		return "e-approval/write/paperWrite";
 	}
+	@RequestMapping("/write/paperCheck")
+	public String paperCheck_get(HttpSession session, Model model) {
+		int memNo=(int) session.getAttribute("memNo");
+		logger.info("전자결재 문서작성페이지, memNo={}", memNo);
+
+		//날짜
+		String cfRegdate=ConfirmUtil.getToDay();
+
+		//문서상세내용
+		ConfirmVO confirmVo=confirmService.selectTempByMemNo(memNo);
+		logger.info("confirmVo={}",confirmVo);
+		if(confirmVo==null) {
+			String msg="생성하신 문서가 없습니다. 문서선택화면으로 이동합니다.";
+			String url="/e-approval/write/selectForm";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			return "common/message";
+		}
+
+		Map<String, Object> map=emplService.selectByView(memNo);
+
+		//결재라인
+		int cfNo=confirmVo.getCfNo();
+		List<Map<String, Object>> orderList =confirmService.selectLineorder(cfNo);
+
+		//문서이름
+		DocformVO docformVo=docformService.selectByFormNo(confirmVo.getFormNo());
+
+		model.addAttribute("map", map);
+		model.addAttribute("confirmVo", confirmVo);
+		model.addAttribute("docformVo", docformVo);
+		model.addAttribute("cfRegdate", cfRegdate);
+		model.addAttribute("orderList", orderList);
+
+		return "e-approval/write/paperCheck";
+	}
 
 	@PostMapping("/write/updating")
+	public String check_post(@ModelAttribute ConfirmVO confirmVo) {
+		logger.info("문서확인 업데이트 confirmVo={}", confirmVo);
+
+		//상태업데이트
+		confirmVo.setCfOrder(ConfirmUtil.MY_TURN);
+		confirmVo.setCfState(ConfirmUtil.STATE_TEMP);
+
+		//DB
+		int result=confirmService.updateContent(confirmVo);
+		if(result>0) {
+			logger.info("문서업데이트성공! result={}", result);
+		}else {
+			logger.info("문서업데이트실패! result={}", result);
+		}
+
+		return "redirect:/e-approval/write/paperCheck";
+
+	}
+	@PostMapping("/write/updating2")
 	public String complete_post(@ModelAttribute ConfirmVO confirmVo) {
 		logger.info("문서상신완료 페이지 confirmVo={}", confirmVo);
+
+		confirmVo.setCfOrder(ConfirmUtil.SR_TURN);
+		confirmVo.setCfState(ConfirmUtil.STATE_REPORT_UP1);
+
 
 		//DB
 		int result=confirmService.updateContent(confirmVo);
@@ -396,6 +467,39 @@ public class ConfirmController {
 		logger.info("상신완료 페이지!");
 	}
 
+	@GetMapping("/approval")
+	public String approval(@RequestParam(defaultValue = "0")int cfNo, Model model) {
+		logger.info("결재처리중 cfNo={}", cfNo);
+
+		//DB
+		String msg="결재처리 실패!", url="/e-approval/mainpage";
+		int result=confirmService.updateCfOrder(cfNo);
+		if(result>0) {
+			msg="결재처리 성공!";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
+
+	@GetMapping("/reject")
+	public String reject(@RequestParam(defaultValue = "0")int cfNo, Model model) {
+		logger.info("반려처리중 cfNo={}", cfNo);
+
+		//DB
+		String msg="반려처리 실패!", url="/e-approval/mainpage";
+		int result=confirmService.updateReject(cfNo);
+		if(result>0) {
+			msg="반려처리 성공!";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
 
 
 
