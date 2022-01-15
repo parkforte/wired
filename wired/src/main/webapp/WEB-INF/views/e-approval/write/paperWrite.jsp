@@ -197,7 +197,7 @@
 	<div class="card card-timeline px-2 border-none">
 	    <ul class="bs4-order-tracking">
 	        <li class="step active">
-	            <div><i class="fas fa-user"></i></div> 문서선택
+	            <div><i class="fas fa-user"></i></div> 문서양식&결재라인
 	        </li>
 	        <li class="step active">
 	            <div><i class="fas fa-bread-slice"></i></div> 문서작성
@@ -228,10 +228,10 @@
 					<div class="paper">
 						<div class="content">
 
-							<table class="tg" style="table-layout: fixed; width: 100%;">
+							<table class="tg t-center" style="table-layout: fixed; width: 100%;">
 								<thead>
 									<tr>
-										<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>품의서</h3></th>
+										<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>${docformVo.formName }</h3></th>
 										<th class="tg-lboi" colspan="4" rowspan="5"><img
 											src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
 									<!-- 	<th>
@@ -280,7 +280,7 @@
 									<tr>
 										<td class="tg-lboi">제목</td>
 										<td class="tg-lboi" colspan="8"><input
-											class="form-control" type="text" id="cfTitle" name="cfTitle" placeholder="제목을 입력하세요." ></td>
+											class="form-control" type="text" id="cfTitle" name="cfTitle" value="${confirmVo.cfTitle }"></td>
 									</tr>
 									<tr>
 										<td class="tg-0lax" colspan="9" rowspan="14"><textarea
@@ -290,7 +290,8 @@
 												src='<c:url value="/resources/api/smarteditor/js/service/HuskyEZCreator.js"/>'
 												charset="utf-8"></script> <script id="smartEditor"
 												type="text/javascript">
-													var oEditors = [];
+												$(function(){
+												var oEditors = [];
 													nhn.husky.EZCreator.createInIFrame({
 													    oAppRef: oEditors,
 													    elPlaceHolder: "txtContent",  //textarea ID 입력
@@ -305,8 +306,11 @@
 														bUseModeChanger : false
 													    }
 
+													});
+
 													$("#submit").click(function(){
 														oEditors.getById["txtContent"].exec("UPDATE_CONTENTS_FIELD", []);
+														$("#txtContent").value = $("#txtContent").value.replace(/<br>$/<p>, "");	//정제
 														if($('#cfTitle').val().length<1){
 															if($('#cfTitle').val().length<1){
 																alert('제목을 입력하세요');
@@ -317,8 +321,7 @@
 															$('#paperWrite').submit();
 														}
 													});
-
-													});
+												});
 												</script></td>
 									</tr>
 								</tbody>
@@ -329,10 +332,10 @@
 									</tr>
 								</tfoot>
 							</table>
-							<input type="text" name="cfNo" value="${confirmVo.cfNo }">
-							<input type="text" name="memNo" value="${map['MEM_NO'] }">
-							<input type="text" name="deptNo" value="${map['DEPT_NO'] }">
-							<input type="submit" id="submit" value="submit">
+							<input type="hidden" name="cfNo" value="${confirmVo.cfNo }">
+							<input type="hidden" name="memNo" value="${map['MEM_NO'] }">
+							<input type="hidden" name="deptNo" value="${map['DEPT_NO'] }">
+							<button type="submit" id="submit" class="btn btn-primary btn-lg btn-block">작성하기</button>
 						</div>
 					</div>
 				</div>

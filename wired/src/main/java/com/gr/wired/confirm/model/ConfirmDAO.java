@@ -13,4 +13,11 @@ public interface ConfirmDAO {
 	int deleteTemp(int memNo);
 	int updateContent(ConfirmVO confirmVo);
 	List<Map<String, Object>> selectLineorder(int cfNo);
+	List<Map<String, Object>> selectConfirmingView(int memNo);
+	int updateCfOrder(int cfNo);
+	int updateReject(int cfNo);
+	int countState1(int memNo);
+	int countState2(int memNo);
+	int countState3(int memNo);
+	int countState4(int memNo);
 }

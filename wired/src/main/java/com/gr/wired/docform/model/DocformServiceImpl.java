@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class DocformServiceImpl implements DocformService {
 
-	private static final Logger logger
-		= LoggerFactory.getLogger(DocformServiceImpl.class);
 
 	private final DocformDAO docformDao;
 
@@ -35,6 +33,12 @@ public class DocformServiceImpl implements DocformService {
 	@Override
 	public int deleteDocform(int formNo) {
 		return docformDao.deleteDocform(formNo);
+	}
+
+
+	@Override
+	public DocformVO selectByFormNo(int formNo) {
+		return docformDao.selectByFormNo(formNo);
 	}
 
 

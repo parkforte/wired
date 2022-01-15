@@ -1,6 +1,6 @@
 
 
---?‚¬?›? •ë³? 3ì¤? join
+--?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? 3ï¿½? join
 select distinct m.*, m.mem_name as member_name , d.dept_name, p.pos_name
 from member m join department d
 on m.dept_no = d.dept_no
@@ -31,7 +31,7 @@ as
 
 
 
---confirmline 4ì¤? join
+--confirmline 4ï¿½? join
         
 select distinct c.*, m.mem_name, d.dept_name, p.pos_name
 from member m join department d
@@ -47,7 +47,7 @@ ORDER BY LINE_ORDER;
 
 
 
---linereg ?‹œ???Š¤
+--linereg ?ï¿½ï¿½???ï¿½ï¿½
 drop sequence linereg_seq;
 
 create sequence linereg_seq
@@ -61,7 +61,7 @@ start with 1
 increment by 1
 nocache;
 
---confirmline ?‹œ???Š¤
+--confirmline ?ï¿½ï¿½???ï¿½ï¿½
 drop sequence confirmline_seq;
 
 create sequence confirmline_seq
@@ -75,14 +75,14 @@ start with 1
 increment by 1
 nocache;
 
---confirm ?‹œ???Š¤
+--confirm ?ï¿½ï¿½???ï¿½ï¿½
 create sequence confirm_seq
 start with 1
 increment by 1
 nocache;
 
 
---ê²°ì¬?„  ì¶”ì¶œ join
+--ê²°ì¬?ï¿½ï¿½ ì¶”ì¶œ join
 select c.cf_no , c.mem_no ,c.reg_no,l.line_order ,l.mem_no as mem_line , m.mem_name, m.mem_originalfilename
 from confirm c join linereg r
 on c.reg_no=r.reg_no
@@ -91,7 +91,7 @@ on r.reg_no=l.reg_no
 join member m
 on l.mem_no=m.mem_no
 where l.mem_no>0;
---ê²°ì¬?„ ? •ë³? view
+--ê²°ì¬?ï¿½ï¿½?ï¿½ï¿½ï¿½? view
 create or replace view lineorder_view
 as
 (
@@ -105,11 +105,29 @@ on l.mem_no=m.mem_no
 where l.mem_no>0
 );
 
---ë¬¸ì„œ? •ë³? ? „ì²? join
+
+
+--ê²°ì¬ìƒíƒœ view
+create or replace view confirming_view
+as
+(
+    select c.cf_no,c.cf_title, m.mem_name ,
+        c.cf_regdate, c.cf_state ,c.cf_order, l.line_order, l.mem_no  "LINE_MEM" 
+    from confirm c join linereg r
+    on c.reg_no=r.reg_no
+    join confirmline l
+    on r.reg_no=l.reg_no
+    join member m
+    on c.mem_no = m.mem_no
+    where c.cf_order=l.line_order
+    and c.cf_order>0
+);
+
+
 
 select c.*, 
     m.mem_name, m.mem_originalfilename , f.form_name , l.line_order,
-    DECODE(c.cf_state, 0 , '?„?‹œ???¥',1,'??ê¸?',2,'?Š¹?¸',3,'ë°˜ë ¤') as state_name
+    DECODE(c.cf_state, 0 , '?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½',1,'??ï¿½?',2,'?ï¿½ï¿½?ï¿½ï¿½',3,'ë°˜ë ¤') as state_name
 from confirm c join member m
 on c.mem_no=m.mem_no
 join docform f
@@ -122,7 +140,7 @@ on l.line_order=c.cf_order
 
 select c.*, 
     m.mem_name, m.mem_originalfilename , f.form_name , l.line_order,
-    DECODE(c.cf_state, 0 , '?„?‹œ???¥',1,'??ê¸?',2,'?Š¹?¸',3,'ë°˜ë ¤') as state_name
+    DECODE(c.cf_state, 0 , '?ï¿½ï¿½?ï¿½ï¿½???ï¿½ï¿½',1,'??ï¿½?',2,'?ï¿½ï¿½?ï¿½ï¿½',3,'ë°˜ë ¤') as state_name
 from confirm c join member m
 on c.mem_no=m.mem_no
 join docform f
