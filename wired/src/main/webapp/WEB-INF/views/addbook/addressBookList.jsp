@@ -73,7 +73,8 @@ span {
 		<!-- title1 -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">지노지노님의 주소록</h6>
+				<h6 class="m-0 font-weight-bold text-primary">${sessionScope.memName }님의
+					개인 주소록</h6>
 				<nav class="f-right" aria-label="...">
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='/wired/addbook/addressBookRegister'">추가</button>
@@ -81,58 +82,89 @@ span {
 			</div>
 			<div class="card-body">
 				<div class="table-responsive" id="dataform">
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
-							<thead>
+					<table class="table table-bordered" id="dataTable" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th>이름</th>
+								<th>연락처</th>
+								<th>이메일</th>
+								<th>회사명</th>
+								<th>부서명</th>
+								<th>직급</th>
+								<th>수정/삭제</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${empty addbookList }">
 								<tr>
-									<th>이름</th>
-									<th>연락처</th>
-									<th>이메일</th>
-									<th>회사명</th>
-									<th>부서명</th>
-									<th>직급</th>
-									<th>수정/삭제</th>
+									<td colspan="6">데이터가 없습니다.</td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:if test="${empty addbookList }">
+							</c:if>
+							<c:if test="${!empty addbookList }">
+								<!-- 리스트 반복문 시작 -->
+								<c:forEach var="map" items="${addbookList }">
 									<tr>
-										<td colspan="6">데이터가 없습니다.</td>
-									</tr>
-								</c:if>
-								<c:if test="${!empty addbookList }">
-									<!-- 리스트 반복문 시작 -->
-									<c:forEach var="map" items="${addbookList }">
-										<tr>
-											<td>${map['ADDRBOOK_NAME'] }</td>
-											<td>${map['ADDRBOOK_TEL'] }</td>
-											<td>${map['ADDRBOOK_EMAIL'] }</td>
-											<td>${map['ADDRBOOK_COMNAME'] }</td>
-											<td>${map['ADDRBOOK_DEPT'] }</td>
-											<td>${map['ADDRBOOK_RANK'] }</td>
-											
-											<td><button type="button" class="btn btn-success" id="btEdit"
+										<td>${map['ADDRBOOK_NAME'] }</td>
+										<td>${map['ADDRBOOK_TEL'] }</td>
+										<td>${map['ADDRBOOK_EMAIL'] }</td>
+										<td>${map['ADDRBOOK_COMNAME'] }</td>
+										<td>${map['ADDRBOOK_DEPT'] }</td>
+										<td>${map['ADDRBOOK_RANK'] }</td>
+
+										<td><button type="button" class="btn btn-success"
+												id="btEdit"
 												onclick="location.href='<c:url value="/addbook/addressBookEdit?addrbookNo=${map['ADDRBOOK_NO'] }"/>'">수정</button>
-												<button type="button" class="btn btn-danger" id="btDel"
+											<button type="button" class="btn btn-danger" id="btDel"
 												onclick="location.href='<c:url value="/addbook/addressBookDelete?addrbookNo=${map['ADDRBOOK_NO'] }"/>'">삭제</button></td>
-										</tr>
-									</c:forEach>
-								</c:if>
-								<!-- 반복 끝 -->
-							</tbody>
-						</table>
-					<nav class="f-right" aria-label="...">
-						<ul class="pagination">
-							<li class="page-item disabled"><a class="page-link">Previous</a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item active" aria-current="page"><a
-								class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a>
-							</li>
-						</ul>
-					</nav>
+									</tr>
+								</c:forEach>
+							</c:if>
+							<!-- 반복 끝 -->
+						</tbody>
+					</table>
+					<!-- 페이징 1,2,3,4,5, -->
+					<div class="col-sm-12 col-md-7">
+						<nav class="f-right" aria-label="...">
+							<!-- 페이지 번호추가 -->
+							<ul class="pagination">
+
+								<li
+									class="page-item
+										<c:if test="${pagingInfo.firstPage==1 }">
+											disabled
+										</c:if>"><a class="page-link" href="#" 
+										onclick="addressBookList(${pagingInfo.firstPage-1})">Previous</a></li>
+
+								<!-- [1][2][3][4][5][6][7][8][9][10] -->
+								<c:forEach var="i" begin="${pagingInfo.firstPage }"
+									end="${pagingInfo.lastPage }">
+
+
+									<li
+										<c:if test="${i==pagingInfo.currentPage }">
+												class="page-item active" aria-current="page"
+											</c:if>
+										<c:if test="${i!=pagingInfo.currentPage }">
+												class="page-item"
+											</c:if>><a
+										class="page-link" href="#" onclick="addressBookList(${i })">${i }</a></li>
+								</c:forEach>
+
+								<li
+									class="page-item
+										<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
+											disabled
+										</c:if>
+										"><a
+									class="page-link" href="#"
+									onclick="addressBookList(${pagingInfo.lastPage+1})">Next</a></li>
+								<!-- 페이지 번호끝 -->
+							</ul>
+						</nav>
+					</div>
+					<input type="text" value="${pagingInfo.lastPage }" />
+
 				</div>
 			</div>
 		</div>
