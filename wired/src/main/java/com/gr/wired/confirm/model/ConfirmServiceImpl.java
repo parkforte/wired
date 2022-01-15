@@ -56,4 +56,19 @@ public class ConfirmServiceImpl implements ConfirmService {
 	public List<Map<String, Object>> selectLineorder(int cfNo) {
 		return confirmDao.selectLineorder(cfNo);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectConfirmingView(int memNo) {
+		return confirmDao.selectConfirmingView(memNo);
+	}
+
+	@Override
+	public int updateCfOrder(int cfNo) {
+		return confirmDao.updateCfOrder(cfNo);
+	}
+
+	@Override
+	public int updateReject(int cfNo) {
+		return confirmDao.updateReject(cfNo);
+	}
 }

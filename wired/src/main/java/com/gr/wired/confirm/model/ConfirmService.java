@@ -8,5 +8,7 @@ public interface ConfirmService {
 	ConfirmVO selectTempByMemNo(int memNo);
 	int updateContent(ConfirmVO confirmVo);
 	List<Map<String, Object>> selectLineorder(int cfNo);
-
+	List<Map<String, Object>> selectConfirmingView(int memNo);
+	int updateCfOrder(int cfNo);
+	int updateReject(int cfNo);
 }

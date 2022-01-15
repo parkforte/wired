@@ -23,7 +23,7 @@
 	</delete>
 	<update id="updateContent" parameterType="confirmVo">
 		UPDATE CONFIRM
-		SET CF_TITLE=#{cfTitle}, CF_CONTENT=#{cfContent}, CF_ORDER=1, CF_STATE=1, CF_REGDATE=SYSDATE
+		SET CF_TITLE=#{cfTitle}, CF_CONTENT=#{cfContent}, CF_ORDER=#{cfOrder}, CF_STATE=#{cfState}, CF_REGDATE=SYSDATE
 		WHERE MEM_NO=#{memNo} and CF_NO=#{cfNo}
 	</update>
 	<select id="selectLineorder" parameterType="int" resultType="map">
@@ -32,4 +32,19 @@
 		AND LINE_ORDER>0
 		ORDER BY LINE_ORDER DESC
 	</select>
+	<select id="selectConfirmingView" parameterType="int" resultType="map">
+		SELECT * FROM CONFIRMING_VIEW
+		WHERE LINE_MEM=#{memNo}
+		AND CF_STATE=CF_ORDER
+	</select>
+	<update id="updateCfOrder" parameterType="int">
+		UPDATE CONFIRM
+		SET CF_ORDER=CF_ORDER+1, CF_STATE=CF_STATE+1
+		WHERE CF_NO=#{cfNo}
+	</update>
+	<update id="updateReject" parameterType="int">
+		UPDATE CONFIRM
+		SET CF_STATE=4
+		WHERE CF_NO=#{cfNo}
+	</update>
 </mapper>
