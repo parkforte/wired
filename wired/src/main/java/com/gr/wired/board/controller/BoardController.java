@@ -27,6 +27,7 @@ import com.gr.wired.bdList.model.BdListVO;
 import com.gr.wired.board.model.BoardListVO;
 import com.gr.wired.board.model.BoardService;
 import com.gr.wired.board.model.BoardVO;
+import com.gr.wired.common.BSearchVO;
 import com.gr.wired.common.ConstUtil;
 import com.gr.wired.common.FileUploadUtil;
 import com.gr.wired.common.PaginationInfo;
@@ -113,7 +114,7 @@ public class BoardController {
 	}
 
 	@RequestMapping("/boardList")
-	public String list(@ModelAttribute SearchVO searchVo
+	public String list(@ModelAttribute BSearchVO searchVo
 			,@RequestParam(defaultValue = "0") int bdlistNo, Model model) {
 		// 파라미터 읽어오기
 		BoardVO boardVo = new BoardVO();
@@ -127,6 +128,11 @@ public class BoardController {
 		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 
+		//[2] searchVo에 값 셋팅
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("값 셋팅 후 searchVo={}", searchVo);
+
 		//db작업
 		List<Map<String,Object>> list = boardService.selectByBNoList(searchVo);
 		logger.info("게시글 목록 list={}", list);
@@ -135,7 +141,7 @@ public class BoardController {
 		logger.info("bdListVo={}", bdListVo);
 
 		//[3] totalPage
-		int totalRecord=boardService.selectTotalRecord(bdlistNo);
+		int totalRecord=boardService.selectTotalRecord(searchVo);
 		logger.info("totalRecord={}", totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 

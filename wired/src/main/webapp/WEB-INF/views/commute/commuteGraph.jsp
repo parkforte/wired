@@ -40,13 +40,10 @@
             <a class="nav-link active" id="a-hover" data-value="1" href="<c:url value='/commute/commuteList'/>">개인근태조회</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-value="2" id="a-hover" href="<c:url value='/jawon/jawonReserve?typeNo=2'/>">개인연차조회</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" data-value="3" id="a-hover" href="<c:url value='/commute/commuteDList'/>">부서근태조회</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-value="3" id="a-hover" href="<c:url value='/jawon/jawonReserve?typeNo=3'/>">부서근태통계</a>
+            <a class="nav-link" data-value="3" id="a-hover" href="<c:url value='/commute/commuteGraph'/>">부서근태통계</a>
           </li>
         </ul>
 		<!-- title1 -->

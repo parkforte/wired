@@ -23,6 +23,11 @@ create sequence res_seq
 increment by 1
 start with 1
 nocache;
+--
+create sequence RESSD_SEQ
+increment by 1
+start with 1
+nocache;
 
 --자원테이블
 INSERT INTO RESOURCES(RES_NO, TYPE_NO, RES_NAME, RES_LOCATION)
@@ -46,7 +51,16 @@ VALUES(RES_SEQ.nextval,3,'R리조트','제주도');
 
 SELECT * FROM RESOURCES;
 
---자원리스트 VIEW
+--자원매니저 VIEW
+CREATE OR REPLACE VIEW JAWONMANAGER_VIEW
+AS
+(
+    SELECT T.TYPE_NAME, R.*
+    FROM RESTYPE T JOIN RESOURCES R
+    ON T.TYPE_NO=R.TYPE_NO
+);
+
+--자원예약 VIEW
 CREATE OR REPLACE VIEW JAWONLIST_VIEW
 AS
 (

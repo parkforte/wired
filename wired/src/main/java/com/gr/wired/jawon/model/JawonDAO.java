@@ -17,4 +17,6 @@ public interface JawonDAO {
 	int deleteReserve(int reservNo);
 	List<Map<String, Object>> selectJawonAllView();
 	int deleteJawonType(int typeNo);
+	int insertJawon(JawonVO jawonVo);
+	int updateJawon(JawonVO jawonVo);
 }

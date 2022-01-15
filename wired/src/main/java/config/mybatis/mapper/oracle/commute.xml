@@ -32,7 +32,7 @@
 		WHERE MEM_NO=#{memNo}
 	</select>
 
-	<select id="selectAll" parameterType="searchVo" resultType="map">
+	<select id="selectAll" parameterType="dateSearchVo" resultType="map">
 		SELECT *
 			from
 			(
@@ -50,6 +50,10 @@
 					<if test="deptNo != null and deptNo !=''">
 						WHERE DEPT_NO=#{deptNo}
 					</if>
+					AND COM_INDATE >= #{startDay}
+					<![CDATA[
+					AND COM_INDATE < to_date(#{endDay})+1
+					]]>
 					ORDER BY COM_NO DESC
 				)A
 			)
@@ -57,7 +61,7 @@
 			WHERE RNUM>#{firstRecordIndex}
 				AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
 	</select>
-	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
+	<select id="selectTotalRecord" parameterType="dateSearchVo" resultType="int">
 		SELECT COUNT(*)
 		FROM COMMUTE C JOIN MEMBER M
 		ON C.MEM_NO=M.MEM_NO
@@ -67,11 +71,11 @@
 		<if test="deptNo != null and deptNo !=''">
 			WHERE DEPT_NO=#{deptNo}
 		</if>
+		AND COM_INDATE >= #{startDay}
+		<![CDATA[
+		AND COM_INDATE < to_date(#{endDay})+1
+		]]>
 	</select>
-
-
-
-
 </mapper>
 
 

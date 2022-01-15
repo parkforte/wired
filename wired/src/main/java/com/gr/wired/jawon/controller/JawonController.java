@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gr.wired.jawon.model.JawonAllVO;
 import com.gr.wired.jawon.model.JawonService;
+import com.gr.wired.jawon.model.JawonVO;
 import com.gr.wired.jawon.model.ResScheduleVO;
 import com.gr.wired.jawon.model.ResTypeVO;
 
@@ -160,4 +161,43 @@ public class JawonController {
 
 		return "jawon/jawonAllList";
 	}
+
+	@RequestMapping("/jawonAdd")
+	public String jawonAdd(@ModelAttribute JawonVO vo, Model model) {
+		logger.info("자원 추가 처리, 파라미터 vo={}", vo);
+
+		int cnt=jawonService.insertJawon(vo);
+		logger.info("자원 추가 결과, cnt={}", cnt);
+
+		String msg="자원 추가 실패", url="/jawon/jawonManage";
+		if(cnt>0) {
+			msg="자원 추가 성공";
+			url="/jawon/jawonManage";
+		}
+
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+
+		return "common/message";
+	}
+
+	@RequestMapping("/jawonEdit")
+	public String jawonEdit(@ModelAttribute JawonVO vo, Model model) {
+		logger.info("자원 수정 처리, 파라미터 vo={}", vo);
+
+		int cnt=jawonService.updateJawon(vo);
+		logger.info("자원 수정 결과, cnt={}", cnt);
+
+		String msg="자원 수정 실패", url="/jawon/jawonManage";
+		if(cnt>0) {
+			msg="자원 수정 성공";
+			url="/jawon/jawonManage";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
+
 }

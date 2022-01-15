@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gr.wired.common.BSearchVO;
+import com.gr.wired.common.DateSearchVO;
 import com.gr.wired.common.SearchVO;
 
 @Service
@@ -43,13 +45,13 @@ public class CommuteServiceImpl implements CommuteService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectAll(SearchVO searchVo) {
-		return commuteDao.selectAll(searchVo);
+	public List<Map<String, Object>> selectAll(DateSearchVO dateSearchVo) {
+		return commuteDao.selectAll(dateSearchVo);
 	}
 
 	@Override
-	public int selectTotalRecord(SearchVO searchVo) {
-		return commuteDao.selectTotalRecord(searchVo);
+	public int selectTotalRecord(DateSearchVO dateSearchVo) {
+		return commuteDao.selectTotalRecord(dateSearchVo);
 	}
 
 

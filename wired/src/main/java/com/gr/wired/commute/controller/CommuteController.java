@@ -1,5 +1,8 @@
 package com.gr.wired.commute.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gr.wired.common.ConstUtil;
+import com.gr.wired.common.DateSearchVO;
 import com.gr.wired.common.PaginationInfo;
-import com.gr.wired.common.SearchVO;
 import com.gr.wired.commute.model.CommuteService;
 import com.gr.wired.commute.model.CommuteVO;
 
@@ -32,27 +35,42 @@ public class CommuteController {
 	}
 
 	@RequestMapping("/commuteList")
-	public String commuteList(@ModelAttribute SearchVO searchVo, HttpSession session, Model model) {
+	public String commuteList(@ModelAttribute DateSearchVO dateSearchVo, HttpSession session, Model model) {
 		int memNo = (int) session.getAttribute("memNo");
-		searchVo.setMemNo(memNo);
-		logger.info("개인 근태 조회 파라미터, memNo={}", searchVo.getMemNo());
+		dateSearchVo.setMemNo(memNo);
+		logger.info("개인 근태 조회 파라미터, memNo={}", dateSearchVo.getMemNo());
+
+		String startDay=dateSearchVo.getStartDay();
+
+		if(startDay==null || startDay.isEmpty()) {
+			Date d = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(d);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			cal.add(Calendar.DATE, -7);
+			String lastDay=sdf.format(cal.getTime());
+			String today=sdf.format(d);
+			dateSearchVo.setStartDay(lastDay);
+			dateSearchVo.setEndDay(today);
+		}
+		logger.info("셋팅 후 주문내역 파라미터, dateSearchVo={}", dateSearchVo);
 
 		//[1] paginationInfo
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setCurrentPage(dateSearchVo.getCurrentPage());
 
 		//[2] searchVo에 값 셋팅
-		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		logger.info("값 셋팅 후 searchVo={}", searchVo);
+		dateSearchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		dateSearchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		logger.info("값 셋팅 후 dateSearchVo={}", dateSearchVo);
 
-		List<Map<String, Object>> clist=commuteService.selectAll(searchVo);
+		List<Map<String, Object>> clist=commuteService.selectAll(dateSearchVo);
 		logger.info("clist.size={}", clist.size());
 
 		//[3] totalPage
-		int totalRecord=commuteService.selectTotalRecord(searchVo);
+		int totalRecord=commuteService.selectTotalRecord(dateSearchVo);
 		logger.info("totalRecord={}", totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 
@@ -63,36 +81,51 @@ public class CommuteController {
 	}
 
 	@RequestMapping("/commuteDList")
-	public String commuteDList(@ModelAttribute SearchVO searchVo, HttpSession session, Model model) {
+	public String commuteDList(@ModelAttribute DateSearchVO dateSearchVo, HttpSession session, Model model) {
 		int memNo=(int) session.getAttribute("memNo");
 		int deptNo=commuteService.selectDeNo(memNo);
-		searchVo.setDeptNo(deptNo);
-		logger.info("부서별 근태 조회 파라미터, deptNo={}", searchVo.getDeptNo());
+		dateSearchVo.setDeptNo(deptNo);
+		logger.info("부서별 근태 조회 파라미터, deptNo={}", dateSearchVo.getDeptNo());
+
+		String startDay=dateSearchVo.getStartDay();
+
+		if(startDay==null || startDay.isEmpty()) {
+			Date d = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(d);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			cal.add(Calendar.DATE, -7);
+			String lastDay=sdf.format(cal.getTime());
+			String today=sdf.format(d);
+			dateSearchVo.setStartDay(lastDay);
+			dateSearchVo.setEndDay(today);
+		}
+		logger.info("셋팅 후 주문내역 파라미터, dateSearchVo={}", dateSearchVo);
 
 		//[1] paginationInfo
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
 		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setCurrentPage(dateSearchVo.getCurrentPage());
 
 		//[2] searchVo에 값 셋팅
-		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
-		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		logger.info("값 셋팅 후 searchVo={}", searchVo);
+		dateSearchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		dateSearchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("값 셋팅 후 searchVo={}", dateSearchVo);
 
-		List<Map<String, Object>> clist=commuteService.selectAll(searchVo);
+		List<Map<String, Object>> clist=commuteService.selectAll(dateSearchVo);
 		logger.info("clist.size={}", clist.size());
 
 		//[3] totalPage
-		int totalRecord=commuteService.selectTotalRecord(searchVo);
+		int totalRecord=commuteService.selectTotalRecord(dateSearchVo);
 		logger.info("totalRecord={}", totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 
-		model.addAttribute("deptNo", searchVo.getDeptNo());
+		model.addAttribute("deptNo", dateSearchVo.getDeptNo());
 		model.addAttribute("clist", clist);
 		model.addAttribute("pagingInfo", pagingInfo);
 
-		return "commute/commuteList";
+		return "commute/commuteDList";
 	}
 
 
