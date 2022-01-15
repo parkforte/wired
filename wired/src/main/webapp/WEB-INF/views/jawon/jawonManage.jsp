@@ -72,15 +72,33 @@ $(function() {
 		});
 
 	});
+	$('.jawonAdd').each(function(index,item) {
+		$(this).click(function(){
+			$('#exampleAdd').find('input[name=typeNo]').val($(this).val());
+			$('#exampleAdd').find('input[name=typeName]').val($(this).prev('input').val());
+
+		});
+	});
+	$('.edit').each(function(index,item){
+		$(this).on("click",function(){
+			$('#exampleEdit').find('input[name=resNo]').val($(this).attr('value'));
+			$('#exampleEdit').find('input[name=typeName]').val($(this).parents('#dataTable').find('.typeName').text());
+			$('#exampleEdit').find('input[name=resName]').val($(this).parents('tr').find('td:eq(0)').text());
+			$('#exampleEdit').find('input[name=resLocation]').val($(this).parents('tr').find('td:eq(1)').text());
+
+		});
+	});
+	$('.remove').each(function(index,item){
+		$(this).on("click",function(){
+			$('#exampleDelete').find('input[name=resNo]').val($(this).attr('value'));
+			$('#exampleDelete').find('#m-del').text($(this).parents('tr').find('td:eq(0)').text());
+		});
+	});
+	alert(${res}.val());
 
 });
 
 
-// function windowonload(){
-
-// 	location.href="<c:url value='/jawon/jawonManage2?typeNo='/>"+$('input[name=]');
-// }
-// window.onload = windowonload;
 
 </script>
 
@@ -133,37 +151,46 @@ $(function() {
                </div>
                <div class="card-body p-bottom-0">
                    <div class="table-responsive">
+
                    <c:forEach var="jawonAllVo" items="${tList}">
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
-                                   <th>자원명 [${jawonAllVo.resTypeVo.typeName }]<input type="text" value="${jawonAllVo.resTypeVo.typeNo }"></th>
+                                   <th>자원명 [<span class="typeName">${jawonAllVo.resTypeVo.typeName }</span>]</th>
                                    <th>자원위치</th>
-                                   <th>예약시간</th>
                                    <th>상태</th>
                                    <th>
+                                   	<input type="hidden" name="nameResult" value="${jawonAllVo.resTypeVo.typeName }">
                                    	<button type="button" class="btn btn-light jawonAdd" value="${jawonAllVo.resTypeVo.typeNo }"
-                                   		data-toggle="modal" data-target="#exampleAdd">추가</button>
+                                   		data-toggle="modal" data-target="#exampleAdd" name="jawonAdd">추가</button>
                                    </th>
                                </tr>
                            </thead>
                            <tbody>
                             <c:if test="${!empty tList }">
                              <c:forEach var="map" items="${jawonAllVo.typeDetailsList }">
-	                            <c:if test="${empty jawonAllVo.typeDetailsList }">
-	                            	<tr>
-	                            		<td colspan="5">데이터가 없습니다.</td>
-	                            	</tr>
-	                            </c:if>
-                               <tr>
-                                   <td>${map['RES_NAME'] }</td>
-                                   <td>${map['RES_LOCATION'] }</td>
-                                   <td>
-                                   <fmt:formatDate value="${map['USE_REGDATE'] }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${map['RETURN_REGDATE'] }" pattern="yyyy-MM-dd"/></td>
-                                   <td><button type="button" class="btn btn-warning">사용중</button></td>
-                                   <td><a href="#" id="a-hover" data-toggle="modal" data-target="#exampleEdit">수정</a>&nbsp;
-                                   		<a href="#" id="a-hover" data-toggle="modal" data-target="#exampleDelete">삭제</a></td>
-                               </tr>
+                             <input type="text" name="test" value="${map['RES_NAME'] }">
+<%--                              	<c:set var="res" value="0"/> --%>
+                             	<c:if test="map['RES_NAME']==0">
+                             		<tr>
+	                             		<td colspan="4">
+	                             			데이터가 없습니다.
+	                             		</td>
+                             		</tr>
+                             	</c:if>
+                             	<c:if test="${!empty jawonAllVo.typeDetailsList}">
+	                               <tr>
+	                                   <td id="resName">${map['RES_NAME'] }</td>
+	                                   <td id="resLocation">${map['RES_LOCATION'] }</td>
+	                                   <td><button type="button" class="btn btn-warning">사용중</button></td>
+	                                   <td>
+	                                   		<input type="text" name="resName" value="${map['RES_NAME'] }">
+	                                   		<a href="#" id="a-hover" class="edit" value="${map['RES_NO'] }"
+	                                   				data-toggle="modal" data-target="#exampleEdit">수정</a>&nbsp;
+	                                   		<a href="#" id="a-hover" class="remove" value="${map['RES_NO'] }"
+	                                   				data-toggle="modal" data-target="#exampleDelete">삭제</a></td>
+	                               </tr>
+                             	</c:if>
                                </c:forEach>
                                </c:if>
                            </tbody>
@@ -252,34 +279,35 @@ $(function() {
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
 			      <div class="modal-header back-color">
-			      	<h5 class="modal-title" id="exampleModalLabel">자원정보 추가</h5>
+			      	<h5 class="modal-title" id="exampleModalLabel">자원 추가</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
+			        <form name="frmRes" action="<c:url value='/jawon/jawonAdd'/>">
 			      <div class="modal-body">
-			        <form name="frmRes" action="<c:url value='/jawon/jawon'/>">
+			        <input type="text" name="typeNo">
 					  <div class="form-group">
 					    <label for="exampleInputEmail1">자원명</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1"  name="typeNo"
-					    	aria-describedby="emailHelp" value="" ><span></span>
+					    <input type="text" class="form-control" id="typeName"  name="typeName"
+					    	aria-describedby="emailHelp" Readonly>
 					  </div>
 					  <div class="form-group">
-					    <label for="exampleInputPassword1">자원정보</label>
-					    <input type="password" class="form-control" id="exampleInputPassword1" name="resName">
+					    <label for="exampleInputEmail1">자원정보</label>
+					    <input type="text" class="form-control" id="resName" name="resName">
 					  </div>
 					  <div class="form-group">
 					    <label for="exampleInputEmail1">자원위치</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1"
+					    <input type="text" class="form-control" id="resLocation"
 					    	aria-describedby="emailHelp" name="resLocation">
 					    <small id="emailHelp" class="form-text text-muted">위치를 지정해주세요.</small>
 					  </div>
-					</form>
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
 			        <button type="submit" class="btn btn-primary jawonAddBig">추가</button>
 			      </div>
+					</form>
 			    </div>
 			  </div>
 			</div>
@@ -288,32 +316,33 @@ $(function() {
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			      	<h5 class="modal-title" id="exampleModalLabel">자원(자원종류이름) 수정</h5>
+			      	<h5 class="modal-title" id="exampleModalLabel">자원 수정</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        <form>
+			        <form name="frmResEdit" action="<c:url value='/jawon/jawonEdit'/>">
+			        <input type="text" name="resNo">
 					  <div class="form-group">
-					    <label for="exampleInputEmail1">자원명</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+					    <label for="jawonName">자원명</label>
+					    <input type="text" class="form-control" name="typeName" id="typeName" Readonly aria-describedby="emailHelp">
 					  </div>
 					  <div class="form-group">
-					    <label for="exampleInputPassword1">자원정보</label>
-					    <input type="password" class="form-control" id="exampleInputPassword1">
+					    <label for="jawonInfo">자원정보</label>
+					    <input type="text" class="form-control" id="resName" name="resName">
 					  </div>
 					  <div class="form-group">
-					    <label for="exampleInputEmail1">자원위치</label>
-					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+					    <label for="jawonLoc">자원위치</label>
+					    <input type="text" class="form-control" id="resLocation" name="resLocation" aria-describedby="emailHelp">
 					    <small id="emailHelp" class="form-text text-muted">위치를 지정해주세요.</small>
 					  </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
+				        <button type="submit" class="btn btn-success">수정</button>
+				      </div>
 					</form>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
-			        <button type="submit" class="btn btn-success">수정</button>
-			      </div>
+					</div>
 			    </div>
 			  </div>
 			</div>
@@ -321,19 +350,22 @@ $(function() {
 			<div class="modal fade" id="exampleDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
+			    <form name="frmResDel" action="">
 			      <div class="modal-header">
-			      	<h5 class="modal-title" id="exampleModalLabel">자원(자원종류이름) 삭제</h5>
+			    <input type="hidden" name="resNo">
+			      	<h5 class="modal-title" id="exampleModalLabel">자원 삭제</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
 			      <div class="modal-body">
-			        자원명, 자원정보 를 삭제하시겠습니까?
+			        <span id="m-del"></span>(을/를) 삭제하시겠습니까?
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
 			        <button type="submit" class="btn btn-danger">삭제</button>
 			      </div>
+			      </form>
 			    </div>
 			  </div>
 			</div>

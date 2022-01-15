@@ -65,6 +65,15 @@ public class JawonServiceImpl implements JawonService{
 		return jawonDao.deleteJawonType(typeNo);
 	}
 
+	@Override
+	public int insertJawon(JawonVO jawonVo) {
+		return jawonDao.insertJawon(jawonVo);
+	}
+
+	@Override
+	public int updateJawon(JawonVO jawonVo) {
+		return jawonDao.updateJawon(jawonVo);
+	}
 
 
 }
