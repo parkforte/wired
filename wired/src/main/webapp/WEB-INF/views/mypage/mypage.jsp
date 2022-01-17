@@ -95,12 +95,12 @@ span{
 
 
 <!--javaScript영역-->
-
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 	$(function(){
+		var isCertification = false;
 		$('#edit_submit').click(function() {
 			if($('#memPwd').val().length<1){
 				alert('비밀번호를 입력하세요');
@@ -119,18 +119,65 @@ span{
 				alert('주소를 입력해주세요.');
 				$('#memAddressdetail').focus();
 				event.preventDefault();
+			}else if(isCertification==false){
+				alert('이메일 인증을 해주세요');
+				$('#memEmail1').focus();
+				event.preventDefault();
+			}
+
+		});
+		var key = "";
+		$('#email-btn').click(function(){
+			var mail = $('#memEmail1').val();
+			if(mail==""){
+				alert("메일 주소를 입력해주세요.");
+				event.preventDefault();
+			}else{
+				if($('#memEmail2').val()=='etc'){
+					mail = mail+"@"+$('#email3').val();
+				}else{
+					mail = mail+"@"+$('#memEmail2').val();	//셀렉트 박스에 값들을 더 함
+				}
+
+				$.ajax({
+					type:"post",
+					url:"<c:url value='/CheckMail'/>",
+					dataType:"json",
+					async:"false",
+					data:{
+						mail:mail
+					},
+					success:function(data){
+						console.log(data.key);
+						key = data.key;
+					}
+				});
+				alert('인증번호가 전송되었습니다.');
+				$(".compare").css("display","block");
+				$(".compare-text").css("display","block");
+				event.preventDefault();
 			}
 
 		});
 
-		/* $('select[name=memEmail2]').change(function() {
+		$(".compare").on("propertychange change keyup paste input", function() {
+			if ($(".compare").val() == key) {
+				$(".compare-text").text("인증 성공!").css("color", "#28A745");
+				isCertification = true;
+			} else {
+				$(".compare-text").text("불일치!").css("color", "red");
+				isCertification = false;
+			}
+		});
+
+		$('select[name=memEmail2]').change(function() {
 			if($('#memEmail2').val()=='etc'){
 				$('#email3').css('visibility','visible');
 			}
-		}); */
+		});
 
 
-		$('#btZipcode').click(function(){
+		$('#btZipcode').submit(function(){
 			window.open(
 				"${pageContext.request.contextPath}/zipcode/zipcode",
 				"zipWin",
@@ -242,20 +289,63 @@ span{
 								<input type="text" name="memAddressdetail" title="상세주소" id="memAddressdetail"
 									class="form-control form-control-user c-size" placeholder="상세주소" value="${map['MEM_ADDRESSDETAIL'] }">
 							</div>
-							<!-- 이메일 -->
-						    <label for="email1">이메일 주소</label>
-							<div class="form-group row">
-						        <input type="text" name="memEmail1"  id="memEmail1" class="form-control  c-size s-half-style" title="이메일주소 앞자리">
-						        <span>@</span>
+						    <c:set var="etcYn" value=""/>
+						    <c:choose>
+						    	<c:when test="${map['MEM_EMAIL2'] != 'naver.com' && map['MEM_EMAIL2'] != 'nate.com'
+						    		&& map['MEM_EMAIL2'] != 'daum.net' && map['MEM_EMAIL2'] != 'gmail.com'
+						    		&& !empty map['MEM_EMAIL2']}">
+								    <c:set var="etcYn" value="Y"/>
+						    	</c:when>
+						    	<c:otherwise>
+								    <c:set var="etcYn" value="N"/>
+						    	</c:otherwise>
+						    </c:choose>
+						        <label for="email1">이메일 주소</label>
+						    <div class="form-group row" >
+						        <input type="text" name="memEmail1"  id="memEmail1" class="form-control  c-size s-half-style"
+						        	title="이메일주소 앞자리" value="${map['MEM_EMAIL1']}">
+						        <span class="between">@</span>
 						        <select class="form-control  c-size s-half-style" name="memEmail2" id="memEmail2"  title="이메일주소 뒷자리">
-						            <option value="naver.com">naver.com</option>
-						            <option value="hanmail.net">hanmail.net</option>
-						            <option value="nate.com">nate.com</option>
-						            <option value="gmail.com">gmail.com</option>
-						            <option value="etc">직접입력</option>
+						            <option value="naver.com"
+						            	<c:if test = "${map['MEM_EMAIL2'] == 'naver.com'}">
+						            		selected="selected"
+						            	</c:if>
+						            >naver.com</option>
+						            <option value="daum.net"
+						            	<c:if test = "${map['MEM_EMAIL2'] == 'daum.net'}">
+						            		selected="selected"
+						            	</c:if>
+						            >daum.net</option>
+						            <option value="nate.com"
+						            	<c:if test = "${map['MEM_EMAIL2'] == 'nate.com'}">
+						            		selected="selected"
+						            	</c:if>
+						            >nate.com</option>
+						            <option value="gmail.com"
+						            	<c:if test = "${map['MEM_EMAIL2'] == 'gmail.com'}">
+						            		selected="selected"
+						            	</c:if>
+						            >gmail.com</option>
+						            <option value="etc"
+						            	<c:if test = "${etcYn == 'Y'}">
+						            		selected="selected"
+						            	</c:if>
+						            >직접입력</option>
 						        </select>
-						        <input type="text" name="email3" id="email3" class="form-control  c-size s-half-style" title="직접입력인 경우 이메일주소 뒷자리"
-						        	style="visibility:hidden;">
+						        <input type="text" name="email3" id="email3"
+						        	class="form-control  c-size s-half-style" title="직접입력인 경우 이메일주소 뒷자리"
+						           	<c:if test = "${etcYn == 'Y'}">
+							        	style="visibility:visible;"
+							        	value="${map['MEM_EMAIL2']}"
+							        </c:if>
+						           	<c:if test = "${etcYn != 'Y'}">
+						        		style="visibility:hidden;"
+							        </c:if>
+						        >
+						        <button class="btn btn-primary" type="submit" id="email-btn">인증</button>
+						        <input type="text" placeholder="인증 키 입력" style="display: none;"
+									class="form-control  c-size s-half-style compare"><span class="compare-text"
+									style="display: none">불일치</span>
 						    </div>
 							<hr>
 							<!-- 연봉 -->

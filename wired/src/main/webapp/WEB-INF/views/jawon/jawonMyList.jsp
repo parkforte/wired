@@ -18,6 +18,9 @@
 	margin-bottom: 12px;
 	margin-top: -12px;
 }
+#btn-loc{
+	margin-left: 5px;
+}
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
@@ -31,6 +34,13 @@ $(function() {
 			$('#m-cancel').click(function() {
 				location.href="<c:url value='/jawon/reserveCancel?reservNo='/>"+res;
 			});
+		});
+	});
+	$('.btn-loc').each(function(index,item){
+		$(this).click(function(){
+			var res=$(this).val();
+			window.open("/wired/jawon/reserveLocation?resNo="+res,"/", "left=50, top=20, width=800, height=400, scrollbars=yes,resizable=yes");
+// 			location.href="<c:url value='/jawon/reserveLocation?resNo='/>"+res;
 		});
 	});
 });
@@ -98,6 +108,7 @@ $(function() {
                                    <th>자원정보</th>
                                    <th>기간</th>
                                    <th>예약정보</th>
+                                   <th>예약위치</th>
                                    <th></th>
                                </tr>
                            </thead>
@@ -115,6 +126,10 @@ $(function() {
                                    <td>
                                    <fmt:formatDate value="${map['USE_REGDATE'] }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${map['RETURN_REGDATE'] }" pattern="yyyy-MM-dd"/></td>
                                    <td>${map['RESERV_CONTENT'] }</td>
+                                   <td>
+                                   <input type="text" value="${map['RES_NO'] }">
+                                   ${map['RES_LOCATION'] }<button type="button" class="btn btn-outline-info btn-loc"
+                                   		value="${map['RES_NO'] }" >위치보기</button></td>
                                    <td><button type="button" class="btn btn-danger b-radius btn-cancel"
                                    	data-toggle="modal" data-target="#exampleModal" value="${map['RESERV_NO'] }">신청취소</button></td>
                                </tr>

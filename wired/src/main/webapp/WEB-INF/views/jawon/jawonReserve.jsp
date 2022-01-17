@@ -40,15 +40,17 @@ $(function () {
 
                     <!-- nav -->
                     <ul class="nav">
+                    <c:forEach var="vo" items="${typeList }" >
 					  <li class="nav-item">
-					    <a class="nav-link active" id="a-hover" data-value="1" href="<c:url value='/jawon/jawonReserve?typeNo=1'/>">회의실</a>
+					    <a class="nav-link active" id="a-hover" data-value="1" href="<c:url value='/jawon/jawonReserve?typeNo=${vo.typeNo }'/>">${vo.typeName }</a>
 					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" data-value="2" id="a-hover" href="<c:url value='/jawon/jawonReserve?typeNo=2'/>">차량</a>
-					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" data-value="3" id="a-hover" href="<c:url value='/jawon/jawonReserve?typeNo=3'/>">리조트</a>
-					  </li>
+					  </c:forEach>
+<!-- 					  <li class="nav-item"> -->
+<%-- 					    <a class="nav-link" data-value="2" id="a-hover" href="<c:url value='/jawon/jawonReserve?typeNo=2'/>">차량</a> --%>
+<!-- 					  </li> -->
+<!-- 					  <li class="nav-item"> -->
+<%-- 					    <a class="nav-link" data-value="3" id="a-hover" href="<c:url value='/jawon/jawonReserve?typeNo=3'/>">리조트</a> --%>
+<!-- 					  </li> -->
 					</ul>
 
 					<!-- reserve -->

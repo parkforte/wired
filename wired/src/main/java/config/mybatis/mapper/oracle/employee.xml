@@ -14,11 +14,16 @@
 			select MEMBER_SEQ.nextval from dual
 		</selectKey>
 		INSERT INTO MEMBER(MEM_NO, RANKS_NO, DEPT_NO, MEM_NAME, MEM_HP1, MEM_HP2, MEM_HP3, MEM_ID, MEM_PWD, MEM_PAY, MEM_HOLIDAY, POS_NO)
-		VALUES(#{memNo},#{ranksNo},#{deptNo},#{memName},#{memHp1},#{memHp2},#{memHp3},#{memNo},#{memPwd},#{memPay},#{memHoliday},#{posNo})
+		VALUES(#{memNo},#{ranksNo},#{deptNo},#{memName},#{memHp1},#{memHp2},#{memHp3},'wired'||#{memNo},#{memPwd},#{memPay},#{memHoliday},#{posNo})
 	</insert>
 
 	<select id="selectPwd" parameterType="string" resultType="string">
 		SELECT MEM_PWD FROM MEMBER
+		WHERE MEM_ID=#{memId}
+	</select>
+
+	<select id="selectResign" parameterType="string" resultType="string">
+		SELECT MEM_RESIGNDATE FROM MEMBER
 		WHERE MEM_ID=#{memId}
 	</select>
 
@@ -40,6 +45,7 @@
 		        JOIN POSITION P
 		        ON M.POS_NO=P.POS_NO
 		        AND MEM_RESIGNDATE IS NULL
+		        <include refid="searchWhere"></include>
 		        ORDER BY MEM_NO DESC
 		    )A
 		)
@@ -86,7 +92,7 @@
 		SELECT * FROM MEMBERINFO_VIEW
 		WHERE MEM_RESIGNDATE IS NOT NULL
 	</select>
-	
+
 	<update id="upBackMember" parameterType="int">
 		UPDATE MEMBER
 		SET MEM_RESIGNDATE=NULL

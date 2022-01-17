@@ -143,43 +143,44 @@ $(function() {
 
     </div>
     		<!-- paging -->
-    				<div class="row">
-              			<div class="col-sm-12 col-md-5">
-              				<div class="dataTables_info" id="dataTables_info" role="status">
-              					Showing 1 to 10 of 57 entries
-              					<span>
-              						<c:if test="${!empty param.searchKeyword }">
-										<p>검색어 : ${param.searchKeyword },
-											${pagingInfo.totalRecord} 건 검색되었습니다. </p>
-									</c:if>
-              					</span>
-              				</div>
+    				<nav class="f-right" aria-label="...">
+			                       		<!-- 페이지 번호추가 -->
+										<ul class="pagination">
 
-              			</div>
+											<li class="page-item
+											<c:if test="${pagingInfo.firstPage==1 }">
+												disabled
+											</c:if>
+											"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
 
-              			<!-- 페이징 1,2,3,4,5, -->
-              			<div class="col-sm-12 col-md-7">
-              				<nav aria-label="...">
-							  <ul class="pagination ">
-							    <li class="page-item disabled">
-							      <span class="page-link">Previous</span>
-							    </li>
-							    <li class="page-item"><a class="page-link" href="#">1</a></li>
-							    <li class="page-item active" aria-current="page">
-							      <span class="page-link">2</span>
-							    </li>
-							    <li class="page-item"><a class="page-link" href="#">3</a></li>
-							    <li class="page-item">
-							      <a class="page-link" href="#">Next</a>
-							    </li>
-							  </ul>
-							</nav>
-              			</div>
-              		</div>
+											<!-- [1][2][3][4][5][6][7][8][9][10] -->
+											<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+
+
+												<li
+													<c:if test="${i==pagingInfo.currentPage }">
+														class="page-item active" aria-current="page"
+													</c:if>
+													<c:if test="${i!=pagingInfo.currentPage }">
+														class="page-item"
+													</c:if>
+												><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li>
+
+											</c:forEach>
+
+
+												<li class="page-item
+												<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
+													disabled
+												</c:if>
+												"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+											<!-- 페이지 번호끝 -->
+										</ul>
+									</nav>
 
 
                 </div>
-<!-- Modal -->
+									<!-- Modal -->
 									<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									  <div class="modal-dialog modal-dialog-centered">
 									    <div class="modal-content">

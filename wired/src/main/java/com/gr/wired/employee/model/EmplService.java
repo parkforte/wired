@@ -3,6 +3,7 @@ package com.gr.wired.employee.model;
 import java.util.List;
 import java.util.Map;
 
+import com.gr.wired.common.BSearchVO;
 import com.gr.wired.common.SearchVO;
 
 public interface EmplService {
@@ -14,8 +15,8 @@ public interface EmplService {
 	int insertMember(EmplVO emplVo);
 	int loginCheck(String memId, String memPwd);
 	EmplVO selectByMemId(String memId);
-	List<Map<String, Object>> selectAll(SearchVO searchVo);
-	int selectTotalRecord(SearchVO searchVo);
+	List<Map<String, Object>> selectAll(BSearchVO searchVo);
+	int selectTotalRecord(BSearchVO searchVo);
 	int updateSignature(EmplVO emplVo);
 	List<Map<String, Object>> selectByMemName(EmplVO emplVo);
 	Map<String, Object> selectByView(int memNo);
