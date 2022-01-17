@@ -36,7 +36,6 @@ public class BSearchVO {
     private int bdlistNo;
 
 
-
     public void setSearchVO(BSearchVO bean){
     	this.currentPage = bean.currentPage;
     	this.searchCondition = bean.getSearchCondition();
@@ -48,7 +47,9 @@ public class BSearchVO {
     	this.recordCountPerPage = bean.recordCountPerPage;
     	this.bdlistNo=bean.bdlistNo;
     }
-    public String getSearchCondition() {
+    
+    
+	public String getSearchCondition() {
     	return searchCondition;
     }
 

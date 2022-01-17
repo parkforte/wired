@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gr.wired.addBook.controller.addressBookController;
 import com.gr.wired.common.ConstUtil;
 import com.gr.wired.common.PaginationInfo;
 import com.gr.wired.common.SearchVO;
@@ -24,10 +23,10 @@ import com.gr.wired.organizationChart.model.OrganizationChartVO;
 public class OrganizationChartController {
 	private static final Logger logger
 	=LoggerFactory.getLogger(OrganizationChartController.class);
-	
-	
+
+
 	private final OrganizationChartService organizationChartService;
-	
+
 	@Autowired
 	public OrganizationChartController(OrganizationChartService organizationChartService) {
 		this.organizationChartService = organizationChartService;
@@ -35,17 +34,18 @@ public class OrganizationChartController {
 
 
 	@RequestMapping("/organizationChart")
-	public String selectByDept(@RequestParam(defaultValue = "") String deptName, Model model) {
-		logger.info("부서별 직원 조회, 파라미터 deptName={}", deptName);
-		
+	public String selectAll(@RequestParam(defaultValue = "") String deptName, @ModelAttribute SearchVO searchVo, Model model) {
+		logger.info("부서별 직원 목록, 파라미터 searchVo={}", searchVo);
+
 		List<OrganizationChartVO> list=organizationChartService.selectByDept(deptName);
-		logger.info("부서별 직원 조회 결과, list.size={}", list.size());
-		
+		logger.info("전체조회 결과 list.size={}", list.size());
+
+
 		model.addAttribute("organList", list);
-		
+
 		return "organChart/organizationChart";
 	}
-	
-	
-	
+
+
+
 }
