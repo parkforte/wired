@@ -34,6 +34,8 @@ public class BSearchVO {
 
     /**게시판 bdlistNo*/
     private int bdlistNo;
+    /**게시판 memNo*/
+    private int memNo;
 
 
 
@@ -121,12 +123,21 @@ public class BSearchVO {
 	public void setBdlistNo(int bdlistNo) {
 		this.bdlistNo = bdlistNo;
 	}
+
+
+	public int getMemNo() {
+		return memNo;
+	}
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+
 	@Override
 	public String toString() {
 		return "BSearchVO [searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword + ", searchUseYn="
 				+ searchUseYn + ", currentPage=" + currentPage + ", blockSize=" + blockSize + ", firstRecordIndex="
 				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex + ", recordCountPerPage="
-				+ recordCountPerPage + ", bdlistNo=" + bdlistNo + "]";
+				+ recordCountPerPage + ", bdlistNo=" + bdlistNo + ", memNo=" + memNo + "]";
 	}
 
 

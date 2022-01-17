@@ -69,11 +69,14 @@ public class CommuteController {
 		List<Map<String, Object>> clist=commuteService.selectAll(dateSearchVo);
 		logger.info("clist.size={}", clist.size());
 
+		Map<String, Object> hList=commuteService.selectHoliday(memNo);
+
 		//[3] totalPage
 		int totalRecord=commuteService.selectTotalRecord(dateSearchVo);
 		logger.info("totalRecord={}", totalRecord);
 		pagingInfo.setTotalRecord(totalRecord);
 
+		model.addAttribute("map", hList);
 		model.addAttribute("clist", clist);
 		model.addAttribute("pagingInfo", pagingInfo);
 

@@ -78,7 +78,6 @@ input#exampleCheck1\ chkbox {
 				alert('삭제하고 싶은 파일을 먼저 체크하세요');
 			}
 		});
-
 		$('#btMultiDown').click(function(){
 			var count=$('tbody input[type=checkbox]:checked').length;
 			if(count>0){
@@ -93,21 +92,20 @@ input#exampleCheck1\ chkbox {
 </script>
 
 	<!-- 페이징 처리를 위한 form 시작-->
-	<form name="frmPage" method="post" action="<c:url value='/webHard/webHardList'/>">
+	<form name="frmPage" method="post" action="<c:url value='/webHard/webHardComList'/>">
 		<input type="hidden" name="currentPage" id="currentPage">
 		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
-		<input type="hidden" name="memNo" value="${sessionScope.memNo }">
 	</form>
 	<!-- 페이징 처리를 위한 form 끝-->
 
 
-    <form name="frmList" method="post" action="<c:url value='/webHard/webHardList'/>">
+    <form name="frmList" method="post" action="<c:url value='/webHard/webHardComList'/>">
    	<!-- defaultPage -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">웹하드</h1>
-		<p class="mb-4">My WebHard.</p>
+        <h1 class="h3 mb-2 text-gray-800">사내 웹하드</h1>
+		<p class="mb-4">Company WebHard.</p>
 
 		<!-- 게시판 검색 -->
 		<div id='boardListSc'>
@@ -121,7 +119,7 @@ input#exampleCheck1\ chkbox {
            <!-- DataTales Example -->
            <div class="card shadow mb-4">
                <div class="card-header py-3">
-                   <h6 class="m-0 font-weight-bold text-primary f-left" >${memmap['MEM_NAME'] }님의 웹하드</h6><!-- 게시판 이름 -->
+                   <h6 class="m-0 font-weight-bold text-primary f-left" >사내 웹하드</h6><!-- 게시판 이름 -->
 					<div class="f-right">
 						<button type="button" class="btn btn-primary f-left istAdd" data-toggle="modal" data-target="#exampleList" id="btUpload">업로드</button>
 
@@ -196,7 +194,7 @@ input#exampleCheck1\ chkbox {
 		                                   	<input type="hidden"  value="${vo.fileName }" name="webHardItems[${idx}].fileName">
 	                                   </td>
 <%-- 	                                   </c:if> --%>
-	                                   <td>${memmap['MEM_NAME'] }</td>
+	                                   <td>${vo.memName }</td>
 	                                   <td>
 	                                   		<span>
 												<a href
@@ -293,12 +291,12 @@ input#exampleCheck1\ chkbox {
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
 			      <div class="modal-header m-list">
-			      	<h5 class="modal-title" id="exampleModalLabel">My Webhard</h5>
+			      	<h5 class="modal-title" id="exampleModalLabel">Company Webhard</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
-			        <form name="frm1"  method="post" enctype="multipart/form-data" action="<c:url value='/webHard/webHardWrite'/>">
+			        <form name="frm1"  method="post" enctype="multipart/form-data" action="<c:url value='/webHard/webHardComWrite'/>">
 			      <div class="modal-body">
 					  <div>
 					  	첨부할 파일을 선택하세요.

@@ -76,6 +76,11 @@
 		AND COM_INDATE < to_date(#{endDay})+1
 		]]>
 	</select>
+
+	<select id="selectHoliday" parameterType="int" resultType="map">
+		SELECT MEM_HOLIDAY, MEM_USEHOLIDAY FROM MEMBER
+		WHERE MEM_NO=#{memNo}
+	</select>
 </mapper>
 
 
