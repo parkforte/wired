@@ -84,13 +84,18 @@ public class EmplServiceImpl implements EmplService{
 	}
 
 	@Override
-	public List<Map<String, Object>> resignMember() {
-		return emplDao.resignMember();
+	public List<Map<String, Object>> resignMember(BSearchVO searchVo) {
+		return emplDao.resignMember(searchVo);
 	}
 
 	@Override
 	public int upBackMember(int memNo) {
 		return emplDao.upBackMember(memNo);
+	}
+
+	@Override
+	public int selectResignRecord(BSearchVO searchVo) {
+		return emplDao.selectResignRecord(searchVo);
 	}
 
 

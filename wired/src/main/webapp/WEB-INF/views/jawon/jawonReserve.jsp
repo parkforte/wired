@@ -11,16 +11,25 @@
 	width: 10%;
 	text-align: center;
 }
-#useRegdate{
-	float: left;
-	width: 10%;
+
+select#selRes {
+    width: 52%;
+    margin-bottom: 2.1%;
 }
-#returnRegdate{
-	width: 10%;
+input#startDay {
+    width: 52%;
 }
-#jawonTextarea{
-	width: 40%;
+input#endDay {
+	width: 52%;
+	margin-bottom: 2.1%;
 }
+#jawonTextarea {
+    width: 52%;
+}
+.resDiv{
+	width:50%;
+}
+
 </style>
 
 <!-- javaScript영역 -->
@@ -54,7 +63,7 @@ $(function () {
 					</ul>
 
 					<!-- reserve -->
-                    <div class="card shadow mb-4">
+                    <div class="card shadow mb-4 resDiv">
                         <div class="card-body" >
                             <div class="table-responsive" >
 									<select class="form-control" multiple="multiple" id="selRes" name="resNo">
