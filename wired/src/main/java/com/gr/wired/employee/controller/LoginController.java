@@ -46,9 +46,11 @@ public class LoginController {
 
 		String msg="로그인 처리 실패", url="/login";
 		int result=emplService.loginCheck(vo.getMemId(), vo.getMemPwd());
+
 		if(result==emplService.LOGIN_OK) {
 			EmplVO emplVo=emplService.selectByMemId(vo.getMemId());
-			logger.info("emplV={}",emplVo.getMemFlag());
+
+			logger.info("emplVo={}",emplVo.getMemFlag());
 			//[1] 세션에 아이디 저장
 			HttpSession session=request.getSession();
 			session.setAttribute("memId", vo.getMemId());

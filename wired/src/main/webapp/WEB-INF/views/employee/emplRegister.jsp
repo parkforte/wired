@@ -57,10 +57,30 @@ span {
 				alert('비밀번호가 일치하지 않습니다!');
 				$('#memPwd2').focus();
 				event.preventDefault();
+			}else if($('#memHp2').val().length<1){
+				alert('휴대폰 번호를 입력해주세요');
+				$('#memHp2').focus();
+				event.preventDefault();
+			}else if($('#memHp3').val().length<1){
+				alert('휴대폰 번호를 입력해주세요');
+				$('#memHp3').focus();
+				event.preventDefault();
 			}else if(!validate_phone($('#memHp2').val()) ||
 					!validate_phone($('#memHp3').val()) ){
 				alert('전화번호는 숫자만 가능합니다.');
 				$('#memHp2').focus();
+				event.preventDefault();
+			}else if($('select[name=deptNo]').val()==0){
+				alert('부서를 선택해주세요');
+				$('#deptNo').focus();
+				event.preventDefault();
+			}else if($('select[name=posNo]').val()==0){
+				alert('직급을 선택해주세요');
+				$('#posNo').focus();
+				event.preventDefault();
+			}else if($('select[name=ranksNo]').val()==0){
+				alert('권한을 선택해주세요');
+				$('#ranksNo').focus();
 				event.preventDefault();
 			}
 
@@ -139,7 +159,7 @@ span {
                                 	<!-- 부서,직급 -->
 	                            	<div class="form-group row rank-margin">
 	                                <select id="inputState deptNo" class="form-control  c-size half-style" name="deptNo" >
-								        <option>부서</option>
+								        <option value="0">부서</option>
 								        <option value="1">인사팀</option>
 								        <option value="2">재무팀</option>
 								        <option value="3">영업1팀</option>
@@ -154,7 +174,7 @@ span {
 								    </select>
 	                                <span></span>
 	                                <select id="inputState posNo" class="form-control  c-size half-style" name="posNo" >
-								        <option>직급</option>
+								        <option value="0">직급</option>
 								        <option value="1">사원</option>
 								        <option value="2">주임</option>
 								        <option value="3">대리</option>
@@ -166,7 +186,7 @@ span {
                                 	<!-- 권한 -->
 	                            	<div class="form-group">
                                     <select id="inputState ranksNo" class="form-control c-size rank-margin" name="ranksNo">
-								        <option>권한</option>
+								        <option value="0">권한</option>
 								        <option value="1">일반</option>
 								        <option value="2">팀장이상</option>
 								        <option value="3">관리자</option>

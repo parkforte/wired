@@ -33,6 +33,12 @@ $(function() {
 			});
 		});
 	});
+	$('.btn-loc').each(function(index,item){
+		$(this).click(function(){
+			var res=$(this).val();
+			window.open("/wired/jawon/reserveLocation?resNo="+res,"/", "left=50, top=20, width=800, height=400, scrollbars=yes,resizable=yes");
+		});
+	});
 });
 
 </script>
@@ -97,6 +103,7 @@ $(function() {
                                    <th>자원정보</th>
                                    <th>기간</th>
                                    <th>예약정보</th>
+                                   <th>예약위치</th>
                                    <th>부서</th>
                                </tr>
                            </thead>
@@ -114,6 +121,11 @@ $(function() {
                                    <td>
                                    <fmt:formatDate value="${map['USE_REGDATE'] }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${map['RETURN_REGDATE'] }" pattern="yyyy-MM-dd"/></td>
                                    <td>${map['RESERV_CONTENT'] }</td>
+                                   <td>
+                                   <input type="text" value="${map['RES_NO'] }">
+                                   ${map['RES_LOCATION'] }<button type="button" class="btn btn-outline-info btn-loc"
+                                   		value="${map['RES_NO'] }" >위치보기</button>
+                                   </td>
                                    <td>${map['DEPT_NAME'] }</td>
                                </tr>
                         </c:forEach>

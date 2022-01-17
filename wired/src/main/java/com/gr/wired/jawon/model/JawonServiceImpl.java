@@ -75,5 +75,10 @@ public class JawonServiceImpl implements JawonService{
 		return jawonDao.updateJawon(jawonVo);
 	}
 
+	@Override
+	public JawonVO selectJawonLoc(int resNo) {
+		return jawonDao.selectJawonLoc(resNo);
+	}
+
 
 }

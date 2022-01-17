@@ -65,6 +65,13 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<!-- STMP 메일 전송 관련 라이브러리 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+			<version>2.2.8.RELEASE</version>
+		</dependency>
+
 	</dependencies>
 
 

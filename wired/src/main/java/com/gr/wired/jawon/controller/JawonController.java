@@ -94,9 +94,13 @@ public class JawonController {
 	public String jawonRes_get(@RequestParam(defaultValue = "0") int typeNo, Model model) {
 		logger.info("자원예약 화면, 파라미터 typeNo={}",typeNo);
 
-		List<Map<String, Object>> list=jawonService.selectByType(typeNo);
-		logger.info("예약 화면 처리, list.size={}", list.size());
+		List<ResTypeVO> typeList = jawonService.selectType();
+		logger.info("예약 화면 처리1, typeList.size={}", typeList.size());
 
+		List<Map<String, Object>> list=jawonService.selectByType(typeNo);
+		logger.info("예약 화면 처리2, list.size={}", list.size());
+
+		model.addAttribute("typeList", typeList);
 		model.addAttribute("rList", list);
 
 		return "jawon/jawonReserve";
@@ -198,6 +202,24 @@ public class JawonController {
 		model.addAttribute("url", url);
 
 		return "common/message";
+	}
+
+	@RequestMapping("/jawonMapBak")
+	public void jawonMap() {
+		logger.info("위치 등록 화면");
+	}
+
+
+	@RequestMapping("/reserveLocation")
+	public String jawonLoc(@RequestParam(defaultValue = "0") int resNo, Model model) {
+		logger.info("자원 예약 위치, 파라미터 resNo={}", resNo);
+
+		JawonVO jawonVo=jawonService.selectJawonLoc(resNo);
+		logger.info("자원 예약 위치 결과, jawonVo={}", jawonVo);
+
+		model.addAttribute("jawonVo", jawonVo);
+
+		return "jawon/jawonMapView";
 	}
 
 }
