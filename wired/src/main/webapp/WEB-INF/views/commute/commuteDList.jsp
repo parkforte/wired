@@ -82,9 +82,6 @@
           <li class="nav-item">
             <a class="nav-link" data-value="3" id="a-hover" href="<c:url value='/commute/commuteDList'/>">부서근태조회</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-value="3" id="a-hover" href="<c:url value='/commute/commuteGraph'/>">부서근태통계</a>
-          </li>
         </ul>
 		 </div>
         <form name="frm1" method="post" action="<c:url value='/commute/commuteDList'/>" >
@@ -109,14 +106,6 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-							<tr>
-								<th width="30%">남은연차</th>
-								<th width="20%">15</th>
-								<th width="30%">사용연차</th>
-								<th width="20%">1</th>
-							</tr>
-					</table>
 					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<thead>
 							<tr>

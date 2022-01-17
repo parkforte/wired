@@ -54,11 +54,18 @@
 				event.preventDefault();
 			}
 		});
+
+		$('.detailbt').each(function (index, item) {
+			$(this).click(function () {
+				alert("게시판 삭제!");
+				location.href="<c:url value='/bdList/bdListmanagement?bdlistNo='/>"+$(this).val();
+			});
+		});
+
+
 	});
 
 </script>
-
-
 
                <!-- defaultPage -->
                 <div class="container-fluid" >
@@ -106,35 +113,17 @@
 				                                   <td>${map['BDLIST_NAME'] }</td>
 				                                   <td>${map['RANKS_NAME'] }</td>
 				                                   <td>
-				                                   		<button type="button" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash"></i>삭제</button>
+				                                   		<button type="button" id="btDelete" class="btn btn-danger f-left detailbt" data-toggle="modal" data-target="#exampleModal" value="${map['BDLIST_NO'] }"><i class="bi bi-trash"></i>삭제</button>
 				                                   </td>
-				                                   <!-- Modal -->
-													<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													  <div class="modal-dialog modal-dialog-centered">
-													    <div class="modal-content">
-													      <div class="modal-header">
-													        <h5 class="modal-title" id="exampleModalLabel">게시판 삭제</h5>
-													        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													          <span aria-hidden="true">&times;</span>
-													        </button>
-													      </div>
-													      <div class="modal-body">
-													       	${map['BDLIST_NAME'] }게시판을 삭제 하시겠습니까?
-													      </div>
-													      <div class="modal-footer">
-													        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-													        <button type="button" class="btn btn-danger"
-													        	onclick="location.href='<c:url value="/bdList/bdListmanagement?bdlistNo=${map['BDLIST_NO'] }"/>'">Delete</button>
-													      </div>
-													    </div>
-													  </div>
-													</div>
+											<!-- 반복 끝 -->
+
 				                               </tr>
 				                           </c:forEach>
 											<!-- 반복 끝 -->
 
 			                           </tbody>
 			                       </table>
+
 			                       <nav class="f-right" aria-label="...">
 			                       		<!-- 페이지 번호추가 -->
 										<ul class="pagination">

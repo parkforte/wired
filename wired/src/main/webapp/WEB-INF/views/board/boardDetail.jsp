@@ -130,8 +130,8 @@ button#btReply {
 								      </div>
 								      <form name="frmDelete" method="post" action='<c:url value="/board/boardDelete"/>'>
 									      <div class="modal-footer">
-											<input type="text" name="boardNo" value="${param.boardNo}">
-											<input type="text" name="bdlistNo" value="${boardVo.bdlistNo}">
+											<input type="hidden" name="boardNo" value="${param.boardNo}">
+											<input type="hidden" name="bdlistNo" value="${boardVo.bdlistNo}">
 									        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 									        <button type="submit" class="btn btn-primary">Delete</button>
 									      </div>

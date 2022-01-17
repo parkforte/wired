@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.gr.wired.webHard.model.WebHardDAO">
+	<sql id="searchWhere">
+		<if test="searchKeyword!=null and searchKeyword!=''">
+	       	AND BOARD_TITLE LIKE '%' || #{searchKeyword} || '%'
+		</if>
+	</sql>
+
+	<insert id="insertMyFile" parameterType="webHardVo">
+		<selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
+			select WEBHARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+			INSERT INTO WEBHARDFILE(FILE_NO, MEM_NO, FILE_NAME, FILE_ORIGINALFILENAME, FILE_FILESIZE)
+			VALUES(#{fileNo}, #{memNo}, #{fileName}, #{fileOriginalfilename}, #{fileFilesize})
+	</insert>
+
+	<insert id="insertFile" parameterType="webHardVo">
+		<selectKey keyProperty="fileNo" resultType="int" order="BEFORE">
+			select WEBHARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+			INSERT INTO WEBHARDFILE(FILE_NO, WEB_NO, MEM_NO, FILE_NAME, FILE_ORIGINALFILENAME, FILE_FILESIZE)
+			VALUES(#{fileNo}, 1, #{memNo},#{fileName}, #{fileOriginalfilename}, #{fileFilesize})
+	</insert>
+
+	<select id="selectByMemNo" parameterType="int" resultType="map">
+		SELECT * FROM MEMBER
+		WHERE MEM_NO=#{memNo}
+	</select>
+
+	<select id="selectFile" parameterType="searchVo" resultType="webHardVo">
+		SELECT *
+		from
+		(
+			select rownum AS RNUM, A.*
+			from
+			(
+				SELECT * FROM WEBHARDFILE
+				WHERE MEM_NO=#{memNo} AND WEB_NO IS NULL <include refid="searchWhere"></include>
+				ORDER BY FILE_NO DESC
+			)A
+		)
+		<![CDATA[
+		WHERE RNUM>#{firstRecordIndex}
+			AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+
+	<select id="allFile" parameterType="searchVo" resultType="webHardVo">
+		SELECT *
+		from
+		(
+			select rownum AS RNUM, A.*
+			from
+			(
+				SELECT w.*,(SELECT MEM_NAME FROM MEMBER M WHERE M.MEM_NO=W.MEM_NO)MEM_NAME
+				FROM
+				WEBHARDFILE W
+				WHERE WEB_NO=1 <include refid="searchWhere"></include>
+				ORDER BY FILE_NO DESC
+			)A
+		)
+		<![CDATA[
+		WHERE RNUM>#{firstRecordIndex}
+			AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+
+	<select id="myTotal" resultType="int" parameterType="searchVo">
+		SELECT COUNT(*) FROM WEBHARDFILE
+		WHERE MEM_NO=#{memNo} AND WEB_NO IS NULL <include refid="searchWhere"></include>
+	</select>
+
+	<select id="comTotal" resultType="int" parameterType="searchVo">
+		SELECT COUNT(*) FROM WEBHARDFILE
+		WHERE WEB_NO=1 <include refid="searchWhere"></include>
+	</select>
+
+	<update id="updateDownCount" parameterType="int">
+		UPDATE WEBHARDFILE
+		SET FILE_DOWNCOUNT=FILE_DOWNCOUNT+1
+		WHERE FILE_NO=#{fileNo}
+	</update>
+
+	<delete id="deleteWebHard" parameterType="int">
+		DELETE FROM WEBHARDFILE
+		WHERE FILE_NO=#{fileNo}
+	</delete>
+
+
+
+
+</mapper>

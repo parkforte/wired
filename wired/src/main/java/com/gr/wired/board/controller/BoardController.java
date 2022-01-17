@@ -206,7 +206,7 @@ public class BoardController {
 		logger.info("파일다운로드 페이지, 파라미터 boardNo={}, boardFilename={}", boardNo, boardFilename);
 
 		int cnt=boardService.updateDownCount(boardNo);
-		logger.info("다운로드 수 등가 결과 boardNo={}", boardNo);
+		logger.info("다운로드 수 등가 결과 cnt={}", cnt);
 
 		String upPath = fileUploadUtil.getUploadPath(ConstUtil.UPLOAD_FILE_FLAG, request);
 

@@ -90,5 +90,6 @@ AS
     JOIN DEPARTMENT D
     ON D.DEPT_NO=M.DEPT_NO
 );
+commit;
 
 

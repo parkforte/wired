@@ -18,5 +18,6 @@ public interface CommuteDAO {
 	int selectDeNo(int memNo);
 	List<Map<String, Object>> selectAll(DateSearchVO dateSearchVo);
 	int selectTotalRecord(DateSearchVO dateSearchVo);
+	Map<String, Object> selectHoliday(int memNo);
 
 }
