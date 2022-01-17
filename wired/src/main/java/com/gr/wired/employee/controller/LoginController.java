@@ -100,13 +100,12 @@ public class LoginController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		logger.info("로그아웃 처리");
 
 		session.removeAttribute("memId");
 		session.removeAttribute("memName");
 		session.removeAttribute("ranksNo");
 		session.removeAttribute("memNo");
 
-		return "redirect:/index";
+		return "redirect:/login";
 	}
 }

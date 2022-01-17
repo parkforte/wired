@@ -119,7 +119,7 @@ span{
 				alert('주소를 입력해주세요.');
 				$('#memAddressdetail').focus();
 				event.preventDefault();
-			}else if(isCertification==false){
+			}else if($('#memFlag').val()=='N'){
 				alert('이메일 인증을 해주세요');
 				$('#memEmail1').focus();
 				event.preventDefault();
@@ -176,10 +176,9 @@ span{
 			}
 		});
 
-
-		$('#btZipcode').submit(function(){
+		$('#btZipcode').click(function(){
 			window.open(
-				"${pageContext.request.contextPath}/zipcode/zipcode",
+				"/wired/zipcode/zipcode",
 				"zipWin",
 				"left=50, top=20, width=500, height=500, scrollbars=yes,resizable=yes");
 		});
@@ -219,7 +218,7 @@ span{
 								<label for="id">아이디</label>
 								<input type="text"
 									 class="form-control form-control-user c-size"
-									id="memId" name="memId" ReadOnly value="${map['MEM_ID'] }">
+									id="memId" name="memId" value="${map['MEM_ID'] }">
 							</div>
 							<!-- 비밀번호 -->
 							<div class="form-group">
@@ -380,7 +379,7 @@ span{
 							<div class="form-group">
 								<input type="hidden"
 									 class="form-control form-control-user c-size"
-									id="memFlag" name="memFlag" ReadOnly value="Y">
+									id="memFlag" name="memFlag" ReadOnly value="${map['MEM_FLAG'] }">
 							</div>
 							<!-- button -->
 							<div class="form-group c-size" style="text-align: center;">
