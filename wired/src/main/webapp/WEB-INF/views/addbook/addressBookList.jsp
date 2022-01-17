@@ -51,8 +51,13 @@ span {
 			}
 		});
 	});
-
+	function boardList(curPage) {
+		$('#currentPage').val(curPage);
+		$('form[name=frmPage]').submit();
+	}
 </script>
+
+
 <!-- 전자결재HOME -->
 <div class="container-fluid">
 	<!-- Page Heading -->
@@ -62,23 +67,14 @@ span {
 			<ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll"
 				style="max-height: 100px;">
 			</ul>
-			<form class="d-flex">
-				<input class="form-control mr-2" type="search" placeholder="이름으로 검색"
-					aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
-			</form>
 		</div>
 	</nav>
 	<div>
 		<!-- title1 -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-<<<<<<< HEAD
-				<h6 class="m-0 font-weight-bold text-primary">${sessionScope.memName }님의 개인 주소록</h6>
-=======
 				<h6 class="m-0 font-weight-bold text-primary">${sessionScope.memName }님의
 					개인 주소록</h6>
->>>>>>> branch 'main' of https://github.com/parkforte/wired.git
 				<nav class="f-right" aria-label="...">
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='/wired/addbook/addressBookRegister'">추가</button>
@@ -105,75 +101,96 @@ span {
 									<td colspan="6">데이터가 없습니다.</td>
 								</tr>
 							</c:if>
-							<c:if test="${!empty addbookList }">
-								<!-- 리스트 반복문 시작 -->
-								<c:forEach var="map" items="${addbookList }">
-									<tr>
 
-										<td>${map['ADDRBOOK_NAME'] }</td>
-										<td>${map['ADDRBOOK_TEL'] }</td>
-										<td>${map['ADDRBOOK_EMAIL'] }</td>
-										<td>${map['ADDRBOOK_COMNAME'] }</td>
-										<td>${map['ADDRBOOK_DEPT'] }</td>
-										<td>${map['ADDRBOOK_RANK'] }</td>
+							<!-- 리스트 반복문 시작 -->
+							<c:forEach var="map" items="${addbookList }">
+								<tr>
+									<c:if test="${!empty addbookList }">
+										<c:if test="${sessionScope.memNo == map['MEM_NO']}">
+											<td>${map['ADDRBOOK_NAME'] }</td>
+											<td>${map['ADDRBOOK_TEL'] }</td>
+											<td>${map['ADDRBOOK_EMAIL'] }</td>
+											<td>${map['ADDRBOOK_COMNAME'] }</td>
+											<td>${map['ADDRBOOK_DEPT'] }</td>
+											<td>${map['ADDRBOOK_RANK'] }</td>
 
-										<td><button type="button" class="btn btn-success"
-												id="btEdit"
-												onclick="location.href='<c:url value="/addbook/addressBookEdit?addrbookNo=${map['ADDRBOOK_NO'] }"/>'">수정</button>
-											<button type="button" class="btn btn-danger" id="btDel"
-												onclick="location.href='<c:url value="/addbook/addressBookDelete?addrbookNo=${map['ADDRBOOK_NO'] }"/>'">삭제</button></td>
-									</tr>
-								</c:forEach>
-							</c:if>
+											<td><button type="button" class="btn btn-success"
+													id="btEdit"
+													onclick="location.href='<c:url value="/addbook/addressBookEdit?addrbookNo=${map['ADDRBOOK_NO'] }"/>'">수정</button>
+												<button type="button" class="btn btn-danger" id="btDel"
+													onclick="location.href='<c:url value="/addbook/addressBookDelete?addrbookNo=${map['ADDRBOOK_NO'] }"/>'">삭제</button></td>
+										</c:if>
+									</c:if>
+								</tr>
+							</c:forEach>
+
 							<!-- 반복 끝 -->
 						</tbody>
 					</table>
-					<!-- 페이징 1,2,3,4,5, -->
-					<div class="col-sm-12 col-md-7">
-						<nav class="f-right" aria-label="...">
-							<!-- 페이지 번호추가 -->
-							<ul class="pagination">
+					<!-- 페이징 -->
+					<div class="row">
+						<div class="col-sm-12 col-md-5">
+							<div class="dataTables_info" id="dataTables_info" role="status">
+								Showing ${pagingInfo.firstPage } to ${pagingInfo.currentPage }
+								of ${pagingInfo.totalPage } entries</div>
 
-								<li
-									class="page-item
+						</div>
+
+						<!-- 페이징 1,2,3,4,5, -->
+						<div class="col-sm-12 col-md-7">
+							<nav class="f-right" aria-label="...">
+								<!-- 페이지 번호추가 -->
+								<ul class="pagination">
+
+									<li
+										class="page-item
 										<c:if test="${pagingInfo.firstPage==1 }">
 											disabled
-										</c:if>"><a class="page-link" href="#"
-										onclick="addressBookList(${pagingInfo.firstPage-1})">Previous</a></li>
+										</c:if>
+										"><a
+										class="page-link"
+										href="<c:url value='addressBookList?currentPage=${pagingInfo.firstPage-1}'/>">
+											Previous</a></li>
 
-								<!-- [1][2][3][4][5][6][7][8][9][10] -->
-								<c:forEach var="i" begin="${pagingInfo.firstPage }"
-									end="${pagingInfo.lastPage }">
+									<!-- [1][2][3][4][5][6][7][8][9][10] -->
+									<c:forEach var="i" begin="${pagingInfo.firstPage }"
+										end="${pagingInfo.lastPage }">
+
+
+										<li
+											<c:if test="${i==pagingInfo.currentPage }">
+												class="page-item active" aria-current="page"
+											</c:if>
+											<c:if test="${i!=pagingInfo.currentPage }">
+												class="page-item"
+											</c:if>><a
+											class="page-link"
+											href="<c:url value='addressBookList?currentPage=${i}'/>">${i }</a></li>
+									</c:forEach>
+
 
 
 									<li
-										<c:if test="${i==pagingInfo.currentPage }">
-												class="page-item active" aria-current="page"
-											</c:if>
-										<c:if test="${i!=pagingInfo.currentPage }">
-												class="page-item"
-											</c:if>><a
-										class="page-link" href="#" onclick="addressBookList(${i })">${i }</a></li>
-								</c:forEach>
-
-								<li
-									class="page-item
+										class="page-item
 										<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
 											disabled
 										</c:if>
 										"><a
-									class="page-link" href="#"
-									onclick="addressBookList(${pagingInfo.lastPage+1})">Next</a></li>
-								<!-- 페이지 번호끝 -->
-							</ul>
-						</nav>
+										class="page-link"
+										href="<c:url value='addressBookList?currentPage=${pagingInfo.lastPage+1}'/>">Next</a></li>
+									<!-- 페이지 번호끝 -->
+								</ul>
+							</nav>
+						</div>
+						<input type="hidden" value="${pagingInfo.lastPage }" />
 					</div>
-					<input type="text" value="${pagingInfo.lastPage }" />
-
+					<!-- 페이징 -->
 				</div>
-			</div>
-		</div>
 
+				<input type="hidden" value="${pagingInfo.lastPage }" />
+			</div>
+
+		</div>
 	</div>
 </div>
 <!-- /.container-fluid -->

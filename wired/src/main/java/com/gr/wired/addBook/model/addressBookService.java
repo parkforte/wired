@@ -20,6 +20,5 @@ public interface addressBookService {
 	int updateAddressBook(addressBookVO addressBookVo);
 	addressBookVO selectByMemId(String memId);
 	int deleteAddressBook(int addrbookNo);
-	
 }
 

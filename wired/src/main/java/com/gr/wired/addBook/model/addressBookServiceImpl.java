@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gr.wired.common.SearchVO;
-import com.gr.wired.employee.model.EmplDAO;
 
 @Service
 public class addressBookServiceImpl implements addressBookService{
@@ -64,6 +63,7 @@ public class addressBookServiceImpl implements addressBookService{
 	public addressBookVO selectByAddNo(int addrbookNo) {
 		return addressBookDao.selectByAddNo(addrbookNo);
 	}
+
 
 
 

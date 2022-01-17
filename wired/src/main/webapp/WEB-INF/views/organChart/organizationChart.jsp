@@ -41,17 +41,12 @@
 <!-- 전자결재HOME -->
 <div class="container-fluid">
 	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">주소록</h1>
+	<h1 class="h3 mb-2 text-gray-800">조직도</h1>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="collapse navbar-collapse" id="navbarScroll">
 			<ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll"
 				style="max-height: 100px;">
 			</ul>
-			<form class="d-flex">
-				<input class="form-control mr-2" type="search" placeholder="부서별 검색"
-					aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
-			</form>
 		</div>
 	</nav>
 
@@ -73,7 +68,8 @@
 		</div>
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">백엔드 1팀</h6>
+				<h6 class="m-0 font-weight-bold text-primary" >${param.deptName }</h6>
+				
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
@@ -110,18 +106,16 @@
 								<!-- 반복 끝 -->
 							</tbody>
 					</table>
-					<nav class="f-right" aria-label="...">
-						<ul class="pagination">
-							<li class="page-item disabled"><a class="page-link">Previous</a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item active" aria-current="page"><a
-								class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a>
-							</li>
-						</ul>
-					</nav>
+					<!-- 페이징 -->
+					<div class="row">
+						<div class="col-sm-12 col-md-5">
+							<div class="dataTables_info" id="dataTables_info" role="status">
+								Showing ${pagingInfo.firstPage } to ${pagingInfo.currentPage }
+								of ${pagingInfo.totalPage } entries</div>
+
+						</div>
+
+						
 				</div>
 			</div>
 		</div>
