@@ -19,4 +19,5 @@ public interface JawonDAO {
 	int deleteJawonType(int typeNo);
 	int insertJawon(JawonVO jawonVo);
 	int updateJawon(JawonVO jawonVo);
+	JawonVO selectJawonLoc(int resNo);
 }

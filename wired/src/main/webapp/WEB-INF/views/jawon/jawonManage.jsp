@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 
+
 <!-- http://localhost:9091/wired/jawon/jawonManage -->
 
 <!-- css영역 -->
@@ -85,18 +86,31 @@ $(function() {
 			$('#exampleEdit').find('input[name=typeName]').val($(this).parents('#dataTable').find('.typeName').text());
 			$('#exampleEdit').find('input[name=resName]').val($(this).parents('tr').find('td:eq(0)').text());
 			$('#exampleEdit').find('input[name=resLocation]').val($(this).parents('tr').find('td:eq(1)').text());
+// 			$('#exampleEdit').find('input[name=resLat]').val($(this).siblings('td:eq(0)').text());
 
 		});
 	});
 	$('.remove').each(function(index,item){
 		$(this).on("click",function(){
 			$('#exampleDelete').find('input[name=resNo]').val($(this).attr('value'));
+// 			$('#exampleDelete').find('#m-del').text($(this).prevAll().('input[name=resLat]').val());
 			$('#exampleDelete').find('#m-del').text($(this).parents('tr').find('td:eq(0)').text());
 		});
 	});
-	alert(${res}.val());
+	$('.mapOpen').click(function(){
+		window.open("/wired/jawon/jawonMapBak","manageMap", "left=50, top=20, width=800, height=500, scrollbars=yes,resizable=yes");
+	});
 
 });
+// var openWin;
+// function openMap(){
+// 	window.name="manageForm";
+// 	openWin = window.open("/wired/jawon/jawonMap","mapForm", "_blank");
+// }
+
+// function setMapText(){
+// 	openWin.document.getElementById("cInput").value = document.getElementById("pInput").value;
+// }
 
 
 
@@ -184,7 +198,8 @@ $(function() {
 	                                   <td id="resLocation">${map['RES_LOCATION'] }</td>
 	                                   <td><button type="button" class="btn btn-warning">사용중</button></td>
 	                                   <td>
-	                                   		<input type="text" name="resName" value="${map['RES_NAME'] }">
+	                                   		<input type="text" name="resLat" value="${map['RES_LAT'] }">
+	                                   		<input type="text" name="resLng" value="${map['RES_LNG'] }">
 	                                   		<a href="#" id="a-hover" class="edit" value="${map['RES_NO'] }"
 	                                   				data-toggle="modal" data-target="#exampleEdit">수정</a>&nbsp;
 	                                   		<a href="#" id="a-hover" class="remove" value="${map['RES_NO'] }"
@@ -296,11 +311,20 @@ $(function() {
 					    <label for="exampleInputEmail1">자원정보</label>
 					    <input type="text" class="form-control" id="resName" name="resName">
 					  </div>
+<%-- 					  <%@ include file="../inc/jawonMap.jsp" %> --%>
 					  <div class="form-group">
 					    <label for="exampleInputEmail1">자원위치</label>
 					    <input type="text" class="form-control" id="resLocation"
 					    	aria-describedby="emailHelp" name="resLocation">
-					    <small id="emailHelp" class="form-text text-muted">위치를 지정해주세요.</small>
+					    <small id="emailHelp" class="form-text text-muted">위치를 지정해주세요.<a id="a-hover" class="mapOpen">click</a></small>
+					  </div>
+					  <div class="form-group">
+					  <label for="resLat">위도</label>
+					    <input type="text" class="form-control" id="resLat" name="resLat" class="setresLat">
+					  </div>
+					  <div class="form-group">
+					  <label for="resLng">경도</label>
+					    <input type="text" class="form-control" id="resLng" name="resLng" class="setresLng">
 					  </div>
 			      </div>
 			      <div class="modal-footer">
@@ -335,7 +359,15 @@ $(function() {
 					  <div class="form-group">
 					    <label for="jawonLoc">자원위치</label>
 					    <input type="text" class="form-control" id="resLocation" name="resLocation" aria-describedby="emailHelp">
-					    <small id="emailHelp" class="form-text text-muted">위치를 지정해주세요.</small>
+					    <small id="emailHelp" class="form-text text-muted">위치를 지정해주세요.<a id="a-hover" class="mapOpen">click</a></small>
+					  </div>
+					  <div class="form-group">
+					  <label for="resLat">위도</label>
+					    <input type="text" class="form-control" id="resLat" name="resLat">
+					  </div>
+					  <div class="form-group">
+					  <label for="resLng">경도</label>
+					    <input type="text" class="form-control" id="resLng" name="resLng">
 					  </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
