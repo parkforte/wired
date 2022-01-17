@@ -197,7 +197,10 @@ $(function(){
     </div>
 </form>
 
-    <!-- Modal -->
+
+    <!-- /.container-fluid -->
+<!-- End of Main Content -->
+<!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
@@ -217,9 +220,5 @@ $(function(){
 			    </div>
 			  </div>
 			</div>
-    <!-- /.container-fluid -->
-     </div>
-
-<!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
 

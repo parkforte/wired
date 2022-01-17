@@ -9,8 +9,8 @@ public interface SignatureConst {
 
 	//서명업로드 페이지
 	String SIGN_FILE_UPLOAD_PATH="signature";
-	String SIGN_FILE_UPLOAD_PATH_TEST="C:\\Users\\hello\\git\\wired\\wired\\src\\main\\webapp\\upload\\signature";
-//	String SIGN_FILE_UPLOAD_PATH_TEST="C:\\Users\\aaoo1\\git\\wired_ms\\wired\\wired\\src\\main\\webapp\\upload\\signature";
+//	String SIGN_FILE_UPLOAD_PATH_TEST="C:\\Users\\hello\\git\\wired\\wired\\src\\main\\webapp\\upload\\signature";
+	String SIGN_FILE_UPLOAD_PATH_TEST="C:\\Users\\aaoo1\\git\\wired_ms\\wired\\wired\\src\\main\\webapp\\upload\\signature";
 
 
 

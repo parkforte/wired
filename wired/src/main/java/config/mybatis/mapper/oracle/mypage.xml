@@ -4,13 +4,13 @@
 
 <mapper namespace="com.gr.wired.mypage.model.MypageDAO">
 
-	<select id="selectByMemId" parameterType="string" resultType="map">
+	<select id="selectByMemId" parameterType="int" resultType="map">
 		SELECT DISTINCT *
 		FROM MEMBER M JOIN DEPARTMENT D
 		ON M.DEPT_NO=D.DEPT_NO
 		JOIN POSITION P
 		ON M.POS_NO=P.POS_NO
-		WHERE MEM_ID=#{memId}
+		WHERE MEM_NO=#{memNo}
 	</select>
 
 	<update id="updateMember" parameterType="emplVo">
@@ -18,6 +18,6 @@
 		SET MEM_ID=#{memId},MEM_PWD=#{memPwd}, MEM_HP1=#{memHp1}, MEM_HP2=#{memHp2}, MEM_HP3=#{memHp3},
 			MEM_EMAIL1=#{memEmail1}, MEM_EMAIL2=#{memEmail2},
 			MEM_ZIPCODE=#{memZipcode}, MEM_ADDRESS=#{memAddress}, MEM_ADDRESSDETAIL=#{memAddressdetail}, MEM_FLAG=#{memFlag}
-		WHERE MEM_ID=#{memId}
+		WHERE MEM_NO=#{memNo}
 	</update>
 </mapper>
