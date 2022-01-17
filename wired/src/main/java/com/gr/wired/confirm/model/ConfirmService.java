@@ -3,6 +3,8 @@ package com.gr.wired.confirm.model;
 import java.util.List;
 import java.util.Map;
 
+import com.gr.wired.common.SearchVO;
+
 public interface ConfirmService {
 	int insertPaper(ConfirmVO confirmVo);
 	ConfirmVO selectTempByMemNo(int memNo);
@@ -15,4 +17,7 @@ public interface ConfirmService {
 	int countState2(int memNo);
 	int countState3(int memNo);
 	int countState4(int memNo);
+	List<ConfirmVO> selectAll(ConfirmVO confirmVo);
+	int selectTotalRecord(ConfirmVO confirmVo);
+	ConfirmVO selectByCfNo(int cfNo);
 }
