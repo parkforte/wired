@@ -2,10 +2,11 @@ package com.gr.wired.confirm.model;
 
 import java.sql.Timestamp;
 
+import com.gr.wired.common.SearchVO;
 import com.gr.wired.docform.model.DocformVO;
 import com.gr.wired.employee.model.EmplVO;
 
-public class ConfirmVO {
+public class ConfirmVO extends SearchVO {
 
 	private int cfNo;
 	private int formNo;

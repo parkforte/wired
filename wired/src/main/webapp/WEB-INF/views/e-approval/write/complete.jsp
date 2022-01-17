@@ -210,7 +210,6 @@
 	            <div><i class="fas fa-birthday-cake"></i></div> 상신완료
 	        </li>
 	    </ul>
-	    <h5 class="text-center"><b>문서를 상신하였습니다.</b></h5>
 	</div>
 
 
@@ -218,7 +217,7 @@
 		<div class="card shadow mb-4">
 			<div class="card-header py-3 ">
 				<div class="setW20 f-left">
-					<h6 class="m-0 font-weight-bold text-primary">문서작성</h6>
+					<h6 class="m-0 font-weight-bold text-primary">상신완료</h6>
 				</div>
 			</div>
 			<div class="card-body">
@@ -226,10 +225,15 @@
 			<div class="card">
              <div class="text-right cross"> </div>
              <div class="card-body text-center"> <img src="https://i.imgur.com/HGAvgxi.png">
-                 <p>문서를 PDF로 출력하시거나 알림메일도 송신 가능합니다.</p>
+                 <p>문서를 상신완료하였습니다.</p>
+                 <a href="<c:url value='/e-approval/write/detail?cfNo=${cfNo }'/>">
                  <button type="button" class="btn btn-primary btn-lg btn-block setW20 margin0">문서상세보기</button>
-				<button type="button" class="btn btn-secondary btn-lg btn-block setW20 margin0">알림메일 보내기</button>
-                 <button type="button" class="btn btn-primary btn-lg btn-block setW20 margin0">PDF출력하기</button>
+                 </a><br>
+                 <a href="<c:url value='/e-approval/mainpage'/>">
+                 <button type="button" class="btn btn-secondary btn-lg btn-block setW20 margin0">전자결재Home</button>
+                 </a>
+				<!-- <button type="button" class="btn btn-secondary btn-lg btn-block setW20 margin0">알림메일 보내기</button>
+                 <button type="button" class="btn btn-primary btn-lg btn-block setW20 margin0">PDF출력하기</button> -->
              </div>
        		  </div>
 

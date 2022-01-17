@@ -83,7 +83,7 @@
 											</div>
 										</div>
 										<div class="modal-footer">
-											<input type="text" name="lineOrder" value="0">
+											<input type="hidden" name="lineOrder" value="0">
 											<button type="button" class="btn btn-secondary"
 												data-dismiss="modal">취소</button>
 											<button type="submit" class="btn btn-primary">등록</button>

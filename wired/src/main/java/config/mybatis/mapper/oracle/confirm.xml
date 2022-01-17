@@ -67,4 +67,36 @@
 		WHERE CF_STATE=4
 		AND MEM_NO=#{memNo}
 	</select>
+		<select id="selectAll" parameterType="confirmVo" resultType="confirmVo">
+		SELECT *
+		FROM
+		(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM
+		    (
+		        SELECT * FROM CONFIRM
+		        WHERE MEM_NO=#{memNo}
+		        <include refid="searchWhere"></include>
+		        ORDER BY CF_NO DESC
+		    )A
+		)
+		<![CDATA[
+		WHERE RNUM>#{firstRecordIndex}
+			AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+
+	<select id="selectTotalRecord" parameterType="confirmVo" resultType="int">
+		SELECT COUNT(*) FROM CONFIRM
+		WHERE MEM_NO=#{memNo}
+		<include refid="searchWhere"></include>
+	</select>
+	<sql id="searchWhere">
+		<if test="searchKeyword!=null and searchKeyword!=''">
+	       	AND CF_TITLE LIKE '%' || #{searchKeyword} || '%'
+		</if>
+	</sql>
+	<select id="selectByCfNo" parameterType="int" resultType="confirmVo">
+		SELECT * FROM CONFIRM
+		WHERE CF_NO=#{cfNo}
+	</select>
 </mapper>

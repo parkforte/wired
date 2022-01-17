@@ -18,6 +18,11 @@ public class ConfirmUtil {
 	public static final int SR_TURN=1;	//no1
 	public static final int LEADER_TURN=2;	//no2
 
+
+	//문서함
+	public static final int RECORD_COUNT=10;  //한페이지에 보여줄 레코드 개수
+	public static final int BLOCK_SIZE=5;
+
 	/**
 	 * 현재날짜출력
 	 * @return

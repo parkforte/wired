@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gr.wired.common.SearchVO;
+
 @Mapper
 public interface ConfirmDAO {
 	int insertPaper(ConfirmVO confirmVo);
@@ -20,4 +22,7 @@ public interface ConfirmDAO {
 	int countState2(int memNo);
 	int countState3(int memNo);
 	int countState4(int memNo);
+	List<ConfirmVO> selectAll(ConfirmVO confirmVo);
+	int selectTotalRecord(ConfirmVO confirmVo);
+	ConfirmVO selectByCfNo(int cfNo);
 }

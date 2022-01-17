@@ -325,12 +325,12 @@
 												</script></td>
 									</tr>
 								</tbody>
-								<tfoot>
+								<!-- <tfoot>
 									<tr>
 										<td class="tg-0lax">증빙서류</td>
 										<td class="tg-0lax dnd" colspan="8"><input type="file" name="cfFile"></td>
 									</tr>
-								</tfoot>
+								</tfoot> -->
 							</table>
 							<input type="hidden" name="cfNo" value="${confirmVo.cfNo }">
 							<input type="hidden" name="memNo" value="${map['MEM_NO'] }">
