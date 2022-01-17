@@ -17,8 +17,8 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
-	public Map<String, Object> selectByMemId(String memId) {
-		return mypageDao.selectByMemId(memId);
+	public Map<String, Object> selectByMemId(int memNo) {
+		return mypageDao.selectByMemId(memNo);
 	}
 
 	@Override

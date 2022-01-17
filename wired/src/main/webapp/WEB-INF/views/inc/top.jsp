@@ -286,11 +286,11 @@ $(function(){
 							</div></li>
 
 						<!-- Nav Item - Alerts -->
-						<li class="nav-item dropdown no-arrow mx-1"><a
-							class="nav-link dropdown-toggle" href="#" id="alertsDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <i class="fas fa-bell fa-fw"></i> <!-- Counter - Alerts -->
-								<span class="badge badge-danger badge-counter">3+</span>
+<!-- 						<li class="nav-item dropdown no-arrow mx-1"><a -->
+<!-- 							class="nav-link dropdown-toggle" href="#" id="alertsDropdown" -->
+<!-- 							role="button" data-toggle="dropdown" aria-haspopup="true" -->
+<!-- 							aria-expanded="false"> <i class="fas fa-bell fa-fw"></i> Counter - Alerts -->
+<!-- 								<span class="badge badge-danger badge-counter">3+</span> -->
 						</a> <!-- Dropdown - 알림 -->
 							<div
 								class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -333,12 +333,12 @@ $(function(){
 							</div></li>
 
 						<!-- Nav Item - 받은메일함 -->
-						<li class="nav-item dropdown no-arrow mx-1"><a
-							class="nav-link dropdown-toggle" href="#" id="messagesDropdown"
-							role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <i class="fas fa-envelope fa-fw"></i>
-								<!-- Counter - Messages --> <span
-								class="badge badge-danger badge-counter">7</span>
+<!-- 						<li class="nav-item dropdown no-arrow mx-1"><a -->
+<!-- 							class="nav-link dropdown-toggle" href="#" id="messagesDropdown" -->
+<!-- 							role="button" data-toggle="dropdown" aria-haspopup="true" -->
+<!-- 							aria-expanded="false"> <i class="fas fa-envelope fa-fw"></i> -->
+<!-- 								Counter - Messages <span -->
+<!-- 								class="badge badge-danger badge-counter">7</span> -->
 						</a> <!-- Dropdown - Messages -->
 							<div
 								class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"

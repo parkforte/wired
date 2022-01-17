@@ -33,10 +33,10 @@ public class MypageController {
 
 	@GetMapping("/mypage")
 	public String mypage_get(HttpSession session, Model model) {
-		String memId=(String) session.getAttribute("memId");
-		logger.info("사원정보 수정 화면, 파라미터 memId={}", memId);
+		int memNo=(int) session.getAttribute("memNo");
+		logger.info("사원정보 수정 화면, 파라미터 memId={}", memNo);
 
-		Map<String, Object> map=mypageService.selectByMemId(memId);
+		Map<String, Object> map=mypageService.selectByMemId(memNo);
 		logger.info("사원수정 - 조회 결과 map={}", map);
 
 		model.addAttribute("map", map);
@@ -48,8 +48,8 @@ public class MypageController {
 	@PostMapping("/mypage")
 	public String mypage_post(@ModelAttribute EmplVO vo, @RequestParam String email3,
 			HttpSession session, Model model) {
-		String memId=(String) session.getAttribute("memId");
-		vo.setMemId(memId);
+		int memNo=(int) session.getAttribute("memNo");
+		vo.setMemNo(memNo);
 		logger.info("사원수정 처리, 파라미터 vo={}", vo);
 
 		if(vo.getMemHp2()==null || vo.getMemHp2().isEmpty() ||

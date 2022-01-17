@@ -119,7 +119,7 @@ span{
 				alert('주소를 입력해주세요.');
 				$('#memAddressdetail').focus();
 				event.preventDefault();
-			}else if($('#memFlag').val()=='N'){
+			}else if($('#memEmail1').val()==null){
 				alert('이메일 인증을 해주세요');
 				$('#memEmail1').focus();
 				event.preventDefault();
@@ -379,7 +379,7 @@ span{
 							<div class="form-group">
 								<input type="hidden"
 									 class="form-control form-control-user c-size"
-									id="memFlag" name="memFlag" ReadOnly value="${map['MEM_FLAG'] }">
+									id="memFlag" name="memFlag" ReadOnly value="Y">
 							</div>
 							<!-- button -->
 							<div class="form-group c-size" style="text-align: center;">

@@ -8,6 +8,6 @@ import com.gr.wired.employee.model.EmplVO;
 
 @Mapper
 public interface MypageDAO {
-	Map<String, Object> selectByMemId(String memId);
+	Map<String, Object> selectByMemId(int memNo);
 	int updateMember(EmplVO emplVo);
 }
