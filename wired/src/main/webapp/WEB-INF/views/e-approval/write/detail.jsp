@@ -134,18 +134,29 @@
 										<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>${docformVo.formName }</h3></th>
 										<th class="tg-lboi" colspan="4" rowspan="5"><img
 											src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
-											<c:if test="${!empty orderList || confirmVo.cfState>2 }">
-												<c:forEach var="orderMap" items="${orderList }">
+										<c:if test="${confirmVo.cfState!=3 }">
+										<c:forEach var="orderMap" items="${orderList }">
 										<th>
-													<div class="sigBox">
-														<div class="sigTitle">${orderMap["MEM_NAME"] } </div>
-														<div class="sigImg" >
-														<img src="<c:url value='/upload/signature/${orderMap["MEM_ORIGINALFILENAME"]}'/>" width="70px" style="margin-top: 0">
-														</div>
-													</div>
+											<div class="sigBox">
+												<div class="sigTitle">${orderMap["MEM_NAME"] } </div>
+												<div class="sigImg" >
+												</div>
+											</div>
 										</th>
-												</c:forEach>
-											</c:if>
+										</c:forEach>
+										</c:if>
+										<c:if test="${confirmVo.cfState==3 }">
+										<c:forEach var="orderMap" items="${orderList }">
+											<th>
+												<div class="sigBox">
+													<div class="sigTitle">${orderMap["MEM_NAME"] } </div>
+													<div class="sigImg" >
+													<img src="<c:url value='/upload/signature/${orderMap["MEM_ORIGINALFILENAME"]}'/>" width="70px" style="margin-top: 0">
+													</div>
+												</div>
+											</th>
+											</c:forEach>
+										</c:if>
 									</tr>
 									<tr>
 									</tr>
