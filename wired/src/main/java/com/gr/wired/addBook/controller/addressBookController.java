@@ -75,6 +75,7 @@ public class addressBookController {
 
 		List<Map<String, Object>> list=addressBookService.selectAll(searchVo);
 		logger.info("전체조회 결과 list.size={}", list.size());
+		
 
 		//[3] totalRecord 구하기
 		int totalRecord=addressBookService.selectTotalRecord(searchVo);
@@ -137,5 +138,7 @@ public class addressBookController {
 
 		return "common/message";
 	}
+
+	
 
 }

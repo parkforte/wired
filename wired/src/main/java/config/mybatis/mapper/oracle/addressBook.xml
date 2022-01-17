@@ -5,67 +5,82 @@
 <mapper namespace="com.gr.wired.addBook.model.addressBookDAO">
 	<sql id="searchWhere">
 		<if test="searchKeyword!=null and searchKeyword!=''">
-			where ${searchCondition} like '%' || #{searchKeyword} || '%'
+			where ${searchCondition} like '%' || #{searchKeyword} ||
+			'%'
 		</if>
 	</sql>
 
 	<insert id="insertAddressBook" parameterType="addressBookVO">
-		<selectKey keyProperty="addrbookNo" resultType="int" order="BEFORE">
+		<selectKey keyProperty="addrbookNo" resultType="int"
+			order="BEFORE">
 			select ADDBOOK_SEQ.nextval from dual
 		</selectKey>
-		insert into ADDRESSBOOK (ADDRBOOK_NO, ADDRBOOK_NAME, ADDRBOOK_COMNAME,ADDRBOOK_TEL,ADDRBOOK_EMAIL,MEM_NO,ADDRBOOK_DEPT,ADDRBOOK_RANK)
-		values (#{addrbookNo},#{addrbookName},#{addrbookComname},#{addrbookTel},#{addrbookEmail},#{memNo},#{addrbookDept},#{addrbookRank})
+		insert into ADDRESSBOOK (ADDRBOOK_NO, ADDRBOOK_NAME,
+		ADDRBOOK_COMNAME,ADDRBOOK_TEL,ADDRBOOK_EMAIL,MEM_NO,ADDRBOOK_DEPT,ADDRBOOK_RANK)
+		values
+		(#{addrbookNo},#{addrbookName},#{addrbookComname},#{addrbookTel},#{addrbookEmail},#{memNo},#{addrbookDept},#{addrbookRank})
 	</insert>
 
-	<select id="selectPwd" parameterType="string" resultType="string">
+	<select id="selectPwd" parameterType="string"
+		resultType="string">
 		SELECT MEM_PWD FROM MEMBER
 		WHERE MEM_ID=#{memId}
 	</select>
 
-	<select id="selectByMemId" parameterType="string" resultType="emplVo">
+	<select id="selectByMemId" parameterType="string"
+		resultType="emplVo">
 		SELECT * FROM MEMBER
 		WHERE MEM_ID=#{memId}
 	</select>
 
 	<select id="selectAll" parameterType="searchVo" resultType="map">
 		SELECT *
-		FROM
-		(
-		    SELECT ROWNUM AS RNUM, A.*
-		    FROM
-		    (
-		        SELECT ADDRBOOK_NO, ADDRBOOK_NAME, ADDRBOOK_COMNAME, ADDRBOOK_TEL, ADDRBOOK_EMAIL,ADDRBOOK_DEPT,ADDRBOOK_RANK
-		        FROM ADDRESSBOOK
-		        ORDER BY ADDRBOOK_NO DESC
-		    )A
-		)
+			FROM
+			(SELECT ROWNUM AS RNUM, A.* FROM
+				(SELECT ADDRBOOK_NO, ADDRBOOK_NAME, ADDRBOOK_COMNAME, ADDRBOOK_TEL, ADDRBOOK_EMAIL,ADDRBOOK_DEPT,ADDRBOOK_RANK,MEM_NO
+					FROM ADDRESSBOOK
+					ORDER BY ADDRBOOK_NO DESC
+				)A
+			)
 		<![CDATA[
 		WHERE RNUM>#{firstRecordIndex}
-			AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+				AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
 	</select>
+	
 
 	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
+		SELECT COUNT(*) FROM ADDRESSBOOK
 		<include refid="searchWhere"></include>
 	</select>
-	
-	
-	
-	<select id="selectByAddNo" parameterType="int" resultType="addressBookVo">
+
+
+
+	<select id="selectByAddNo" parameterType="int"
+		resultType="addressBookVo">
 		SELECT * FROM ADDRESSBOOK
 		WHERE ADDRBOOK_NO=#{addrbookNo}
 	</select>
 	<update id="updateAddressBook" parameterType="addressBookVO">
 		UPDATE ADDRESSBOOK
-		SET ADDRBOOK_NAME=#{addrbookName}, ADDRBOOK_TEL=#{addrbookTel}, ADDRBOOK_COMNAME=#{addrbookComname}, ADDRBOOK_EMAIL=#{addrbookEmail},
-			ADDRBOOK_DEPT=#{addrbookDept}, ADDRBOOK_RANK=#{addrbookRank}, MEM_NO=#{memNo}
+		SET ADDRBOOK_NAME=#{addrbookName}, ADDRBOOK_TEL=#{addrbookTel},
+		ADDRBOOK_COMNAME=#{addrbookComname}, ADDRBOOK_EMAIL=#{addrbookEmail},
+		ADDRBOOK_DEPT=#{addrbookDept}, ADDRBOOK_RANK=#{addrbookRank},
+		MEM_NO=#{memNo}
 		WHERE ADDRBOOK_NO=#{addrbookNo}
 	</update>
-	<select id="selectByMemName" parameterType="addressBookVo" resultType="map">
+	<select id="selectByMemName" parameterType="addressBookVo"
+		resultType="map">
 		select * from memberinfo_view
-		where mem_name like '%'||#{memName}||'%'
+		where mem_name like
+		'%'||#{memName}||'%'
 	</select>
 	<delete id="deleteAddressBook" parameterType="int">
-		DELETE FROM ADDRESSBOOK WHERE ADDRBOOK_NO=#{addrbookNo}
+		DELETE FROM
+		ADDRESSBOOK WHERE ADDRBOOK_NO=#{addrbookNo}
 	</delete>
+
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		SELECT COUNT(*) FROM ADDRESSBOOK
+	</select>
 </mapper>
