@@ -13,7 +13,9 @@
 			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/docbox'/>">문서함</a></li>
 			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/confirm/confirmAdmin'/>">결재선관리</a></li>
 			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/signature/uploadPage'/>">서명관리</a></li>
+			<c:if test="${sessionScope.ranksNo==3}">
 			<li class="nav-item active"><a class="nav-link" href="<c:url value='/e-approval/doctype/admin'/>">문서관리</a></li>
+			</c:if>
 		</ul>
 	</div>
 </nav>

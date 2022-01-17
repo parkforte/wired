@@ -32,13 +32,13 @@
 <%@ include file="include/navbar.jsp"%>
 	<div>
 		<!-- 차트 -->
-		<div class="card shadow mb-4" style="height: 400px">
+		<div class="card shadow mb-4">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">나의 문서 상태</h6>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<div class="f-center" style="width: 50%;">
+					<div class="f-center" style="width: 50%; height: 100%;">
 						<!--차트가 그려질 부분-->
 						<canvas id="doughnut-chart"></canvas>
 						<script type="text/javascript">
@@ -83,7 +83,7 @@
 						<c:forEach var="map" items="${confirmingList }">
 						<div class="card text-center f-left setMR10" style="width: 15rem;">
 					  	<div class="card-body">
-						    <h5 class="card-title">${map["CF_TITLE"] }</h5>
+						    <h5 class="card-title"><a href="<c:url value='/e-approval/write/detail?cfNo=${map["CF_NO"]}'/>">${map["CF_TITLE"]}</a></h5>
 						    <p class="card-text">기안자 : ${map["MEM_NAME"] }</p>
 						    <p class="card-text">기안일 :<fmt:formatDate value='${map["CF_REGDATE"] }' pattern="yyyy-MM-dd"/></p>
 						    <a href="<c:url value='/e-approval/approval?cfNo=${map["CF_NO"] }'/>" class="btn btn-primary">결재</a>

@@ -116,9 +116,10 @@ $(function(){
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">전자결재:</h6>
-						<a class="collapse-item" href="#">문서작성</a>
-						<a class="collapse-item" href="#">문서함</a>
-						<a class="collapse-item" href="#">문서관리</a>
+						<a class="collapse-item" href="<c:url value='/e-approval/mainpage'/>">메인페이지</a>
+						<a class="collapse-item" href="<c:url value='/e-approval/write/selectForm'/>">문서작성</a>
+						<a class="collapse-item" href="<c:url value='/e-approval/docbox'/>">문서함</a>
+						<a class="collapse-item" href="<c:url value='/e-approval/signature/uploadPage'/>">서명관리</a>
 					</div>
 				</div></li>
 
@@ -184,10 +185,10 @@ $(function(){
 			<li class="nav-item"><a class="nav-link" href="<c:url value='/addbook/addressBookList'/>">
 					<i class="fas fa-list fa-sm fa-fw "></i> <span>주소록</span>
 			</a></li>
-			<!-- 스케쥴러 -->
+			<!-- 스케쥴러
 			<li class="nav-item"><a class="nav-link" href="#">
 					<i class="fas fa-fw fa-table"></i> <span>스케쥴러</span>
-			</a></li>
+			</a></li> -->
 			<!-- 사원관리 -->
 			<!-- <li class="nav-item" id="emplManage_nav" style="display: none;"><a class="nav-link" href="#">
 					<i class="fas fa-fw fa-table"></i> <span>사원관리</span>
