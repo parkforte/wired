@@ -18,6 +18,7 @@ import com.gr.wired.bdList.model.BdListVO;
 import com.gr.wired.board.model.BoardService;
 import com.gr.wired.common.BSearchVO;
 import com.gr.wired.confirm.model.ConfirmService;
+import com.gr.wired.jawon.model.JawonService;
 
 @Controller
 public class HomeController {
@@ -27,15 +28,17 @@ public class HomeController {
 	private final BdListService bdListService;
 	private final BoardService boardService;
 	private final ConfirmService confirmService;
+	private final JawonService jawonService;
 
 	@Autowired
-	public HomeController(BdListService bdListService, BoardService boardService, ConfirmService confirmService) {
+	public HomeController(BdListService bdListService, BoardService boardService, ConfirmService confirmService,
+			JawonService jawonService) {
 		super();
 		this.bdListService = bdListService;
 		this.boardService = boardService;
 		this.confirmService = confirmService;
+		this.jawonService = jawonService;
 	}
-
 
 	@RequestMapping("/index")
 	public String home(HttpSession session, Model model) {
@@ -52,6 +55,8 @@ public class HomeController {
 		int state3=confirmService.countState3(memNo);
 		int state4=confirmService.countState4(memNo);
 
+		List<Map<String, Object>> jList=jawonService.selectMainJawon();
+
 
 		model.addAttribute("state1",state1);
 		model.addAttribute("state2",state2);
@@ -61,8 +66,16 @@ public class HomeController {
 		session.setAttribute("bdlist", list);
 		model.addAttribute("noList", noList);
 
+		model.addAttribute("jList",jList);
+
 		return "index";
 	}
+
+
+
+
+
+
 
 
 

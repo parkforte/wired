@@ -71,6 +71,21 @@
 		ORDER BY RESERV_NO DESC
 	</select>
 
+	<select id="selectMainJawon" resultType="map">
+		SELECT *
+		FROM
+		(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM
+		    (
+		        SELECT * FROM JAWONMEM_VIEW
+		        ORDER BY RESERV_NO DESC
+		    )A
+		)
+		<![CDATA[
+		WHERE RNUM<7]]>
+	</select>
+
 	<delete id="deleteJawonType" parameterType="int">
 		DELETE FROM RESTYPE WHERE TYPE_NO=#{typeNo}
 	</delete>

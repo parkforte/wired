@@ -18,20 +18,15 @@
 	margin-bottom: 12px;
 	margin-top: -12px;
 }
+.btn-loc{
+	margin-left: 20px;
+}
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
 $(function() {
 	$('.jawonSelRes').change(function(){
 		location.href=($(this).val());
-	});
-	$('.btn-cancel').each(function(index,item) {
-		$(this).click(function() {
-			var res=$(this).val();
-			$('#m-cancel').click(function() {
-				location.href="<c:url value='/jawon/reserveCancel?reservNo='/>"+res;
-			});
-		});
 	});
 	$('.btn-loc').each(function(index,item){
 		$(this).click(function(){
@@ -122,7 +117,7 @@ $(function() {
                                    <fmt:formatDate value="${map['USE_REGDATE'] }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${map['RETURN_REGDATE'] }" pattern="yyyy-MM-dd"/></td>
                                    <td>${map['RESERV_CONTENT'] }</td>
                                    <td>
-                                   <input type="text" value="${map['RES_NO'] }">
+                                   <input type="hidden" value="${map['RES_NO'] }">
                                    ${map['RES_LOCATION'] }<button type="button" class="btn btn-outline-info btn-loc"
                                    		value="${map['RES_NO'] }" >위치보기</button>
                                    </td>

@@ -18,8 +18,8 @@
 	margin-bottom: 12px;
 	margin-top: -12px;
 }
-#btn-loc{
-	margin-left: 5px;
+.btn-loc{
+	margin-left: 20px;
 }
 </style>
 <!-- javaScript영역 -->
@@ -127,7 +127,7 @@ $(function() {
                                    <fmt:formatDate value="${map['USE_REGDATE'] }" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${map['RETURN_REGDATE'] }" pattern="yyyy-MM-dd"/></td>
                                    <td>${map['RESERV_CONTENT'] }</td>
                                    <td>
-                                   <input type="text" value="${map['RES_NO'] }">
+                                   <input type="hidden" value="${map['RES_NO'] }">
                                    ${map['RES_LOCATION'] }<button type="button" class="btn btn-outline-info btn-loc"
                                    		value="${map['RES_NO'] }" >위치보기</button></td>
                                    <td><button type="button" class="btn btn-danger b-radius btn-cancel"
