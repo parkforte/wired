@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gr.wired.common.PaginationInfo;
+import com.gr.wired.common.SearchVO;
 import com.gr.wired.confirm.model.ConfirmLineService;
 import com.gr.wired.confirm.model.ConfirmLineVO;
 import com.gr.wired.confirm.model.ConfirmService;
@@ -68,9 +71,32 @@ public class ConfirmController {
 
 
 	@RequestMapping("/docbox")
-	public void docbox_get() {
-		logger.info("문서함!");
-	}
+	public void docbox_get(@ModelAttribute ConfirmVO confirmVo ,HttpSession session, Model model) {
+		int memNo =(int)session.getAttribute("memNo");
+		logger.info("문서함! memNo={}, searchVo={}", memNo, confirmVo);
+
+		//Paging
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConfirmUtil.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(ConfirmUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(confirmVo.getCurrentPage());
+
+		confirmVo.setMemNo(memNo);
+		confirmVo.setRecordCountPerPage(ConfirmUtil.RECORD_COUNT);
+		confirmVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("셋팅 후 searchVo={}", confirmVo);
+
+		//DB
+		List<ConfirmVO> list =confirmService.selectAll(confirmVo);
+		logger.info("list.size={}", list.size());
+
+		int totalRecord=confirmService.selectTotalRecord(confirmVo);
+		pagingInfo.setTotalRecord(totalRecord);
+
+		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
+
+		}
 
 
 
@@ -398,7 +424,7 @@ public class ConfirmController {
 	@RequestMapping("/write/paperCheck")
 	public String paperCheck_get(HttpSession session, Model model) {
 		int memNo=(int) session.getAttribute("memNo");
-		logger.info("전자결재 문서작성페이지, memNo={}", memNo);
+		logger.info("전자결재 문서확인페이지, memNo={}", memNo);
 
 		//날짜
 		String cfRegdate=ConfirmUtil.getToDay();
@@ -454,6 +480,7 @@ public class ConfirmController {
 	@PostMapping("/write/updating2")
 	public String complete_post(@ModelAttribute ConfirmVO confirmVo) {
 		logger.info("문서상신완료 페이지 confirmVo={}", confirmVo);
+		int cfNo=confirmVo.getCfNo();
 
 		confirmVo.setCfOrder(ConfirmUtil.SR_TURN);
 		confirmVo.setCfState(ConfirmUtil.STATE_REPORT_UP1);
@@ -467,13 +494,17 @@ public class ConfirmController {
 			logger.info("문서상신실패! result={}", result);
 		}
 
-		return "redirect:/e-approval/write/complete";
+		return "redirect:/e-approval/write/complete?cfNo="+cfNo;
 
 	}
 
-	@RequestMapping("/write/complete")
-	public void completePage() {
-		logger.info("상신완료 페이지!");
+	@GetMapping("/write/complete")
+	public void completePage(@RequestParam(defaultValue = "0")int cfNo, Model model) {
+
+		logger.info("상신완료 페이지! cfNo={}",cfNo);
+
+		model.addAttribute("cfNo", cfNo);
+
 	}
 
 	@GetMapping("/approval")
@@ -508,6 +539,31 @@ public class ConfirmController {
 		model.addAttribute("url", url);
 
 		return "common/message";
+	}
+
+	@GetMapping("/write/detail")
+	public String detail(@RequestParam(defaultValue = "0") int cfNo, HttpSession session, Model model) {
+
+		int memNo=(int)session.getAttribute("memNo");
+		logger.info("상세보기 cfNo={}, memNo={}", cfNo, memNo);
+
+		ConfirmVO confirmVo=confirmService.selectByCfNo(cfNo);
+		logger.info("confirmVo={}",confirmVo);
+
+		Map<String, Object> map=emplService.selectByView(memNo);
+
+		//결재라인
+		List<Map<String, Object>> orderList =confirmService.selectLineorder(cfNo);
+
+		//문서이름
+		DocformVO docformVo=docformService.selectByFormNo(confirmVo.getFormNo());
+
+		model.addAttribute("map", map);
+		model.addAttribute("confirmVo", confirmVo);
+		model.addAttribute("docformVo", docformVo);
+		model.addAttribute("orderList", orderList);
+
+		return "e-approval/write/detail";
 	}
 
 

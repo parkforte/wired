@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp"%>
+<!-- Custom fonts for this template-->
+<link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+<!-- Custom styles for this template-->
+<link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<!-- 부트스트랩 version 4.6.0 -->
+<!-- 부트스트랩 icon -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-<!-- http://localhost:9091/wired/default/defaultPage -->
-<!-- 2 load the theme CSS file -->
-<link rel="stylesheet"
-	href="<c:url value='/resources/api/jsTree/dist/themes/proton/style.min.css' />" />
+<!-- 수정용CSS -->
+<link href="${pageContext.request.contextPath}/resources/css/wiredStyle.css" rel="stylesheet">
 
 <style type="text/css">
 .f-right {
@@ -85,13 +94,10 @@
 }
 
 .sigImg {
-	margin-top:20px;
-	background-color: silver;
 }
 
 .sigBox {
 	height: 70px;
-	background-color: silver;
 }
 
 .btnMargin {
@@ -99,90 +105,7 @@
 	margin-top: 5px;
 }
 
-
-.bs4-order-tracking {
-    margin-bottom: 30px;
-    overflow: hidden;
-    color: #878788;
-    padding-left: 0px;
-    margin-top: 30px
-}
-
-.bs4-order-tracking li {
-    list-style-type: none;
-    font-size: 13px;
-    width: 25%;
-    float: left;
-    position: relative;
-    font-weight: 400;
-    color: #878788;
-    text-align: center
-}
-
-.bs4-order-tracking li:first-child:before {
-    margin-left: 15px !important;
-    padding-left: 11px !important;
-    text-align: left !important
-}
-
-.bs4-order-tracking li:last-child:before {
-    margin-right: 5px !important;
-    padding-right: 11px !important;
-    text-align: right !important
-}
-
-.bs4-order-tracking li>div {
-    color: #fff;
-    width: 29px;
-    text-align: center;
-    line-height: 29px;
-    display: block;
-    font-size: 12px;
-    background: #878788;
-    border-radius: 50%;
-    margin: auto
-}
-
-.bs4-order-tracking li:after {
-    content: '';
-    width: 150%;
-    height: 2px;
-    background: #878788;
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 15px;
-    z-index: -1
-}
-
-.bs4-order-tracking li:first-child:after {
-    left: 50%
-}
-
-.bs4-order-tracking li:last-child:after {
-    left: 0% !important;
-    width: 0% !important
-}
-
-.bs4-order-tracking li.active {
-    font-weight: bold;
-    color: #FF73B8
-}
-
-.bs4-order-tracking li.active>div {
-    background: #FF73B8
-}
-
-.bs4-order-tracking li.active:after {
-    background: #FF73B8
-}
-
-.card-timeline {
-    background-color: #fff;
-    z-index: 0
-}
 </style>
-<script src="<c:url value='/resources/api/jsTree/dist/libs/jquery.js'/> "></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -191,38 +114,15 @@
 
 
 </script>
-<!-- 전자결재HOME -->
 <div class="container-fluid">
-	<%@ include file="../include/navbar.jsp"%>
-	<div class="card card-timeline px-2 border-none">
-	    <ul class="bs4-order-tracking">
-	        <li class="step active">
-	            <div><i class="fas fa-user"></i></div> 문서양식&결재라인
-	        </li>
-	        <li class="step active">
-	            <div><i class="fas fa-bread-slice"></i></div> 문서작성
-	        </li>
-	        <li class="step active">
-	            <div><i class="fas fa-truck"></i></div> 문서확인
-	        </li>
-	        <li class="step ">
-	            <div><i class="fas fa-birthday-cake"></i></div> 상신완료
-	        </li>
-	    </ul>
-	    <h5 class="text-center"><b>작성하신 문서를 확인 후 상신버튼을 클릭하세요.</b></h5>
-	</div>
-
+<%@ include file="../include/navbar.jsp"%>
 	<div>
 		<div class="card shadow mb-4">
 			<div class="card-header py-3 ">
 				<div class="setW20 f-left">
-					<h6 class="m-0 font-weight-bold text-primary">문서작성</h6>
-				</div>
-				<div class="f-right">
-
+					<h6 class="m-0 font-weight-bold text-primary">문서상세보기</h6>
 				</div>
 			</div>
-			<form method="post" id="paperWrite" action="<c:url value='/e-approval/write/updating2'/>">
 			<div class="card-body">
 				<div class="table-responsive">
 					<div class="paper">
@@ -234,18 +134,14 @@
 										<th class="tg-lboi text-center" colspan="3" rowspan="5"><h3>${docformVo.formName }</h3></th>
 										<th class="tg-lboi" colspan="4" rowspan="5"><img
 											src="<c:url value='/resources/img/logo/wired_logo.png'/>"></th>
-									<!-- 	<th>
-											<div class="sigBox">
-												<div class="sigTitle"></div>
-												<div class="sigImg"></div>
-											</div>
-										</th> -->
-											<c:if test="${!empty orderList}">
+											<c:if test="${!empty orderList || confirmVo.cfState>2 }">
 												<c:forEach var="orderMap" items="${orderList }">
 										<th>
 													<div class="sigBox">
 														<div class="sigTitle">${orderMap["MEM_NAME"] } </div>
-														<div class="sigImg"></div>
+														<div class="sigImg" >
+														<img src="<c:url value='/upload/signature/${orderMap["MEM_ORIGINALFILENAME"]}'/>" width="70px" style="margin-top: 0">
+														</div>
 													</div>
 										</th>
 												</c:forEach>
@@ -265,9 +161,9 @@
 										<td class="tg-lboi">기안부서</td>
 										<td class="tg-lboi" colspan="2">${map["DEPT_NAME"]}</td>
 										<td class="tg-lboi">기안일</td>
-										<td class="tg-lboi" colspan="2">${cfRegdate }</td>
+										<td class="tg-lboi" colspan="2">${confirmVo.cfRegdate}</td>
 										<td class="tg-lboi">문서번호</td>
-										<td class="tg-lboi" colspan="2">WIRED-${confirmVo.memNo }-${confirmVo.cfNo }</td>
+										<td class="tg-lboi" colspan="2">WIRED-${confirmVo.cfNo }</td>
 									</tr>
 									<tr>
 										<td class="tg-lboi">기안자</td>
@@ -299,13 +195,10 @@
 							<input type="hidden" name="cfNo" value="${confirmVo.cfNo }">
 							<input type="hidden" name="memNo" value="${map['MEM_NO'] }">
 							<input type="hidden" name="deptNo" value="${map['DEPT_NO'] }">
-							<button type="submit" class="btn btn-success btn-lg btn-block">상신하기</button>
-							<button type="button" class="btn btn-secondary btn-lg btn-block">수정하기</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			</form>
 		</div>
 	</div>
 </div>

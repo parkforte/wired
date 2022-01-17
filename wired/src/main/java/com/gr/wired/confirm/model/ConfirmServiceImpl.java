@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gr.wired.common.SearchVO;
+
 @Service
 public class ConfirmServiceImpl implements ConfirmService {
 
@@ -90,5 +92,20 @@ public class ConfirmServiceImpl implements ConfirmService {
 	@Override
 	public int countState4(int memNo) {
 		return confirmDao.countState4(memNo);
+	}
+
+	@Override
+	public List<ConfirmVO> selectAll(ConfirmVO confirmVo) {
+		return confirmDao.selectAll(confirmVo);
+	}
+
+	@Override
+	public int selectTotalRecord(ConfirmVO confirmVo) {
+		return confirmDao.selectTotalRecord(confirmVo);
+	}
+
+	@Override
+	public ConfirmVO selectByCfNo(int cfNo) {
+		return confirmDao.selectByCfNo(cfNo);
 	}
 }

@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp"%>
 
-<!-- 2 load the theme CSS file -->
-<link rel="stylesheet"
-	href="<c:url value='/resources/api/jsTree/dist/themes/proton/style.min.css' />" />
-
 <style>
 .setW25 {
 	width: 25%;
@@ -25,9 +21,7 @@
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
-	$(funtion(){
-		$('')
-	});
+
 </script>
 <!-- 전자결재HOME -->
 <div>
@@ -49,23 +43,35 @@
 						<form method="post"
 							action="<c:url value='/e-approval/confirm/searchMember'/>">
 							<div class="input-group-append">
-								<input type="text" name="regNo"  value="${param.regNo }">
-								<input type="text" class="form-control" placeholder="사원명을 입력하세요"
+								<input type="hidden" name="regNo"  value="${param.regNo }">
+								<c:if test="${confirmlineList.size()==2 }">
+									<input type="text" class="form-control" placeholder="결재라인은 최대 2단계이므로 추가하실 수 없습니다."
+									id="memName" name="memName" readonly="readonly" value="${mem['MEM_NAME'] }">
+								</c:if>
+								<c:if test="${confirmlineList.size()!=2}">
+									<input type="text" class="form-control" placeholder="사원명을 입력하세요"
 									id="memName" name="memName" value="${mem['MEM_NAME'] }">
 								<input class="btn btn-outline-secondary" type="submit"
 									value="검색">
+								</c:if>
 							</div>
 						</form>
 						<br>
 						<form method="post"
 							action="<c:url value='/e-approval/confirm/addLineOrder'/>">
 							<div class="input-group-append">
-								<input type="text" name="regNo" value="${param.regNo }">
+								<input type="hidden" name="regNo" value="${param.regNo }">
 								<select class="custom-select" name="lineOrder" id="lineOrder"
 									aria-label="Example select with button addon">
-									<option selected>결재순서선택</option>
-									<option value="1">No.1</option>
-									<option value="2">No.2</option>
+									<c:if test="${empty confirmlineList }">
+										<option value="1" selected="selected">No.1</option>
+									</c:if>
+									<c:if test="${confirmlineList.size()==1 }">
+										<option value="2" selected="selected">No.2</option>
+									</c:if>
+									<c:if test="${confirmlineList.size()==2 }">
+										<option selected="selected">결재라인은 최대 2단계이므로 추가하실 수 없습니다.</option>
+									</c:if>
 								</select> <select class="custom-select" name="memNo" id="memNo"
 									aria-label="Example select with button addon">
 									<c:if test="${empty emplList }">
@@ -77,8 +83,11 @@
 												${map['POS_NAME'] } ${map['MEMBER_NAME'] }</option>
 										</c:forEach>
 									</c:if>
-								</select> <input class="btn btn-outline-secondary" type="submit"
+								</select>
+									<c:if test="${confirmlineList.size()!=2 }">
+								 <input class="btn btn-outline-secondary" id="submit" type="submit"
 									value="등록">
+									</c:if>
 							</div>
 						</form>
 						<br>

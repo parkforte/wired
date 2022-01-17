@@ -23,6 +23,10 @@
 .margin0{
 	margin: 0 auto;
 }
+
+.inline-f{
+	display: inline-flex;
+}
 </style>
 <!-- javaScript영역 -->
 
@@ -58,18 +62,15 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table table-bordered t-center" id="dataTable" width="100%"
-						cellspacing="0">
+					<table class="table table-bordered t-center" id="dataTable" style=" width: 100%">
 						<col width="10%">
-						<col width="15%">
-						<col width="25%">
+						<col width="30%">
 						<col width="20%">
 						<col width="20%">
-						<col width="10%">
+						<col width="20%">
 						<thead>
 							<tr>
 								<th>번호</th>
-								<th>문서양식</th>
 								<th>문서제목</th>
 								<th>기안일</th>
 								<th>결재일</th>
@@ -77,31 +78,87 @@
 							</tr>
 						</thead>
 						<tbody>
+						 <c:if test="${empty list }">
+						  	<tr>
+						  		<td colspan="5">데이터가 없습니다.</td>
+						  	</tr>
+						  </c:if>
+						  <c:if test="${!empty list }">
+						  <c:forEach var="vo" items="${list }">
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>WIRED-${vo.cfNo }</td>
+								<td><a href="<c:url value='/e-approval/write/detail?cfNo=${vo.cfNo }'/>">${vo.cfTitle }</a></td>
+								<td><fmt:formatDate value="${vo.cfRegdate }" pattern="yyyy-MM-dd  hh:mm:ss"/></td>
+								<td><fmt:formatDate value="${vo.cfOkdate }" pattern="yyyy-MM-dd  hh:mm:ss"/></td>
+								<td>
+								<c:if test="${vo.cfState==1 }">
+									<button type="button" class="btn btn-secondary">결재대기</button>
+								</c:if>
+								<c:if test="${vo.cfState==2 }">
+									<button type="button" class="btn btn-info">결재중</button>
+								</c:if>
+								<c:if test="${vo.cfState==3 }">
+									<button type="button" class="btn btn-success">승인</button>
+								</c:if>
+								<c:if test="${vo.cfState==4 }">
+									<button type="button" class="btn btn-warning">반려</button>
+								</c:if>
+								</td>
 							</tr>
+						  </c:forEach>
+						  </c:if>
 						</tbody>
 					</table>
-					<nav class="f-right" aria-label="...">
-						<ul class="pagination">
-							<li class="page-item disabled"><a class="page-link">Previous</a>
-							</li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item active" aria-current="page"><a
-								class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">Next</a>
-							</li>
-						</ul>
-					</nav>
-					<form>
-					<div id='f-right' style="width: 20%;">
-						<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" name="searchKeyword">
+					          		<!-- 페이징 -->
+              		<div class="row">
+              			<div class="col-sm-12 col-md-5">
+              				<div class="dataTables_info" id="dataTables_info" role="status">
+              					Showing ${pagingInfo.firstPage } to ${pagingInfo.currentPage } of ${pagingInfo.totalPage } entries
+              				</div>
+
+              			</div>
+
+              			<!-- 페이징 1,2,3,4,5, -->
+              			<div class="col-sm-12 col-md-7">
+              				<nav class="f-right" aria-label="...">
+	                       		<!-- 페이지 번호추가 -->
+								<ul class="pagination">
+
+										<li class="page-item
+										<c:if test="${pagingInfo.firstPage==1 }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="list(${pagingInfo.firstPage-1})">Previous</a></li>
+
+									<!-- [1][2][3][4][5][6][7][8][9][10] -->
+									<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+
+
+										<li
+											<c:if test="${i==pagingInfo.currentPage }">
+												class="page-item active" aria-current="page"
+											</c:if>
+											<c:if test="${i!=pagingInfo.currentPage }">
+												class="page-item"
+											</c:if>
+										><a class="page-link" href="#" onclick="list(${i })">${i }</a></li>
+									</c:forEach>
+
+										<li class="page-item
+										<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="list(${pagingInfo.lastPage+1})">Next</a></li>
+									<!-- 페이지 번호끝 -->
+								</ul>
+							</nav>
+              			</div>
+              			<input type="hidden" value="${pagingInfo.lastPage }"/>
+              		</div>
+              		<!-- 페이징 -->
+					<form method="post" action="<c:url value='/e-approval/docbox'/>">
+					<div id='f-right inline-f' style="width: 20%;">
+						<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" name="searchKeyword" value="${param.searchKeyword}">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</div>
 					</form>
