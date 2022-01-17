@@ -21,6 +21,7 @@ public interface EmplDAO {
 	Map<String, Object> selectByView(int memNo);
 	int updateMember(EmplVO emplVo);
 	int upResignMember(int memNo);
-	List<Map<String, Object>> resignMember();
+	List<Map<String, Object>> resignMember(BSearchVO searchVo);
 	int upBackMember(int memNo);
+	int selectResignRecord(BSearchVO searchVo);
 }

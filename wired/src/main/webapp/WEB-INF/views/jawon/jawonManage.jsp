@@ -59,6 +59,10 @@ a{
   background:#fff;
   border: 1px solid grey;
 }
+.jawonDel{
+	margin-top: -67px;
+    margin-left: 261px;
+}
 
 </style>
 <!-- javaScript영역 -->
