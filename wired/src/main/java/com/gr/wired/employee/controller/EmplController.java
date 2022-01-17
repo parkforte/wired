@@ -159,13 +159,29 @@ public class EmplController {
 	}
 
 	@RequestMapping("/emplResign")
-	public String ResighList(Model model) {
-		logger.info("퇴사자목록페이지");
+	public String ResighList(@ModelAttribute BSearchVO searchVo,Model model) {
+		logger.info("퇴사자목록, 파라미터 searchVo={}", searchVo);
 
-		List<Map<String, Object>> list = emplService.resignMember();
+		//[1] PaginationInfo 객체 생성 - 계산해줌
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+
+		//[2] searchVo에 값 셋팅
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		logger.info("값 셋팅 후 searchVo={}", searchVo);
+
+		List<Map<String, Object>> list = emplService.resignMember(searchVo);
 		logger.info("퇴사목록, 조회 결과 list={}", list);
 
+		//[3] totalRecord 구하기
+		int totalRecord=emplService.selectResignRecord(searchVo);
+		pagingInfo.setTotalRecord(totalRecord);
+
 		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
 
 		return "employee/emplResign";
 	}

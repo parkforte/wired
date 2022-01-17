@@ -13,6 +13,7 @@ public interface JawonService {
 	List<Map<String, Object>> selectJawonMyView(int memNo);
 	int deleteReserve(int reservNo);
 	List<Map<String, Object>> selectJawonAllView();
+	List<Map<String, Object>> selectMainJawon();
 	int deleteJawonType(int typeNo);
 	int insertJawon(JawonVO jawonVo);
 	int updateJawon(JawonVO jawonVo);

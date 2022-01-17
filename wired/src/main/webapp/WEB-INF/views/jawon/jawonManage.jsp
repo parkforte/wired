@@ -59,6 +59,10 @@ a{
   background:#fff;
   border: 1px solid grey;
 }
+.jawonDel{
+	margin-top: -67px;
+    margin-left: 261px;
+}
 
 </style>
 <!-- javaScript영역 -->
@@ -170,10 +174,10 @@ $(function() {
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
-                                   <th>자원명 [<span class="typeName">${jawonAllVo.resTypeVo.typeName }</span>]</th>
-                                   <th>자원위치</th>
-                                   <th>상태</th>
-                                   <th>
+                                   <th style="width: 25%">자원명 [<span class="typeName">${jawonAllVo.resTypeVo.typeName }</span>]</th>
+                                   <th style="width: 25%">자원위치</th>
+                                   <th style="width: 25%">상태</th>
+                                   <th style="width: 25%">
                                    	<input type="hidden" name="nameResult" value="${jawonAllVo.resTypeVo.typeName }">
                                    	<button type="button" class="btn btn-light jawonAdd" value="${jawonAllVo.resTypeVo.typeNo }"
                                    		data-toggle="modal" data-target="#exampleAdd" name="jawonAdd">추가</button>
@@ -183,8 +187,7 @@ $(function() {
                            <tbody>
                             <c:if test="${!empty tList }">
                              <c:forEach var="map" items="${jawonAllVo.typeDetailsList }">
-                             <input type="text" name="test" value="${map['RES_NAME'] }">
-<%--                              	<c:set var="res" value="0"/> --%>
+                             <input type="hidden" name="test" value="${map['RES_NAME'] }">
                              	<c:if test="map['RES_NAME']==0">
                              		<tr>
 	                             		<td colspan="4">
@@ -198,8 +201,8 @@ $(function() {
 	                                   <td id="resLocation">${map['RES_LOCATION'] }</td>
 	                                   <td><button type="button" class="btn btn-warning">사용중</button></td>
 	                                   <td>
-	                                   		<input type="text" name="resLat" value="${map['RES_LAT'] }">
-	                                   		<input type="text" name="resLng" value="${map['RES_LNG'] }">
+	                                   		<input type="hidden" name="resLat" value="${map['RES_LAT'] }">
+	                                   		<input type="hidden" name="resLng" value="${map['RES_LNG'] }">
 	                                   		<a href="#" id="a-hover" class="edit" value="${map['RES_NO'] }"
 	                                   				data-toggle="modal" data-target="#exampleEdit">수정</a>&nbsp;
 	                                   		<a href="#" id="a-hover" class="remove" value="${map['RES_NO'] }"

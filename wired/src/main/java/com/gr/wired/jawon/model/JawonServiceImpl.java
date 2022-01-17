@@ -61,6 +61,11 @@ public class JawonServiceImpl implements JawonService{
 	}
 
 	@Override
+	public List<Map<String, Object>> selectMainJawon() {
+		return jawonDao.selectMainJawon();
+	}
+
+	@Override
 	public int deleteJawonType(int typeNo) {
 		return jawonDao.deleteJawonType(typeNo);
 	}
@@ -79,6 +84,8 @@ public class JawonServiceImpl implements JawonService{
 	public JawonVO selectJawonLoc(int resNo) {
 		return jawonDao.selectJawonLoc(resNo);
 	}
+
+
 
 
 }

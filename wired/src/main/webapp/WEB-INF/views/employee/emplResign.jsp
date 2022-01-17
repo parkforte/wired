@@ -38,6 +38,11 @@
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
+function boardList(curPage) {
+	$('#currentPage').val(curPage);
+	$('form[name=frmPage]').submit();
+}
+
 $(function(){
 	$('.btn-back').each(function(index,item) {
 		$(this).click(function() {
@@ -49,7 +54,14 @@ $(function(){
 	});
 });
 </script>
+<!-- 페이징 처리를 위한 form 시작-->
+	<form name="frmPage" method="post" action="<c:url value='/employee/emplResign'/>">
+		<input type="hidden" name="currentPage" id="currentPage">
+		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+	</form>
+<!-- 페이징 처리를 위한 form 끝-->
 
+	<form name="frmList" method="post" action="<c:url value='/employee/emplResign'/>">
       <!-- defaultPage -->
     <div class="container-fluid font">
 		<div id="topTitle">
@@ -57,11 +69,10 @@ $(function(){
         <h1 class="h3 mb-2 text-gray-800 h1-style">퇴사자 목록</h1>
         <p class="mb-4 f-left">resignation List</p>
         <!-- search -->
-        <form class="d-flex f-right m-search">
-			<input class="form-control mr-2" type="search" placeholder="Search"
-				aria-label="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
-		</form>
+			<div id='boardListSc' class="d-flex f-right m-search">
+				<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" name="searchKeyword">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</div>
 		</div>
         <!-- title1 -->
          <div class="card shadow mb-4 c-both">
@@ -112,7 +123,7 @@ $(function(){
                                    <td>${map['MEM_NO'] }</td>
                                    <td>${map['MEM_NAME'] }</td>
                                    <td>${map['DEPT_NAME'] }</td>
-                                   <td>${map['POS_NO'] }</td>
+                                   <td>${map['POS_NAME'] }</td>
                                    <td>
 										<c:if test="${!empty map['MEM_HP1'] }">
 									           <span id="hp1">${map['MEM_HP1'] }</span>
@@ -120,8 +131,8 @@ $(function(){
 									           - <span id="hp3">${map['MEM_HP3'] }</span>
 								        </c:if>
 								   </td>
-								   <td>${map['MEM_JOINDATE'] }</td>
-								   <td>${map['MEM_RESIGNDATE'] }</td>
+								   <td><fmt:formatDate value="${map['MEM_JOINDATE'] }" pattern="yyyy-MM-dd"/></td>
+								   <td><fmt:formatDate value="${map['MEM_RESIGNDATE'] }" pattern="yyyy-MM-dd"/></td>
                                    <td>
 									<button type="button" class="btn btn-info btn-back" value="${map['MEM_NO'] }"
 									data-toggle="modal" data-target="#exampleModal">
@@ -135,36 +146,56 @@ $(function(){
                    </div>
                </div>
                 </div>
-                <!-- paging -->
-    				<div class="row">
+                <!-- 페이징 -->
+              		<div class="row">
               			<div class="col-sm-12 col-md-5">
               				<div class="dataTables_info" id="dataTables_info" role="status">
-              					Showing 1 to 10 of 57 entries
+              					Showing ${pagingInfo.firstPage } to ${pagingInfo.currentPage } of ${pagingInfo.totalPage } entries
               				</div>
 
               			</div>
 
               			<!-- 페이징 1,2,3,4,5, -->
               			<div class="col-sm-12 col-md-7">
-              				<nav aria-label="...">
-							  <ul class="pagination ">
-							    <li class="page-item disabled">
-							      <span class="page-link">Previous</span>
-							    </li>
-							    <li class="page-item"><a class="page-link" href="#">1</a></li>
-							    <li class="page-item active" aria-current="page">
-							      <span class="page-link">2</span>
-							    </li>
-							    <li class="page-item"><a class="page-link" href="#">3</a></li>
-							    <li class="page-item">
-							      <a class="page-link" href="#">Next</a>
-							    </li>
-							  </ul>
+              				<nav class="f-right" aria-label="...">
+	                       		<!-- 페이지 번호추가 -->
+								<ul class="pagination">
+
+										<li class="page-item
+										<c:if test="${pagingInfo.firstPage==1 }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
+
+									<!-- [1][2][3][4][5][6][7][8][9][10] -->
+									<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+
+
+										<li
+											<c:if test="${i==pagingInfo.currentPage }">
+												class="page-item active" aria-current="page"
+											</c:if>
+											<c:if test="${i!=pagingInfo.currentPage }">
+												class="page-item"
+											</c:if>
+										><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li>
+									</c:forEach>
+
+										<li class="page-item
+										<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+									<!-- 페이지 번호끝 -->
+								</ul>
 							</nav>
               			</div>
+              			<input type="hidden" value="${pagingInfo.lastPage }"/>
               		</div>
+              		<!-- 페이징 -->
 
     </div>
+
 
     <!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -188,6 +219,7 @@ $(function(){
 			</div>
     <!-- /.container-fluid -->
      </div>
+     </form>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
 
