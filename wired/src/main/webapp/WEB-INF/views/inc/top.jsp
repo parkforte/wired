@@ -173,9 +173,20 @@ $(function(){
 			</li>
 
 			<!-- 웹하드 -->
-			<li class="nav-item"><a class="nav-link" href="#">
+			<li class="nav-item"><a class="nav-link" href="#"
+				data-toggle="collapse" data-target="#collapseWeb"
+				aria-expanded="true" aria-controls="collapseWeb">
 					<i class="fas fa-fw fa-chart-area"></i> <span>웹하드</span>
-			</a></li>
+				</a>
+				<div id="collapseWeb" class="collapse"
+					aria-labelledby="headingPages" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">웹하드:</h6>
+							<a class="collapse-item" href="<c:url value='/webHard/webHardList'/>">나의 웹하드</a>
+							<a class="collapse-item" href="<c:url value='/webHard/webHardComList'/>">사내 웹하드</a>
+					</div>
+				</div>
+			</li>
 
 			<!-- 조직도 -->
 			<li class="nav-item"><a class="nav-link" href="<c:url value='/organChart/organizationChart'/>">

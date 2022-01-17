@@ -54,6 +54,11 @@ public class CommuteServiceImpl implements CommuteService{
 		return commuteDao.selectTotalRecord(dateSearchVo);
 	}
 
+	@Override
+	public Map<String, Object> selectHoliday(int memNo) {
+		return commuteDao.selectHoliday(memNo);
+	}
+
 
 
 

@@ -123,7 +123,6 @@ as
     and c.cf_order>0
 );
 
---docbox join
 
 
 select c.*, 
