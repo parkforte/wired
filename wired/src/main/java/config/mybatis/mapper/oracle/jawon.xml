@@ -79,13 +79,18 @@
 		<selectKey keyProperty="resNo" resultType="int" order="BEFORE">
 			select RES_SEQ.NEXTVAL from dual
 		</selectKey>
-		INSERT INTO RESOURCES(TYPE_NO, RES_NO, RES_NAME, RES_LOCATION)
-		VALUES(#{typeNo},#{resNo},#{resName},#{resLocation})
+		INSERT INTO RESOURCES(TYPE_NO, RES_NO, RES_NAME, RES_LOCATION, RES_LAT, RES_LNG)
+		VALUES(#{typeNo},#{resNo},#{resName},#{resLocation},#{resLat},#{resLng})
 	</insert>
 
 	<update id="updateJawon" parameterType="jawonVo">
 		UPDATE RESOURCES
-		SET RES_NAME=#{resName}, RES_LOCATION=#{resLocation}
+		SET RES_NAME=#{resName}, RES_LOCATION=#{resLocation}, RES_LAT=#{resLat}, RES_LNG=#{resLng}
 		WHERE RES_NO=#{resNo}
 	</update>
+
+	<select id="selectJawonLoc" parameterType="int" resultType="jawonVo">
+		SELECT * FROM RESOURCES
+		WHERE RES_NO=#{resNo}
+	</select>
 </mapper>

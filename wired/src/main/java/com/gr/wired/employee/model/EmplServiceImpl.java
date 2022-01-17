@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gr.wired.common.BSearchVO;
 import com.gr.wired.common.SearchVO;
 
 @Service
@@ -25,8 +26,11 @@ public class EmplServiceImpl implements EmplService{
 	@Override
 	public int loginCheck(String memId, String memPwd) {
 		String dbPwd = emplDao.selectPwd(memId);
+		String dbResign = emplDao.selectResign(memId);
 		int result=0;
-		if(dbPwd==null || dbPwd.isEmpty()) {
+		if(dbResign!=null) {
+			result=USERID_NONE;
+		}else if(dbPwd==null || dbPwd.isEmpty()) {
 			result=USERID_NONE;
 		}else {
 			if(dbPwd.equals(memPwd)) {
@@ -45,12 +49,12 @@ public class EmplServiceImpl implements EmplService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectAll(SearchVO searchVo) {
+	public List<Map<String, Object>> selectAll(BSearchVO searchVo) {
 		return emplDao.selectAll(searchVo);
 	}
 
 	@Override
-	public int selectTotalRecord(SearchVO searchVo) {
+	public int selectTotalRecord(BSearchVO searchVo) {
 		return emplDao.selectTotalRecord(searchVo);
 	}
 

@@ -7,6 +7,8 @@ public class JawonVO {
 	private String resLocation;
 	private char reservFlag;
 	private String resInformation;
+	private String resLat;
+	private String resLng;
 
 	public int getResNo() {
 		return resNo;
@@ -45,10 +47,25 @@ public class JawonVO {
 		this.resInformation = resInformation;
 	}
 
+	public String getResLat() {
+		return resLat;
+	}
+	public void setResLat(String resLat) {
+		this.resLat = resLat;
+	}
+	public String getResLng() {
+		return resLng;
+	}
+	public void setResLng(String resLng) {
+		this.resLng = resLng;
+	}
+
 	@Override
 	public String toString() {
 		return "JawonVO [resNo=" + resNo + ", typeNo=" + typeNo + ", resName=" + resName + ", resLocation="
-				+ resLocation + ", reservFlag=" + reservFlag + ", resInformation=" + resInformation + "]";
+				+ resLocation + ", reservFlag=" + reservFlag + ", resInformation=" + resInformation + ", resLat="
+				+ resLat + ", resLng=" + resLng + "]";
 	}
+
 
 }

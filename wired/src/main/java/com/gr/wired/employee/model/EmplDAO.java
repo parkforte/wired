@@ -5,15 +5,17 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gr.wired.common.BSearchVO;
 import com.gr.wired.common.SearchVO;
 
 @Mapper
 public interface EmplDAO {
 	int insertMember(EmplVO emplVo);
 	String selectPwd(String memId);
+	String selectResign(String memId);
 	EmplVO selectByMemId(String memId);
-	List<Map<String, Object>> selectAll(SearchVO searchVo);
-	int selectTotalRecord(SearchVO searchVo);
+	List<Map<String, Object>> selectAll(BSearchVO searchVo);
+	int selectTotalRecord(BSearchVO searchVo);
 	int updateSignature(EmplVO emplVo);
 	List<Map<String, Object>> selectByMemName(EmplVO emplVo);
 	Map<String, Object> selectByView(int memNo);

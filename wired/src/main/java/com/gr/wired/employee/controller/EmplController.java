@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gr.wired.common.BSearchVO;
 import com.gr.wired.common.ConstUtil;
 import com.gr.wired.common.PaginationInfo;
 import com.gr.wired.common.SearchVO;
@@ -68,7 +69,7 @@ public class EmplController {
 	}
 
 	@RequestMapping("/emplList")
-	public String emplAll(@ModelAttribute SearchVO searchVo, Model model) {
+	public String emplAll(@ModelAttribute BSearchVO searchVo, Model model) {
 		logger.info("글목록, 파라미터 searchVo={}", searchVo);
 
 		//[1] PaginationInfo 객체 생성 - 계산해줌
