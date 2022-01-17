@@ -5,7 +5,7 @@
 <mapper namespace="com.gr.wired.employee.model.EmplDAO">
 	<sql id="searchWhere">
 		<if test="searchKeyword!=null and searchKeyword!=''">
-			where ${searchCondition} like '%' || #{searchKeyword} || '%'
+			AND MEM_NAME LIKE '%' || #{searchKeyword} || '%'
 		</if>
 	</sql>
 
@@ -44,7 +44,7 @@
 		        ON M.DEPT_NO=D.DEPT_NO
 		        JOIN POSITION P
 		        ON M.POS_NO=P.POS_NO
-		        AND MEM_RESIGNDATE IS NULL
+		        WHERE MEM_RESIGNDATE IS NULL
 		        <include refid="searchWhere"></include>
 		        ORDER BY MEM_NO DESC
 		    )A
@@ -56,6 +56,7 @@
 
 	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
 		SELECT COUNT(*) FROM MEMBER
+		WHERE MEM_RESIGNDATE IS NULL
 		<include refid="searchWhere"></include>
 	</select>
 
@@ -88,9 +89,28 @@
 		WHERE MEM_NO=#{memNo}
 	</update>
 
-	<select id="resignMember" resultType="map">
-		SELECT * FROM MEMBERINFO_VIEW
+	<select id="resignMember" resultType="map" parameterType="searchVo">
+		SELECT *
+		FROM
+		(
+		    SELECT ROWNUM AS RNUM, A.*
+		    FROM
+		    (
+		        SELECT * FROM MEMBERINFO_VIEW
+				WHERE MEM_RESIGNDATE IS NOT NULL
+		        <include refid="searchWhere"></include>
+		        ORDER BY MEM_RESIGNDATE DESC
+		    )A
+		)
+		<![CDATA[
+		WHERE RNUM>#{firstRecordIndex}
+			AND RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+
+	<select id="selectResignRecord" parameterType="searchVo" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
 		WHERE MEM_RESIGNDATE IS NOT NULL
+		<include refid="searchWhere"></include>
 	</select>
 
 	<update id="upBackMember" parameterType="int">

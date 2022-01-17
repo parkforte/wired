@@ -34,6 +34,11 @@
 </style>
 <!-- javaScript영역 -->
 <script type="text/javascript">
+function boardList(curPage) {
+	$('#currentPage').val(curPage);
+	$('form[name=frmPage]').submit();
+}
+
 $(function() {
 	$('.res_btn').each(function(index,item) {
 		$(this).click(function() {
@@ -47,25 +52,25 @@ $(function() {
 });
 
 </script>
-<!-- 페이징 처리를 위한 form -->
-<form id="frmPage" method="post" action="<c:url value='/employee/emplList'/>">
-	<input type="hidden" name="currentPage" >
-	<input type="hidden" name="searchCondition" value="${param.searchCondition }">
-	<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
-</form>
+<!-- 페이징 처리를 위한 form 시작-->
+	<form name="frmPage" method="post" action="<c:url value='/employee/emplList'/>">
+		<input type="hidden" name="currentPage" id="currentPage">
+		<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
+	</form>
+<!-- 페이징 처리를 위한 form 끝-->
 
+	<form name="frmList" method="post" action="<c:url value='/employee/emplList'/>">
       <!-- defaultPage -->
     <div class="container-fluid font">
 		<div id="topTitle">
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800 h1-style">사원목록</h1>
         <p class="mb-4 f-left">Employee List</p>
-        <!-- search -->
-		<form class="d-flex f-right m-search">
-			<input class="form-control mr-2" type="search" placeholder="Search"
-				aria-label="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
-		</form>
+		<!-- search -->
+			<div id='boardListSc' class="d-flex f-right m-search">
+				<input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search" name="searchKeyword">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</div>
 		</div>
         <!-- title1 -->
          <div class="card shadow mb-4 c-both">
@@ -90,7 +95,6 @@ $(function() {
                            </div>
                        </form>
                    </div>
-               </li>
                </div>
                <div class="card-body">
                    <div class="table-responsive">
@@ -142,41 +146,54 @@ $(function() {
                </div>
 
     </div>
-    		<!-- paging -->
-    				<nav class="f-right" aria-label="...">
-			                       		<!-- 페이지 번호추가 -->
-										<ul class="pagination">
 
-											<li class="page-item
-											<c:if test="${pagingInfo.firstPage==1 }">
-												disabled
+    		<!-- 페이징 -->
+              		<div class="row">
+              			<div class="col-sm-12 col-md-5">
+              				<div class="dataTables_info" id="dataTables_info" role="status">
+              					Showing ${pagingInfo.firstPage } to ${pagingInfo.currentPage } of ${pagingInfo.totalPage } entries
+              				</div>
+
+              			</div>
+
+              			<!-- 페이징 1,2,3,4,5, -->
+              			<div class="col-sm-12 col-md-7">
+              				<nav class="f-right" aria-label="...">
+	                       		<!-- 페이지 번호추가 -->
+								<ul class="pagination">
+
+										<li class="page-item
+										<c:if test="${pagingInfo.firstPage==1 }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
+
+									<!-- [1][2][3][4][5][6][7][8][9][10] -->
+									<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
+
+
+										<li
+											<c:if test="${i==pagingInfo.currentPage }">
+												class="page-item active" aria-current="page"
 											</c:if>
-											"><a class="page-link" href="#" onclick="boardList(${pagingInfo.firstPage-1})">Previous</a></li>
+											<c:if test="${i!=pagingInfo.currentPage }">
+												class="page-item"
+											</c:if>
+										><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li>
+									</c:forEach>
 
-											<!-- [1][2][3][4][5][6][7][8][9][10] -->
-											<c:forEach var="i" begin="${pagingInfo.firstPage }" end="${pagingInfo.lastPage }">
-
-
-												<li
-													<c:if test="${i==pagingInfo.currentPage }">
-														class="page-item active" aria-current="page"
-													</c:if>
-													<c:if test="${i!=pagingInfo.currentPage }">
-														class="page-item"
-													</c:if>
-												><a class="page-link" href="#" onclick="boardList(${i })">${i }</a></li>
-
-											</c:forEach>
-
-
-												<li class="page-item
-												<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
-													disabled
-												</c:if>
-												"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
-											<!-- 페이지 번호끝 -->
-										</ul>
-									</nav>
+										<li class="page-item
+										<c:if test="${pagingInfo.lastPage==pagingInfo.totalPage }">
+											disabled
+										</c:if>
+										"><a class="page-link" href="#" onclick="boardList(${pagingInfo.lastPage+1})">Next</a></li>
+									<!-- 페이지 번호끝 -->
+								</ul>
+							</nav>
+              			</div>
+              			<input type="hidden" value="${pagingInfo.lastPage }"/>
+              		</div>
+              		<!-- 페이징 -->
 
 
                 </div>
@@ -204,6 +221,7 @@ $(function() {
 
     <!-- /.container-fluid -->
      </div>
+     </form>
 <!-- End of Main Content -->
 <%@ include file="../inc/bottom.jsp" %>
 
