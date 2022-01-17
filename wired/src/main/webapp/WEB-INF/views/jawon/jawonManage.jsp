@@ -304,7 +304,7 @@ $(function() {
 			      </div>
 			        <form name="frmRes" action="<c:url value='/jawon/jawonAdd'/>">
 			      <div class="modal-body">
-			        <input type="text" name="typeNo">
+			        <input type="hidden" name="typeNo">
 					  <div class="form-group">
 					    <label for="exampleInputEmail1">자원명</label>
 					    <input type="text" class="form-control" id="typeName"  name="typeName"

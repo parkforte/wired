@@ -63,5 +63,5 @@ public class DBConfiguration {
 	public PlatformTransactionManager txManager() throws Exception{
 		return new DataSourceTransactionManager(dataSource());
 	}
-		
+
 }
