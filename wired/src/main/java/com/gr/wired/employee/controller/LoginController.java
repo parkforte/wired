@@ -107,6 +107,6 @@ public class LoginController {
 		session.removeAttribute("ranksNo");
 		session.removeAttribute("memNo");
 
-		return "redirect:/index";
+		return "redirect:/login";
 	}
 }
