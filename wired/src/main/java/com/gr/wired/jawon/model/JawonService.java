@@ -17,5 +17,6 @@ public interface JawonService {
 	int deleteJawonType(int typeNo);
 	int insertJawon(JawonVO jawonVo);
 	int updateJawon(JawonVO jawonVo);
+	int deleteJawon(int resNo);
 	JawonVO selectJawonLoc(int resNo);
 }

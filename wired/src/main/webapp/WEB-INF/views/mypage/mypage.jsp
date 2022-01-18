@@ -119,9 +119,9 @@ span{
 				alert('주소를 입력해주세요.');
 				$('#memAddressdetail').focus();
 				event.preventDefault();
-			}else if($('#memEmail1').val()==null){
+			}else if($('#memFlag').val()=='N'){
 				alert('이메일 인증을 해주세요');
-				$('#memEmail1').focus();
+ 				$('#memEmail1').focus();
 				event.preventDefault();
 			}
 
@@ -164,6 +164,7 @@ span{
 			if ($(".compare").val() == key) {
 				$(".compare-text").text("인증 성공!").css("color", "#28A745");
 				isCertification = true;
+				$('#memFlag').val('Y');
 			} else {
 				$(".compare-text").text("불일치!").css("color", "red");
 				isCertification = false;
@@ -377,9 +378,9 @@ span{
 							</div>
 							<!-- 인증여부 -->
 							<div class="form-group">
-								<input type="hidden"
+								<input type="text"
 									 class="form-control form-control-user c-size"
-									id="memFlag" name="memFlag" ReadOnly value="Y">
+									id="memFlag" name="memFlag" ReadOnly value="${map['MEM_FLAG']}">
 							</div>
 							<!-- button -->
 							<div class="form-group c-size" style="text-align: center;">

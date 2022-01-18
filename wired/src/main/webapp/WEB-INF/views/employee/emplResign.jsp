@@ -195,12 +195,10 @@ $(function(){
               		<!-- 페이징 -->
 
     </div>
-
+</form>
 
 
     <!-- /.container-fluid -->
-     </div>
-     </form>
 <!-- End of Main Content -->
 <!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

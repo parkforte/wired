@@ -385,7 +385,7 @@ $(function() {
 			<div class="modal fade" id="exampleDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
-			    <form name="frmResDel" action="">
+			    <form name="frmResDel" action="<c:url value='/jawon/jawonDelete'/>">
 			      <div class="modal-header">
 			    <input type="hidden" name="resNo">
 			      	<h5 class="modal-title" id="exampleModalLabel">자원 삭제</h5>
