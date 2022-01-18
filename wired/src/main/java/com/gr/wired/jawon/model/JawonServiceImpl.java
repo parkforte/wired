@@ -81,9 +81,15 @@ public class JawonServiceImpl implements JawonService{
 	}
 
 	@Override
+	public int deleteJawon(int resNo) {
+		return jawonDao.deleteJawon(resNo);
+	}
+
+	@Override
 	public JawonVO selectJawonLoc(int resNo) {
 		return jawonDao.selectJawonLoc(resNo);
 	}
+
 
 
 

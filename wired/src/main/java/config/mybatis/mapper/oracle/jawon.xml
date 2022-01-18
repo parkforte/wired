@@ -11,10 +11,6 @@
 		VALUES(#{typeNo}, #{typeName})
 	</insert>
 
-<!-- 	<select id="selectJawonName" resultType="jawonVo"> -->
-<!-- 		SELECT * FROM RESTYPE -->
-<!-- 	</select> -->
-
 	<select id="selectType" resultType="resTypeVo">
 		SELECT * FROM RESTYPE
 	</select>
@@ -103,6 +99,10 @@
 		SET RES_NAME=#{resName}, RES_LOCATION=#{resLocation}, RES_LAT=#{resLat}, RES_LNG=#{resLng}
 		WHERE RES_NO=#{resNo}
 	</update>
+
+	<delete id="deleteJawon" parameterType="int">
+		DELETE FROM RESOURCES WHERE RES_NO=#{resNo}
+	</delete>
 
 	<select id="selectJawonLoc" parameterType="int" resultType="jawonVo">
 		SELECT * FROM RESOURCES

@@ -204,6 +204,25 @@ public class JawonController {
 		return "common/message";
 	}
 
+	@RequestMapping("/jawonDelete")
+	public String jawonDel(@RequestParam(defaultValue = "0") int resNo, Model model) {
+		logger.info("자원 삭제 처리, 파라미터 resNo={}", resNo);
+
+		int cnt=jawonService.deleteJawon(resNo);
+		logger.info("자원 삭제 결과, cnt={}", cnt);
+
+		String msg="자원 삭제 실패", url="/jawon/jawonManage";
+		if(cnt>0) {
+			msg="자원 삭제 성공";
+			url="/jawon/jawonManage";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "common/message";
+	}
+
 	@RequestMapping("/jawonMapBak")
 	public void jawonMap() {
 		logger.info("위치 등록 화면");
