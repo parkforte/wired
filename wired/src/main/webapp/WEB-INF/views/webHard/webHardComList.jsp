@@ -124,9 +124,9 @@ input#exampleCheck1\ chkbox {
 						<button type="button" class="btn btn-primary f-left istAdd" data-toggle="modal" data-target="#exampleList" id="btUpload">업로드</button>
 
 						<button type="button" class="btn btn-primary f-left" id="btMultiDown">다운로드</button>
-<%-- 						<c:if test="${sessionScope.ranksNo==3}"> --%>
+						<c:if test="${sessionScope.ranksNo==3}">
 						<button type="button" id="btMultiDel" class="btn btn-danger f-left detailbt">파일삭제</button>
-<%-- 						</c:if> --%>
+						</c:if>
 					</div>
                </div>
 
@@ -159,9 +159,9 @@ input#exampleCheck1\ chkbox {
                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
                                <tr>
-<%--                                    <c:if test="${sessionScope.ranksNo==3}"> --%>
+                                   <c:if test="${sessionScope.ranksNo==3}">
                                	  	 <th style="width:50px"><input type="checkbox" name="chkAll" class="form-check-input" id="exampleCheck1 chkAll"></th>
-<%--                            			</c:if> --%>
+                           			</c:if>
                                    <th style="width: 151px">작성자</th>
                                    <th>파일명</th>
                                    <th style="width: 140px">등록일</th>
@@ -185,7 +185,7 @@ input#exampleCheck1\ chkbox {
 						<c:set var="idx" value="0"/>
                            <c:forEach var="vo" items="${fList }">
 	                               <tr>
-<%-- 	                               		<c:if test="${sessionScope.ranksNo==3}"> --%>
+	                               		<c:if test="${sessionScope.ranksNo==3}">
 	                                   <td>
 		                                   	<script type="text/javascript">
 												$()
@@ -193,7 +193,7 @@ input#exampleCheck1\ chkbox {
 	                                   		<input type="checkbox"  class="form-check-input" id="exampleCheck1 chkbox" value="${vo.fileNo}" name="webHardItems[${idx}].fileNo">
 		                                   	<input type="hidden"  value="${vo.fileName }" name="webHardItems[${idx}].fileName">
 	                                   </td>
-<%-- 	                                   </c:if> --%>
+	                                   </c:if>
 	                                   <td>${vo.memName }</td>
 	                                   <td>
 	                                   		<span>
