@@ -378,7 +378,7 @@ span{
 							</div>
 							<!-- 인증여부 -->
 							<div class="form-group">
-								<input type="text"
+								<input type="hidden"
 									 class="form-control form-control-user c-size"
 									id="memFlag" name="memFlag" ReadOnly value="${map['MEM_FLAG']}">
 							</div>
