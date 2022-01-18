@@ -80,7 +80,7 @@ a{
    		<form class="frmWrite" method="post" enctype="multipart/form-data" action='<c:url value="/board/boardUpdate"/>'>
 		<div class="card-header py-3">
 
-			<input type="text" name="bdlistNo" value="${bdListVo.bdlistNo}">
+			<input type="hidden" name="bdlistNo" value="${bdListVo.bdlistNo}">
 			<input type="hidden" name="oldFileName" value="${boardVo.boardFilename}">
 
 			<h6 class="m-0 font-weight-bold text-primary"  >게시판-${bdListVo.bdlistName }</h6>
