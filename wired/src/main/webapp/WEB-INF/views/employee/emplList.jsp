@@ -30,6 +30,9 @@
 #t-width {
     width: 3%;
 }
+.no-width{
+	width: 6%;
+}
 
 </style>
 <!-- javaScript영역 -->
@@ -102,12 +105,13 @@ $(function() {
                            <thead>
                                <tr>
                                	   <th id="t-width"><input type="checkbox" class="form-check-input check-margin" id="exampleCheck1"></th>
-                                   <th>사원번호</th>
-                                   <th>이름</th>
+                                   <th class="no-width">사원번호</th>
+                                   <th>아이디</th>
+                                   <th style="width: 20%;">이름</th>
                                    <th>부서</th>
                                    <th>직급</th>
-                                   <th>연락처</th>
-                                   <th>수정/삭제</th>
+                                   <th style="width: 20%;">연락처</th>
+                                   <th style="width: 9.2%;">수정/삭제</th>
                                </tr>
                            </thead>
                            <tbody>
@@ -122,6 +126,7 @@ $(function() {
 	                               <tr>
 	                                   <td><input type="checkbox" class="form-check-input check-margin2" id="exampleCheck1"></td>
 	                                   <td>${map['MEM_NO'] }</td>
+	                                   <td>${map['MEM_ID'] }</td>
 	                                   <td>${map['MEM_NAME'] }</td>
 	                                   <td>${map['DEPT_NAME'] }</td>
 	                                   <td>${map['POS_NAME'] }</td>

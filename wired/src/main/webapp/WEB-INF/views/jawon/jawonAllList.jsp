@@ -34,7 +34,25 @@ $(function() {
 			window.open("/wired/jawon/reserveLocation?resNo="+res,"/", "left=50, top=20, width=800, height=400, scrollbars=yes,resizable=yes");
 		});
 	});
+	var today = new Date().getFullYear() + "-" + _pad(new String(new Date().getMonth() + 1), 2) + "-" + _pad(new String(new Date().getDate()), 2);
+	var useReg=null;
+	var returnReg=null;
+	$('.jawonInfo').each(function(index,item){
+		useReg=$(this).find('input[name=useRegdate]').val();
+		returnReg=$(this).find('input[name=returnRegdate]').val();
+		if(today>=useReg && today<=returnReg+1){
+			$(this).find('#btnUse').removeClass("btn-secondary");
+			$(this).find('#btnUse').addClass("btn-warning");
+			$(this).find('#btnUse').text('사용중');
+		}
+	});
 });
+
+
+
+function _pad(n, width) {
+	n = n + ''; return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+}
 
 </script>
 
@@ -99,6 +117,7 @@ $(function() {
                                    <th>기간</th>
                                    <th>예약정보</th>
                                    <th>예약위치</th>
+                                   <th>상태</th>
                                    <th>부서</th>
                                </tr>
                            </thead>
@@ -110,7 +129,7 @@ $(function() {
                             </c:if>
                             <c:if test="${!empty aList }">
                         	<c:forEach var="map" items="${aList }">
-                               <tr>
+                               <tr class="jawonInfo">
                                    <td>${map['TYPE_NAME'] }</td>
                                    <td>${map['RES_NAME'] }</td>
                                    <td>
@@ -121,6 +140,10 @@ $(function() {
                                    ${map['RES_LOCATION'] }<button type="button" class="btn btn-outline-info btn-loc"
                                    		value="${map['RES_NO'] }" >위치보기</button>
                                    </td>
+                                   <td>
+                                   <input type="hidden" name="useRegdate" value='<fmt:formatDate value="${map['USE_REGDATE']}" pattern="yyyy-MM-dd"/>'>
+                                   <input type="hidden" name="returnRegdate" value='<fmt:formatDate value="${map['RETURN_REGDATE']}" pattern="yyyy-MM-dd"/>'>
+	                                   <button type="button" class="btn btn-secondary" id="btnUse">미사용</button></td>
                                    <td>${map['DEPT_NAME'] }</td>
                                </tr>
                         </c:forEach>

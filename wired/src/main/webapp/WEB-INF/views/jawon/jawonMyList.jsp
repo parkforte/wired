@@ -40,7 +40,6 @@ $(function() {
 		$(this).click(function(){
 			var res=$(this).val();
 			window.open("/wired/jawon/reserveLocation?resNo="+res,"/", "left=50, top=20, width=800, height=400, scrollbars=yes,resizable=yes");
-// 			location.href="<c:url value='/jawon/reserveLocation?resNo='/>"+res;
 		});
 	});
 });
