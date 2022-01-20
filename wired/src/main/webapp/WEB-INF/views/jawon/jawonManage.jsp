@@ -63,6 +63,9 @@ a{
 	margin-top: -67px;
     margin-left: 261px;
 }
+.btn-loc{
+	margin-left: 20px;
+}
 
 </style>
 <!-- javaScript영역 -->
@@ -90,33 +93,26 @@ $(function() {
 			$('#exampleEdit').find('input[name=typeName]').val($(this).parents('#dataTable').find('.typeName').text());
 			$('#exampleEdit').find('input[name=resName]').val($(this).parents('tr').find('td:eq(0)').text());
 			$('#exampleEdit').find('input[name=resLocation]').val($(this).parents('tr').find('td:eq(1)').text());
-// 			$('#exampleEdit').find('input[name=resLat]').val($(this).siblings('td:eq(0)').text());
 
 		});
 	});
 	$('.remove').each(function(index,item){
 		$(this).on("click",function(){
 			$('#exampleDelete').find('input[name=resNo]').val($(this).attr('value'));
-// 			$('#exampleDelete').find('#m-del').text($(this).prevAll().('input[name=resLat]').val());
 			$('#exampleDelete').find('#m-del').text($(this).parents('tr').find('td:eq(0)').text());
 		});
 	});
 	$('.mapOpen').click(function(){
 		window.open("/wired/jawon/jawonMapBak","manageMap", "left=50, top=20, width=800, height=500, scrollbars=yes,resizable=yes");
 	});
+	$('.btn-loc').each(function(index,item){
+		$(this).click(function(){
+			var res=$(this).val();
+			window.open("/wired/jawon/reserveLocation?resNo="+res,"/", "left=50, top=20, width=800, height=400, scrollbars=yes,resizable=yes");
+		});
+	});
 
 });
-// var openWin;
-// function openMap(){
-// 	window.name="manageForm";
-// 	openWin = window.open("/wired/jawon/jawonMap","mapForm", "_blank");
-// }
-
-// function setMapText(){
-// 	openWin.document.getElementById("cInput").value = document.getElementById("pInput").value;
-// }
-
-
 
 </script>
 
@@ -176,7 +172,7 @@ $(function() {
                                <tr>
                                    <th style="width: 25%">자원명 [<span class="typeName">${jawonAllVo.resTypeVo.typeName }</span>]</th>
                                    <th style="width: 25%">자원위치</th>
-                                   <th style="width: 25%">상태</th>
+                                   <th style="width: 8%"></th>
                                    <th style="width: 25%">
                                    	<input type="hidden" name="nameResult" value="${jawonAllVo.resTypeVo.typeName }">
                                    	<button type="button" class="btn btn-light jawonAdd" value="${jawonAllVo.resTypeVo.typeNo }"
@@ -197,9 +193,12 @@ $(function() {
                              	</c:if>
                              	<c:if test="${!empty jawonAllVo.typeDetailsList}">
 	                               <tr>
-	                                   <td id="resName">${map['RES_NAME'] }</td>
+	                                   <td id="resName">${map['RES_NAME'] }
 	                                   <td id="resLocation">${map['RES_LOCATION'] }</td>
-	                                   <td><button type="button" class="btn btn-warning">사용중</button></td>
+	                                   <td><button type="button" class="btn btn-outline-info btn-loc"
+                                   		value="${map['RES_NO'] }" >위치보기</button>
+                                   		</td>
+
 	                                   <td>
 	                                   		<input type="hidden" name="resLat" value="${map['RES_LAT'] }">
 	                                   		<input type="hidden" name="resLng" value="${map['RES_LNG'] }">
@@ -350,7 +349,7 @@ $(function() {
 			      </div>
 			      <div class="modal-body">
 			        <form name="frmResEdit" action="<c:url value='/jawon/jawonEdit'/>">
-			        <input type="text" name="resNo">
+			        <input type="hidden" name="resNo">
 					  <div class="form-group">
 					    <label for="jawonName">자원명</label>
 					    <input type="text" class="form-control" name="typeName" id="typeName" Readonly aria-describedby="emailHelp">
