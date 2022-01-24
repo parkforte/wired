@@ -21,7 +21,7 @@
 					JOIN DEPARTMENT D
 					ON M.DEPT_NO=D.DEPT_NO
 					WHERE D.DEPT_NAME=#{deptName}
-					ORDER BY D.DEPT_NO DESC
+					ORDER BY MEM_NO DESC
 				)A
 			)
 

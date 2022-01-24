@@ -103,7 +103,7 @@ $(function() {
 		});
 	});
 	$('.mapOpen').click(function(){
-		window.open("/wired/jawon/jawonMapBak","manageMap", "left=50, top=20, width=800, height=500, scrollbars=yes,resizable=yes");
+		window.open("/wired/jawon/jawonMapBak","manageMap", "left=50, top=20, width=800, height=350, scrollbars=yes,resizable=yes");
 	});
 	$('.btn-loc').each(function(index,item){
 		$(this).click(function(){
