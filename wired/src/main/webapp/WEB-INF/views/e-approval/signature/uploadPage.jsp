@@ -54,10 +54,8 @@
 			</div>
 			<div class="card-body">
 				<div class="canvasBox">
-				<c:if test=" ${!empty emplVo.memOriginalfilename }">
 					<img src="<c:url value='/upload/signature/${emplVo.memOriginalfilename }'/>"
 		 		border="0" width="100%">
-		 		</c:if>
 				</div>
 			</div>
 		</div>
