@@ -39,7 +39,7 @@
 	$(function(){
 		$('#btnPaint').click(function(){
 			open('paint','paint',
-			 'width=400,height=450,left=50,top=50,location=yes,resizable=yes');
+			 'width=350,height=300,left=50,top=50,location=yes,resizable=yes');
 		});
 
 	});
@@ -54,10 +54,8 @@
 			</div>
 			<div class="card-body">
 				<div class="canvasBox">
-				<c:if test=" ${!empty emplVo.memOriginalfilename }">
 					<img src="<c:url value='/upload/signature/${emplVo.memOriginalfilename }'/>"
 		 		border="0" width="100%">
-		 		</c:if>
 				</div>
 			</div>
 		</div>

@@ -69,7 +69,7 @@
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary" >${param.deptName }</h6>
-				
+
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
@@ -87,7 +87,7 @@
 						<tbody>
 								<c:if test="${empty organList }">
 									<tr>
-										<td colspan="5">데이터가 없습니다.</td>
+										<td colspan="5">부서를 선택하세요.</td>
 									</tr>
 								</c:if>
 								<c:if test="${!empty organList }">
@@ -99,7 +99,7 @@
 											<td>${vo.memEmail1 } @ ${vo.memEmail2 }</td>
 											<td>${vo.deptName }</td>
 											<td>${vo.posName }</td>
-											
+
 										</tr>
 									</c:forEach>
 								</c:if>
@@ -115,7 +115,7 @@
 
 						</div>
 
-						
+
 				</div>
 			</div>
 		</div>

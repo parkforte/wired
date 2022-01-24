@@ -1,31 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mainstyle.css"/>
+<!-- Custom styles for this template-->
+<link
+	href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css"
+	rel="stylesheet">
+<!-- 부트스트랩 version 4.6.0 -->
+<!-- 부트스트랩 icon -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/mainstyle.css" />
 <style type="text/css">
-	body{	margin:5px;padding:5px;}
-	caption{visibility:hidden;	}
-	p{
-		font-size: 1.0em;
-	}
+body {
+	margin: 5px;
+	padding: 5px;
+}
 
-	#divZip table{
-		width: 430px;
-		margin: 15px 0;
-	}
-	.blue{
-		color:#006AD5;
-	}
-	#divPage{
-		text-align: center;
-	}
+caption {
+	visibility: hidden;
+}
 
+p {
+	font-size: 1.0em;
+}
+
+#divZip table {
+	width: 430px;
+	margin: 15px 0;
+}
+
+.blue {
+	color: #006AD5;
+}
+
+#divPage {
+	text-align: center;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.f-right {
+	float: right;
+}
 </style>
 
 <script type="text/javascript"
@@ -96,7 +122,7 @@
 
 		$('#divCount').html("<p>도로명 주소 검색 결과 ("+ totalCount +"건)</p>");
 
-		var str="<table class='box2'>";
+		var str="<table class='box2' style='width:100%'>";
 		str+="<tr><th style='width:20%'>우편번호</th>";
 		str+="<th style='width:80%'>도로명 주소</th></tr>";
 
@@ -154,22 +180,35 @@
 
 </head>
 <body>
-<h1>도로명 주소 검색</h1>
-<p>도로명주소, 건물명 또는 지번을 입력하세요</p>
-<p class="blue">검색어 예 : 도로명(반포대로 58), 건물명(독립기념관), 지번(삼성동 25)</p>
-<form name="frmZip" id="frmZip" method="post">
-	<label for="dong">지역명</label>
-	<input type="text" name="dong" id="dong">
-	<input type="text" name="currentPage" id="currentPage" value="1"/>				<!-- 요청 변수 설정 (현재 페이지. currentPage : n > 0) -->
-  	<input type="hidden" name="countPerPage" id="countPerPage" value="6"/>			<!-- 요청 변수 설정 (페이지당 출력 개수. countPerPage 범위 : 0 < n <= 100) -->
-  	<input type="hidden" name="confmKey" value="U01TX0FVVEgyMDE3MTIxODE3Mzc0MTEwNzU1Njg="/> <!-- 요청 변수 설정 (승인키) -->
-  	<input type="hidden" name="resultType" value="json"/>
-	<input type="submit" value="찾기">
-</form>
-
-<div id="divCount"></div>
-<div id="divZip"></div>
-<div id="divPage"></div>
-
+	<form name="frmZip" id="frmZip" method="post">
+		<div class="jumbotron">
+			<h1 class="display-4">도로명 주소 검색</h1>
+			<p class="lead">도로명주소, 건물명 또는 지번을 입력하세요.</p>
+			<hr class="my-4">
+			<p>검색어 예 : 도로명(반포대로 58), 건물명(독립기념관), 지번(삼성동 25)</p>
+			<div class="input-group input-group-sm mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-sm">검색어</span>
+				</div>
+				<input type="text" name="dong" id="dong" class="form-control"
+					aria-label="Sizing example input"
+					aria-describedby="inputGroup-sizing-sm">
+			</div>
+			<button type="submit" class="btn btn-primary f-right">찾기</button>
+			<input type="hidden" name="currentPage" id="currentPage" value="1" />
+			<!-- 요청 변수 설정 (현재 페이지. currentPage : n > 0) -->
+			<input type="hidden" name="countPerPage" id="countPerPage" value="6" />
+			<!-- 요청 변수 설정 (페이지당 출력 개수. countPerPage 범위 : 0 < n <= 100) -->
+			<input type="hidden" name="confmKey"
+				value="U01TX0FVVEgyMDE3MTIxODE3Mzc0MTEwNzU1Njg=" />
+			<!-- 요청 변수 설정 (승인키) -->
+			<input type="hidden" name="resultType" value="json" />
+		</div>
+	</form>
+	<div class="center">
+		<div id="divCount"></div>
+		<div id="divZip"></div>
+		<div id="divPage"></div>
+	</div>
 </body>
 </html>

@@ -424,9 +424,6 @@ $(function(){
 								</a> <a class="dropdown-item" href="<c:url value='/commute/commuteList?memNo=${sessionScope.memNo }'/>"> <i
 									class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 									근태관리
-								</a> <a class="dropdown-item" href="#"> <i
-									class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-									출/퇴근등록
 								</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#" data-toggle="modal"
