@@ -135,8 +135,26 @@
 					</div>
 					<!-- Card Body -->
 					<div class="card-body">
-						<!-- 공지사항 최신 -->
+						<!-- 전체자원예약현황 -->
 						<%@ include file="jawon/mainJawonAll.jsp" %>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Pie Chart -->
+			<div class="col-xl-6 col-lg-5">
+				<div class="card shadow mb-4">
+					<!-- Card Header - Dropdown -->
+					<div
+						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary"><span style="font-size: 0.9em;">기준(현재)</span> 실시간 코로나19 현황</h6>
+
+					</div>
+					<!-- Card Body -->
+					<div class="card-body">
+						<!-- 전체자원예약현황 -->
+						<%@ include file="inc/covid19.jsp" %>
 
 					</div>
 				</div>
