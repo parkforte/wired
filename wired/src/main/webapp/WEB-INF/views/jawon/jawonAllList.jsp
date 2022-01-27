@@ -31,7 +31,7 @@ $(function() {
 	$('.btn-loc').each(function(index,item){
 		$(this).click(function(){
 			var res=$(this).val();
-			window.open("/wired/jawon/reserveLocation?resNo="+res,"/", "left=50, top=20, width=500, height=230, scrollbars=yes,resizable=yes");
+			window.open("/wired/jawon/reserveLocation?resNo="+res,"/", "left=50, top=20, width=570, height=351, scrollbars=yes,resizable=yes");
 		});
 	});
 	var today = new Date().getFullYear() + "-" + _pad(new String(new Date().getMonth() + 1), 2) + "-" + _pad(new String(new Date().getDate()), 2);

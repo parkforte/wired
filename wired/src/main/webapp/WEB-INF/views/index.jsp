@@ -156,6 +156,36 @@
 						<!-- 전체자원예약현황 -->
 						<%@ include file="inc/covid19.jsp" %>
 
+			<!-- 날씨 -->
+			<div class="col-xl-4 col-lg-3">
+				<div class="card shadow mb-4">
+					<!-- Card Header - Dropdown -->
+					<div
+						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">현재 날씨</h6>
+
+					</div>
+					<!-- Card Body -->
+					<div class="card-body">
+						<!-- 공지사항 최신 -->
+						<%@ include file="weather/weather_api.jsp" %>
+
+					</div>
+				</div>
+			</div>
+			<!-- 날씨 -->
+			<div class="col-xl-8 col-lg-6">
+				<div class="card shadow mb-4">
+					<!-- Card Header - Dropdown -->
+					<div
+						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+						<h6 class="m-0 font-weight-bold text-primary">코로나19병원정보(국민안심병원 외)서비스</h6>
+
+					</div>
+					<!-- Card Body -->
+					<div class="card-body">
+						<!-- 공지사항 최신 -->
+						<%@ include file="covidTest/covid.jsp" %>
 					</div>
 				</div>
 			</div>

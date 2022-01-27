@@ -97,6 +97,7 @@ span{
 <!--javaScript영역-->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
 	$(function(){
@@ -177,12 +178,12 @@ span{
 			}
 		});
 
-		$('#btZipcode').click(function(){
-			window.open(
-				"/wired/zipcode/zipcode",
-				"zipWin",
-				"left=50, top=20, width=500, height=500, scrollbars=yes,resizable=yes");
-		});
+// 		$('#btZipcode').click(function(){
+// 			window.open(
+// 				"/wired/zipcode/zipcode",
+// 				"zipWin",
+// 				"left=50, top=20, width=500, height=500, scrollbars=yes,resizable=yes");
+// 		});
 	});
 	function validate_phone(tel){
 		var pattern = new RegExp(/^[0-9]*$/g);
@@ -192,6 +193,33 @@ span{
 
 	if(Character.compare(vo.getMemFlag(), 'N')==0){
 		alert('상세정보를 입력하세요.');
+	}
+	function btnzipcode(){
+		new daum.Postcode({
+	        oncomplete: function(data) {
+
+	        	console.log(data);
+
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	            var roadAddr = data.roadAddress; // 도로명 주소 변수
+	            var jibunAddr = data.jibunAddress; // 지번 주소 변수
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+
+	            $('#memZipcode').val(data.zonecode);
+	            if(roadAddr != ''){
+	            	$('#memAddress').val(roadAddr);
+	            }
+	            else if(jibunAddr != ''){
+	            	$('#memAddressdetail').val(jibunAddr);
+	            }
+
+	        },
+	        theme: {
+            	bgColor: "#F2F2FC" //바탕 배경색
+            }
+	    }).open();
 	}
 </script>
 
@@ -281,7 +309,8 @@ span{
 								<input type="text" name="memZipcode" id="memZipcode" title="우편번호" ReadOnly
 										style="width: 250px; display: inline-block"
 										class="form-control form-control-user c-size" placeholder="우편번호" value="${map['MEM_ZIPCODE'] }">
-								<input style="display: inline-block" type="Button" value="우편번호 찾기" id="btZipcode" title="새창열림" class="btn btn-primary b-radius">
+								<input style="display: inline-block" type="Button" value="우편번호 찾기" id="btZipcode"
+									onclick="btnzipcode()" title="새창열림" class="btn btn-primary b-radius">
 								<br /><span class="sp1">&nbsp;</span>
 								<input type="text" name="memAddress" ReadOnly title="주소" id="memAddress"
 								class="form-control form-control-user c-size" placeholder="주소" value="${map['MEM_ADDRESS'] }">
