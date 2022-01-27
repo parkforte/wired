@@ -30,10 +30,10 @@ th#do {
 		$.ajax({
 			 url :"<c:url value='/covidTest/getCovidApi'/>"
 			,type:"post"
-			,data:$("#form").serialize()
+			,data:$("#formHp").serialize()
 			,dataType:"xml"
 			,success:function(xmlStr){
-				$("#list").html("");
+				$("#listHp").html("");
 				totalCount= $(xmlStr).find("totalCount").text();
 				var resultCode = $(xmlStr).find("resultCode").text();
 				var resultMsg = $(xmlStr).find("resultMsg").text();
@@ -55,10 +55,10 @@ th#do {
 		$.ajax({
 			 url :"<c:url value='/covidTest/getCovidApi'/>"
 			,type:"post"
-			,data:$("#form").serialize()
+			,data:$("#formHp").serialize()
 			,dataType:"xml"
 			,success:function(xmlStr){
-				$("#list").html("");
+				$("#listHp").html("");
 				totalCount= $(xmlStr).find("totalCount").text();
 				var resultCode = $(xmlStr).find("resultCode").text();
 				var resultMsg = $(xmlStr).find("resultMsg").text();
@@ -104,7 +104,7 @@ th#do {
 			htmlStr += "</tr>";
 		});
 		htmlStr += "</table>";
-		$("#list").html(htmlStr);
+		$("#listHp").html(htmlStr);
 
 	}
 
@@ -145,7 +145,7 @@ th#do {
 <title>covid</title>
 </head>
 <body>
-<form name="form" id="form" method="post">
+<form name="formHp" id="formHp" method="post">
 	<div id="select">
 		<select name="spclAdmTyCd">
 			<option value="A0">국민안심병원</option>
@@ -162,7 +162,7 @@ th#do {
 </form>
 	<div class="center">
 		<div id="divCount"></div>
-		<div id="list"></div>
+		<div id="listHp"></div>
 		<div id="divPage"></div>
 	</div>
 </body>

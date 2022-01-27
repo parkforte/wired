@@ -142,20 +142,6 @@
 				</div>
 			</div>
 
-			<!-- Pie Chart -->
-			<div class="col-xl-6 col-lg-5">
-				<div class="card shadow mb-4">
-					<!-- Card Header - Dropdown -->
-					<div
-						class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-						<h6 class="m-0 font-weight-bold text-primary"><span style="font-size: 0.9em;">기준(현재)</span> 실시간 코로나19 현황</h6>
-
-					</div>
-					<!-- Card Body -->
-					<div class="card-body">
-						<!-- 전체자원예약현황 -->
-						<%@ include file="inc/covid19.jsp" %>
-
 			<!-- 날씨 -->
 			<div class="col-xl-4 col-lg-3">
 				<div class="card shadow mb-4">
@@ -173,7 +159,8 @@
 					</div>
 				</div>
 			</div>
-			<!-- 날씨 -->
+
+			<!-- 코로나19 병원정보 -->
 			<div class="col-xl-8 col-lg-6">
 				<div class="card shadow mb-4">
 					<!-- Card Header - Dropdown -->
@@ -184,13 +171,30 @@
 					</div>
 					<!-- Card Body -->
 					<div class="card-body">
-						<!-- 공지사항 최신 -->
+						<!-- 코로나19 병원정보 -->
 						<%@ include file="covidTest/covid.jsp" %>
 					</div>
 				</div>
 			</div>
-		</div>
 
+			<!-- 코로나19 시도별 현황 -->
+<!-- 			<div class="col-xl-6 col-lg-5"> -->
+<!-- 				<div class="card shadow mb-4"> -->
+<!-- 					Card Header - Dropdown -->
+<!-- 					<div -->
+<!-- 						class="card-header py-3 d-flex flex-row align-items-center justify-content-between"> -->
+<!-- 						<h6 class="m-0 font-weight-bold text-primary"><span style="font-size: 0.9em;">기준(현재)</span> 실시간 코로나19 현황</h6> -->
+
+<!-- 					</div> -->
+<!-- 					Card Body -->
+<!-- 					<div class="card-body"> -->
+<!-- 						코로나 현황 -->
+<%-- 						<%@ include file="inc/covid19.jsp" %> --%>
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+		</div>
 	</div>
 	<!-- /.container-fluid -->
 

@@ -32,19 +32,19 @@ $(function(){
 	$('.startCd').val(year+month+day);
 	$('.endCd').val(year+month+day);
 	$.ajax({
-		data: $("#form").serialize(),
+		data: $("#formCo").serialize(),
 		type: "post",
 		url: "<c:url value='/sample/covid19'/>",
 		dataType:"xml",
-		success: function(xmlStr){
-			$("#list").html("");
-			var errCode = $(xmlStr).find("errorCode").text();
-			var errDesc = $(xmlStr).find("errorMessage").text();
+		success: function(xmlRes){
+			$("#listCo").html("");
+			var errCode = $(xmlRes).find("errorCode").text();
+			var errDesc = $(xmlRes).find("errorMessage").text();
 			if(errCode == "0"){
 				alert(errCode+"="+errDesc);
 			}else{
-				if(xmlStr != null){
-					makeList(xmlStr);
+				if(xmlRes != null){
+					makeListCovid(xmlRes);
 				}
 			}
 		},
@@ -55,7 +55,7 @@ $(function(){
 	$('.tDate').after($('.startCd').val());
 });
 
-function makeList(xmlStr){
+function makeListCovid(xmlRes){
 	var htmlStr = "";
 	htmlStr += "<table class='table table-bordered' id='dataTable' width='100%' cellspacing='0'>";
 		htmlStr += "<tr>";
@@ -68,11 +68,11 @@ function makeList(xmlStr){
 		htmlStr += "<th>해외유입 수</th>";
 // 		htmlStr += "<th>기준일시</th>";
 		htmlStr += "</tr>";
-		if($(xmlStr).find("item").find('gubun').text().length<1){
+		if($(xmlRes).find("item").find('gubun').text().length<1){
 			$('.startCd').val(yy+mm+dd);
 			$('.endCd').val(yy+mm+dd);
 		}
-	$(xmlStr).find("item").each(function(){
+	$(xmlRes).find("item").each(function(){
 		htmlStr += "<tr class='contentTr'>";
 		htmlStr += "<td>"+$(this).find('gubun').text()+"</td>";		//시도명
 		htmlStr += "<td>"+$(this).find('deathCnt').text()+"</td>";	//사망자 수
@@ -85,7 +85,7 @@ function makeList(xmlStr){
 		htmlStr += "</tr>";
 	});
 	htmlStr += "</table>";
-	$("#list").html(htmlStr);
+	$("#listCo").html(htmlStr);
 }
 
 //특수문자, 특정문자열(sql예약어의 앞뒤공백포함) 제거
@@ -124,14 +124,14 @@ function checkSearchedWord(obj){
 </script>
 <body>
 <span class="font-weight-bold text-primary tDate">Date: </span>
-	<form name="form" id="form" method="post">
+	<form name="formCo" id="formCo" method="post">
 		<input type="hidden" name="serviceKey" id="serviceKey"
 		value="OfEsOtklGh4oLrpA3fUlfsQgL59MCNhIwILKKSsJT5zJeCFmSaEiYZrO85uoZYaJO4HvxSEQ9Jagb5OraOJgCQ%3D%3D"/>
 		<input type="hidden" name="pageNo" value="1"/>
 		<input type="hidden" name="numOfRows" value="10"/>
 		<input type="hidden" name="startCreateDt" class="startCd" value="20210101"/>
 		<input type="hidden" name="endCreateDt" class="endCd" value="20210101"/>
-		<div id="list"></div><!-- 검색 결과 리스트 출력 영역 -->
+		<div id="listCo"></div><!-- 검색 결과 리스트 출력 영역 -->
 	</form>
 </body>
 </html>
